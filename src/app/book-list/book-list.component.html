@@ -1,0 +1,17 @@
+<div class="ui middle aligned selection divided list">
+  <ng-container *ngIf="listView">
+    <bm-book-list-item
+      *ngFor="let b of books"
+      [book]="b"
+      class="item"
+      (click)="showDetail(b)"
+    ></bm-book-list-item>
+  </ng-container>
+  <ng-container *ngIf="!listView">
+    <bm-book-details
+      [book]="detailBook"
+      (backButton)="enableList()"
+      class="ui container"
+    ></bm-book-details>
+  </ng-container>
+</div>
