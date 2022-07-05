@@ -32,9 +32,9 @@ export class BookDetailsComponent implements OnInit {
     //bookId = Number(this.route.snapshot.paramMap.get("id"));
     //this.book = this.books[bookId];
     this.route.paramMap.subscribe((params) => {
-      console.log(`params.get('id') ${params.get('id')}`);
-      if (params?.get('id')) {
-        this.id = Number(params.get('id'));
+      console.log(`params.get('id') ${params.get("id")}`);
+      if (params?.get("id")) {
+        this.id = Number(params.get("id"));
         this.book = this.books[this.id];
       }
     });
