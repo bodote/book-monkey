@@ -1,42 +1,46 @@
-<div *ngIf="book">
-  <h2>{{ book.title }}</h2>
-  <h3>{{ book.subtitle }}</h3>
-  <div class="ui divider"></div>
-  <div class="ui grid">
-    <div class="four wide column">
-      <h4>Autoren:</h4>
-      <ng-container *ngFor="let author of book.authors">
-        {{ author }}<br />
-      </ng-container>
+<div class="ui middle aligned selection divided list">
+  <div class="ui container">
+    <h2>{{ book.title }}</h2>
+    <h3>{{ book.subtitle }}</h3>
+    <div class="ui divider"></div>
+    <div class="ui grid">
+      <div class="four wide column">
+        <h4>Autoren:</h4>
+        <ng-container *ngFor="let author of book.authors">
+          {{ author }}<br />
+        </ng-container>
+      </div>
+      <div class="four wide column">
+        <h4>ISBN:</h4>
+        {{ book.isbn }}
+      </div>
+      <div class="four wide column">
+        <h4>Erschienen:</h4>
+        {{ book.published }}
+      </div>
+      <div class="four wide column">
+        <h4>Rating:</h4>
+        <ng-container *ngIf="book.rating">
+          <ng-container
+            *ngFor="let dummy of ','.repeat(book.rating - 1).split(',')"
+          >
+            <i class="yellow star icon"> </i
+          ></ng-container>
+        </ng-container>
+      </div>
     </div>
-    <div class="four wide column">
-      <h4>ISBN:</h4>
-      {{ book.isbn }}
-    </div>
-    <div class="four wide column">
-      <h4>Erschienen:</h4>
-      {{ book.published }}
-    </div>
-    <div class="four wide column">
-      <h4>Rating:</h4>
-      <ng-container *ngIf="book.rating">
-        <ng-container
-          *ngFor="let dummy of ','.repeat(book.rating - 1).split(',')"
-        >
-          <i class="yellow star icon"> </i
-        ></ng-container>
-      </ng-container>
-    </div>
+    <h4>Beschreibung:</h4>
+    <p>{{ book.description }}</p>
+    <img
+      class="ui middle aligned small image"
+      src="{{book?.thumbnails?.[0]?.url}}"
+      alt="{{book?.thumbnails?.[0]?.title}}"
+    /><br />
+    <br />
+    <button class="blue ui button" (click)="prev()">vor</button>
+    <button class="red ui button" routerLink="/list">
+      Zurück zur Buchliste
+    </button>
+    <button class="blue ui button" (click)="next()">weiter</button>
   </div>
-  <h4>Beschreibung:</h4>
-  <p>{{ book.description }}</p>
-  <img
-    class="ui middle aligned small image"
-    src="{{book?.thumbnails?.[0]?.url}}"
-    alt="{{book?.thumbnails?.[0]?.title}}"
-  /><br />
-  <br />
-  <button class="red ui button" (click)="backToList($event)">
-    Zurück zur Buchliste
-  </button>
 </div>
