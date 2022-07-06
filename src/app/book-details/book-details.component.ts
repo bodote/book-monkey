@@ -1,19 +1,19 @@
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
-import { Book } from "../shared/book";
-import { BookStoreService } from "../shared/book-store.service";
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Book } from '../shared/book';
+import { BookStoreService } from '../shared/book-store.service';
 
 @Component({
-  selector: "bm-book-details",
-  templateUrl: "./book-details.component.html",
-  styleUrls: ["./book-details.component.css"],
+  selector: 'bm-book-details',
+  templateUrl: './book-details.component.html',
+  styleUrls: ['./book-details.component.css']
 })
 export class BookDetailsComponent implements OnInit {
   book: Book = {
-    title: "no title",
+    title: 'no title',
     authors: [],
-    published: new Date("2000-01-01"),
-    isbn: "",
+    published: new Date('2000-01-01'),
+    isbn: ''
   };
   id: number = 0;
 
@@ -32,10 +32,14 @@ export class BookDetailsComponent implements OnInit {
     //bookId = Number(this.route.snapshot.paramMap.get("id"));
     //this.book = this.books[bookId];
     this.route.paramMap.subscribe((params) => {
-      console.log(`params.get('id') ${params.get("id")}`);
-      if (params?.get("id")) {
-        this.id = Number(params.get("id"));
-        this.book = this.books[this.id];
+      console.log(`params.get('isbn') ${params.get('isbn')}`);
+      if (params?.get('isbn')) {
+        let isbn = params.get('isbn');
+        let bookIdx = this.books.findIndex((book) => isbn === book.isbn);
+        if (bookIdx != -1) {
+          this.id = bookIdx;
+          this.book = this.books[this.id];
+        }
       }
     });
   }
