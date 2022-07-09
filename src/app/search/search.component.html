@@ -1,0 +1,34 @@
+<div class="ui container">
+  <h2>Suche</h2>
+  <div class="ui category search" [class.loading]="isLoading">
+    <div class="ui icon input">
+      <input
+        #search
+        (keyup)="keyup(search.value)"
+        class="prompt"
+        type="text"
+        placeholder="Search books..."
+      />
+      <i class="search icon"></i>
+    </div>
+  </div>
+  <div
+    class="ui middle aligned selection divided list container"
+    *ngIf="foundBooks && foundBooks.length > 0"
+  >
+    <ng-container *ngFor="let book of foundBooks">
+      <div class="item" [routerLink]="['/detail', book.isbn]">
+        <div class="content">
+          <div class="header">{{ book?.title }}</div>
+          <div class="sub header">{{ book?.subtitle }}</div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <div
+    class="ui middle aligned selection divided list container"
+    *ngIf="foundBooks && foundBooks.length === 0"
+  >
+    <p>Sorry, nothing found.</p>
+  </div>
+</div>

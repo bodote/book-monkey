@@ -1,8 +1,40 @@
 <div class="ui middle aligned selection divided list container">
-  <bm-book-list-item
-    *ngFor="let b of books; index as id"
-    [book]="b"
-    class="item"
-    [routerLink]="['/detail', b.isbn]"
-  ></bm-book-list-item>
+  <ng-container *ngIf="error">
+    <div class="ui message">
+      <i class="close icon"></i>
+      <div class="header">Fehler!</div>
+      <p>{{ error }} <br /></p>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="!books && error === undefined">
+    <div class="ui container">
+      <div class="ui segment">
+        <div class="ui active inverted dimmer">
+          <div class="ui large text loader">Loading</div>
+        </div>
+        <div class="ui placeholder">
+          <div class="image header">
+            <div class="line"></div>
+            <div class="line"></div>
+          </div>
+          <div class="paragraph">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="books">
+    <bm-book-list-item
+      *ngFor="let b of books; index as id"
+      [book]="b"
+      class="item"
+      [routerLink]="['/detail', b.isbn]"
+    ></bm-book-list-item>
+  </ng-container>
 </div>

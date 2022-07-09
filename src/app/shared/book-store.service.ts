@@ -1,46 +1,62 @@
+import { BookFactoryService } from './book-factory.service';
+import { BookRaw } from './book-raw';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/internal/Observable';
 import { Book } from './book';
+import { catchError, delay, map, retry } from 'rxjs/operators';
+import { throwError } from 'rxjs';
+
 /*
  */
 @Injectable({
   providedIn: 'root'
 })
 export class BookStoreService {
-  books: Book[];
-  constructor() {
-    this.books = [
-      {
-        title: 'Angular',
-        authors: ['Ferdinand Malcher', 'Johannes Hoppe', 'Danny Koppenhagen'],
-        published: new Date('2020-10-08'),
-        isbn: '978-3-86490-779-1',
-        rating: 5,
-        subtitle:
-          'Grundlagen, fortgeschrittene Themen und Best Practices – inkl. RxJS, NgRx und PWA',
-        thumbnails: [
-          {
-            title: 'Angular',
-            url: 'https://dpunkt.de/wp-content/uploads/2020/09/13654-200x291.jpg'
-          }
-        ],
-        description: 'Lernen Sie Angular mit diesem Praxisbuch!'
-      },
-      {
-        title: 'Angular',
-        authors: ['Manfred Steyer'],
-        published: new Date('2021-09-21'),
-        isbn: '978-3-96009-166-0',
-        subtitle: 'Das Praxisbuch zu Grundlagen und Best Practices',
-        thumbnails: [
-          {
-            title: 'Angular',
-            url: 'https://dpunkt.de/wp-content/uploads/2021/05/13610-200x291.jpg'
-          }
-        ]
-      }
-    ];
+  deleteBook(isbn: string | undefined) {
+    return this.http
+      .delete(`https://api4.angular-buch.com/book/${isbn}`, {
+        responseType: 'arraybuffer'
+      })
+      .pipe(retry({ count: 3, delay: 1000 }), catchError(this.processError));
   }
-  getAll(): Book[] {
-    return this.books;
+  getBook(isbn: string | null) {
+    return this.http
+      .get<BookRaw>(`https://api4.angular-buch.com/book/${isbn}`)
+      .pipe(
+        retry({ count: 3, delay: 1000 }),
+        catchError(this.processError),
+        map((rawBook) => BookFactoryService.getFromRaw(rawBook)),
+        delay(1000)
+      );
+  }
+
+  constructor(private http: HttpClient) {}
+  getAll(): Observable<Book[]> {
+    return this.http.get<BookRaw[]>('https://api4.angular-buch.com/books').pipe(
+      retry({ count: 3, delay: 1000 }),
+      catchError(this.processError),
+      map((rawBooksArray: BookRaw[]): Book[] =>
+        rawBooksArray.map((rawBook) => BookFactoryService.getFromRaw(rawBook))
+      ),
+      delay(1000)
+    );
+  }
+
+  getAllSearch(text: string): Observable<Book[]> {
+    return this.http
+      .get<BookRaw[]>(`https://api4.angular-buch.com/books/search/${text}`)
+      .pipe(
+        retry({ count: 3, delay: 1000 }),
+        catchError(this.processError),
+        map((rawBooksArray: BookRaw[]): Book[] =>
+          rawBooksArray.map((rawBook) => BookFactoryService.getFromRaw(rawBook))
+        )
+      );
+  }
+
+  private processError(err: HttpErrorResponse): Observable<any> {
+    console.error('Error in bookStoreService: ' + err.message);
+    return throwError((): string => 'HttpError: ' + err.message);
   }
 }

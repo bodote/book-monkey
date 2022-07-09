@@ -11,13 +11,23 @@ export class BookListComponent implements OnInit {
   books!: Book[];
   listView!: boolean;
   detailBook!: Book;
+  error: string | undefined;
 
   constructor(private bs: BookStoreService) {
     this.bs = bs;
   }
 
   ngOnInit(): void {
-    this.books = this.bs.getAll();
+    this.bs.getAll().subscribe({
+      next: (books) => {
+        this.books = books;
+        this.error = undefined;
+        return;
+      },
+      error: (err: string) => {
+        this.error = err;
+      }
+    });
     this.listView = true;
   }
 }

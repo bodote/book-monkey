@@ -5,6 +5,8 @@
   ],
   "rules":{
 
+  
+  
    },
   "overrides": [
     {
@@ -23,6 +25,7 @@
         "plugin:prettier/recommended"
       ],
       "rules": {
+        "prettier/prettier": "warn",
         "@angular-eslint/directive-selector": [
           "error",
           {

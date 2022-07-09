@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, of } from 'rxjs';
 import { Book } from '../shared/book';
 import { BookStoreService } from '../shared/book-store.service';
 
@@ -9,15 +10,10 @@ import { BookStoreService } from '../shared/book-store.service';
   styleUrls: ['./book-details.component.css']
 })
 export class BookDetailsComponent implements OnInit {
-  book: Book = {
-    title: 'no title',
-    authors: [],
-    published: new Date('2000-01-01'),
-    isbn: ''
-  };
+  book!: Book;
   id: number = 0;
 
-  private books: Book[] = [];
+  error: string | undefined;
 
   constructor(
     private router: Router,
@@ -26,37 +22,50 @@ export class BookDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    let bookId = 0;
-    this.books = this.bookService.getAll();
-
-    //bookId = Number(this.route.snapshot.paramMap.get("id"));
-    //this.book = this.books[bookId];
     this.route.paramMap.subscribe((params) => {
       console.log(`params.get('isbn') ${params.get('isbn')}`);
       if (params?.get('isbn')) {
         let isbn = params.get('isbn');
-        let bookIdx = this.books.findIndex((book) => isbn === book.isbn);
-        if (bookIdx != -1) {
-          this.id = bookIdx;
-          this.book = this.books[this.id];
-        }
+        this.getABook(isbn);
       }
     });
   }
-  next(): void {
-    console.log(`next() ${this.id}`);
 
-    if (this.id < this.books.length - 1) {
-      this.id += 1;
-      this.book = this.books[this.id];
-    }
+  getABook(isbn: string | null) {
+    this.bookService.getBook(isbn).subscribe({
+      next: (book) => {
+        console.log(`get book with ${isbn} `);
+        if (book) {
+          this.book = book;
+        }
+      },
+      error: (err) => (this.error = err)
+    });
   }
-  prev(): void {
-    console.log(`prev() ${this.id}`);
 
-    if (this.id > 0) {
-      this.id -= 1;
-      this.book = this.books[this.id];
-    }
+  delete(isbn: string | undefined): void {
+    this.confirm('Really delete book?').subscribe((ok) => {
+      if (ok) {
+        this.reallyDelete(isbn);
+      }
+    });
+  }
+
+  reallyDelete(isbn: string | undefined): void {
+    this.bookService.deleteBook(isbn).subscribe({
+      next: (res) => {
+        console.log(`deleted ${isbn}`);
+        console.log(res);
+        this.router.navigate(['list']);
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    });
+  }
+
+  confirm(message?: string): Observable<boolean> {
+    const confirmation = window.confirm(message || 'Is it OK?');
+    return of(confirmation);
   }
 }
