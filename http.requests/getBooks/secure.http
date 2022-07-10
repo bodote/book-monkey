@@ -1,0 +1,3 @@
+GET https://api4.angular-buch.com/secure/books
+Accept: application/json
+Authorization: Bearer 1234567890

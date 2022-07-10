@@ -3,7 +3,6 @@ import {
   debounceTime,
   distinctUntilChanged,
   filter,
-  of,
   Subject,
   switchMap,
   tap
@@ -21,14 +20,7 @@ export class SearchComponent implements OnInit {
   foundBooks: Book[] | undefined;
   isLoading: boolean = false;
 
-  constructor(private bookStoreService: BookStoreService) {
-    // also recommended
-    of([1, 2, 3]).subscribe({
-      next: (v) => console.log(v),
-      error: (e) => console.error(e),
-      complete: () => console.info('complete')
-    });
-  }
+  constructor(private bookStoreService: BookStoreService) {}
 
   ngOnInit(): void {
     this.search$ = new Subject<string>();

@@ -1,8 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TestScheduler } from 'rxjs/testing';
-import { exhaustMap, iif, tap } from 'rxjs';
+import { exhaustMap, iif, of, tap } from 'rxjs';
 import { HomeComponent } from './home.component';
-import { retry } from 'rxjs/operators';
+import { catchError, retry } from 'rxjs/operators';
+import { SearchComponent } from '../search/search.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -10,7 +12,8 @@ describe('HomeComponent', () => {
   let testScheduler: TestScheduler;
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [HomeComponent]
+      declarations: [HomeComponent, SearchComponent],
+      imports: [HttpClientTestingModule]
     }).compileComponents();
 
     fixture = TestBed.createComponent(HomeComponent);
@@ -55,17 +58,23 @@ describe('HomeComponent', () => {
       const { cold, expectObservable } = helpers;
 
       let count = 0;
-      const source$ = iif(() => ++count <= 2, cold('--#'), cold('--y-|'));
+      const source$ = iif(() => ++count <= 2, cold('---#'), cold('--y-|'));
 
       const final$ = source$.pipe(
-        retry({ count: 5, delay: 100 }),
-        tap((value) => console.log('in/out :' + value))
+        tap((value) => console.error('in :' + value)),
+        retry({ count: 1, delay: 10 }),
+        catchError((err) => {
+          console.error('catched the error:' + err);
+          return of('An Error Has occured');
+        }),
+        tap((value) => console.error('out :' + value))
       );
       //            --#
       //            100ms ----#
       //            200ms    ------y
-      const expected = '200ms ------y-|';
-      expectObservable(final$).toBe(expected);
+      const expected = '--- 10ms ---(x|)';
+      const valuesOut = { x: 'An Error Has occured', y: undefined };
+      expectObservable(final$).toBe(expected, valuesOut);
     });
   });
 });
