@@ -9,6 +9,10 @@ import { HomeComponent } from './home/home.component';
 import { BookListComponent } from './book-list/book-list.component';
 import { SearchComponent } from './search/search.component';
 import { TokenInterceptor } from './shared/token.interceptor';
+import { BookFormComponent } from './book-edit/book-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CreateBookComponent } from './create-book/create-book.component';
+import { DatePipe } from '@angular/common';
 
 const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
@@ -20,10 +24,17 @@ const httpInterceptorProviders = [
     BookListItemComponent,
     BookDetailsComponent,
     HomeComponent,
-    SearchComponent
+    SearchComponent,
+    BookFormComponent,
+    CreateBookComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
-  providers: [httpInterceptorProviders],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule
+  ],
+  providers: [httpInterceptorProviders, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

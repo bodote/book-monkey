@@ -1,0 +1,10 @@
+<div class="ui container">
+  <p>Create new Book:</p>
+  <ng-container *ngIf="errorMessage.length > 0">
+    <div class="ui negative message">
+      <i class="close icon"></i>
+      {{ errorMessage }}
+    </div>
+  </ng-container>
+  <bm-book-edit (submitBook)="saveBook($event)"></bm-book-edit>
+</div>

@@ -70,6 +70,12 @@
         alt="{{book?.thumbnails?.[0]?.title}}"
       /><br />
       <br />
+      <button
+        class="green ui button"
+        [routerLink]="['/detail/edit', book?.isbn]"
+      >
+        Edit
+      </button>
       <button class="red ui button" (click)="delete(book?.isbn)">Delete</button>
       <button class="blue ui button" routerLink="/list">
         Zurück zur Buchliste
