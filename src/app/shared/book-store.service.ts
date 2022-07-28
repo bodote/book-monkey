@@ -26,23 +26,25 @@ export class BookStoreService {
       .pipe(retry({ count: 3, delay: 1000 }), catchError(this.processError));
   }
 
-  postBook(book: Book): Observable<BookRaw> {
+  postBook(book: Book): Observable<string> {
+    const bookRaw = this.bookFactory.getRawFromBook(book);
+    console.log('post bookRaw: ' + JSON.stringify(bookRaw));
     return this.http
-      .post<BookRaw>(
-        'https://api4.angular-buch.com/secure/book',
-        this.bookFactory.getRawFromBook(book)
-      )
+      .post('https://api4.angular-buch.com/secure/book', bookRaw, {
+        responseType: 'text'
+      })
       .pipe(
         tap((val) => console.log('post book return: ' + JSON.stringify(val))),
         catchError(this.processError)
       );
   }
-  putBook(book: Book): Observable<BookRaw> {
+  putBook(book: Book): Observable<string> {
+    const bookRaw = this.bookFactory.getRawFromBook(book);
+    console.log('put bookRaw: ' + JSON.stringify(bookRaw));
     return this.http
-      .put<BookRaw>(
-        `https://api4.angular-buch.com/secure/book/${book.isbn}`,
-        this.bookFactory.getRawFromBook(book)
-      )
+      .put(`https://api4.angular-buch.com/secure/book/${book.isbn}`, bookRaw, {
+        responseType: 'text'
+      })
       .pipe(
         tap((val) => console.log('put book return: ' + JSON.stringify(val))),
         catchError(this.processError)

@@ -1,13 +1,12 @@
 import { BookRaw } from './book-raw';
 import { Injectable } from '@angular/core';
 import { Book } from './book';
-import { DatePipe } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookFactoryService {
-  constructor(private datePipe: DatePipe) {}
+  constructor() {}
 
   static getFromRaw(bookRaw: BookRaw): Book {
     return {
@@ -16,12 +15,10 @@ export class BookFactoryService {
     };
   }
   getRawFromBook(book: Book): BookRaw {
-    console.log(book.published);
-    const shortDate = this.datePipe.transform(book.published, 'shortDate');
-    if (!shortDate) new Error(' could not transform date: ' + book.published);
+    console.log('ISODate2: ' + new Date(book.published).toISOString());
     return <BookRaw>{
       ...book,
-      published: shortDate
+      published: new Date(book.published).toISOString()
     };
   }
   static getEmptyBook(): Book {
