@@ -26,14 +26,25 @@ export class BookStoreService {
       .pipe(retry({ count: 3, delay: 1000 }), catchError(this.processError));
   }
 
-  postBook(book: Book) {
+  postBook(book: Book): Observable<BookRaw> {
     return this.http
-      .post(
+      .post<BookRaw>(
         'https://api4.angular-buch.com/secure/book',
         this.bookFactory.getRawFromBook(book)
       )
       .pipe(
         tap((val) => console.log('post book return: ' + JSON.stringify(val))),
+        catchError(this.processError)
+      );
+  }
+  putBook(book: Book): Observable<BookRaw> {
+    return this.http
+      .put<BookRaw>(
+        `https://api4.angular-buch.com/secure/book/${book.isbn}`,
+        this.bookFactory.getRawFromBook(book)
+      )
+      .pipe(
+        tap((val) => console.log('put book return: ' + JSON.stringify(val))),
         catchError(this.processError)
       );
   }
@@ -77,7 +88,7 @@ export class BookStoreService {
   }
 
   private processError(err: HttpErrorResponse): Observable<any> {
-    console.error('Error in bookStoreService: ' + err.message);
-    return throwError((): string => 'HttpError: ' + err.message);
+    console.error('service HttpErrorResponse: ' + JSON.stringify(err));
+    return throwError(() => err);
   }
 }

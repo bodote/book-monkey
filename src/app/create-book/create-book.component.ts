@@ -11,16 +11,15 @@ export class CreateBookComponent {
   errorMessage = '';
   constructor(private bookStoreService: BookStoreService) {}
 
-  saveBook(book: Book) {
+  createBookSave(book: Book) {
     console.log('post Book: ' + JSON.stringify(book));
     this.bookStoreService.postBook(book).subscribe(
       (res) => {
-        console.log('OK: http post: ' + JSON.stringify(res));
-        this.errorMessage = res.error;
+        console.log('OK: http createBookSave: ' + JSON.stringify(res));
       },
       (err) => {
-        console.log('ERROR in http post: ' + JSON.stringify(err));
-        this.errorMessage = err;
+        console.error('ERROR in createBookSave: ' + JSON.stringify(err));
+        this.errorMessage = JSON.stringify(err);
       }
     );
   }

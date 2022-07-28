@@ -1,5 +1,5 @@
 <div class="ui container">
-  <p>Create new Book:</p>
+  <p>Edit existing Book:</p>
   <ng-container *ngIf="errorMessage.length > 0">
     <div class="ui negative message">
       <i class="close icon"></i>
@@ -7,7 +7,8 @@
     </div>
   </ng-container>
   <bm-book-form
-    (saveBookEventEmitter)="createBookSave($event)"
-    [isNew]="true"
+    [book]="book$ | async"
+    [isNew]="false"
+    (saveBookEventEmitter)="saveBook($event)"
   ></bm-book-form>
 </div>

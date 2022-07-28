@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import {
-  HttpRequest,
-  HttpHandler,
+  HttpErrorResponse,
   HttpEvent,
+  HttpHandler,
   HttpInterceptor,
-  HttpResponse,
-  HttpErrorResponse
+  HttpRequest,
+  HttpResponse
 } from '@angular/common/http';
 import { Observable, tap, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -50,8 +50,8 @@ export class TokenInterceptor implements HttpInterceptor {
         }
       }),
       catchError((response: HttpErrorResponse) => {
-        console.error(JSON.stringify(response));
-        return throwError(() => new Error(JSON.stringify(response.error)));
+        console.error('catch Error in interceptor:' + JSON.stringify(response));
+        return throwError(() => response);
       })
     );
   }

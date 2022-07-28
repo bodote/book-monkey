@@ -14,6 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CreateBookComponent } from './create-book/create-book.component';
 import { DatePipe } from '@angular/common';
 import { FormMessagesComponent } from './form-messages/form-messages.component';
+import { BookEditComponent } from './book-edit/book-edit.component';
 
 const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
@@ -28,7 +29,8 @@ const httpInterceptorProviders = [
     SearchComponent,
     BookFormComponent,
     CreateBookComponent,
-    FormMessagesComponent
+    FormMessagesComponent,
+    BookEditComponent
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,10 @@
 <div class="ui container">
-  <ng-container *ngIf="book$ | async; else loading">
-    <form class="ui form" [formGroup]="editForm" (ngSubmit)="submitForm()">
+  <ng-container *ngIf="isNew || book; else loading">
+    <form
+      class="ui form"
+      [formGroup]="editForm"
+      (ngSubmit)="bookFormSaveBook()"
+    >
       <div class="field">
         <label for="title">Title: </label>
         <input id="title" type="text" formControlName="title" />
@@ -57,7 +61,7 @@
                 <input id="url" type="text" formControlName="url" />
               </div>
               <div class="field">
-                <input type="text" formControlName="description" />
+                <input type="text" formControlName="title" />
               </div>
             </div>
           </div>
