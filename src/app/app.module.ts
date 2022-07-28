@@ -13,6 +13,7 @@ import { BookFormComponent } from './book-edit/book-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CreateBookComponent } from './create-book/create-book.component';
 import { DatePipe } from '@angular/common';
+import { FormMessagesComponent } from './form-messages/form-messages.component';
 
 const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
@@ -26,7 +27,8 @@ const httpInterceptorProviders = [
     HomeComponent,
     SearchComponent,
     BookFormComponent,
-    CreateBookComponent
+    CreateBookComponent,
+    FormMessagesComponent
   ],
   imports: [
     BrowserModule,

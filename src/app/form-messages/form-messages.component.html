@@ -1,0 +1,5 @@
+<div *ngIf="control?.invalid && (control?.dirty || control?.touched)">
+  <div *ngFor="let errorTxt of errorsForControl()" class="ui red message">
+    {{ errorTxt }}
+  </div>
+</div>

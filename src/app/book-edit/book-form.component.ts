@@ -94,9 +94,7 @@ export class BookFormComponent implements OnInit {
   get thumbnails() {
     return this.editForm.get('thumbnails') as FormArray;
   }
-  stringify(s: any): string {
-    return JSON.stringify(s);
-  }
+
   submitForm() {
     const book = this.editForm.value as Book;
     this.submitBook.emit(book);

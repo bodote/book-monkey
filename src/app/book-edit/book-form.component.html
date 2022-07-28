@@ -5,6 +5,10 @@
         <label for="title">Title: </label>
         <input id="title" type="text" formControlName="title" />
       </div>
+      <bm-form-messages
+        [control]="editForm.get('title')"
+        controlName="title"
+      ></bm-form-messages>
       <div class="field">
         <label for="subtitle">Subtitle: </label>
         <input id="subtitle" type="text" formControlName="subtitle" />
@@ -13,16 +17,12 @@
       <div class="field">
         <label for="isbn">ISBN: </label>
         <input id="isbn" type="text" formControlName="isbn" required />
-
-        <div *ngIf="isbn?.invalid && (isbn?.dirty || isbn?.touched)">
-          <div *ngIf="isbn?.errors?.['minlength']" class="ui red message">
-            Name must be at least 11 characters long.
-          </div>
-          <div *ngIf="isbn?.errors?.['maxlength']" class="ui red message">
-            Name must be max 13 characters long.
-          </div>
-        </div>
+        <bm-form-messages
+          [control]="editForm.get('isbn')"
+          controlName="isbn"
+        ></bm-form-messages>
       </div>
+
       <div class="field">
         <label for="published">Published: </label>
         <input id="published" type="text" formControlName="published" />
