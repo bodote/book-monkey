@@ -116,6 +116,7 @@ export class BookFormComponent implements OnInit, OnChanges {
   }
 
   bookFormSaveBook() {
+    console.log('book save called in book-form');
     const book = this.editForm.value as Book;
     this.saveBookEventEmitter.emit(book);
   }
@@ -130,6 +131,7 @@ export class BookFormComponent implements OnInit, OnChanges {
   }
 
   addThumb() {
+    console.log('add thumb called in book-form');
     const thumbG = this.fb.group({
       url: '',
       title: ''
