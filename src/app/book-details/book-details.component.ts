@@ -23,7 +23,6 @@ export class BookDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
-      console.log(`params.get('isbn') ${params.get('isbn')}`);
       if (params?.get('isbn')) {
         let isbn = params.get('isbn');
         this.getABook(isbn);
@@ -34,7 +33,6 @@ export class BookDetailsComponent implements OnInit {
   getABook(isbn: string | null) {
     this.bookService.getBook(isbn).subscribe({
       next: (book) => {
-        console.log(`get book with ${isbn} `);
         if (book) {
           this.book = book;
         }
@@ -53,9 +51,7 @@ export class BookDetailsComponent implements OnInit {
 
   reallyDelete(isbn: string | undefined): void {
     this.bookService.deleteBook(isbn).subscribe({
-      next: (res) => {
-        console.log(`deleted ${isbn}`);
-        console.log(res);
+      next: () => {
         this.router.navigate(['list']);
       },
       error: (err) => {

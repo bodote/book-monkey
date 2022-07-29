@@ -6,9 +6,12 @@
       {{ errorMessage }}
     </div>
   </ng-container>
+
   <bm-book-form
     [book]="book$ | async"
     [isNew]="false"
+    [saved]="saved"
+    [successMsg]="successMsg"
     (saveBookEventEmitter)="saveBook($event)"
   ></bm-book-form>
 </div>

@@ -15,7 +15,6 @@ export class BookFactoryService {
     };
   }
   getRawFromBook(book: Book): BookRaw {
-    console.log('ISODate2: ' + new Date(book.published).toISOString());
     return <BookRaw>{
       ...book,
       published: new Date(book.published).toISOString()

@@ -35,21 +35,35 @@
         <label for="description">Description: </label>
         <input id="description" type="text" formControlName="description" />
       </div>
-
-      <h4 class="ui dividing header">Authors:</h4>
-      <ng-container *ngIf="authors?.controls">
-        <div
-          formArrayName="authors"
-          class="inline fields"
-          *ngFor="let auth of authors.controls; index as i"
-        >
-          <div class="field">
-            <input type="text" [formControlName]="i" />
+      <div class="ui segment">
+        <h4 class="ui dividing header">Authors:</h4>
+        <ng-container *ngIf="authors?.controls">
+          <div
+            formArrayName="authors"
+            class="inline fields"
+            *ngFor="let auth of authors.controls; index as i"
+          >
+            <div class="field">
+              <input type="text" [formControlName]="i" />
+            </div>
+            <button
+              class="circular red ui minus icon button"
+              (click)="removeAuthor(i)"
+            >
+              <i class="minus icon"></i>
+            </button>
           </div>
-        </div>
-      </ng-container>
-      <h4 class="ui dividing header">Thumbs:</h4>
-      <div class="inline fields">
+        </ng-container>
+        <button
+          class="circular green ui minus icon button"
+          (click)="addAuthor()"
+        >
+          <i class="plus icon"></i>
+        </button>
+      </div>
+
+      <div class="ui segment">
+        <h4 class="ui dividing header">Thumbs:</h4>
         <ng-container *ngIf="thumbnails?.controls">
           <div
             class="inline fields"
@@ -63,9 +77,25 @@
               <div class="field">
                 <input type="text" formControlName="title" />
               </div>
+              <button
+                class="circular red ui minus icon button"
+                (click)="removeThumb(j)"
+              >
+                <i class="minus icon"></i>
+              </button>
             </div>
           </div>
         </ng-container>
+        <button
+          class="circular green ui minus icon button"
+          (click)="addThumb()"
+        >
+          <i class="plus icon"></i>
+        </button>
+      </div>
+      <div *ngIf="saved" class="ui bottom attached info message">
+        <i class="icon save"></i>
+        Book saved! {{ successMsg }}
       </div>
       <button
         type="submit"

@@ -28,7 +28,7 @@ export class BookStoreService {
 
   postBook(book: Book): Observable<string> {
     const bookRaw = this.bookFactory.getRawFromBook(book);
-    console.log('post bookRaw: ' + JSON.stringify(bookRaw));
+
     return this.http
       .post('https://api4.angular-buch.com/secure/book', bookRaw, {
         responseType: 'text'
@@ -40,15 +40,12 @@ export class BookStoreService {
   }
   putBook(book: Book): Observable<string> {
     const bookRaw = this.bookFactory.getRawFromBook(book);
-    console.log('put bookRaw: ' + JSON.stringify(bookRaw));
+
     return this.http
       .put(`https://api4.angular-buch.com/secure/book/${book.isbn}`, bookRaw, {
         responseType: 'text'
       })
-      .pipe(
-        tap((val) => console.log('put book return: ' + JSON.stringify(val))),
-        catchError(this.processError)
-      );
+      .pipe(catchError(this.processError));
   }
 
   getBook(isbn: string | null) {

@@ -25,6 +25,8 @@ import { BookStoreService } from '../shared/book-store.service';
 export class BookFormComponent implements OnInit, OnChanges {
   @Input() book: Book | undefined | null;
   @Input() isNew: boolean = false;
+  @Input() saved: boolean = false;
+  @Input() successMsg = '';
   editForm!: FormGroup;
   @Output() saveBookEventEmitter = new EventEmitter();
 
@@ -56,7 +58,7 @@ export class BookFormComponent implements OnInit, OnChanges {
     }
   }
   ngOnChanges() {
-    if (!this.isNew && this.book) {
+    if (!this.isNew && this.book && this.editForm) {
       this.fillForm(this.book);
     }
   }
@@ -89,9 +91,7 @@ export class BookFormComponent implements OnInit, OnChanges {
       authors.push(fcAuthor);
     }
     this.editForm.setControl('authors', authors);
-    this.editForm.get('isbn')?.valueChanges.subscribe((val) => {
-      console.log('val change: ' + JSON.stringify(val));
-    });
+
     if (book.thumbnails) {
       let thumbnails = this.fb.array([] as FormGroup[]);
       for (let thumb of book.thumbnails) {
@@ -118,5 +118,26 @@ export class BookFormComponent implements OnInit, OnChanges {
   bookFormSaveBook() {
     const book = this.editForm.value as Book;
     this.saveBookEventEmitter.emit(book);
+  }
+
+  addAuthor() {
+    const fcAuthor = new FormControl('');
+    this.authors.push(fcAuthor);
+  }
+
+  removeAuthor(i: number) {
+    this.authors.removeAt(i);
+  }
+
+  addThumb() {
+    const thumbG = this.fb.group({
+      url: '',
+      title: ''
+    });
+    this.thumbnails.push(thumbG);
+  }
+
+  removeThumb(j: number) {
+    this.thumbnails.removeAt(j);
   }
 }
