@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { IsbnValidatorService } from './isbn-validator.service';
+import { BodosValidatorService } from './bodos-validator.service';
 
 describe('IsbnValidatorService', () => {
-  let service: IsbnValidatorService;
+  let service: BodosValidatorService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(IsbnValidatorService);
+    service = TestBed.inject(BodosValidatorService);
   });
 
   it('should be created', () => {

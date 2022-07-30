@@ -23,6 +23,9 @@ export class FormMessagesComponent {
       minlength: 'at least 11 chars',
       isbnLength: 'ISBN not valid, must be 10 or 13 digits',
       isbnExists: 'ISBN already exists'
+    },
+    authors: {
+      oneAuthor: 'we need at least one Author'
     }
   };
 

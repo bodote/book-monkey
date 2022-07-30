@@ -50,6 +50,10 @@
             </button>
           </div>
         </ng-container>
+        <bm-form-messages
+          [control]="editForm.get('authors')"
+          controlName="authors"
+        ></bm-form-messages>
         <button
           class="circular green ui minus icon button"
           (click)="addAuthor()"

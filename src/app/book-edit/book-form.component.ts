@@ -16,7 +16,7 @@ import {
 import { Book } from '../shared/book';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BookStoreService } from '../shared/book-store.service';
-import { IsbnValidatorService } from '../shared/isbn-validator.service';
+import { BodosValidatorService } from '../shared/bodos-validator.service';
 
 @Component({
   selector: 'bm-book-form',
@@ -36,20 +36,21 @@ export class BookFormComponent implements OnInit, OnChanges {
     private router: Router,
     private bookStoreService: BookStoreService,
     private fb: FormBuilder,
-    private isbnValidatorServ: IsbnValidatorService
+    private isbnValidatorServ: BodosValidatorService
   ) {}
 
   ngOnInit(): void {
     let isbnControl!: FormControl;
     if (this.isNew) {
       isbnControl = new FormControl('', {
-        validators: [Validators.required, IsbnValidatorService.checkIsbn],
+        validators: [Validators.required, BodosValidatorService.checkIsbn],
         asyncValidators: [this.isbnValidatorServ.asyncIsbnExistsValidator()]
       });
     } else {
-      isbnControl = new FormControl('', {
-        validators: [Validators.required, IsbnValidatorService.checkIsbn]
-      });
+      isbnControl = new FormControl('', [
+        Validators.required,
+        BodosValidatorService.checkIsbn
+      ]);
     }
 
     this.editForm = this.fb.group({
@@ -71,7 +72,7 @@ export class BookFormComponent implements OnInit, OnChanges {
   }
 
   private fillEmptyBook() {
-    const authors = this.fb.array([]);
+    const authors = this.fb.array([], [BodosValidatorService.checkAuthors]);
     authors.push(new FormControl('<author>'));
     this.editForm.setControl('authors', authors);
     const thbArray = this.fb.array([]) as FormArray;

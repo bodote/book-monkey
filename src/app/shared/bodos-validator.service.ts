@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {
   AbstractControl,
   AsyncValidatorFn,
+  FormArray,
   FormControl,
   ValidationErrors
 } from '@angular/forms';
@@ -12,13 +13,26 @@ import { catchError, map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class IsbnValidatorService {
+export class BodosValidatorService {
   constructor(private bookService: BookStoreService) {}
   static checkIsbn(control: FormControl): ValidationErrors | null {
     console.log(control.value);
     if (control.value.length != 10 && control.value.length != 13)
       return { isbnLength: { valid: false } };
     return null;
+  }
+  static checkAuthors(
+    authorsFormArray: AbstractControl
+  ): ValidationErrors | null {
+    if (
+      (authorsFormArray as FormArray).controls.some(
+        (ele) => ele.value?.length > 0
+      )
+    ) {
+      return null;
+    } else {
+      return { oneAuthor: { valid: false } };
+    }
   }
   asyncIsbnExistsValidator(): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
