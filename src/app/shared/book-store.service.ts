@@ -58,6 +58,14 @@ export class BookStoreService {
         delay(1000)
       );
   }
+  getBookFast(isbn: string | null) {
+    return this.http
+      .get<BookRaw>(`https://api4.angular-buch.com/secure/book/${isbn}`)
+      .pipe(
+        catchError(this.processError),
+        map((rawBook) => BookFactoryService.getFromRaw(rawBook))
+      );
+  }
 
   getAll(): Observable<Book[]> {
     return this.http
@@ -87,7 +95,7 @@ export class BookStoreService {
   }
 
   private processError(err: HttpErrorResponse): Observable<any> {
-    console.error('service HttpErrorResponse: ' + JSON.stringify(err));
+    //console.error('service HttpErrorResponse: ' + JSON.stringify(err));
     return throwError(() => err);
   }
 }

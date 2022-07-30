@@ -16,6 +16,7 @@ import {
 import { Book } from '../shared/book';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BookStoreService } from '../shared/book-store.service';
+import { IsbnValidatorService } from '../shared/isbn-validator.service';
 
 @Component({
   selector: 'bm-book-form',
@@ -34,21 +35,27 @@ export class BookFormComponent implements OnInit, OnChanges {
     private route: ActivatedRoute,
     private router: Router,
     private bookStoreService: BookStoreService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private isbnValidatorServ: IsbnValidatorService
   ) {}
 
   ngOnInit(): void {
+    let isbnControl!: FormControl;
+    if (this.isNew) {
+      isbnControl = new FormControl('', {
+        validators: [Validators.required, IsbnValidatorService.checkIsbn],
+        asyncValidators: [this.isbnValidatorServ.asyncIsbnExistsValidator()]
+      });
+    } else {
+      isbnControl = new FormControl('', {
+        validators: [Validators.required, IsbnValidatorService.checkIsbn]
+      });
+    }
+
     this.editForm = this.fb.group({
       title: ['empty title', Validators.required],
       subtitle: 'empty sub title',
-      isbn: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(11),
-          Validators.maxLength(13)
-        ]
-      ],
+      isbn: isbnControl,
       published: new Date(),
       description: '',
       rating: ''

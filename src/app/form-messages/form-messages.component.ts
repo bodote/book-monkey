@@ -18,9 +18,11 @@ export class FormMessagesComponent {
       required: 'A Title is required'
     },
     isbn: {
-      required: 'ISBN Number 11-13 chars long is required',
+      required: 'ISBN Number is required',
       maxlength: 'not longer then 13 chars',
-      minlength: 'at least 11 chars'
+      minlength: 'at least 11 chars',
+      isbnLength: 'ISBN not valid, must be 10 or 13 digits',
+      isbnExists: 'ISBN already exists'
     }
   };
 

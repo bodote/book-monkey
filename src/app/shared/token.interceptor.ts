@@ -23,7 +23,7 @@ export class TokenInterceptor implements HttpInterceptor {
 
     return next.handle(myRequest).pipe(
       catchError((response: HttpErrorResponse) => {
-        console.error('catch Error in interceptor:' + JSON.stringify(response));
+        //console.error('catch Error in interceptor:' + JSON.stringify(response));
         return throwError(() => response);
       })
     );
