@@ -25,7 +25,12 @@
 
       <div class="field">
         <label for="published">Published: </label>
-        <input id="published" type="text" formControlName="published" />
+        <input
+          id="published"
+          type="date"
+          useValueAsLocalDate
+          formControlName="published"
+        />
       </div>
       <div class="field">
         <label for="description">Description: </label>

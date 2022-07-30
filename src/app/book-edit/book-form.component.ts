@@ -57,7 +57,7 @@ export class BookFormComponent implements OnInit, OnChanges {
       title: ['empty title', Validators.required],
       subtitle: 'empty sub title',
       isbn: isbnControl,
-      published: new Date(),
+      published: [],
       description: '',
       rating: ''
     });
@@ -90,7 +90,7 @@ export class BookFormComponent implements OnInit, OnChanges {
     this.editForm.get('subtitle')?.setValue(book.subtitle + '');
     this.editForm.get('isbn')?.setValue(book.isbn + '');
     this.editForm.get('description')?.setValue(book.description + '');
-    this.editForm.get('published')?.setValue(book.published + '');
+    this.editForm.get('published')?.setValue(book.published);
     this.editForm.get('rating')?.setValue(book.rating + '');
 
     let authors = this.fb.array([]);
@@ -125,8 +125,7 @@ export class BookFormComponent implements OnInit, OnChanges {
 
   bookFormSaveBook() {
     console.log('book save called in book-form');
-    const book = this.editForm.value as Book;
-    this.saveBookEventEmitter.emit(book);
+    this.saveBookEventEmitter.emit(this.editForm.value as Book);
   }
 
   addAuthor() {
