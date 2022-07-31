@@ -19,6 +19,7 @@ import localeDe from '@angular/common/locales/de';
 import { LocalDateValueAccessorModule } from 'angular-date-value-accessor';
 import { IsbnPipe } from './shared/isbn.pipe';
 import { ZoomDirective } from './shared/zoom.directive';
+import { DelayDirective } from './shared/delay.directive';
 
 const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
@@ -36,7 +37,8 @@ const httpInterceptorProviders = [
     FormMessagesComponent,
     BookEditComponent,
     IsbnPipe,
-    ZoomDirective
+    ZoomDirective,
+    DelayDirective
   ],
   imports: [
     BrowserModule,

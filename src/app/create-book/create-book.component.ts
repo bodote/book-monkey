@@ -1,20 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Book } from '../shared/book';
 import { BookStoreService } from '../shared/book-store.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'bm-create-book',
   templateUrl: './create-book.component.html',
   styleUrls: ['./create-book.component.css']
 })
-export class CreateBookComponent {
+export class CreateBookComponent implements OnDestroy {
   errorMessage = '';
   saved = false;
   successMsg = '';
+  private subscription: Subscription | undefined;
   constructor(private bookStoreService: BookStoreService) {}
 
   createBookSave(book: Book) {
-    this.bookStoreService.postBook(book).subscribe(
+    this.subscription = this.bookStoreService.postBook(book).subscribe(
       (res) => {
         this.saved = true;
         this.successMsg = JSON.stringify(res);
@@ -25,5 +27,10 @@ export class CreateBookComponent {
         this.errorMessage = JSON.stringify(err);
       }
     );
+  }
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }

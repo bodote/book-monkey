@@ -55,9 +55,12 @@
           <h4>Rating:</h4>
           <ng-container *ngIf="book.rating">
             <ng-container
-              *ngFor="let dummy of ','.repeat(book.rating - 1).split(',')"
+              *ngFor="
+                let dummy of ','.repeat(book.rating - 1).split(',');
+                index as i
+              "
             >
-              <i class="yellow star icon"> </i
+              <i class="yellow star icon" [bmDelay]="1000 + i * 500"> </i
             ></ng-container>
           </ng-container>
         </div>
