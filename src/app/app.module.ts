@@ -17,6 +17,8 @@ import { FormMessagesComponent } from './form-messages/form-messages.component';
 import { BookEditComponent } from './book-edit/book-edit.component';
 import localeDe from '@angular/common/locales/de';
 import { LocalDateValueAccessorModule } from 'angular-date-value-accessor';
+import { IsbnPipe } from './shared/isbn.pipe';
+import { ZoomDirective } from './shared/zoom.directive';
 
 const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
@@ -32,7 +34,9 @@ const httpInterceptorProviders = [
     BookFormComponent,
     CreateBookComponent,
     FormMessagesComponent,
-    BookEditComponent
+    BookEditComponent,
+    IsbnPipe,
+    ZoomDirective
   ],
   imports: [
     BrowserModule,

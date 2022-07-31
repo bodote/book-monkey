@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Book } from '../shared/book';
 import { BookStoreService } from '../shared/book-store.service';
+import { Observable, of, tap } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'bm-book-list',
@@ -8,7 +10,7 @@ import { BookStoreService } from '../shared/book-store.service';
   styleUrls: ['./book-list.component.css']
 })
 export class BookListComponent implements OnInit {
-  books!: Book[];
+  books$: Observable<Book[] | null> | undefined;
   listView!: boolean;
   detailBook!: Book;
   error: string | undefined;
@@ -18,16 +20,13 @@ export class BookListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.bs.getAll().subscribe({
-      next: (books) => {
-        this.books = books;
-        this.error = undefined;
-        return;
-      },
-      error: (err: string) => {
+    this.books$ = this.bs.getAll().pipe(
+      tap(() => (this.error = undefined)),
+      catchError((err) => {
         this.error = err;
-      }
-    });
+        return of(null);
+      })
+    );
     this.listView = true;
   }
 }

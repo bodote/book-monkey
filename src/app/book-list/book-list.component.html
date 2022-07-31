@@ -3,11 +3,19 @@
     <div class="ui message">
       <i class="close icon"></i>
       <div class="header">Fehler!</div>
-      <p>{{ error }} <br /></p>
+      <p>{{ error | json }} <br /></p>
     </div>
   </ng-container>
 
-  <ng-container *ngIf="!books && error === undefined">
+  <ng-container *ngIf="books$ | async as books; else loading">
+    <bm-book-list-item
+      *ngFor="let b of books; index as id"
+      [book]="b"
+      class="item"
+      [routerLink]="['/detail', b.isbn]"
+    ></bm-book-list-item>
+  </ng-container>
+  <ng-template #loading>
     <div class="ui container">
       <div class="ui segment">
         <div class="ui active inverted dimmer">
@@ -28,13 +36,5 @@
         </div>
       </div>
     </div>
-  </ng-container>
-  <ng-container *ngIf="books">
-    <bm-book-list-item
-      *ngFor="let b of books; index as id"
-      [book]="b"
-      class="item"
-      [routerLink]="['/detail', b.isbn]"
-    ></bm-book-list-item>
-  </ng-container>
+  </ng-template>
 </div>
