@@ -1,6 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
-import { Book } from '../shared/book';
-import { BookStoreService } from '../shared/book-store.service';
+import { Book } from '../../shared/book';
+import { BookStoreService } from '../../shared/book-store.service';
 import { Subscription } from 'rxjs';
 
 @Component({

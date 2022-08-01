@@ -12,7 +12,7 @@
       *ngFor="let b of books; index as id"
       [book]="b"
       class="item"
-      [routerLink]="['/detail', b.isbn]"
+      [routerLink]="['/books/detail', b.isbn]"
     ></bm-book-list-item>
   </ng-container>
   <ng-template #loading>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Book } from '../shared/book';
-import { BookStoreService } from '../shared/book-store.service';
+import { Book } from '../../shared/book';
+import { BookStoreService } from '../../shared/book-store.service';
 import { Observable, of, tap } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 

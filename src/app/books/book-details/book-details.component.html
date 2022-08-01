@@ -75,12 +75,12 @@
       <br />
       <button
         class="green ui button"
-        [routerLink]="['/detail/edit', book?.isbn]"
+        [routerLink]="['/admin/edit', book?.isbn]"
       >
         Edit
       </button>
       <button class="red ui button" (click)="delete(book?.isbn)">Delete</button>
-      <button class="blue ui button" routerLink="/list">
+      <button class="blue ui button" routerLink="/books/list">
         Zurück zur Buchliste
       </button>
       <button class="blue ui button">weiter</button>

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BookStoreService } from '../shared/book-store.service';
-import { Book } from '../shared/book';
+import { BookStoreService } from '../../shared/book-store.service';
+import { Book } from '../../shared/book';
 
 @Component({
   selector: 'bm-book-edit',
