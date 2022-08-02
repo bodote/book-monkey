@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE translationbundle [
+<!ELEMENT translationbundle (translation)*>
+<!ATTLIST translationbundle lang CDATA #REQUIRED>
+
+<!ELEMENT translation (#PCDATA|ph)*>
+<!ATTLIST translation id CDATA #REQUIRED>
+<!ATTLIST translation desc CDATA #IMPLIED>
+<!ATTLIST translation meaning CDATA #IMPLIED>
+<!ATTLIST translation xml:space (default|preserve) "default">
+
+<!ELEMENT ph (#PCDATA|ex)*>
+<!ATTLIST ph name CDATA #REQUIRED>
+
+<!ELEMENT ex (#PCDATA)>
+]>
+<translationbundle lang="de">
+  <translation id="Menu:home">Home</translation>
+  <translation id="Menu:booklist">Buchliste</translation>
+  <translation id="Menu:admin">Administrator</translation>
+  <translation id="Error">Fehler!</translation>
+  <translation id="Authors">Autoren</translation>
+  <translation id="published">Erschienen</translation>
+  <translation id="rating">Bewertung</translation>
+  <translation id="bookDescription">Beschreibung</translation>
+  <translation id="deleteButton">Löschen</translation>
+  <translation id="backToBookListButton">zurück zur Buchliste</translation>
+  <translation id="next">weiter</translation>
+  <translation id="HomeComponent:header">Home</translation>
+  <translation id="HomeComponent:book list link" desc="text of link to books screen">zur Buchliste</translation>
+  <translation id="SearchCompenent:header">Suche</translation>
+  <translation id="SearchCompenent:not found">nichts gefunden</translation>
+  <translation id="CanCanvigateToAdminGuard:question">Wirklich mit Admin-rechten weiter ?</translation>
+</translationbundle>

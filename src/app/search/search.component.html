@@ -1,5 +1,5 @@
 <div class="ui container">
-  <h2>Suche</h2>
+  <h2 i18n="@@SearchCompenent:header">Search books</h2>
   <div class="ui category search" [class.loading]="isLoading">
     <div class="ui icon input">
       <input
@@ -17,7 +17,7 @@
     *ngIf="foundBooks && foundBooks.length > 0"
   >
     <ng-container *ngFor="let book of foundBooks">
-      <div class="item" [routerLink]="['/detail', book.isbn]">
+      <div class="item" [routerLink]="['/books/detail', book.isbn]">
         <div class="content">
           <div class="header">{{ book?.title }}</div>
           <div class="sub header">{{ book?.subtitle }}</div>
@@ -29,6 +29,6 @@
     class="ui middle aligned selection divided list container"
     *ngIf="foundBooks && foundBooks.length === 0"
   >
-    <p>Sorry, nothing found.</p>
+    <p i18n="@@SearchCompenent:not found">Sorry, nothing found.</p>
   </div>
 </div>

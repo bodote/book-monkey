@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE messagebundle [
+<!ELEMENT messagebundle (msg)*>
+<!ATTLIST messagebundle class CDATA #IMPLIED>
+
+<!ELEMENT msg (#PCDATA|ph|source)*>
+<!ATTLIST msg id CDATA #IMPLIED>
+<!ATTLIST msg seq CDATA #IMPLIED>
+<!ATTLIST msg name CDATA #IMPLIED>
+<!ATTLIST msg desc CDATA #IMPLIED>
+<!ATTLIST msg meaning CDATA #IMPLIED>
+<!ATTLIST msg obsolete (obsolete) #IMPLIED>
+<!ATTLIST msg xml:space (default|preserve) "default">
+<!ATTLIST msg is_hidden CDATA #IMPLIED>
+
+<!ELEMENT source (#PCDATA)>
+
+<!ELEMENT ph (#PCDATA|ex)*>
+<!ATTLIST ph name CDATA #REQUIRED>
+
+<!ELEMENT ex (#PCDATA)>
+]>
+<messagebundle>
+  <msg id="Menu:home"><source>src/app/app.component.html:7</source>Home</msg>
+  <msg id="Menu:booklist"><source>src/app/app.component.html:14</source>List</msg>
+  <msg id="Menu:admin"><source>src/app/app.component.html:21</source>Admin</msg>
+  <msg id="Error"><source>src/app/books/book-details/book-details.component.html:4</source>Error!</msg>
+  <msg id="Authors"><source>src/app/books/book-details/book-details.component.html:40</source>Authors:</msg>
+  <msg id="published"><source>src/app/books/book-details/book-details.component.html:50</source>published:</msg>
+  <msg id="rating"><source>src/app/books/book-details/book-details.component.html:54</source>Rating:</msg>
+  <msg id="bookDescription"><source>src/app/books/book-details/book-details.component.html:67</source>Description:</msg>
+  <msg id="deleteButton"><source>src/app/books/book-details/book-details.component.html:85,88</source> Delete </msg>
+  <msg id="backToBookListButton"><source>src/app/books/book-details/book-details.component.html:92,95</source> back to book list </msg>
+  <msg id="next"><source>src/app/books/book-details/book-details.component.html:95</source>next</msg>
+  <msg id="HomeComponent:header"><source>src/app/home/home.component.html:1</source>Book-Monkey</msg>
+  <msg id="HomeComponent:book list link" desc="text of link to books screen"><source>src/app/home/home.component.html:6,9</source> show book list <ph name="START_ITALIC_TEXT"/><ph name="CLOSE_ITALIC_TEXT"/></msg>
+  <msg id="SearchCompenent:header"><source>src/app/search/search.component.html:1</source>Search books</msg>
+  <msg id="SearchCompenent:not found"><source>src/app/search/search.component.html:31</source>Sorry, nothing found.</msg>
+  <msg id="CanCanvigateToAdminGuard:question"><source>src/app/shared/can-navigate-to-admin.guard.ts:23</source>Realy want to be Admin</msg>
+</messagebundle>

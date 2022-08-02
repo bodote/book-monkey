@@ -2,7 +2,7 @@
   <ng-container *ngIf="error">
     <div class="ui message">
       <i class="close icon"></i>
-      <div class="header">Fehler!</div>
+      <div class="header" i18n="@@Error">Error!</div>
       <p>{{ error }} <br /></p>
     </div>
   </ng-container>
@@ -38,7 +38,7 @@
       <div class="ui divider"></div>
       <div class="ui grid">
         <div class="four wide column">
-          <h4>Autoren:</h4>
+          <h4 i18n="@@Authors">Authors:</h4>
           <ng-container *ngFor="let author of book.authors">
             {{ author }}<br />
           </ng-container>
@@ -48,11 +48,11 @@
           {{ book.isbn | isbn }}
         </div>
         <div class="four wide column">
-          <h4>Erschienen:</h4>
+          <h4 i18n="@@published">published:</h4>
           {{ book.published | date: 'longDate' }}
         </div>
         <div class="four wide column">
-          <h4>Rating:</h4>
+          <h4 i18n="@@rating">Rating:</h4>
           <ng-container *ngIf="book.rating">
             <ng-container
               *ngFor="
@@ -65,7 +65,7 @@
           </ng-container>
         </div>
       </div>
-      <h4>Beschreibung:</h4>
+      <h4 i18n="@@bookDescription">Description:</h4>
       <p>{{ book.description }}</p>
       <img
         class="ui middle aligned small image"
@@ -79,11 +79,21 @@
       >
         Edit
       </button>
-      <button class="red ui button" (click)="delete(book?.isbn)">Delete</button>
-      <button class="blue ui button" routerLink="/books/list">
-        Zurück zur Buchliste
+      <button
+        class="red ui button"
+        (click)="delete(book?.isbn)"
+        i18n="@@deleteButton"
+      >
+        Delete
       </button>
-      <button class="blue ui button">weiter</button>
+      <button
+        class="blue ui button"
+        routerLink="/books/list"
+        i18n="@@backToBookListButton"
+      >
+        back to book list
+      </button>
+      <button class="blue ui button" i18n="@@next">next</button>
     </div>
   </ng-container>
 </div>
