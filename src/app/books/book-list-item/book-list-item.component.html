@@ -1,16 +1,25 @@
-<img
-  class="ui middle aligned tiny image"
-  bmZoom
-  src="{{book?.thumbnails?.[0]?.url}}"
-  alt="{{book?.thumbnails?.[0]?.title}}"
-/>
-<div class="content">
-  <div class="header">{{ book?.title }}</div>
-  <div class="sub header">{{ book?.subtitle }}</div>
-  <div class="meta">
-    <span *ngFor="let author of book?.authors; last as isLast"
-      >{{ author }}<span *ngIf="!isLast">, </span></span
-    ><br />
-    <span>{{ book?.isbn }}</span>
+<div class="container py-4">
+  <div class="card md:card-side bg-base-100 shadow-xl">
+    <figure>
+      <img
+        class="h-full w-20 lg:object-cover md:h-full md:w-48 sm:h-full sm:w-24"
+        src="{{book?.thumbnails?.[0]?.url}}"
+        alt="{{book?.thumbnails?.[0]?.title}}"
+      />
+    </figure>
+    <div class="card-body">
+      <h2 class="card-title">{{ book?.title }}</h2>
+      <div class="text-lg">{{ book?.subtitle }}</div>
+      <div>
+        <div
+          class="text-xs"
+          *ngFor="let author of book?.authors; last as isLast"
+        >
+          {{ author }}<span *ngIf="!isLast">, </span>
+        </div>
+        <br />
+        <span>ISBN: {{ book?.isbn | isbn }} </span>
+      </div>
+    </div>
   </div>
 </div>

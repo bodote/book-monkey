@@ -25,6 +25,7 @@
     "@angular/router": "^14.0.0",
     "@dimaslz/ng-heroicons": "^0.1.5",
     "angular-date-value-accessor": "^2.0.1",
+    "daisyui": "^2.22.0",
     "rxjs": "~7.5.0",
     "semantic-ui-css": "^2.4.1",
     "tslib": "^2.3.0",

@@ -1,74 +1,82 @@
-<div class="ui middle aligned selection divided list">
+<div class="container px-8 py-8">
   <ng-container *ngIf="error">
-    <div class="ui message">
-      <i class="close icon"></i>
-      <div class="header" i18n="@@Error">Error!</div>
-      <p>{{ error }} <br /></p>
+    <div class="alert alert-error shadow-lg">
+      <div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="stroke-current flex-shrink-0 h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
+        </svg>
+        <span> {{ error | json }} </span>
+      </div>
     </div>
   </ng-container>
 
-  <ng-container *ngIf="!book">
-    <div class="ui main text container">
-      <div class="ui container">
-        <div class="ui segment">
-          <div class="ui active inverted dimmer">
-            <div class="ui large text loader">Loading</div>
-          </div>
-          <div class="ui placeholder">
-            <div class="image header">
-              <div class="line"></div>
-              <div class="line"></div>
-            </div>
-            <div class="paragraph">
-              <div class="line"></div>
-              <div class="line"></div>
-              <div class="line"></div>
-              <div class="line"></div>
-              <div class="line"></div>
-            </div>
-          </div>
+  <ng-container *ngIf="!book && !error">
+    <div class="relative rounded-xl overflow-auto p-8">
+      <div class="flex items-center justify-center">
+        Loading...
+        <div class="pl-5">
+          <div
+            class="w-6 h-6 border-b-2 border-slate-900 rounded-full animate-spin"
+          ></div>
         </div>
       </div>
     </div>
   </ng-container>
   <ng-container *ngIf="book">
-    <div class="ui container">
-      <h2>{{ book.title }}</h2>
-      <h3>{{ book.subtitle }}</h3>
-      <div class="ui divider"></div>
-      <div class="ui grid">
-        <div class="four wide column">
-          <h4 i18n="@@Authors">Authors:</h4>
+    <div class="container">
+      <div class="text-2xl font-bold pb-8">{{ book.title }}</div>
+      <div class="text-lg font-bold">{{ book.subtitle }}</div>
+      <div class="divider"></div>
+      <div class="flex flex-row pb-8">
+        <div class="basis-1/4">
+          <div class="text-lg font-bold" i18n="@@Authors">Authors:</div>
           <ng-container *ngFor="let author of book.authors">
             {{ author }}<br />
           </ng-container>
         </div>
-        <div class="four wide column">
-          <h4>ISBN:</h4>
+        <div class="basis-1/4">
+          <div class="text-lg font-bold">ISBN:</div>
           {{ book.isbn | isbn }}
         </div>
-        <div class="four wide column">
-          <h4 i18n="@@published">published:</h4>
+        <div class="basis-1/4">
+          <div class="text-lg font-bold" i18n="@@published">published:</div>
           {{ book.published | date: 'longDate' }}
         </div>
-        <div class="four wide column">
-          <h4 i18n="@@rating">Rating:</h4>
+        <div class="basis-1/4">
+          <div class="text-lg font-bold" i18n="@@rating">Rating:</div>
           <ng-container *ngIf="book.rating">
-            <ng-container
-              *ngFor="
-                let dummy of ','.repeat(book.rating - 1).split(',');
-                index as i
-              "
-            >
-              <i class="yellow star icon" [bmDelay]="1000 + i * 500"> </i
-            ></ng-container>
+            <div class="flex flex-wrap">
+              <ng-container
+                *ngFor="
+                  let dummy of ','.repeat(book.rating - 1).split(',');
+                  index as i
+                "
+              >
+                <star-solid-icon
+                  color="goldenrod"
+                  [bmDelay]="1000 + i * 500"
+                ></star-solid-icon>
+              </ng-container>
+            </div>
           </ng-container>
         </div>
       </div>
-      <h4 i18n="@@bookDescription">Description:</h4>
+      <div class="text-lg font-bold pb-2" i18n="@@bookDescription">
+        Description:
+      </div>
       <p>{{ book.description }}</p>
       <img
-        class="ui middle aligned small image"
+        class="h-full w-48"
         src="{{book?.thumbnails?.[0]?.url}}"
         alt="{{book?.thumbnails?.[0]?.title}}"
       /><br />

@@ -1,34 +1,44 @@
-<div class="ui container">
-  <h2 i18n="@@SearchCompenent:header">Search books</h2>
-  <div class="ui category search" [class.loading]="isLoading">
-    <div class="ui icon input">
+<div class="container py-2">
+  <h2 i18n="@@SearchCompenent:header" class="text-2xl py-2">Search books</h2>
+  <div class="indicator relative">
+    <span class="indicator-item badge" [class.invisible]="!isLoading"
+      >is loading...</span
+    >
+    <label class="relative text-gray-400 focus-within:text-gray-600 block">
+      <search-outline-icon
+        class="pointer-events-none w-8 h-8 absolute top-7 transform -translate-y-1/2 right-1"
+      ></search-outline-icon>
+
       <input
         #search
         (keyup)="keyup(search.value)"
-        class="prompt"
+        class="input input-bordered w-full max-w-xs"
         type="text"
         placeholder="Search books..."
       />
-      <i class="search icon"></i>
+    </label>
+  </div>
+  <div class="overflow-x-auto py-2" *ngIf="foundBooks && foundBooks.length > 0">
+    <table class="table w-full">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let book of foundBooks">
+          <tr class="hover" [routerLink]="['/books/detail', book.isbn]">
+            <th>{{ book?.title }}</th>
+            <td>{{ book?.subtitle }}</td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+  <div class="py-2" *ngIf="foundBooks && foundBooks.length === 0">
+    <div class="alert alert-info shadow-lg">
+      <p i18n="@@SearchCompenent:not found">Sorry, nothing found.</p>
     </div>
-  </div>
-  <div
-    class="ui middle aligned selection divided list container"
-    *ngIf="foundBooks && foundBooks.length > 0"
-  >
-    <ng-container *ngFor="let book of foundBooks">
-      <div class="item" [routerLink]="['/books/detail', book.isbn]">
-        <div class="content">
-          <div class="header">{{ book?.title }}</div>
-          <div class="sub header">{{ book?.subtitle }}</div>
-        </div>
-      </div>
-    </ng-container>
-  </div>
-  <div
-    class="ui middle aligned selection divided list container"
-    *ngIf="foundBooks && foundBooks.length === 0"
-  >
-    <p i18n="@@SearchCompenent:not found">Sorry, nothing found.</p>
   </div>
 </div>

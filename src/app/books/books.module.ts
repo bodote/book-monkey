@@ -8,6 +8,7 @@ import { IsbnPipe } from './shared/isbn.pipe';
 import { ZoomDirective } from './shared/zoom.directive';
 import { DelayDirective } from './shared/delay.directive';
 import { BookListComponent } from './book-list/book-list.component';
+import { OutlineIconsModule, SolidIconsModule } from '@dimaslz/ng-heroicons';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,11 @@ import { BookListComponent } from './book-list/book-list.component';
     ZoomDirective,
     DelayDirective
   ],
-  imports: [CommonModule, BooksRoutingModule]
+  imports: [
+    CommonModule,
+    BooksRoutingModule,
+    OutlineIconsModule,
+    SolidIconsModule
+  ]
 })
 export class BooksModule {}

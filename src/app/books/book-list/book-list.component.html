@@ -1,38 +1,42 @@
-<div class="ui middle aligned selection divided list container">
+<div class="container px-8 py-8">
   <ng-container *ngIf="error">
-    <div class="ui message">
-      <i class="close icon"></i>
-      <div class="header">Fehler!</div>
-      <p>{{ error | json }} <br /></p>
+    <div class="alert alert-error shadow-lg">
+      <div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="stroke-current flex-shrink-0 h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
+        </svg>
+        <span> {{ error | json }} </span>
+      </div>
     </div>
   </ng-container>
-
-  <ng-container *ngIf="books$ | async as books; else loading">
-    <bm-book-list-item
-      *ngFor="let b of books; index as id"
-      [book]="b"
-      class="item"
-      [routerLink]="['/books/detail', b.isbn]"
-    ></bm-book-list-item>
+  <ng-container *ngIf="!error">
+    <ng-container *ngIf="books$ | async as books; else loading">
+      <bm-book-list-item
+        *ngFor="let b of books; index as id"
+        [book]="b"
+        class="item"
+        [routerLink]="['/books/detail', b.isbn]"
+      ></bm-book-list-item>
+    </ng-container>
   </ng-container>
   <ng-template #loading>
-    <div class="ui container">
-      <div class="ui segment">
-        <div class="ui active inverted dimmer">
-          <div class="ui large text loader">Loading</div>
-        </div>
-        <div class="ui placeholder">
-          <div class="image header">
-            <div class="line"></div>
-            <div class="line"></div>
-          </div>
-          <div class="paragraph">
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-          </div>
+    <div class="relative rounded-xl overflow-auto p-8">
+      <div class="flex items-center justify-center">
+        Loading...
+        <div class="pl-5">
+          <div
+            class="w-6 h-6 border-b-2 border-slate-900 rounded-full animate-spin"
+          ></div>
         </div>
       </div>
     </div>
