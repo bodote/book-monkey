@@ -6,13 +6,19 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { SearchComponent } from './search/search.component';
 import { TokenInterceptor } from './shared/token.interceptor';
+import { NgHeroiconsModule } from '@dimaslz/ng-heroicons';
 
 const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
 ];
 @NgModule({
   declarations: [AppComponent, HomeComponent, SearchComponent],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    NgHeroiconsModule
+  ],
   providers: [
     httpInterceptorProviders
     //{provide: LOCALE_ID, useValue: 'de' }

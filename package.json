@@ -23,6 +23,7 @@
     "@angular/platform-browser": "^14.0.0",
     "@angular/platform-browser-dynamic": "^14.0.0",
     "@angular/router": "^14.0.0",
+    "@dimaslz/ng-heroicons": "^0.1.5",
     "angular-date-value-accessor": "^2.0.1",
     "rxjs": "~7.5.0",
     "semantic-ui-css": "^2.4.1",
