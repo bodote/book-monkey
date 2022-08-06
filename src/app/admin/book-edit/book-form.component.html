@@ -28,9 +28,19 @@
       </label>
       <div class="py-4">
         <label class="input-group py-1">
-          <span>ISBN: </span>
+          <span
+            [class.bg-error]="
+              editForm.get('isbn')?.invalid &&
+              (editForm.get('isbn')?.dirty || editForm.get('isbn')?.touched)
+            "
+            >ISBN:
+          </span>
           <input
             class="input input-bordered w-full"
+            [class.input-error]="
+              editForm.get('isbn')?.invalid &&
+              (editForm.get('isbn')?.dirty || editForm.get('isbn')?.touched)
+            "
             id="isbn"
             type="text"
             formControlName="isbn"
@@ -55,12 +65,12 @@
       </label>
       <label class="input-group pb-4">
         <span>Description: </span>
-        <input
-          class="input input-bordered w-full"
+        <textarea
+          class="textarea input-bordered w-full"
           id="description"
           type="text"
           formControlName="description"
-        />
+        ></textarea>
       </label>
       <div class="flex flex-col w-full border-opacity-50">
         <div class="divider">Authors:</div>
