@@ -8,6 +8,7 @@ import { FormMessagesComponent } from './form-messages/form-messages.component';
 import { BookEditComponent } from './book-edit/book-edit.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LocalDateValueAccessorModule } from 'angular-date-value-accessor';
+import { SolidIconsModule } from '@dimaslz/ng-heroicons';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { LocalDateValueAccessorModule } from 'angular-date-value-accessor';
     CommonModule,
     AdminRoutingModule,
     ReactiveFormsModule,
-    LocalDateValueAccessorModule
+    LocalDateValueAccessorModule,
+    SolidIconsModule
   ]
 })
 export class AdminModule {}

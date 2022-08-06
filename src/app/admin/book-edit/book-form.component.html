@@ -1,102 +1,150 @@
-<div class="ui container">
+<div class="container">
   <ng-container *ngIf="isNew || book; else loading">
-    <form class="ui form" [formGroup]="editForm">
-      <div class="field">
-        <label for="title">Title: </label>
-        <input id="title" type="text" formControlName="title" />
+    <form class="form-control" [formGroup]="editForm">
+      <div class="pb-4">
+        <label class="input-group">
+          <span>Title</span>
+          <input
+            id="title"
+            type="text"
+            formControlName="title"
+            placeholder="info@site.com"
+            class="input input-bordered w-full"
+          />
+        </label>
       </div>
       <bm-form-messages
         [control]="editForm.get('title')"
         controlName="title"
       ></bm-form-messages>
-      <div class="field">
-        <label for="subtitle">Subtitle: </label>
-        <input id="subtitle" type="text" formControlName="subtitle" />
-      </div>
-
-      <div class="field">
-        <label for="isbn">ISBN: </label>
-        <input id="isbn" type="text" formControlName="isbn" required />
+      <label class="input-group pb-4">
+        <span>Subtitle: </span>
+        <input
+          class="input input-bordered w-full"
+          id="subtitle"
+          type="text"
+          formControlName="subtitle"
+        />
+      </label>
+      <div class="py-4">
+        <label class="input-group py-1">
+          <span>ISBN: </span>
+          <input
+            class="input input-bordered w-full"
+            id="isbn"
+            type="text"
+            formControlName="isbn"
+            required
+          />
+        </label>
         <bm-form-messages
           [control]="editForm.get('isbn')"
           controlName="isbn"
         ></bm-form-messages>
       </div>
 
-      <div class="field">
-        <label for="published">Published: </label>
+      <label class="input-group pb-4">
+        <span>Published: </span>
         <input
+          class="input input-bordered w-full"
           id="published"
           type="date"
           useValueAsLocalDate
           formControlName="published"
         />
-      </div>
-      <div class="field">
-        <label for="description">Description: </label>
-        <input id="description" type="text" formControlName="description" />
-      </div>
-      <div class="ui segment">
-        <h4 class="ui dividing header">Authors:</h4>
+      </label>
+      <label class="input-group pb-4">
+        <span>Description: </span>
+        <input
+          class="input input-bordered w-full"
+          id="description"
+          type="text"
+          formControlName="description"
+        />
+      </label>
+      <div class="flex flex-col w-full border-opacity-50">
+        <div class="divider">Authors:</div>
+
         <ng-container *ngIf="authors?.controls">
           <div
             formArrayName="authors"
-            class="inline fields"
+            class=""
             *ngFor="let auth of authors.controls; index as i"
           >
-            <div class="field">
-              <input type="text" [formControlName]="i" />
+            <div class="flex flex-row py-2">
+              <input
+                class="input input-bordered w-full p-2"
+                type="text"
+                [formControlName]="i"
+              />
+              <div class="p-2">
+                <minus-circle-solid-icon
+                  (click)="removeAuthor(i)"
+                  color="red"
+                ></minus-circle-solid-icon>
+              </div>
             </div>
-            <button
-              class="circular red ui minus icon button"
-              (click)="removeAuthor(i)"
-            >
-              <i class="minus icon"></i>
-            </button>
           </div>
         </ng-container>
         <bm-form-messages
           [control]="editForm.get('authors')"
           controlName="authors"
         ></bm-form-messages>
-        <button
-          class="circular green ui minus icon button"
-          (click)="addAuthor()"
-        >
-          <i class="plus icon"></i>
-        </button>
+        <div class="p-2">
+          <plus-circle-solid-icon
+            color="green"
+            (click)="addAuthor()"
+          ></plus-circle-solid-icon>
+        </div>
       </div>
 
-      <div class="ui segment">
-        <h4 class="ui dividing header">Thumbs:</h4>
+      <div class="">
+        <div class="divider">Thumbs:</div>
+
         <ng-container *ngIf="thumbnails?.controls">
           <div
-            class="inline fields"
+            class=""
             formArrayName="thumbnails"
             *ngFor="let thumb of thumbnails?.controls; index as j"
           >
-            <div class="inline fields" [formGroupName]="j">
-              <div class="field">
-                <input id="url" type="text" formControlName="url" />
+            <div class="" [formGroupName]="j">
+              <div class="form-control">
+                <div class="flex flex-row">
+                  <label class="input-group w-full px-2">
+                    <span>URL: </span>
+                    <input
+                      class="input input-bordered w-full"
+                      id="url"
+                      type="text"
+                      formControlName="url"
+                    />
+                  </label>
+
+                  <label class="input-group">
+                    <span>Name:</span>
+                    <input
+                      class="input input-bordered w-full"
+                      type="text"
+                      formControlName="title"
+                    />
+                  </label>
+                  <div class="p-2">
+                    <minus-circle-solid-icon
+                      (click)="removeThumb(j)"
+                      color="red"
+                    ></minus-circle-solid-icon>
+                  </div>
+                </div>
               </div>
-              <div class="field">
-                <input type="text" formControlName="title" />
-              </div>
-              <button
-                class="circular red ui minus icon button"
-                (click)="removeThumb(j)"
-              >
-                <i class="minus icon"></i>
-              </button>
             </div>
           </div>
         </ng-container>
-        <button
-          class="circular green ui minus icon button"
-          (click)="addThumb()"
-        >
-          <i class="plus icon"></i>
-        </button>
+        <div class="p-2">
+          <plus-circle-solid-icon
+            color="green"
+            (click)="addThumb()"
+          ></plus-circle-solid-icon>
+        </div>
       </div>
       <div *ngIf="saved" class="ui bottom attached info message">
         <i class="icon save"></i>
@@ -104,7 +152,7 @@
       </div>
       <button
         type="submit"
-        class="ui button"
+        class="btn btn-primary"
         (click)="bookFormSaveBook()"
         [class.disabled]="editForm.invalid"
         [class.primary]="!editForm.invalid"
