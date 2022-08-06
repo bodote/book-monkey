@@ -37,22 +37,22 @@
       <div class="text-2xl font-bold pb-8">{{ book.title }}</div>
       <div class="text-lg font-bold">{{ book.subtitle }}</div>
       <div class="divider"></div>
-      <div class="flex flex-row pb-8">
-        <div class="basis-1/4">
+      <div class="flex flex-row flex-wrap pb-8">
+        <div class="basis-1/5 pr-2 pb-2">
           <div class="text-lg font-bold" i18n="@@Authors">Authors:</div>
           <ng-container *ngFor="let author of book.authors">
             {{ author }}<br />
           </ng-container>
         </div>
-        <div class="basis-1/4">
+        <div class="basis-1/4 pr-2 pb-2">
           <div class="text-lg font-bold">ISBN:</div>
           {{ book.isbn | isbn }}
         </div>
-        <div class="basis-1/4">
+        <div class="basis-1/4 pr-2 pb-2">
           <div class="text-lg font-bold" i18n="@@published">published:</div>
           {{ book.published | date: 'longDate' }}
         </div>
-        <div class="basis-1/4">
+        <div class="basis-1/4 pr-2 pb-2">
           <div class="text-lg font-bold" i18n="@@rating">Rating:</div>
           <ng-container *ngIf="book.rating">
             <div class="flex flex-wrap">
@@ -81,27 +81,31 @@
         alt="{{book?.thumbnails?.[0]?.title}}"
       /><br />
       <br />
-      <button
-        class="green ui button"
-        [routerLink]="['/admin/edit', book?.isbn]"
-      >
-        Edit
-      </button>
-      <button
-        class="red ui button"
-        (click)="delete(book?.isbn)"
-        i18n="@@deleteButton"
-      >
-        Delete
-      </button>
-      <button
-        class="blue ui button"
-        routerLink="/books/list"
-        i18n="@@backToBookListButton"
-      >
-        back to book list
-      </button>
-      <button class="blue ui button" i18n="@@next">next</button>
+      <div class="flex flex-row">
+        <button
+          class="btn btn-primary basis-1/4 m-2"
+          [routerLink]="['/admin/edit', book?.isbn]"
+        >
+          Edit
+        </button>
+        <button
+          class="btn btn-secondary basis-1/4 m-2"
+          (click)="delete(book?.isbn)"
+          i18n="@@deleteButton"
+        >
+          Delete
+        </button>
+        <button
+          class="btn btn-secondary basis-1/4 m-2"
+          routerLink="/books/list"
+          i18n="@@backToBookListButton"
+        >
+          back to book list
+        </button>
+        <button class="btn btn-secondary basis-1/4 m-2" i18n="@@next">
+          next
+        </button>
+      </div>
     </div>
   </ng-container>
 </div>
