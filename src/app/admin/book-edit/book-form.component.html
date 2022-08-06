@@ -3,7 +3,7 @@
     <form class="form-control" [formGroup]="editForm">
       <div class="pb-4">
         <label class="input-group">
-          <span>Title</span>
+          <span class="bg-primary/30">Title</span>
           <input
             id="title"
             type="text"
@@ -18,7 +18,7 @@
         controlName="title"
       ></bm-form-messages>
       <label class="input-group pb-4">
-        <span>Subtitle: </span>
+        <span class="bg-primary/30">Subtitle: </span>
         <input
           class="input input-bordered w-full"
           id="subtitle"
@@ -29,6 +29,7 @@
       <div class="py-4">
         <label class="input-group py-1">
           <span
+            class="bg-primary/30"
             [class.bg-error]="
               editForm.get('isbn')?.invalid &&
               (editForm.get('isbn')?.dirty || editForm.get('isbn')?.touched)
@@ -54,7 +55,7 @@
       </div>
 
       <label class="input-group pb-4">
-        <span>Published: </span>
+        <span class="bg-primary/30">Published: </span>
         <input
           class="input input-bordered w-full"
           id="published"
@@ -64,9 +65,9 @@
         />
       </label>
       <label class="input-group pb-4">
-        <span>Description: </span>
+        <span class="bg-primary/30">Description: </span>
         <textarea
-          class="textarea input-bordered w-full"
+          class="textarea input-bordered w-full h-80"
           id="description"
           type="text"
           formControlName="description"
@@ -121,7 +122,7 @@
               <div class="form-control">
                 <div class="flex flex-row">
                   <label class="input-group w-full px-2">
-                    <span>URL: </span>
+                    <span class="bg-primary/30">URL: </span>
                     <input
                       class="input input-bordered w-full"
                       id="url"
@@ -131,7 +132,7 @@
                   </label>
 
                   <label class="input-group">
-                    <span>Name:</span>
+                    <span class="bg-primary/30">Name:</span>
                     <input
                       class="input input-bordered w-full"
                       type="text"
@@ -156,10 +157,26 @@
           ></plus-circle-solid-icon>
         </div>
       </div>
-      <div *ngIf="saved" class="ui bottom attached info message">
-        <i class="icon save"></i>
-        Book saved! {{ successMsg }}
+
+      <div *ngIf="saved" class="alert alert-info shadow-lg">
+        <div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            class="stroke-current flex-shrink-0 w-6 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            ></path>
+          </svg>
+          <span> Book saved! {{ successMsg }}</span>
+        </div>
       </div>
+
       <button
         type="submit"
         class="btn btn-primary"
