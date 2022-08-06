@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BookListComponent } from './book-list.component';
+import { IsbnPipe } from '../shared/isbn.pipe';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('BookListComponent', () => {
   let component: BookListComponent;
@@ -8,7 +10,8 @@ describe('BookListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [BookListComponent]
+      declarations: [BookListComponent, IsbnPipe],
+      imports: [HttpClientTestingModule]
     }).compileComponents();
 
     fixture = TestBed.createComponent(BookListComponent);

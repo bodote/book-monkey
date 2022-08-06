@@ -1,17 +1,16 @@
+import { BodosValidatorService } from './bodos-validator.service';
+import { BookStoreService } from '../../shared/book-store.service';
 import { TestBed } from '@angular/core/testing';
-
-import { BookStoreService } from './book-store.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-describe('BookStoreService', () => {
+describe('BodosValidatorService', () => {
   let service: BookStoreService;
-
   beforeEach(() => {
     TestBed.configureTestingModule({ imports: [HttpClientTestingModule] });
     service = TestBed.inject(BookStoreService);
   });
-
-  it('should be created', () => {
-    expect(service).toBeTruthy();
+  it('should create an instance', () => {
+    const directive = new BodosValidatorService(service);
+    expect(directive).toBeTruthy();
   });
 });

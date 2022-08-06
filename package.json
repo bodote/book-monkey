@@ -9,7 +9,7 @@
     "build-de": "ng build --configuration=production,de",
     "extract-i18n": "ng extract-i18n --format=xmb --output-path=src ",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
+    "test": "ng test --watch",
     "lint": "ng lint",
     "lint-fix": "ng lint --fix"
   },

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { ActivatedRoute, Router } from '@angular/router';
 import { BookStoreService } from '../../shared/book-store.service';
 import { Book } from '../../shared/book';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'bm-book-edit',
@@ -17,7 +17,6 @@ export class BookEditComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private bookStoreService: BookStoreService
   ) {}
 
