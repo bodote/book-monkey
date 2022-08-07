@@ -35,7 +35,7 @@ export class BookEditComponent implements OnInit {
     this.bookStoreService.putBook(book).subscribe(
       (res) => {
         this.saved = true;
-        this.successMsg = JSON.stringify(res);
+        this.successMsg = res;
         this.book$ = of(book);
         setTimeout(() => (this.saved = false), 5000);
       },
