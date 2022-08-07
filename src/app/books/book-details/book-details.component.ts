@@ -52,10 +52,12 @@ export class BookDetailsComponent implements OnInit {
   reallyDelete(isbn: string | undefined): void {
     this.bookService.deleteBook(isbn).subscribe({
       next: () => {
-        this.router.navigate(['list']);
+        this.router.navigate(['/books/list']);
       },
       error: (err) => {
         console.error(err);
+        this.error =
+          'Could not delete the book, Error message is: ' + JSON.stringify(err);
       }
     });
   }

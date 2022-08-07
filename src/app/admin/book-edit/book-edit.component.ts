@@ -32,17 +32,17 @@ export class BookEditComponent implements OnInit {
   }
 
   saveBook(book: Book) {
-    this.bookStoreService.putBook(book).subscribe(
-      (res) => {
+    this.bookStoreService.putBook(book).subscribe({
+      next: (res) => {
         this.saved = true;
         this.successMsg = res;
         this.book$ = of(book);
         setTimeout(() => (this.saved = false), 5000);
       },
-      (err) => {
-        console.error('ERROR in http.put saveBook: ' + JSON.stringify(err));
-        this.errorMessage = JSON.stringify(err);
+      error: (error) => {
+        this.errorMessage = JSON.stringify(error);
+        console.error('ERROR in http.put saveBook: ' + JSON.stringify(error));
       }
-    );
+    });
   }
 }

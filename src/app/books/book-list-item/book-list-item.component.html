@@ -21,7 +21,7 @@
         <span>ISBN: {{ book?.isbn | isbn }} </span>
         <button
           class="btn btn-primary basis-1/4 m-2"
-          [routerLink]="['/admin/detail', book?.isbn]"
+          [routerLink]="['/books/detail', book?.isbn]"
         >
           Details
         </button>

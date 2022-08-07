@@ -13,21 +13,18 @@ import { tap, throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class BookStoreService {
-  constructor(
-    private http: HttpClient,
-    private bookFactory: BookFactoryService
-  ) {}
+  constructor(private http: HttpClient) {}
 
   deleteBook(isbn: string | undefined) {
     return this.http
-      .delete(`https://api4.angular-buch.com/secure/book/${isbn}`, {
-        responseType: 'arraybuffer'
+      .delete(`https://api4.angular-buch.com/xsecure/book/${isbn}`, {
+        responseType: 'text' // needed because the api will not answer with JSON, but Angulars HttpClient defaults zu JSON
       })
       .pipe(retry({ count: 3, delay: 1000 }), catchError(this.processError));
   }
 
   postBook(book: Book): Observable<string> {
-    const bookRaw = this.bookFactory.getRawFromBook(book);
+    const bookRaw = BookFactoryService.getRawFromBook(book);
 
     return this.http
       .post('https://api4.angular-buch.com/secure/book', bookRaw, {
@@ -39,7 +36,7 @@ export class BookStoreService {
       );
   }
   putBook(book: Book): Observable<string> {
-    const bookRaw = this.bookFactory.getRawFromBook(book);
+    const bookRaw = BookFactoryService.getRawFromBook(book);
 
     return this.http
       .put(`https://api4.angular-buch.com/secure/book/${book.isbn}`, bookRaw, {

@@ -14,7 +14,7 @@ export class BookFactoryService {
       published: new Date(bookRaw.published)
     };
   }
-  getRawFromBook(book: Book): BookRaw {
+  static getRawFromBook(book: Book): BookRaw {
     return <BookRaw>{
       ...book,
       published: book.published.toISOString()
