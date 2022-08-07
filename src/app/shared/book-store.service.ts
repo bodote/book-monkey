@@ -17,7 +17,7 @@ export class BookStoreService {
 
   deleteBook(isbn: string | undefined) {
     return this.http
-      .delete(`https://api4.angular-buch.com/xsecure/book/${isbn}`, {
+      .delete(`https://api4.angular-buch.com/secure/book/${isbn}`, {
         responseType: 'text' // needed because the api will not answer with JSON, but Angulars HttpClient defaults zu JSON
       })
       .pipe(retry({ count: 3, delay: 1000 }), catchError(this.processError));
@@ -92,7 +92,7 @@ export class BookStoreService {
   }
 
   private processError(err: HttpErrorResponse): Observable<any> {
-    //console.error('service HttpErrorResponse: ' + JSON.stringify(err));
+    //console.error('Service HttpErrorResponse: ' + JSON.stringify(err));
     return throwError(() => err);
   }
 }
