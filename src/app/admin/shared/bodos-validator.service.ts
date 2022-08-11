@@ -3,7 +3,6 @@ import {
   AbstractControl,
   AsyncValidatorFn,
   FormArray,
-  FormControl,
   ValidationErrors
 } from '@angular/forms';
 import { Observable, of } from 'rxjs';
@@ -15,15 +14,13 @@ import { catchError, map } from 'rxjs/operators';
 })
 export class BodosValidatorService {
   constructor(private bookService: BookStoreService) {}
-  static checkIsbn(control: FormControl): ValidationErrors | null {
-    console.log('checkIsbn static ; formControl.value=' + control.value);
+  checkIsbn(control: AbstractControl): ValidationErrors | null {
+    //console.log('checkIsbn static ; formControl.value=' + control.value);
     if (control.value.length != 10 && control.value.length != 13)
       return { isbnLength: { valid: false } };
     return null;
   }
-  static checkAuthors(
-    authorsFormArray: AbstractControl
-  ): ValidationErrors | null {
+  checkAuthors(authorsFormArray: AbstractControl): ValidationErrors | null {
     if (
       (authorsFormArray as FormArray).controls.some(
         (ele) => ele.value?.length > 0

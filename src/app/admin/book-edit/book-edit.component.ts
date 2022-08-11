@@ -14,16 +14,17 @@ export class BookEditComponent implements OnInit {
   errorMessage = '';
   saved = false;
   successMsg = '';
-
   constructor(
     private route: ActivatedRoute,
     private bookStoreService: BookStoreService
-  ) {}
+  ) {
+    this.route = route;
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
-      if (params?.get('isbn')) {
-        let isbn = params.get('isbn');
+      let isbn = params.get('isbn');
+      if (isbn) {
         this.book$ = this.bookStoreService.getBook(isbn);
       } else {
         this.book$ = of({} as Book);

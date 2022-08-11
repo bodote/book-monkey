@@ -42,23 +42,23 @@ export class BookFormComponent implements OnInit, OnChanges {
     let isbnControl!: FormControl;
     if (this.isNew) {
       isbnControl = new FormControl('', {
-        validators: [Validators.required, BodosValidatorService.checkIsbn],
+        validators: [Validators.required, this.isbnValidatorServ.checkIsbn],
         asyncValidators: [this.isbnValidatorServ.asyncIsbnExistsValidator()]
       });
     } else {
       isbnControl = new FormControl('', [
         Validators.required,
-        BodosValidatorService.checkIsbn
+        this.isbnValidatorServ.checkIsbn
       ]);
     }
 
     this.editForm = this.fb.group({
-      title: ['empty title', Validators.required],
-      subtitle: 'empty sub title',
+      title: ['', Validators.required],
+      subtitle: '',
       isbn: isbnControl,
-      published: [],
+      published: [new Date('2022-08-10'), Validators.required],
       description: '',
-      rating: ''
+      rating: null
     });
     if (this.isNew) {
       this.fillEmptyBook();
@@ -71,14 +71,14 @@ export class BookFormComponent implements OnInit, OnChanges {
   }
 
   private fillEmptyBook() {
-    const authors = this.fb.array([], [BodosValidatorService.checkAuthors]);
-    authors.push(new FormControl('<author>'));
+    const authors = this.fb.array([], [this.isbnValidatorServ.checkAuthors]);
+    authors.push(new FormControl(''));
     this.editForm.setControl('authors', authors);
     const thbArray = this.fb.array([]) as FormArray;
     thbArray.push(
       this.fb.group({
-        url: '<url>',
-        title: '<title>'
+        url: '',
+        title: ''
       })
     );
     this.editForm.setControl('thumbnails', thbArray);
@@ -123,8 +123,11 @@ export class BookFormComponent implements OnInit, OnChanges {
   }
 
   bookFormSaveBook() {
-    console.log('book save called in book-form');
-    this.saveBookEventEmitter.emit(this.editForm.value as Book);
+    if (this.editForm.valid) {
+      this.saveBookEventEmitter.emit(this.editForm.value as Book);
+    } else {
+      throw new Error('bookFormSave called although form is not valid!');
+    }
   }
 
   addAuthor() {

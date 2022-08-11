@@ -15,7 +15,7 @@ import { tap, throwError } from 'rxjs';
 export class BookStoreService {
   constructor(private http: HttpClient) {}
 
-  deleteBook(isbn: string | undefined) {
+  deleteBook(isbn: string | undefined): Observable<string> {
     return this.http
       .delete(`https://api4.angular-buch.com/secure/book/${isbn}`, {
         responseType: 'text' // needed because the api will not answer with JSON, but Angulars HttpClient defaults zu JSON

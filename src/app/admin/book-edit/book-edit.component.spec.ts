@@ -13,12 +13,16 @@ import { BookStoreService } from '../../shared/book-store.service';
 import { Book } from '../../shared/book';
 import { of, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
 describe('BookEditComponent', () => {
   let component: BookEditComponent;
   let fixture: ComponentFixture<BookEditComponent>;
   let bookStoreMock: Partial<BookStoreService>;
   let book: Book;
+
+  let route: ActivatedRoute;
+
   beforeEach(async () => {
     book = {
       title: 'string',
@@ -27,7 +31,8 @@ describe('BookEditComponent', () => {
       isbn: ''
     };
     bookStoreMock = {
-      putBook: jasmine.createSpy().and.returnValue(of('nix'))
+      putBook: jasmine.createSpy().and.returnValue(of('OK')),
+      getBook: jasmine.createSpy().and.returnValue(of([book]))
     };
     expect(bookStoreMock.putBook).not.toHaveBeenCalled();
 
@@ -50,13 +55,26 @@ describe('BookEditComponent', () => {
 
     fixture = TestBed.createComponent(BookEditComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+
+    route = TestBed.inject(ActivatedRoute);
   });
 
-  it('should create', () => {
+  it('should create component and should ball bookStoreService.get() with ISBN number on ngOnInit()', () => {
+    let paramMapGetSpy = jasmine.createSpyObj<ParamMap>('paramMap.get()', [
+      'get'
+    ]);
+    paramMapGetSpy.get.and.returnValue('123');
+    const routeParamMap = spyOnProperty(route, 'paramMap').and.returnValue(
+      of(paramMapGetSpy)
+    );
+    fixture.detectChanges();
     expect(component).toBeTruthy();
+    expect(routeParamMap).toHaveBeenCalledOnceWith();
+    expect(paramMapGetSpy.get).toHaveBeenCalledOnceWith('isbn');
+    expect(bookStoreMock.getBook).toHaveBeenCalledOnceWith('123');
   });
-  it('should call bookstoreservice and subscribe , success case', fakeAsync(() => {
+  it('to save a book, it should call bookstoreservice and subscribe on saveBook(), success case', fakeAsync(() => {
+    fixture.detectChanges();
     //arrange
     bookStoreMock.putBook = jasmine.createSpy().and.returnValue(of('OK'));
     //act
@@ -70,7 +88,7 @@ describe('BookEditComponent', () => {
     expect(component.saved).toEqual(false);
   }));
 
-  it('should call bookstoreservice and subscribe , error case', fakeAsync(() => {
+  it('should call bookstoreservice and subscribe on saveBook() , error case', fakeAsync(() => {
     //arrange
     const errorObservable$ = throwError(() => {
       return new HttpErrorResponse({ status: 404 });

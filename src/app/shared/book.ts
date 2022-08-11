@@ -5,7 +5,7 @@ export interface Book {
   published: Date;
   isbn: string;
   thumbnails?: Thumbnail[];
-  rating?: number;
+  rating?: number | null;
   description?: string;
 }
 export interface Thumbnail {
