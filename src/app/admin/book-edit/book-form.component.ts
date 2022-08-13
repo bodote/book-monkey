@@ -4,7 +4,8 @@ import {
   Input,
   OnChanges,
   OnInit,
-  Output
+  Output,
+  SimpleChanges
 } from '@angular/core';
 import {
   FormArray,
@@ -58,15 +59,16 @@ export class BookFormComponent implements OnInit, OnChanges {
       isbn: isbnControl,
       published: [new Date('2022-08-10'), Validators.required],
       description: '',
-      rating: null
+      rating: [null, [Validators.min(0), Validators.max(5)]]
     });
     if (this.isNew) {
       this.fillEmptyBook();
     }
   }
-  ngOnChanges() {
-    if (!this.isNew && this.book && this.editForm) {
-      this.fillForm(this.book);
+  ngOnChanges(changes: SimpleChanges) {
+    const { book, isNew, saved, successMsg } = changes;
+    if (book.currentValue && !this.isNew && this.editForm) {
+      this.fillForm(book.currentValue);
     }
   }
 
@@ -90,7 +92,7 @@ export class BookFormComponent implements OnInit, OnChanges {
     this.editForm.get('isbn')?.setValue(book.isbn + '');
     this.editForm.get('description')?.setValue(book.description + '');
     this.editForm.get('published')?.setValue(book.published);
-    this.editForm.get('rating')?.setValue(book.rating + '');
+    this.editForm.get('rating')?.setValue(book.rating);
 
     let authors = this.fb.array([]);
     for (let author of book.authors) {

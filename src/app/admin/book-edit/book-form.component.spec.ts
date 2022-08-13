@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BookFormComponent } from './book-form.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { AsyncValidatorFn, ReactiveFormsModule } from '@angular/forms';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, SimpleChange } from '@angular/core';
 import { BodosValidatorService } from '../shared/bodos-validator.service';
 import { Book } from '../../shared/book';
 import { of } from 'rxjs';
@@ -54,11 +54,43 @@ describe('BookFormsComponent', () => {
 
       fixture = TestBed.createComponent(BookFormComponent);
       component = fixture.componentInstance;
-      component.isNew = true;
+      component.isNew = false;
       fixture.detectChanges();
     });
-    it('should create', () => {
+    it('should create, form should be valid and emit the new book data to the saveBookEventEmitter Output emitter', () => {
       expect(component).toBeTruthy();
+      spyOn(component.saveBookEventEmitter, 'emit');
+      component.book = testBookData;
+      //directly call ngOnChanges
+      component.ngOnChanges({
+        book: new SimpleChange(null, testBookData, false)
+      });
+      fixture.detectChanges(); // TODO why needed ??
+      const buttonEl = fixture.debugElement.query(
+        By.css('button[type="submit"]')
+      );
+
+      buttonEl.nativeElement.click();
+      expect(component.editForm.valid).toBeTrue();
+      expect(component.saveBookEventEmitter.emit).toHaveBeenCalledWith(
+        testBookData
+      );
+    });
+    it('should add an author ', () => {
+      expect(component).toBeTruthy();
+      spyOn(component.saveBookEventEmitter, 'emit');
+      spyOn(component, 'addAuthor').and.callThrough();
+      component.book = testBookData;
+      //directly call ngOnChanges
+      component.ngOnChanges({
+        book: new SimpleChange(null, testBookData, false)
+      });
+      fixture.detectChanges();
+      expect(component.authors.length).toEqual(1);
+      const addAuthButton = fixture.debugElement.query(By.css('#addAuthor'));
+      addAuthButton.nativeElement.click();
+      expect(component.addAuthor).toHaveBeenCalledTimes(1);
+      expect(component.authors.length).toEqual(2);
     });
   });
 
@@ -168,6 +200,7 @@ describe('BookFormsComponent', () => {
       expect(component.authors.length).toEqual(1);
       expect(component.editForm.valid).toBeTrue();
       // act
+
       const authorPlusButton = fixture.debugElement.query(By.css('#addAuthor'));
       authorPlusButton.nativeElement.click();
       // assert
