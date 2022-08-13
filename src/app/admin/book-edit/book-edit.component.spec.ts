@@ -90,6 +90,7 @@ describe('BookEditComponent', () => {
 
   it('should call bookstoreservice and subscribe on saveBook() , error case', fakeAsync(() => {
     //arrange
+    spyOn(console, 'error');
     const errorObservable$ = throwError(() => {
       return new HttpErrorResponse({ status: 404 });
     });
@@ -100,6 +101,7 @@ describe('BookEditComponent', () => {
     component.saveBook(book);
     tick(1);
     //assert
+    expect(console.error).toHaveBeenCalledTimes(1);
     expect(bookStoreMock.putBook).toHaveBeenCalledOnceWith(book);
     expect(component.saved).toEqual(false);
     expect(component.successMsg.length).toEqual(0);

@@ -140,7 +140,7 @@ export class BookFormComponent implements OnInit, OnChanges {
   }
 
   addThumb() {
-    console.log('add thumb called in book-form');
+    //console.log('add thumb called in book-form');
     const thumbG = this.fb.group({
       url: '',
       title: ''

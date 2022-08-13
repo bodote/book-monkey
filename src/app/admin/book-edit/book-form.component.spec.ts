@@ -19,6 +19,16 @@ const emptyBookData: Book = {
   rating: null,
   thumbnails: [{ title: '', url: '' }]
 };
+const testBookData: Book = {
+  authors: ['author'],
+  isbn: '1234567890',
+  published: new Date('2022-02-02'),
+  title: 'a title',
+  subtitle: '',
+  description: '',
+  rating: 3,
+  thumbnails: [{ title: '', url: '' }]
+};
 describe('BookFormsComponent', () => {
   let component: BookFormComponent;
   let fixture: ComponentFixture<BookFormComponent>;
@@ -26,32 +36,56 @@ describe('BookFormsComponent', () => {
     'validatorSpy',
     ['asyncIsbnExistsValidator', 'checkIsbn', 'checkAuthors']
   );
+  describe('with existing book and AsyncValidatorFn that returns a isbnExists-Error', () => {
+    beforeEach(async () => {
+      validatorService.asyncIsbnExistsValidator = jasmine
+        .createSpy<() => AsyncValidatorFn>()
+        .and.returnValue(() => of({ isbnExists: { valid: false } }));
+      //.and.returnValue(() => of({}));
+      validatorService.checkIsbn = jasmine.createSpy().and.returnValue(null);
+      await TestBed.configureTestingModule({
+        declarations: [BookFormComponent],
+        imports: [HttpClientTestingModule, ReactiveFormsModule],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA],
+        providers: [
+          { provide: BodosValidatorService, useValue: validatorService }
+        ]
+      }).compileComponents();
 
-  validatorService.asyncIsbnExistsValidator = jasmine
-    .createSpy<() => AsyncValidatorFn>()
-    .and.returnValue(() => of({ isbnExists: { valid: false } }));
-  validatorService.checkIsbn = jasmine.createSpy().and.returnValue(null);
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [BookFormComponent],
-      imports: [HttpClientTestingModule, ReactiveFormsModule],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      providers: [
-        { provide: BodosValidatorService, useValue: validatorService }
-      ]
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(BookFormComponent);
-    component = fixture.componentInstance;
-    component.isNew = true;
-    fixture.detectChanges();
+      fixture = TestBed.createComponent(BookFormComponent);
+      component = fixture.componentInstance;
+      component.isNew = true;
+      fixture.detectChanges();
+    });
+    it('should create', () => {
+      expect(component).toBeTruthy();
+    });
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-  describe('with new book', () => {
+  describe('with new book and AsyncValidatorFn that returns a isbnExists-Error', () => {
+    beforeEach(async () => {
+      validatorService.asyncIsbnExistsValidator = jasmine
+        .createSpy<() => AsyncValidatorFn>()
+        .and.returnValue(() => of({ isbnExists: { valid: false } }));
+      //.and.returnValue(() => of({}));
+      validatorService.checkIsbn = jasmine.createSpy().and.returnValue(null);
+      await TestBed.configureTestingModule({
+        declarations: [BookFormComponent],
+        imports: [HttpClientTestingModule, ReactiveFormsModule],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA],
+        providers: [
+          { provide: BodosValidatorService, useValue: validatorService }
+        ]
+      }).compileComponents();
+
+      fixture = TestBed.createComponent(BookFormComponent);
+      component = fixture.componentInstance;
+      component.isNew = true;
+      fixture.detectChanges();
+    });
+    it('should create', () => {
+      expect(component).toBeTruthy();
+    });
     it('should create the edit form, which should not be valid', () => {
       expect(component.editForm.value).toEqual(emptyBookData);
       expect(component.editForm.valid).toBeFalse();
@@ -76,10 +110,100 @@ describe('BookFormsComponent', () => {
     it('should call bookFormSaveBook method, when button is clicked, but not emit Event if Form is not valid', () => {
       spyOn(component, 'bookFormSaveBook').and.callThrough();
       spyOn(component.saveBookEventEmitter, 'emit');
+      spyOn(console, 'error');
+      const buttonEl = fixture.debugElement.query(By.css('button')); //throws an Error but is catched internally;
+      spyOn(buttonEl.nativeElement, 'click').and.callThrough();
+
+      buttonEl.nativeElement.click();
+
+      expect(component.bookFormSaveBook).toHaveBeenCalledTimes(1);
+      expect(console.error).toHaveBeenCalledTimes(1);
+      expect(component.saveBookEventEmitter.emit).toHaveBeenCalledTimes(0);
+    });
+  });
+  describe('with new book and AsyncValidatorFn that returns no errors', () => {
+    beforeEach(async () => {
+      validatorService.asyncIsbnExistsValidator = jasmine
+        .createSpy<() => AsyncValidatorFn>()
+        .and.returnValue(() => of({}));
+      validatorService.checkIsbn = jasmine.createSpy().and.returnValue(null);
+      await TestBed.configureTestingModule({
+        declarations: [BookFormComponent],
+        imports: [HttpClientTestingModule, ReactiveFormsModule],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA],
+        providers: [
+          { provide: BodosValidatorService, useValue: validatorService }
+        ]
+      }).compileComponents();
+
+      fixture = TestBed.createComponent(BookFormComponent);
+      component = fixture.componentInstance;
+      component.isNew = true;
+      fixture.detectChanges();
+    });
+    it('should call bookFormSaveBook method, when button is clicked, and emit Event if Form is  valid', () => {
+      //arrange
+      spyOn(component, 'bookFormSaveBook').and.callThrough();
+      spyOn(component.saveBookEventEmitter, 'emit');
+      expect(component.editForm.valid).toBeFalse();
+      // act
+      component.editForm.setValue(testBookData);
+      // assert
+      expect(component.editForm.valid).toBeTrue();
+      // act
       const buttonEl = fixture.debugElement.query(By.css('button'));
       buttonEl.nativeElement.click();
+      // assert
       expect(component.bookFormSaveBook).toHaveBeenCalledTimes(1);
-      expect(component.saveBookEventEmitter.emit).toHaveBeenCalledTimes(0);
+      expect(component.saveBookEventEmitter.emit).toHaveBeenCalledTimes(1);
+    });
+    it('should call addAuthor method, when add Author is clicked, same with removeAuthor', () => {
+      //arrange
+      spyOn(component, 'addAuthor').and.callThrough();
+      spyOn(component, 'removeAuthor').and.callThrough();
+      expect(component.editForm.valid).toBeFalse();
+      // act
+      component.editForm.setValue(testBookData);
+      // assert
+      expect(component.authors.length).toEqual(1);
+      expect(component.editForm.valid).toBeTrue();
+      // act
+      const authorPlusButton = fixture.debugElement.query(By.css('#addAuthor'));
+      authorPlusButton.nativeElement.click();
+      // assert
+      expect(component.authors.length).toEqual(2);
+      expect(component.addAuthor).toHaveBeenCalledTimes(1);
+      //arrange
+      const authorMinusButton = fixture.debugElement.query(
+        By.css('#removeAuthor')
+      );
+      authorMinusButton.nativeElement.click();
+      expect(component.removeAuthor).toHaveBeenCalledTimes(1);
+      expect(component.authors.length).toEqual(1);
+    });
+    it('should call addThumb method, when add Thumb is clicked, same with ThumbAuthor', () => {
+      //arrange
+      spyOn(component, 'addThumb').and.callThrough();
+      spyOn(component, 'removeThumb').and.callThrough();
+      expect(component.editForm.valid).toBeFalse();
+      // act
+      component.editForm.setValue(testBookData);
+      // assert
+      expect(component.thumbnails.length).toEqual(1);
+      expect(component.editForm.valid).toBeTrue();
+      // act
+      const thumbPlusButton = fixture.debugElement.query(By.css('#addThumb'));
+      thumbPlusButton.nativeElement.click();
+      // assert
+      expect(component.thumbnails.length).toEqual(2);
+      expect(component.addThumb).toHaveBeenCalledTimes(1);
+      //arrange
+      const thumbMinusButton = fixture.debugElement.query(
+        By.css('#removeThumb')
+      );
+      thumbMinusButton.nativeElement.click();
+      expect(component.removeThumb).toHaveBeenCalledTimes(1);
+      expect(component.thumbnails.length).toEqual(1);
     });
   });
 });

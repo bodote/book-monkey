@@ -5,6 +5,7 @@ import { HomeComponent } from './home.component';
 import { catchError, retry } from 'rxjs/operators';
 import { SearchComponent } from '../search/search.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -13,7 +14,8 @@ describe('HomeComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [HomeComponent, SearchComponent],
-      imports: [HttpClientTestingModule]
+      imports: [HttpClientTestingModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();
 
     fixture = TestBed.createComponent(HomeComponent);
@@ -40,10 +42,10 @@ describe('HomeComponent', () => {
       //---------------------------------------------|
 
       const final$ = source$.pipe(
-        tap((value) => console.log('in :' + value)),
+        //tap((value) => console.log('in :' + value)),
         //mergeMap(()=>inner$),
-        exhaustMap(() => inner$),
-        tap((value) => console.log('out:' + value))
+        exhaustMap(() => inner$)
+        //tap((value) => console.log('out:' + value))
       );
       //--------------------i---j---k--
       //-----------------------------i---j---k--
@@ -64,10 +66,10 @@ describe('HomeComponent', () => {
         tap((value) => console.error('in :' + value)),
         retry({ count: 1, delay: 10 }),
         catchError((err) => {
-          console.error('catched the error:' + err);
+          //console.error('catched the error:' + err);
           return of('An Error Has occured');
-        }),
-        tap((value) => console.error('out :' + value))
+        })
+        //tap((value) => console.error('out :' + value))
       );
       //            --#
       //            100ms ----#
