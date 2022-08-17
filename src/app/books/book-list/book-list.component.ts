@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Book } from '../../shared/book';
 import { BookStoreService } from '../../shared/book-store.service';
-import { Observable, of, tap } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'bm-book-list',
@@ -13,17 +14,17 @@ export class BookListComponent implements OnInit {
   books$: Observable<Book[] | null> | undefined;
   listView!: boolean;
   detailBook!: Book;
-  error: string | undefined;
+  error: HttpErrorResponse | undefined;
 
-  constructor(private bs: BookStoreService) {
+  constructor(private bs: BookStoreService, private cd: ChangeDetectorRef) {
     this.bs = bs;
   }
 
   ngOnInit(): void {
     this.books$ = this.bs.getAll().pipe(
-      tap(() => (this.error = undefined)),
       catchError((err) => {
         this.error = err;
+        this.cd.detectChanges();
         return of(null);
       })
     );

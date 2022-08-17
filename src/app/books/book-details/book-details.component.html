@@ -11,6 +11,26 @@
       </div>
     </div>
   </ng-container>
+  <ng-container *ngIf="!book && error">
+    <div id="errorNoBook" class="alert alert-error shadow-lg">
+      <div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="stroke-current flex-shrink-0 h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
+        </svg>
+        <span> {{ error | json }} </span>
+      </div>
+    </div>
+  </ng-container>
   <ng-container *ngIf="book">
     <div class="container">
       <div class="text-2xl font-bold pb-8">{{ book.title }}</div>
@@ -23,12 +43,14 @@
             {{ author }}<br />
           </ng-container>
         </div>
-        <div class="basis-1/4 pr-2 pb-2">
+        <div class="basis-1/4 pr-2 pb-2" id="isbn">
           <div class="text-lg font-bold">ISBN:</div>
           {{ book.isbn | isbn }}
         </div>
         <div class="basis-1/4 pr-2 pb-2">
-          <div class="text-lg font-bold" i18n="@@published">published:</div>
+          <div class="text-lg font-bold" i18n="@@published" id="published">
+            published:
+          </div>
           {{ book.published | date: 'longDate' }}
         </div>
         <div class="basis-1/4 pr-2 pb-2">
@@ -61,7 +83,7 @@
       /><br />
       <br />
       <ng-container *ngIf="error">
-        <div class="alert alert-error shadow-lg">
+        <div id="error" class="alert alert-error shadow-lg">
           <div>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -82,6 +104,7 @@
       </ng-container>
       <div class="flex flex-row">
         <button
+          id="editButton"
           class="btn btn-primary basis-1/4 m-2"
           [routerLink]="['/admin/edit', book?.isbn]"
         >
@@ -102,7 +125,7 @@
           back to book list
         </button>
         <button class="btn btn-secondary basis-1/4 m-2" i18n="@@next">
-          next
+          Next
         </button>
       </div>
     </div>

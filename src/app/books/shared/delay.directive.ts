@@ -11,7 +11,6 @@ export class DelayDirective implements OnInit {
 
   ngOnInit(): void {
     if (this.bmDelay) {
-      console.log('bmDelay=' + this.bmDelay);
       setTimeout(() => {
         this.visibility = 'visible';
       }, this.bmDelay);

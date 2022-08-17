@@ -37,7 +37,6 @@ export class BookStoreService {
   }
   putBook(book: Book): Observable<string> {
     const bookRaw = BookFactoryService.getRawFromBook(book);
-
     return this.http
       .put(`https://api4.angular-buch.com/secure/book/${book.isbn}`, bookRaw, {
         responseType: 'text'
@@ -55,7 +54,7 @@ export class BookStoreService {
         delay(1000)
       );
   }
-  getBookFast(isbn: string | null) {
+  getBookFast(isbn: string | null): Observable<Book> {
     return this.http
       .get<BookRaw>(`https://api4.angular-buch.com/secure/book/${isbn}`)
       .pipe(

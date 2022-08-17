@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { Book } from '../../shared/book';
 import { BookStoreService } from '../../shared/book-store.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'bm-book-details',
@@ -13,7 +14,7 @@ export class BookDetailsComponent implements OnInit {
   book!: Book;
   id: number = 0;
 
-  error: string | undefined;
+  error: HttpErrorResponse | undefined;
 
   constructor(
     private router: Router,
@@ -23,26 +24,26 @@ export class BookDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
-      if (params?.get('isbn')) {
-        let isbn = params.get('isbn');
+      let isbn: string | null;
+      if ((isbn = params?.get('isbn')) != null) {
         this.getABook(isbn);
       }
     });
   }
 
-  getABook(isbn: string | null) {
+  getABook(isbn: string) {
     this.bookService.getBook(isbn).subscribe({
       next: (book) => {
-        if (book) {
-          this.book = book;
-        }
+        this.book = book;
       },
-      error: (err) => (this.error = err)
+      error: (err: HttpErrorResponse) => (this.error = err)
     });
   }
 
+  readonly confirmMessage = 'Really delete book?';
+
   delete(isbn: string | undefined): void {
-    this.confirm('Really delete book?').subscribe((ok) => {
+    this.confirm(this.confirmMessage).subscribe((ok) => {
       if (ok) {
         this.reallyDelete(isbn);
       }
@@ -55,15 +56,13 @@ export class BookDetailsComponent implements OnInit {
         this.router.navigate(['/books/list']);
       },
       error: (err) => {
-        console.error(err);
-        this.error =
-          'Could not delete the book, Error message is: ' + JSON.stringify(err);
+        this.error = err;
       }
     });
   }
 
   confirm(message?: string): Observable<boolean> {
-    const confirmation = window.confirm(message || 'Is it OK?');
+    const confirmation = window.confirm(message);
     return of(confirmation);
   }
 }

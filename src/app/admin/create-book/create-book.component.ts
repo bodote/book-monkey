@@ -12,21 +12,21 @@ export class CreateBookComponent implements OnDestroy {
   errorMessage = '';
   saved = false;
   successMsg = '';
-  private subscription: Subscription | undefined;
+  subscription: Subscription | undefined;
   constructor(private bookStoreService: BookStoreService) {}
 
   createBookSave(book: Book) {
-    this.subscription = this.bookStoreService.postBook(book).subscribe(
-      (res) => {
+    this.subscription = this.bookStoreService.postBook(book).subscribe({
+      next: (res) => {
         this.saved = true;
-        this.successMsg = JSON.stringify(res);
+        this.successMsg = res;
         setTimeout(() => (this.saved = false), 5000);
       },
-      (err) => {
+      error: (err) => {
         console.error('ERROR in createBookSave: ' + JSON.stringify(err));
         this.errorMessage = JSON.stringify(err);
       }
-    );
+    });
   }
   ngOnDestroy() {
     if (this.subscription) {

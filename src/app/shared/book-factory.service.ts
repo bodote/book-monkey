@@ -1,6 +1,7 @@
 import { BookRaw } from './book-raw';
 import { Injectable } from '@angular/core';
 import { Book } from './book';
+import { formatDate } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class BookFactoryService {
   static getRawFromBook(book: Book): BookRaw {
     return <BookRaw>{
       ...book,
-      published: book.published.toISOString()
+      published: formatDate(book.published, 'YYYY-MM-dd', 'en', 'Z')
     };
   }
   static getEmptyBook(): Book {
@@ -25,7 +26,7 @@ export class BookFactoryService {
       title: '',
       subtitle: '',
       authors: [],
-      published: new Date(),
+      published: new Date('2022-02-02'),
       isbn: '',
       thumbnails: [],
       rating: 0,

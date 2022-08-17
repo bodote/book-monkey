@@ -55,21 +55,23 @@ describe('BookFormsComponent', () => {
       fixture = TestBed.createComponent(BookFormComponent);
       component = fixture.componentInstance;
       component.isNew = false;
-      fixture.detectChanges();
     });
     it('should create, form should be valid and emit the new book data to the saveBookEventEmitter Output emitter', () => {
       expect(component).toBeTruthy();
       spyOn(component.saveBookEventEmitter, 'emit');
-      component.book = testBookData;
+      fixture.detectChanges(); // only if component.isNew || component.book , there is a button!
       //directly call ngOnChanges
+      component.book = testBookData;
+      // because of fixture.detectChanges() does not call it in a unittest directly,
+      // and only the first fixture.detectChanges() call calls ngOnInit()
       component.ngOnChanges({
-        book: new SimpleChange(null, testBookData, false)
+        aBook: new SimpleChange(null, testBookData, false)
       });
-      fixture.detectChanges(); // TODO why needed ??
+      // to force reevaluate the html - template after component.book = testBookData:
+      fixture.detectChanges();
       const buttonEl = fixture.debugElement.query(
         By.css('button[type="submit"]')
       );
-
       buttonEl.nativeElement.click();
       expect(component.editForm.valid).toBeTrue();
       expect(component.saveBookEventEmitter.emit).toHaveBeenCalledWith(
@@ -77,13 +79,14 @@ describe('BookFormsComponent', () => {
       );
     });
     it('should add an author ', () => {
+      fixture.detectChanges();
       expect(component).toBeTruthy();
       spyOn(component.saveBookEventEmitter, 'emit');
       spyOn(component, 'addAuthor').and.callThrough();
       component.book = testBookData;
       //directly call ngOnChanges
       component.ngOnChanges({
-        book: new SimpleChange(null, testBookData, false)
+        aBook: new SimpleChange(null, testBookData, false)
       });
       fixture.detectChanges();
       expect(component.authors.length).toEqual(1);

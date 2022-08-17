@@ -9,9 +9,6 @@ import { AbstractControl, ValidationErrors } from '@angular/forms';
 export class FormMessagesComponent {
   @Input() control: AbstractControl | null = null;
   @Input() controlName: string = '';
-  requiredText: string = 'An Error';
-  minLengthText: string = '';
-  maxLengthText: string = '';
 
   errorstruct = {
     title: {
@@ -31,9 +28,6 @@ export class FormMessagesComponent {
 
   constructor() {}
 
-  stringify(s: any): string {
-    return JSON.stringify(s);
-  }
   errorsForControl(): string[] {
     if (this.control?.errors) {
       let valErrors: ValidationErrors = this.control

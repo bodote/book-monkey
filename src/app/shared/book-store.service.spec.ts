@@ -1,4 +1,4 @@
-import { fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
 
 import { BookStoreService } from './book-store.service';
 import {
@@ -9,11 +9,27 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { of } from 'rxjs';
 import { BookRaw } from './book-raw';
 import { Book } from './book';
+import { formatDate } from '@angular/common';
 
 enum HttpMethods {
   DELETE = 'DELETE',
-  GET = 'GET'
+  GET = 'GET',
+  PUT = 'PUT'
 }
+const theDate = new Date('2020-02-01');
+let bookRaw = {
+  title: 'string',
+  authors: [],
+  published: formatDate(theDate, 'YYYY-MM-dd', 'en', 'Z'),
+  isbn: '123'
+} as BookRaw;
+let book = {
+  title: 'string',
+  authors: [],
+  published: theDate,
+  isbn: '123'
+} as Book;
+
 describe('BookStoreService', () => {
   describe('.delete(isbn) with Testbed', () => {
     let service: BookStoreService;
@@ -62,6 +78,23 @@ describe('BookStoreService', () => {
       );
       req?.flush('OK');
     }));
+    it('should get a book with isbn with 3 retries , if the first and second try fails', fakeAsync(() => {
+      //act
+      service.getBook('123').subscribe((b) => {
+        expect(b.title).toEqual(book.title);
+        expect(b.published).toEqual(book.published);
+      });
+      //assert and mock server responses via "flush()"
+      let req = runAlwaysFailingRequests(
+        3,
+        'https://api4.angular-buch.com/secure/book/123',
+        HttpMethods.GET
+      );
+      req?.flush(book);
+      tick(1000);
+      const n = flush();
+      expect(n).toEqual(0);
+    }));
 
     it('should throw error when even the 3rd retry fails ', fakeAsync(() => {
       let errorText = '';
@@ -88,30 +121,112 @@ describe('BookStoreService', () => {
     });
   });
   describe('.getAll() but without Testbed', () => {
-    const theDate = new Date('2020-02-01');
-    let bookRaw = {
-      title: 'string',
-      authors: [],
-      published: theDate.toISOString(),
-      isbn: '123'
-    } as BookRaw;
     let bookStoreService: BookStoreService;
     let httpStub: HttpClient;
-    beforeEach(() => {
+    beforeEach(() => {});
+    it('should call http GET with url and return a Book converted from BookRaw', (done) => {
+      //arrange:
       httpStub = jasmine.createSpyObj('httpStub', {
         get: of([bookRaw])
       });
       bookStoreService = new BookStoreService(httpStub);
-    });
-    it('should call http GET with url and return a Book converted from BookRaw', (done) => {
+      //act
+
       bookStoreService.getAll().subscribe((b: Book[]) => {
         expect(b.length).toEqual(1);
-        expect(b[0].title).toEqual(bookRaw.title);
-        expect(b[0].published.toISOString()).toEqual(bookRaw.published);
+        expect(b[0].title).toEqual(book.title);
+        expect(b[0].published).toEqual(book.published);
         done();
       });
       expect(httpStub.get).toHaveBeenCalledOnceWith(
         'https://api4.angular-buch.com/secure/books'
+      );
+    });
+    it(
+      'should call http GET with url and isbn and ' +
+        'try 3 times if an error occurs and return this Book converted from BookRaw',
+      (done) => {
+        //arrange:
+        httpStub = jasmine.createSpyObj('httpStub', {
+          get: of(bookRaw)
+        });
+        bookStoreService = new BookStoreService(httpStub);
+        bookStoreService.getBook('123').subscribe((b: Book) => {
+          expect(b.title).toEqual(book.title);
+          expect(b.published).toEqual(book.published);
+          done();
+        });
+        expect(httpStub.get).toHaveBeenCalledOnceWith(
+          'https://api4.angular-buch.com/secure/book/123'
+        );
+      }
+    );
+    it('should call http GET with url and isbn and return this Book converted from BookRaw', (done) => {
+      //arrange:
+      httpStub = jasmine.createSpyObj('httpStub', {
+        get: of(bookRaw)
+      });
+      bookStoreService = new BookStoreService(httpStub);
+      bookStoreService.getBookFast('123').subscribe((b: Book) => {
+        expect(b.title).toEqual(book.title);
+        expect(b.published).toEqual(book.published);
+        done();
+      });
+      expect(httpStub.get).toHaveBeenCalledOnceWith(
+        'https://api4.angular-buch.com/secure/book/123'
+      );
+    });
+    it('should call http PUT with book and return ok', (done) => {
+      //arrange:
+      httpStub = jasmine.createSpyObj('httpStub', {
+        put: of('OK')
+      });
+      bookStoreService = new BookStoreService(httpStub);
+      bookStoreService.putBook(book).subscribe((data) => {
+        expect(data).toEqual('OK');
+        done();
+      });
+
+      expect(httpStub.put).toHaveBeenCalledOnceWith(
+        'https://api4.angular-buch.com/secure/book/123',
+        bookRaw,
+        {
+          responseType: 'text' as jasmine.ExpectedRecursive<'json'>
+        }
+      );
+    });
+    it('should call http POST with book and return ok', (done) => {
+      //arrange:
+      httpStub = jasmine.createSpyObj('httpStub', {
+        post: of('OK')
+      });
+      bookStoreService = new BookStoreService(httpStub);
+      bookStoreService.postBook(book).subscribe((data) => {
+        expect(data).toEqual('OK');
+        done();
+      });
+
+      expect(httpStub.post).toHaveBeenCalledOnceWith(
+        'https://api4.angular-buch.com/secure/book',
+        bookRaw,
+        {
+          responseType: 'text' as jasmine.ExpectedRecursive<'json'>
+        }
+      );
+    });
+    it('should call http get with search string and return list of books', (done) => {
+      //arrange:
+      httpStub = jasmine.createSpyObj('httpStub', {
+        get: of([bookRaw])
+      });
+      bookStoreService = new BookStoreService(httpStub);
+      bookStoreService.getAllSearch('search_string').subscribe((books) => {
+        expect(books).toEqual([book]);
+        done();
+      });
+
+      expect(httpStub.get).toHaveBeenCalledOnceWith(
+        'https://api4.angular-buch.com/secure/books/search/search_string'
       );
     });
   });
