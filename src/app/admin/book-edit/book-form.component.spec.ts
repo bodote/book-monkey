@@ -36,24 +36,28 @@ describe('BookFormsComponent', () => {
     'validatorSpy',
     ['asyncIsbnExistsValidator', 'checkIsbn', 'checkAuthors']
   );
+
+  async function prepareTests() {
+    validatorService.asyncIsbnExistsValidator = jasmine
+      .createSpy<() => AsyncValidatorFn>()
+      .and.returnValue(() => of({ isbnExists: { valid: false } }));
+    validatorService.checkIsbn = jasmine.createSpy().and.returnValue(null);
+    await TestBed.configureTestingModule({
+      declarations: [BookFormComponent],
+      imports: [HttpClientTestingModule, ReactiveFormsModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      providers: [
+        { provide: BodosValidatorService, useValue: validatorService }
+      ]
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(BookFormComponent);
+    component = fixture.componentInstance;
+  }
+
   describe('with existing book and AsyncValidatorFn that returns a isbnExists-Error', () => {
     beforeEach(async () => {
-      validatorService.asyncIsbnExistsValidator = jasmine
-        .createSpy<() => AsyncValidatorFn>()
-        .and.returnValue(() => of({ isbnExists: { valid: false } }));
-      //.and.returnValue(() => of({}));
-      validatorService.checkIsbn = jasmine.createSpy().and.returnValue(null);
-      await TestBed.configureTestingModule({
-        declarations: [BookFormComponent],
-        imports: [HttpClientTestingModule, ReactiveFormsModule],
-        schemas: [CUSTOM_ELEMENTS_SCHEMA],
-        providers: [
-          { provide: BodosValidatorService, useValue: validatorService }
-        ]
-      }).compileComponents();
-
-      fixture = TestBed.createComponent(BookFormComponent);
-      component = fixture.componentInstance;
+      await prepareTests();
       component.isNew = false;
     });
     it('should create, form should be valid and emit the new book data to the saveBookEventEmitter Output emitter', () => {
@@ -99,22 +103,7 @@ describe('BookFormsComponent', () => {
 
   describe('with new book and AsyncValidatorFn that returns a isbnExists-Error', () => {
     beforeEach(async () => {
-      validatorService.asyncIsbnExistsValidator = jasmine
-        .createSpy<() => AsyncValidatorFn>()
-        .and.returnValue(() => of({ isbnExists: { valid: false } }));
-      //.and.returnValue(() => of({}));
-      validatorService.checkIsbn = jasmine.createSpy().and.returnValue(null);
-      await TestBed.configureTestingModule({
-        declarations: [BookFormComponent],
-        imports: [HttpClientTestingModule, ReactiveFormsModule],
-        schemas: [CUSTOM_ELEMENTS_SCHEMA],
-        providers: [
-          { provide: BodosValidatorService, useValue: validatorService }
-        ]
-      }).compileComponents();
-
-      fixture = TestBed.createComponent(BookFormComponent);
-      component = fixture.componentInstance;
+      await prepareTests();
       component.isNew = true;
       fixture.detectChanges();
     });
@@ -158,21 +147,10 @@ describe('BookFormsComponent', () => {
   });
   describe('with new book and AsyncValidatorFn that returns no errors', () => {
     beforeEach(async () => {
+      await prepareTests();
       validatorService.asyncIsbnExistsValidator = jasmine
         .createSpy<() => AsyncValidatorFn>()
         .and.returnValue(() => of({}));
-      validatorService.checkIsbn = jasmine.createSpy().and.returnValue(null);
-      await TestBed.configureTestingModule({
-        declarations: [BookFormComponent],
-        imports: [HttpClientTestingModule, ReactiveFormsModule],
-        schemas: [CUSTOM_ELEMENTS_SCHEMA],
-        providers: [
-          { provide: BodosValidatorService, useValue: validatorService }
-        ]
-      }).compileComponents();
-
-      fixture = TestBed.createComponent(BookFormComponent);
-      component = fixture.componentInstance;
       component.isNew = true;
       fixture.detectChanges();
     });

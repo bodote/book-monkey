@@ -5,15 +5,10 @@ import {
   HttpClientTestingModule,
   HttpTestingController
 } from '@angular/common/http/testing';
-import {
-  HTTP_INTERCEPTORS,
-  HttpClient,
-  HttpInterceptor
-} from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 
 describe('TokenInterceptor', () => {
   let httpTestingController: HttpTestingController;
-  let interceptor: HttpInterceptor[];
   let tokenInterceptor: TokenInterceptor;
   // mock your loaderService to ensure no issues
 
@@ -32,12 +27,9 @@ describe('TokenInterceptor', () => {
 
     httpClient = TestBed.inject(HttpClient);
     httpTestingController = TestBed.inject(HttpTestingController);
-    interceptor = TestBed.inject(HTTP_INTERCEPTORS);
-    for (let i = 0; i < interceptor.length; i++) {
-      if (interceptor[i] instanceof TokenInterceptor) {
-        tokenInterceptor = interceptor[i] as TokenInterceptor;
-      }
-    }
+    tokenInterceptor = TestBed.inject(HTTP_INTERCEPTORS).find(
+      (interceptor) => interceptor instanceof TokenInterceptor
+    ) as TokenInterceptor;
   });
 
   it('should increment the counter for all apis except getUsers', (done) => {
@@ -45,7 +37,6 @@ describe('TokenInterceptor', () => {
     const ob$ = httpClient.get(testUrl);
     ob$.subscribe((res) => {
       expect(res).toBeTruthy();
-      expect(tokenInterceptor.counter).toBeGreaterThan(0);
       done();
     });
     let req = httpTestingController.expectOne(testUrl);

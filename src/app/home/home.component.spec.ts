@@ -66,7 +66,6 @@ describe('HomeComponent', () => {
         tap((value) => console.error('in :' + value)),
         retry({ count: 1, delay: 10 }),
         catchError((err) => {
-          //console.error('catched the error:' + err);
           return of('An Error Has occured');
         })
         //tap((value) => console.error('out :' + value))

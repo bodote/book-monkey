@@ -52,7 +52,7 @@ describe('BookListComponent', () => {
       .createSpy<() => Observable<Book[]>>()
       .and.returnValue(of([testBookData]));
     testScheduler.run((helpers) => {
-      const { cold, expectObservable } = helpers;
+      const { expectObservable } = helpers;
       fixture.detectChanges();
       expect(component).toBeTruthy();
       expect(component.books$).toBeDefined();
@@ -70,7 +70,7 @@ describe('BookListComponent', () => {
       .createSpy<() => Observable<Book[]>>()
       .and.returnValue(of([testBookData]).pipe(delay(1000)));
     testScheduler.run((helpers) => {
-      const { cold, expectObservable } = helpers;
+      const { expectObservable } = helpers;
       fixture.detectChanges();
 
       expect(component.books$).toBeDefined();

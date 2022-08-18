@@ -10,7 +10,6 @@ class TestComponent {}
 
 describe('ZoomDirective', () => {
   let fixture: ComponentFixture<TestComponent>;
-  let component;
   beforeEach(() => {
     fixture = TestBed.configureTestingModule({
       declarations: [TestComponent, ZoomDirective],

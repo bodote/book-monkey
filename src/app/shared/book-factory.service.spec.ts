@@ -23,8 +23,6 @@ const testBookDataRaw: BookRaw = {
   thumbnails: [{ title: '', url: '' }]
 };
 describe('BookFactoryService', () => {
-  let service: BookFactoryService;
-
   it('should get an empty book', () => {
     const book = BookFactoryService.getEmptyBook();
     expect(book.title).toEqual('');

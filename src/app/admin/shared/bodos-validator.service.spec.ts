@@ -67,7 +67,7 @@ describe('BodosValidatorService', () => {
   });
   it('should return error observable if book with this ISBN already exists', () => {
     testScheduler.run((helpers) => {
-      const { cold, expectObservable } = helpers;
+      const { expectObservable } = helpers;
       //arrange
       mockService.getBookFast = jasmine
         .createSpy()
@@ -87,7 +87,7 @@ describe('BodosValidatorService', () => {
 
   it('should return  observable of(null) if book with this ISBN does not exists yet', () => {
     testScheduler.run((helpers) => {
-      const { cold, expectObservable } = helpers;
+      const { expectObservable } = helpers;
       //arrange
       mockService.getBookFast = jasmine.createSpy().and.returnValue(
         throwError(() => {

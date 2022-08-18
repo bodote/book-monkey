@@ -9,13 +9,12 @@ import {
 import { By } from '@angular/platform-browser';
 
 @Component({
-  template: '<div  [bmDelay]="100*1" >testcontent</div>'
+  template: '<div  [bmDelay]="100" >testcontent</div>'
 })
 class TestComponent {}
 
 describe('DelayDirective', () => {
   let fixture: ComponentFixture<TestComponent>;
-  let component;
   beforeEach(() => {
     fixture = TestBed.configureTestingModule({
       declarations: [TestComponent, DelayDirective],

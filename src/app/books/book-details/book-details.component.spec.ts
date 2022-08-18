@@ -98,7 +98,6 @@ describe('BookDetailsComponent and IsbnPipe', () => {
           return de.attributes['ng-reflect-router-link'] === '/books/list';
         });
         expect(index).toBeGreaterThan(-1);
-        debugElements = fixture.debugElement.queryAll(By.directive(RouterLink));
         debugElements = fixture.debugElement.queryAll(By.css('div>div>button'));
         index = debugElements.findIndex((de) => {
           return de.nativeElement.textContent.indexOf('Delete') != -1;
@@ -123,11 +122,7 @@ describe('BookDetailsComponent and IsbnPipe', () => {
       'should contain delete-button, and when clicked  ' +
         'should call component.delete(isbn)',
       () => {
-        let propertySpy = spyOnProperty(
-          route,
-          'paramMap',
-          'get'
-        ).and.returnValue(of(params));
+        spyOnProperty(route, 'paramMap', 'get').and.returnValue(of(params));
         spyOn(component, 'delete');
         fixture.detectChanges(); // should call ngOnInit()
         let debugElements = fixture.debugElement.queryAll(
@@ -145,11 +140,7 @@ describe('BookDetailsComponent and IsbnPipe', () => {
       'should subscribe a to a confirmation window, and call this.bookService.deleteBook(isbn)' +
         ' if the confirmation is true, and show an error when the bookService.deleteBook() is called and it does not succeede',
       () => {
-        let propertySpy = spyOnProperty(
-          route,
-          'paramMap',
-          'get'
-        ).and.returnValue(of(params));
+        spyOnProperty(route, 'paramMap', 'get').and.returnValue(of(params));
         fixture.detectChanges(); // should call ngOnInit()
         //arrange
         spyOn(window, 'confirm').and.returnValue(true);
@@ -223,7 +214,7 @@ describe('BookDetailsComponent and IsbnPipe', () => {
       ' return an observable of true| false ',
     () => {
       testScheduler.run((helpers) => {
-        const { cold, expectObservable } = helpers;
+        const { expectObservable } = helpers;
         //arrange
         spyOn(window, 'confirm').and.returnValue(true);
         //act + assert:
