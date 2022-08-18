@@ -167,9 +167,9 @@ describe('BookStoreService', () => {
         get: of(bookRaw)
       });
       bookStoreService = new BookStoreService(httpStub);
-      bookStoreService.getBookFast('123').subscribe((b: Book) => {
-        expect(b.title).toEqual(book.title);
-        expect(b.published).toEqual(book.published);
+      bookStoreService.getBookFast('123').subscribe((b: Book | null) => {
+        expect(b?.title).toEqual(book.title);
+        expect(b?.published).toEqual(book.published);
         done();
       });
       expect(httpStub.get).toHaveBeenCalledOnceWith(

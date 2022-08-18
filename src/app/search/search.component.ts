@@ -27,10 +27,10 @@ export class SearchComponent implements OnInit {
     this.search$
       .pipe(
         filter((text: string) => text.length > 2),
-        tap((text: string) => console.log('starts: ' + text)),
         debounceTime(400),
         tap(() => (this.isLoading = true)),
         distinctUntilChanged(),
+        tap(() => (this.isLoading = true)),
         switchMap((text) => this.bookStoreService.getAllSearch(text)),
         tap(() => (this.isLoading = false))
       )
@@ -38,10 +38,13 @@ export class SearchComponent implements OnInit {
         next: (books) => {
           console.log('books: ');
           console.table(books);
-          this.foundBooks = books;
+          this.foundBooks = books as Book[];
           return;
         },
-        error: (e) => console.error(e)
+        error: (e) => {
+          console.error(e);
+          this.isLoading = false;
+        }
       });
   }
 

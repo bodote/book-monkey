@@ -32,4 +32,14 @@ describe('FormMessagesComponent', () => {
     fixture.detectChanges();
     expect(component.errorsForControl()).toEqual(['at least 11 chars']);
   });
+  it('should create no errormessage  ', () => {
+    expect(component).toBeTruthy();
+    component.control = new FormControl('123', [
+      Validators.required,
+      Validators.minLength(3)
+    ]);
+    component.controlName = 'isbn';
+    fixture.detectChanges();
+    expect(component.errorsForControl()).toEqual([]);
+  });
 });

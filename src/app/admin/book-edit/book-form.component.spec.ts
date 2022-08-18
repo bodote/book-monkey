@@ -60,28 +60,51 @@ describe('BookFormsComponent', () => {
       await prepareTests();
       component.isNew = false;
     });
-    it('should create, form should be valid and emit the new book data to the saveBookEventEmitter Output emitter', () => {
-      expect(component).toBeTruthy();
-      spyOn(component.saveBookEventEmitter, 'emit');
-      fixture.detectChanges(); // only if component.isNew || component.book , there is a button!
-      //directly call ngOnChanges
-      component.book = testBookData;
-      // because of fixture.detectChanges() does not call it in a unittest directly,
-      // and only the first fixture.detectChanges() call calls ngOnInit()
-      component.ngOnChanges({
-        aBook: new SimpleChange(null, testBookData, false)
-      });
-      // to force reevaluate the html - template after component.book = testBookData:
-      fixture.detectChanges();
-      const buttonEl = fixture.debugElement.query(
-        By.css('button[type="submit"]')
-      );
-      buttonEl.nativeElement.click();
-      expect(component.editForm.valid).toBeTrue();
-      expect(component.saveBookEventEmitter.emit).toHaveBeenCalledWith(
-        testBookData
-      );
-    });
+    it(
+      ' form should be valid and emit the new book data to the saveBookEventEmitter Output emitter' +
+        'if a book is given to ngOnChanges',
+      () => {
+        expect(component).toBeTruthy();
+        spyOn(component.saveBookEventEmitter, 'emit');
+        fixture.detectChanges(); // only if component.isNew || component.book , there is a button!
+        //directly call ngOnChanges
+        component.book = testBookData;
+        // because of fixture.detectChanges() does not call it in a unittest directly,
+        // and only the first fixture.detectChanges() call calls ngOnInit()
+        component.ngOnChanges({
+          aBook: new SimpleChange(null, testBookData, false)
+        });
+        // to force reevaluate the html - template after component.book = testBookData:
+        fixture.detectChanges();
+        const buttonEl = fixture.debugElement.query(
+          By.css('button[type="submit"]')
+        );
+        buttonEl.nativeElement.click();
+        expect(component.editForm.valid).toBeTrue();
+        expect(component.saveBookEventEmitter.emit).toHaveBeenCalledWith(
+          testBookData
+        );
+      }
+    );
+    it(
+      'form should be valid and emit the new book data to the saveBookEventEmitter Output emitter' +
+        'if a book is given in advance to the component before ngOnInit is run',
+      () => {
+        expect(component).toBeTruthy();
+        component.book = testBookData;
+        spyOn(component.saveBookEventEmitter, 'emit');
+        fixture.detectChanges(); // only if component.isNew || component.book , there is a button!
+
+        const buttonEl = fixture.debugElement.query(
+          By.css('button[type="submit"]')
+        );
+        buttonEl.nativeElement.click();
+        expect(component.editForm.valid).toBeTrue();
+        expect(component.saveBookEventEmitter.emit).toHaveBeenCalledWith(
+          testBookData
+        );
+      }
+    );
     it('should add an author ', () => {
       fixture.detectChanges();
       expect(component).toBeTruthy();
@@ -128,6 +151,7 @@ describe('BookFormsComponent', () => {
       isbnEl.dispatchEvent(new Event('input'));
       expect(isbnContr?.value).toEqual('123');
       expect(isbnContr?.pristine).toBeFalse();
+      expect(component.isbn?.dirty).toBeTrue();
       expect(isbnContr?.dirty).toBeTruthy();
       expect(isbnContr?.valid).toBeFalse();
     });

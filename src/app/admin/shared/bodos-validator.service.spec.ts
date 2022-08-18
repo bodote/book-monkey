@@ -84,7 +84,6 @@ describe('BodosValidatorService', () => {
       expectObservable(error$).toBe(expected, valuesOut);
     });
   });
-
   it('should return  observable of(null) if book with this ISBN does not exists yet', () => {
     testScheduler.run((helpers) => {
       const { expectObservable } = helpers;
@@ -106,4 +105,25 @@ describe('BodosValidatorService', () => {
       expectObservable(error$).toBe(expected, valuesOut);
     });
   });
+  it(
+    'should return  observable of(null) if book with this ISBN does not exists yet ' +
+      'but getBookFast returns empty string instead of error',
+    () => {
+      testScheduler.run((helpers) => {
+        const { expectObservable } = helpers;
+        //arrange
+        mockService.getBookFast = jasmine.createSpy().and.returnValue(of(null));
+        const validatorService = new BodosValidatorService(mockService);
+        const isbnFC = new FormControl('1234567890');
+        const valFn = validatorService.asyncIsbnExistsValidator() as (
+          control: AbstractControl
+        ) => Observable<ValidationErrors>;
+        expect(valFn).not.toBeNull();
+        const error$: Observable<ValidationErrors | null> = valFn(isbnFC);
+        const valuesOut = { e: null };
+        const expected = '(e|)';
+        expectObservable(error$).toBe(expected, valuesOut);
+      });
+    }
+  );
 });

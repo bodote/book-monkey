@@ -54,7 +54,7 @@ export class BookStoreService {
         delay(1000)
       );
   }
-  getBookFast(isbn: string | null): Observable<Book> {
+  getBookFast(isbn: string | null): Observable<Book | null> {
     return this.http
       .get<BookRaw>(`https://api4.angular-buch.com/secure/book/${isbn}`)
       .pipe(
