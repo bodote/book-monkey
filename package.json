@@ -42,6 +42,8 @@
     "@angular/cli": "~14.0.3",
     "@angular/compiler-cli": "^14.0.0",
     "@angular/localize": "^14.0.3",
+    "@stryker-mutator/core": "^6.1.2",
+    "@stryker-mutator/karma-runner": "^6.1.2",
     "@types/jasmine": "~4.0.0",
     "@typescript-eslint/eslint-plugin": "5.29.0",
     "@typescript-eslint/parser": "5.29.0",
