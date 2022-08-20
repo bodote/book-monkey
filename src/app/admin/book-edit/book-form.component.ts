@@ -24,7 +24,7 @@ import { BodosValidatorService } from '../shared/bodos-validator.service';
   styleUrls: ['./book-form.component.css']
 })
 export class BookFormComponent implements OnInit, OnChanges {
-  @Input() book: Book | undefined | null;
+  @Input() aBook: Book | undefined | null;
   @Input() isNew: boolean = false;
   @Input() saved: boolean = false;
   @Input() successMsg = '';
@@ -63,8 +63,8 @@ export class BookFormComponent implements OnInit, OnChanges {
     });
     if (this.isNew) {
       this.fillEmptyBook();
-    } else if (this.book) {
-      this.fillForm(this.book);
+    } else if (this.aBook) {
+      this.fillForm(this.aBook);
     }
   }
   ngOnChanges(changes: SimpleChanges) {

@@ -68,7 +68,7 @@ describe('BookFormsComponent', () => {
         spyOn(component.saveBookEventEmitter, 'emit');
         fixture.detectChanges(); // only if component.isNew || component.book , there is a button!
         //directly call ngOnChanges
-        component.book = testBookData;
+        component.aBook = testBookData;
         // because of fixture.detectChanges() does not call it in a unittest directly,
         // and only the first fixture.detectChanges() call calls ngOnInit()
         component.ngOnChanges({
@@ -91,7 +91,7 @@ describe('BookFormsComponent', () => {
         'if a book is given in advance to the component before ngOnInit is run',
       () => {
         expect(component).toBeTruthy();
-        component.book = testBookData;
+        component.aBook = testBookData;
         spyOn(component.saveBookEventEmitter, 'emit');
         fixture.detectChanges(); // only if component.isNew || component.book , there is a button!
 
@@ -110,7 +110,7 @@ describe('BookFormsComponent', () => {
       expect(component).toBeTruthy();
       spyOn(component.saveBookEventEmitter, 'emit');
       spyOn(component, 'addAuthor').and.callThrough();
-      component.book = testBookData;
+      component.aBook = testBookData;
       //directly call ngOnChanges
       component.ngOnChanges({
         aBook: new SimpleChange(null, testBookData, false)

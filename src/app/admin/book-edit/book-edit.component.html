@@ -1,7 +1,7 @@
 <div class="container m-4">
   <h2 class="text-lg font-bold">Edit existing Book:</h2>
-  <ng-container *ngIf="errorMessage.length > 0">
-    <div class="alert alert-error shadow-lg">
+  <ng-container *ngIf="loadingError$ | async as error">
+    <div class="alert alert-error shadow-lg mb-4 mt-4">
       <div>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -16,13 +16,13 @@
             d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
           />
         </svg>
-        <span>{{ errorMessage }}</span>
+        <span id="errorMessage">{{ error }}</span>
       </div>
     </div>
   </ng-container>
 
   <bm-book-form
-    [book]="book$ | async"
+    [aBook]="book$ | async"
     [isNew]="false"
     [saved]="saved"
     [successMsg]="successMsg"
