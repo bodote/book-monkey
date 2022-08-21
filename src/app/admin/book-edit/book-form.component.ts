@@ -25,9 +25,9 @@ import { BodosValidatorService } from '../shared/bodos-validator.service';
 })
 export class BookFormComponent implements OnInit, OnChanges {
   @Input() aBook: Book | undefined | null;
-  @Input() isNew: boolean = false;
-  @Input() saved: boolean = false;
-  @Input() successMsg = '';
+  @Input() isNew!: boolean;
+  @Input() saved!: boolean;
+  @Input() successMsg!: string;
   editForm!: FormGroup;
   @Output() saveBookEventEmitter = new EventEmitter();
 
@@ -36,20 +36,20 @@ export class BookFormComponent implements OnInit, OnChanges {
     //private router: Router,
     private bookStoreService: BookStoreService,
     private fb: FormBuilder,
-    private isbnValidatorServ: BodosValidatorService
+    private bodosValidatorService: BodosValidatorService
   ) {}
 
   ngOnInit(): void {
     let isbnControl!: FormControl;
     if (this.isNew) {
       isbnControl = new FormControl('', {
-        validators: [Validators.required, this.isbnValidatorServ.checkIsbn],
-        asyncValidators: [this.isbnValidatorServ.asyncIsbnExistsValidator()]
+        validators: [Validators.required, this.bodosValidatorService.checkIsbn],
+        asyncValidators: [this.bodosValidatorService.asyncIsbnExistsValidator()]
       });
     } else {
       isbnControl = new FormControl('', [
         Validators.required,
-        this.isbnValidatorServ.checkIsbn
+        this.bodosValidatorService.checkIsbn
       ]);
     }
 
@@ -75,7 +75,10 @@ export class BookFormComponent implements OnInit, OnChanges {
   }
 
   private fillEmptyBook() {
-    const authors = this.fb.array([], [this.isbnValidatorServ.checkAuthors]);
+    const authors = this.fb.array(
+      [],
+      [this.bodosValidatorService.checkAuthors]
+    );
     authors.push(new FormControl(''));
     this.editForm.setControl('authors', authors);
     const thbArray = this.fb.array([]) as FormArray;

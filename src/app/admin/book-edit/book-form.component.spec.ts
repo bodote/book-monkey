@@ -2,7 +2,11 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BookFormComponent } from './book-form.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { AsyncValidatorFn, ReactiveFormsModule } from '@angular/forms';
+import {
+  AsyncValidatorFn,
+  ReactiveFormsModule,
+  ValidationErrors
+} from '@angular/forms';
 import { CUSTOM_ELEMENTS_SCHEMA, SimpleChange } from '@angular/core';
 import { BodosValidatorService } from '../shared/bodos-validator.service';
 import { Book } from '../../shared/book';
@@ -29,6 +33,10 @@ const testBookData: Book = {
   rating: 3,
   thumbnails: [{ title: '', url: '' }]
 };
+const testBookDataWrongISBN: Book = {
+  ...testBookData,
+  isbn: '123'
+};
 describe('BookFormsComponent', () => {
   let component: BookFormComponent;
   let fixture: ComponentFixture<BookFormComponent>;
@@ -36,12 +44,16 @@ describe('BookFormsComponent', () => {
     'validatorSpy',
     ['asyncIsbnExistsValidator', 'checkIsbn', 'checkAuthors']
   );
-
-  async function prepareTests() {
+  async function prepareTests(
+    asyncReturn: { isbnExists: { valid: false } } | null = {
+      isbnExists: { valid: false }
+    },
+    checkIsbn: ValidationErrors | null = null
+  ) {
     validatorService.asyncIsbnExistsValidator = jasmine
       .createSpy<() => AsyncValidatorFn>()
-      .and.returnValue(() => of({ isbnExists: { valid: false } }));
-    validatorService.checkIsbn = jasmine.createSpy().and.returnValue(null);
+      .and.returnValue(() => of(asyncReturn));
+    validatorService.checkIsbn = jasmine.createSpy().and.returnValue(checkIsbn);
     await TestBed.configureTestingModule({
       declarations: [BookFormComponent],
       imports: [HttpClientTestingModule, ReactiveFormsModule],
@@ -54,16 +66,14 @@ describe('BookFormsComponent', () => {
     fixture = TestBed.createComponent(BookFormComponent);
     component = fixture.componentInstance;
   }
-
-  describe('with existing book and AsyncValidatorFn that returns a isbnExists-Error', () => {
-    beforeEach(async () => {
-      await prepareTests();
-      component.isNew = false;
-    });
+  describe('with existing book where AsyncValidatorFn is not used, ', () => {
+    beforeEach(async () => {});
     it(
-      ' form should be valid and emit the new book data to the saveBookEventEmitter Output emitter' +
+      'form should be valid and emit the new book data to the saveBookEventEmitter Output emitter' +
         'if a book is given to ngOnChanges',
-      () => {
+      async () => {
+        await prepareTests();
+        component.isNew = false;
         expect(component).toBeTruthy();
         spyOn(component.saveBookEventEmitter, 'emit');
         fixture.detectChanges(); // only if component.isNew || component.book , there is a button!
@@ -89,7 +99,9 @@ describe('BookFormsComponent', () => {
     it(
       'form should be valid and emit the new book data to the saveBookEventEmitter Output emitter' +
         'if a book is given in advance to the component before ngOnInit is run',
-      () => {
+      async () => {
+        await prepareTests();
+        component.isNew = false;
         expect(component).toBeTruthy();
         component.aBook = testBookData;
         spyOn(component.saveBookEventEmitter, 'emit');
@@ -105,7 +117,9 @@ describe('BookFormsComponent', () => {
         );
       }
     );
-    it('should add an author ', () => {
+    it('should add an author, if add button is clicked', async () => {
+      await prepareTests();
+      component.isNew = false;
       fixture.detectChanges();
       expect(component).toBeTruthy();
       spyOn(component.saveBookEventEmitter, 'emit');
@@ -122,8 +136,27 @@ describe('BookFormsComponent', () => {
       expect(component.addAuthor).toHaveBeenCalledTimes(1);
       expect(component.authors.length).toEqual(2);
     });
+    it('should disable the SAVE button, and show the error if ISBN is invalid ', async () => {
+      await prepareTests(null, [{ error: true }]);
+      component.isNew = false;
+      fixture.detectChanges();
+      // change ISBN number
+      spyOn(component.saveBookEventEmitter, 'emit');
+      spyOn(component, 'addAuthor').and.callThrough();
+      component.aBook = testBookDataWrongISBN;
+      //directly call ngOnChanges
+      component.ngOnChanges({
+        aBook: new SimpleChange(null, testBookDataWrongISBN, false)
+      });
+      fixture.detectChanges();
+      expect(component.authors.length).toEqual(1);
+      const saveButton = fixture.debugElement.query(
+        By.css('button[type="submit"]')
+      );
+      //check if button is disabled:
+      expect(saveButton.nativeElement.disabled).toBeTrue();
+    });
   });
-
   describe('with new book and AsyncValidatorFn that returns a isbnExists-Error', () => {
     beforeEach(async () => {
       await prepareTests();
@@ -161,20 +194,17 @@ describe('BookFormsComponent', () => {
       spyOn(console, 'error');
       const buttonEl = fixture.debugElement.query(By.css('button')); //throws an Error but is catched internally;
       spyOn(buttonEl.nativeElement, 'click').and.callThrough();
-
+      expect(buttonEl.nativeElement.disabled).toBeTrue();
       buttonEl.nativeElement.click();
 
-      expect(component.bookFormSaveBook).toHaveBeenCalledTimes(1);
-      expect(console.error).toHaveBeenCalledTimes(1);
+      expect(component.bookFormSaveBook).toHaveBeenCalledTimes(0);
+      expect(console.error).toHaveBeenCalledTimes(0);
       expect(component.saveBookEventEmitter.emit).toHaveBeenCalledTimes(0);
     });
   });
   describe('with new book and AsyncValidatorFn that returns no errors', () => {
     beforeEach(async () => {
-      await prepareTests();
-      validatorService.asyncIsbnExistsValidator = jasmine
-        .createSpy<() => AsyncValidatorFn>()
-        .and.returnValue(() => of({}));
+      await prepareTests(null);
       component.isNew = true;
       fixture.detectChanges();
     });
@@ -185,10 +215,12 @@ describe('BookFormsComponent', () => {
       expect(component.editForm.valid).toBeFalse();
       // act
       component.editForm.setValue(testBookData);
+      fixture.detectChanges();
       // assert
       expect(component.editForm.valid).toBeTrue();
       // act
       const buttonEl = fixture.debugElement.query(By.css('button'));
+      expect(buttonEl.nativeElement.disabled).toBeFalse();
       buttonEl.nativeElement.click();
       // assert
       expect(component.bookFormSaveBook).toHaveBeenCalledTimes(1);

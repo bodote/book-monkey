@@ -197,6 +197,7 @@
         type="submit"
         class="btn btn-primary"
         (click)="bookFormSaveBook()"
+        [disabled]="!editForm.valid"
         [class.disabled]="editForm.invalid"
         [class.primary]="!editForm.invalid"
       >
