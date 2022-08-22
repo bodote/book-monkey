@@ -15,7 +15,7 @@ import { catchError, map } from 'rxjs/operators';
 export class BodosValidatorService {
   constructor(private bookService: BookStoreService) {}
   checkIsbn(control: AbstractControl): ValidationErrors | null {
-    //console.log('checkIsbn static ; formControl.value=' + control.value);
+    if (!control.value) return { isbnLength: { valid: false } };
     if (control.value.length != 10 && control.value.length != 13)
       return { isbnLength: { valid: false } };
     return null;

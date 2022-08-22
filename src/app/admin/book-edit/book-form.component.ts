@@ -43,11 +43,11 @@ export class BookFormComponent implements OnInit, OnChanges {
     let isbnControl!: FormControl;
     if (this.isNew) {
       isbnControl = new FormControl('', {
-        validators: [Validators.required, this.bodosValidatorService.checkIsbn],
+        validators: [this.bodosValidatorService.checkIsbn],
         asyncValidators: [this.bodosValidatorService.asyncIsbnExistsValidator()]
       });
     } else {
-      isbnControl = new FormControl('', [
+      isbnControl = new FormControl(null, [
         Validators.required,
         this.bodosValidatorService.checkIsbn
       ]);
@@ -69,7 +69,7 @@ export class BookFormComponent implements OnInit, OnChanges {
   }
   ngOnChanges(changes: SimpleChanges) {
     const { aBook } = changes;
-    if (aBook?.currentValue && !this.isNew && this.editForm) {
+    if (aBook.currentValue && !this.isNew) {
       this.fillForm(aBook.currentValue);
     }
   }
@@ -91,7 +91,7 @@ export class BookFormComponent implements OnInit, OnChanges {
     this.editForm.setControl('thumbnails', thbArray);
   }
 
-  private fillForm(book: Book) {
+  fillForm(book: Book) {
     this.editForm.get('title')?.setValue(book.title);
     this.editForm.get('subtitle')?.setValue(book.subtitle + '');
     this.editForm.get('isbn')?.setValue(book.isbn + '');
@@ -99,13 +99,12 @@ export class BookFormComponent implements OnInit, OnChanges {
     this.editForm.get('published')?.setValue(book.published);
     this.editForm.get('rating')?.setValue(book.rating);
 
-    let authors = this.fb.array([]);
+    let authors = this.fb.array([], [this.bodosValidatorService.checkAuthors]);
     for (let author of book.authors) {
       const fcAuthor = new FormControl(author);
       authors.push(fcAuthor);
     }
     this.editForm.setControl('authors', authors);
-
     if (book.thumbnails) {
       let thumbnails = this.fb.array([] as FormGroup[]);
       for (let thumb of book.thumbnails) {
@@ -138,7 +137,7 @@ export class BookFormComponent implements OnInit, OnChanges {
   }
 
   addAuthor() {
-    const fcAuthor = new FormControl('');
+    const fcAuthor = new FormControl(null);
     this.authors.push(fcAuthor);
   }
 
@@ -148,10 +147,11 @@ export class BookFormComponent implements OnInit, OnChanges {
 
   addThumb() {
     //console.log('add thumb called in book-form');
-    const thumbG = this.fb.group({
-      url: '',
-      title: ''
-    });
+    // const thumbG = this.fb.group({
+    //   url: '',
+    //   title: ''
+    // });
+    const thumbG = this.fb.group({});
     this.thumbnails.push(thumbG);
   }
 
