@@ -25,8 +25,13 @@ export class BookDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       let isbn: string | null;
-      if ((isbn = params?.get('isbn')) != null) {
+      if ((isbn = params.get('isbn')) != null) {
         this.getABook(isbn);
+      } else {
+        console.error(
+          'no isbn param found in route, rerouting to /home (should actually route to an error page) '
+        );
+        this.router.navigate(['/home']);
       }
     });
   }

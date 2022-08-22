@@ -74,24 +74,32 @@ describe('CreateBookComponent', () => {
     //assert
     expect(mockService.postBook).toHaveBeenCalledOnceWith(testBookData);
     expect(component.errorMessage).toContain('404');
+    expect((console.error as jasmine.Spy).calls.mostRecent().args[0]).toContain(
+      'ERROR in createBookSave:'
+    );
     expect(component.successMsg?.length).toEqual(0);
     expect(component.saved).toBeFalse();
     expect(console.error).toHaveBeenCalledTimes(1);
   });
-  it('should unsubscribe when component ist disposed ', () => {
+  it('should unsubscribe when component is disposed ', () => {
     //arrange
     spyOn(component, 'ngOnDestroy').and.callThrough();
 
     mockService.postBook = jasmine
       .createSpy<() => Observable<string>>()
       .and.returnValue(of('OK'));
+
     //act
     component.createBookSave(testBookData);
+    if (component.subscription)
+      spyOn(component.subscription, 'unsubscribe').and.callThrough();
     //assert
     expect(mockService.postBook).toHaveBeenCalledOnceWith(testBookData);
     //act
     component.ngOnDestroy();
     //assert
     expect(component.ngOnDestroy).toHaveBeenCalledTimes(1);
+    expect(component.subscription?.closed).toBeTrue();
+    expect(component.subscription?.unsubscribe).toHaveBeenCalled();
   });
 });

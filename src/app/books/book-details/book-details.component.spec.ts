@@ -23,12 +23,14 @@ const testBookData: Book = {
   rating: 3,
   thumbnails: [{ title: '', url: '' }]
 };
+
 describe('BookDetailsComponent and IsbnPipe', () => {
   let component: BookDetailsComponent;
   let fixture: ComponentFixture<BookDetailsComponent>;
   let testScheduler: TestScheduler;
   let route: ActivatedRoute;
   let router: Router;
+
   const theError = new HttpErrorResponse({ status: 404 });
   let mockService = jasmine.createSpyObj<BookStoreService>('bookStoreService', [
     'getBook',
@@ -40,6 +42,7 @@ describe('BookDetailsComponent and IsbnPipe', () => {
       imports: [
         RouterTestingModule.withRoutes([
           { path: 'detail/:isbn', component: BookDetailsComponent },
+          { path: 'detail/wrong', component: BookDetailsComponent },
           { path: 'list', component: BookListComponent }
         ])
       ],
@@ -153,6 +156,7 @@ describe('BookDetailsComponent and IsbnPipe', () => {
         component.delete('1234567890');
         expect(mockService.deleteBook).toHaveBeenCalledOnceWith('1234567890');
         expect(component.error).toBeDefined();
+        expect(window.confirm).toHaveBeenCalledOnceWith('Really delete book?');
         expect(component.book).toBeDefined();
         fixture.detectChanges();
         const debugElement = fixture.debugElement.query(
@@ -163,17 +167,41 @@ describe('BookDetailsComponent and IsbnPipe', () => {
         );
       }
     );
+
+    it(
+      'should subscribe a to a confirmation window, and NOT call this.bookService.deleteBook(isbn)' +
+        ' if the confirmation is false, ',
+      () => {
+        spyOnProperty(route, 'paramMap', 'get').and.returnValue(of(params));
+        spyOn(component, 'reallyDelete');
+        fixture.detectChanges(); // should call ngOnInit()
+        //arrange
+        spyOn(window, 'confirm').and.returnValue(false);
+        mockService.deleteBook = jasmine
+          .createSpy<() => Observable<string>>()
+          .and.returnValue(throwError(() => theError));
+
+        expect(component.book).toBeDefined();
+        //act
+        component.delete('1234567890');
+        expect(mockService.deleteBook).toHaveBeenCalledTimes(0);
+        expect(component.reallyDelete).toHaveBeenCalledTimes(0);
+      }
+    );
   });
   it(
     'should subscribe to route.paramMap onInit() and get the isbn param ' +
       'and show the error html if  bookstoreService returns an error',
     () => {
-      const params = {
-        get: () => {
-          return '1234567890';
-        }
-      } as unknown as ParamMap;
-
+      // const params = {
+      //   get: () => {
+      //     return '1234567890';
+      //   }
+      // } as unknown as ParamMap;
+      const params = jasmine.createSpyObj<ParamMap>('paramMap', ['get']);
+      params.get = jasmine
+        .createSpy<(a: string) => string>()
+        .and.returnValue('12345567');
       mockService.getBook = jasmine
         .createSpy<() => Observable<Book>>()
         .and.returnValue(throwError(() => theError));
@@ -182,6 +210,7 @@ describe('BookDetailsComponent and IsbnPipe', () => {
       );
       fixture.detectChanges(); // should call ngOnInit()
       expect(propertySpy).toHaveBeenCalledTimes(1);
+      expect(params.get).toHaveBeenCalledOnceWith('isbn');
       expect(mockService.getBook).toHaveBeenCalledTimes(1);
       expect(JSON.stringify(component.error)).toContain('"status":404');
       expect(component.error?.status).toBeGreaterThan(299);
@@ -189,6 +218,38 @@ describe('BookDetailsComponent and IsbnPipe', () => {
 
       const debugElement = fixture.debugElement.query(By.css('div.alert'));
       expect(debugElement.nativeElement.textContent).toContain('"status": 404');
+    }
+  );
+
+  it(
+    "should log  an error to console and reroute to /home, if it tries to subscribe to route.paramMap onInit() and don't get the isbn param " +
+      '',
+    async () => {
+      const params = {
+        get: () => {
+          return null;
+        }
+      } as unknown as ParamMap;
+      spyOn(console, 'error');
+      spyOn(router, 'navigate').and.callThrough();
+      mockService.getBook = jasmine
+        .createSpy<() => Observable<Book>>()
+        .and.returnValue(of({} as Book));
+      let x = jasmine.createSpyObj({ basename: [], propertyNames: ['isbn'] });
+      //spyOn(params, 'get').and.returnValue('1234567');
+      let propertySpy = spyOnProperty(route, 'paramMap', 'get').and.returnValue(
+        of(params)
+      );
+      fixture.detectChanges(); // should call ngOnInit()
+      await fixture.whenStable();
+      expect(propertySpy).toHaveBeenCalledTimes(1);
+
+      expect(mockService.getBook).toHaveBeenCalledTimes(0);
+      expect(console.error).toHaveBeenCalledTimes(1);
+      expect(console.error).toHaveBeenCalledWith(
+        'no isbn param found in route, rerouting to /home (should actually route to an error page) '
+      );
+      expect(router.navigate).toHaveBeenCalledOnceWith(['/home']);
     }
   );
 

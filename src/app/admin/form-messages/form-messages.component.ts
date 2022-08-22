@@ -8,7 +8,7 @@ import { AbstractControl, ValidationErrors } from '@angular/forms';
 })
 export class FormMessagesComponent {
   @Input() control: AbstractControl | null = null;
-  @Input() controlName: string = '';
+  @Input() controlName: string | null = null;
 
   errorstruct = {
     title: {

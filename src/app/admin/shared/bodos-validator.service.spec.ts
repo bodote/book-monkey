@@ -49,6 +49,32 @@ describe('BodosValidatorService', () => {
       oneAuthor: { valid: false }
     });
   });
+  it(
+    'should return { oneAuthor: { valid: false } } if FormControlArray ' +
+      'has one author but its value is empty string',
+    () => {
+      //arrange
+      const validatorService = new BodosValidatorService(mockService);
+      const authorFC = new FormControl('');
+      const authorArray = new FormArray([authorFC]);
+      expect(validatorService.checkAuthors(authorArray)).toEqual({
+        oneAuthor: { valid: false }
+      });
+    }
+  );
+  it(
+    'should return no error if FormControlArray ' +
+      'has an author that value is empty string, but has another valid author',
+    () => {
+      //arrange
+      const validatorService = new BodosValidatorService(mockService);
+      const authorFC1 = new FormControl('');
+      const authorFC2 = new FormControl('11');
+
+      const authorArray = new FormArray([authorFC1, authorFC2]);
+      expect(validatorService.checkAuthors(authorArray)).toBeNull();
+    }
+  );
   it('should return null if value.length is 10 or 13', () => {
     //arrange
     const validatorService = new BodosValidatorService(mockService);
@@ -61,6 +87,14 @@ describe('BodosValidatorService', () => {
     //arrange
     const validatorService = new BodosValidatorService(mockService);
     const isbnFC = new FormControl('123456789');
+    expect(validatorService.checkIsbn(isbnFC)).toEqual({
+      isbnLength: { valid: false }
+    });
+  });
+  it('should return an error if control.value is not defined', () => {
+    //arrange
+    const validatorService = new BodosValidatorService(mockService);
+    const isbnFC = new FormControl(null);
     expect(validatorService.checkIsbn(isbnFC)).toEqual({
       isbnLength: { valid: false }
     });

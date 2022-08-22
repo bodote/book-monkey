@@ -1,7 +1,7 @@
 <div class="container px-8 py-8">
   <p></p>
   <div class="text-2xl font-bold pb-8">Create new Book:</div>
-  <ng-container *ngIf="errorMessage.length > 0">
+  <ng-container *ngIf="!!errorMessage && errorMessage.length > 0">
     <div class="alert alert-error shadow-lg">
       <div>
         <svg

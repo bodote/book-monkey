@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./create-book.component.css']
 })
 export class CreateBookComponent implements OnDestroy {
-  errorMessage = '';
+  errorMessage: string | undefined;
   saved = false;
   successMsg = '';
   subscription: Subscription | undefined;

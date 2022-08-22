@@ -33,13 +33,13 @@ export class BodosValidatorService {
   }
   asyncIsbnExistsValidator(): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
-      console.log('calling book Service for validation of isbn');
+      //console.log('calling book Service for validation of isbn');
       return this.bookService.getBookFast(control.value).pipe(
         map((book) => {
           return book ? { isbnExists: { valid: false } } : null;
         }),
         catchError(() => {
-          console.log('all good, since isbn does not yet exist');
+          //console.log('all good, since isbn does not yet exist');
           return of(null);
         })
       );
