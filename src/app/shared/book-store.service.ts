@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { Book } from './book';
 import { catchError, delay, map, retry } from 'rxjs/operators';
-import { tap, throwError } from 'rxjs';
+import { throwError } from 'rxjs';
 
 /*
  */
@@ -31,7 +31,7 @@ export class BookStoreService {
         responseType: 'text'
       })
       .pipe(
-        tap((val) => console.log('post book return: ' + JSON.stringify(val))),
+        //tap((val) => console.log('post book return: ' + JSON.stringify(val))),
         catchError(this.processError)
       );
   }
@@ -44,7 +44,7 @@ export class BookStoreService {
       .pipe(catchError(this.processError));
   }
 
-  getBook(isbn: string | null) {
+  getBook(isbn: string | null): Observable<Book> {
     return this.http
       .get<BookRaw>(`https://api4.angular-buch.com/secure/book/${isbn}`)
       .pipe(

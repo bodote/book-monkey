@@ -55,17 +55,42 @@ describe('SearchComponent', () => {
         .createSpy<() => Observable<Book[]>>()
         .and.returnValue(of([testBookData]).pipe(delay(10)));
       const searchString = 'test';
-      expect(component).toBeTruthy();
+      expect(component.isLoading).toBeFalse();
       component.keyup(searchString);
-
       tick(390);
       expect(component.foundBooks).toBeUndefined();
+      expect(component.isLoading).toBeFalse();
       expect(mockService.getAllSearch).toHaveBeenCalledTimes(0);
       tick(10);
       expect(component.isLoading).toBeTrue();
       expect(mockService.getAllSearch).toHaveBeenCalledOnceWith(searchString);
-      tick(10);
+      tick(8);
+      expect(component.isLoading).toBeTrue();
+      tick(2);
       expect(component.foundBooks).toEqual([testBookData]);
+      expect(component.isLoading).toBeFalse();
+    })
+  );
+  it(
+    'should not call BookStoreService.getAllSearch after 400ms if keyup() is called with a string ' +
+      'of only  2 chars and should not subscribe and set foundBooks',
+    fakeAsync(() => {
+      mockService.getAllSearch = jasmine
+        .createSpy<() => Observable<Book[]>>()
+        .and.returnValue(of([testBookData]).pipe(delay(10)));
+      const searchString = '12';
+      expect(component.isLoading).toBeFalse();
+      component.keyup(searchString);
+      tick(390);
+      expect(component.foundBooks).toBeUndefined();
+      expect(mockService.getAllSearch).toHaveBeenCalledTimes(0);
+      tick(10);
+      expect(component.isLoading).toBeFalse();
+      expect(mockService.getAllSearch).not.toHaveBeenCalledOnceWith(
+        searchString
+      );
+      tick(10);
+      expect(component.foundBooks).toBeUndefined();
       expect(component.isLoading).toBeFalse();
     })
   );

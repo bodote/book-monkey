@@ -21,7 +21,7 @@ export class CanNavigateToAdminGuard implements CanActivate {
     | boolean
     | UrlTree {
     if (!this.adminOk) {
-      const question = $localize`:@@CanCanvigateToAdminGuard\:question:Realy want to be Admin`;
+      const question = $localize`:@@CanCanvigateToAdminGuard\:question:Really want to be Admin?`;
       this.adminOk = window.confirm(question);
     }
     return this.adminOk;

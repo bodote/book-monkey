@@ -28,7 +28,6 @@ export class SearchComponent implements OnInit {
       .pipe(
         filter((text: string) => text.length > 2),
         debounceTime(400),
-        tap(() => (this.isLoading = true)),
         distinctUntilChanged(),
         tap(() => (this.isLoading = true)),
         switchMap((text) => this.bookStoreService.getAllSearch(text)),
@@ -36,8 +35,8 @@ export class SearchComponent implements OnInit {
       )
       .subscribe({
         next: (books) => {
-          console.log('books: ');
-          console.table(books);
+          //console.log('books: ');
+          //console.table(books);
           this.foundBooks = books as Book[];
           return;
         },

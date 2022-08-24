@@ -31,7 +31,7 @@ let book = {
 } as Book;
 
 describe('BookStoreService', () => {
-  describe('.delete(isbn) with Testbed', () => {
+  describe(' with Testbed', () => {
     let service: BookStoreService;
     let httpTestingController: HttpTestingController;
     let httpClient;
@@ -53,21 +53,23 @@ describe('BookStoreService', () => {
     });
 
     function runAlwaysFailingRequests(
-      numRequests: number,
+      numErrorResponds: number,
       url: string,
-      method: string
+      method: string,
+      expectedNumberOfRetrials: number = 3
     ) {
       let req = httpTestingController.expectOne(url);
-      for (let i = 0; i < numRequests; i++) {
+      for (let i = 0; i < numErrorResponds; i++) {
         expect(req.request?.method).toEqual(method);
         req.error(errorEvent, errorResponse);
         tick(2000);
-        req = httpTestingController.expectOne(url);
+        if (i < expectedNumberOfRetrials)
+          req = httpTestingController.expectOne(url);
       }
       return req;
     }
 
-    it('should delete a book with isbn with 3 retries , if the first and second try fails', fakeAsync(() => {
+    it('should call deleteBook() and delete a book with isbn with 3 retries , if the first and second try fails', fakeAsync(() => {
       //act
       service.deleteBook('123').subscribe((data) => expect(data).toEqual('OK'));
       //assert and mock server responses via "flush()"
@@ -78,7 +80,7 @@ describe('BookStoreService', () => {
       );
       req?.flush('OK');
     }));
-    it('should get a book with isbn with 3 retries , if the first and second try fails', fakeAsync(() => {
+    it('should call getBook() to get a book with isbn with 3 retries , if the first and second try fails', fakeAsync(() => {
       //act
       service.getBook('123').subscribe((b) => {
         expect(b.title).toEqual(book.title);
@@ -95,8 +97,106 @@ describe('BookStoreService', () => {
       const n = flush();
       expect(n).toEqual(0);
     }));
+    it('should call getBook() to get a book with isbn with 3 retries , but all 3 retries fails', fakeAsync(() => {
+      //act
+      service.getBook('123').subscribe({
+        next: (b) => {
+          fail('expect error');
+        },
+        error: (error) => {
+          expect(error.status).toEqual(404);
+        }
+      });
+      //assert and mock server responses via "flush()"
+      let req = runAlwaysFailingRequests(
+        4,
+        'https://api4.angular-buch.com/secure/book/123',
+        HttpMethods.GET,
+        3
+      );
 
-    it('should throw error when even the 3rd retry fails ', fakeAsync(() => {
+      tick(1000);
+      const n = flush();
+      expect(n).toEqual(0);
+    }));
+    it('should call getAll() to get a book with isbn with 3 retries , if the first and second try fails', fakeAsync(() => {
+      //act
+      service.getAll().subscribe((b) => {
+        expect(b[0].title).toEqual(book.title);
+        expect(b[0].published).toEqual(book.published);
+      });
+      //assert and mock server responses via "flush()"
+      let req = runAlwaysFailingRequests(
+        3,
+        'https://api4.angular-buch.com/secure/books',
+        HttpMethods.GET
+      );
+      req?.flush([book]);
+      tick(1000);
+      const n = flush();
+      expect(n).toEqual(0);
+    }));
+    it('should call getAll() to get a book with isbn with 3 retries , but all retrials fail', fakeAsync(() => {
+      //act
+      service.getAll().subscribe({
+        next: (b) => {
+          fail('expect error');
+        },
+        error: (error) => {
+          expect(error.status).toEqual(404);
+        }
+      });
+      //assert and mock server responses via "flush()"
+      let req = runAlwaysFailingRequests(
+        4,
+        'https://api4.angular-buch.com/secure/books',
+        HttpMethods.GET,
+        3
+      );
+
+      tick(1000);
+      const n = flush();
+      expect(n).toEqual(0);
+    }));
+    it('should call getAllSearch() to get a book with isbn with 3 retries , if the first and second try fails', fakeAsync(() => {
+      //act
+      service.getAllSearch('searchstring').subscribe((b) => {
+        expect(b[0].title).toEqual(book.title);
+        expect(b[0].published).toEqual(book.published);
+      });
+      //assert and mock server responses via "flush()"
+      let req = runAlwaysFailingRequests(
+        3,
+        'https://api4.angular-buch.com/secure/books/search/searchstring',
+        HttpMethods.GET
+      );
+      req?.flush([book]);
+      tick(1000);
+      const n = flush();
+      expect(n).toEqual(0);
+    }));
+    it('should call getAllSearch() to get a book with isbn with 3 retries , but all 3 retrials fail', fakeAsync(() => {
+      //act
+      service.getAllSearch('searchstring').subscribe({
+        next: (b) => {
+          fail('we actualy expect an error');
+        },
+        error: (error: HttpErrorResponse) => {
+          expect(error.status).toEqual(404);
+        }
+      });
+      //assert and mock server responses via "flush()"
+      let req = runAlwaysFailingRequests(
+        4,
+        'https://api4.angular-buch.com/secure/books/search/searchstring',
+        HttpMethods.GET,
+        3
+      );
+      tick(1000);
+      const n = flush();
+      expect(n).toEqual(0);
+    }));
+    it('should try to deleteBook() and throw error when even the 3rd retry fails ', fakeAsync(() => {
       let errorText = '';
       //act
       service.deleteBook('123').subscribe({
@@ -120,11 +220,11 @@ describe('BookStoreService', () => {
       httpTestingController.verify();
     });
   });
-  describe('.getAll() but without Testbed', () => {
+  describe(' but without Testbed', () => {
     let bookStoreService: BookStoreService;
     let httpStub: HttpClient;
     beforeEach(() => {});
-    it('should call http GET with url and return a Book converted from BookRaw', (done) => {
+    it('getAll() should call http GET with url and return a Book array converted from BookRaw array', (done) => {
       //arrange:
       httpStub = jasmine.createSpyObj('httpStub', {
         get: of([bookRaw])
@@ -143,8 +243,7 @@ describe('BookStoreService', () => {
       );
     });
     it(
-      'should call http GET with url and isbn and ' +
-        'try 3 times if an error occurs and return this Book converted from BookRaw',
+      'getBook() should call http GET with url and isbn  ' + ' from BookRaw',
       (done) => {
         //arrange:
         httpStub = jasmine.createSpyObj('httpStub', {
@@ -161,7 +260,7 @@ describe('BookStoreService', () => {
         );
       }
     );
-    it('should call http GET with url and isbn and return this Book converted from BookRaw', (done) => {
+    it('getBookFast() should call http GET with url and isbn and return this Book converted from BookRaw', (done) => {
       //arrange:
       httpStub = jasmine.createSpyObj('httpStub', {
         get: of(bookRaw)
@@ -176,7 +275,7 @@ describe('BookStoreService', () => {
         'https://api4.angular-buch.com/secure/book/123'
       );
     });
-    it('should call http PUT with book and return ok', (done) => {
+    it('putBook() should call http PUT with book and return ok', (done) => {
       //arrange:
       httpStub = jasmine.createSpyObj('httpStub', {
         put: of('OK')
@@ -195,7 +294,7 @@ describe('BookStoreService', () => {
         }
       );
     });
-    it('should call http POST with book and return ok', (done) => {
+    it('postBook() should call http POST with book and return ok', (done) => {
       //arrange:
       httpStub = jasmine.createSpyObj('httpStub', {
         post: of('OK')
@@ -214,7 +313,7 @@ describe('BookStoreService', () => {
         }
       );
     });
-    it('should call http get with search string and return list of books', (done) => {
+    it('getAllSearch() should call http get with search string and return list of books', (done) => {
       //arrange:
       httpStub = jasmine.createSpyObj('httpStub', {
         get: of([bookRaw])

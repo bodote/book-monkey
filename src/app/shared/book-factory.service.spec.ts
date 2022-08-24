@@ -27,6 +27,10 @@ describe('BookFactoryService', () => {
     const book = BookFactoryService.getEmptyBook();
     expect(book.title).toEqual('');
     expect(book.published.toISOString()).toContain('2022-02-02');
+    expect(book.subtitle).toEqual('');
+    expect(book.authors).toEqual([]);
+    expect(book.isbn).toEqual('');
+    expect(book.description).toEqual('');
   });
   it('should convert from Book to BookRaw', () => {
     expect(BookFactoryService.getFromRaw(testBookDataRaw)).toEqual(

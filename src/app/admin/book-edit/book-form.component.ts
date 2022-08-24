@@ -93,9 +93,9 @@ export class BookFormComponent implements OnInit, OnChanges {
 
   fillForm(book: Book) {
     this.editForm.get('title')?.setValue(book.title);
-    this.editForm.get('subtitle')?.setValue(book.subtitle + '');
+    this.editForm.get('subtitle')?.setValue(book.subtitle);
     this.editForm.get('isbn')?.setValue(book.isbn + '');
-    this.editForm.get('description')?.setValue(book.description + '');
+    this.editForm.get('description')?.setValue(book.description);
     this.editForm.get('published')?.setValue(book.published);
     this.editForm.get('rating')?.setValue(book.rating);
 

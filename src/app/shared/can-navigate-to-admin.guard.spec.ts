@@ -16,6 +16,7 @@ describe('CanNavigateToAdminGuard', () => {
       guard.canActivate({} as ActivatedRouteSnapshot, {} as RouterStateSnapshot)
     ).toBeTrue();
     expect(window.confirm).toHaveBeenCalledTimes(1);
+    expect(window.confirm).toHaveBeenCalledWith('Really want to be Admin?');
   });
   it('should return true if previous answer was  true', () => {
     spyOn(window, 'confirm').and.returnValue(true);

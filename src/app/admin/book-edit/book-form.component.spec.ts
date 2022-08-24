@@ -29,8 +29,8 @@ const testBookDataNoThumbs: Book = {
   isbn: '1234567890',
   published: new Date('2022-02-02'),
   title: 'a title',
-  subtitle: '',
-  description: '',
+  subtitle: 'a subtitle',
+  description: 'a description',
   rating: 3
 };
 const testBookData: Book = {

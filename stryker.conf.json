@@ -5,7 +5,9 @@
     "src/**/*.ts",
     "!src/**/*.spec.ts",
     "!src/test.ts",
-    "!src/environments/*.ts"
+    "!src/environments/*.ts",
+    "!src/**/*.module.ts",
+    "!main.ts"
   ],
   "testRunner": "karma",
   "karma": {
@@ -22,6 +24,7 @@
     "clear-text",
     "html"
   ],
+  "htmlReporter": { "fileName": "reports/mutation/mutation.all.html" },
   "concurrency": 4,
   "concurrency_comment": "Recommended to use about half of your available cores when running stryker with angular",
   "coverageAnalysis": "perTest",
