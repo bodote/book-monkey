@@ -16,9 +16,7 @@ export class BookListComponent implements OnInit {
   detailBook!: Book;
   error: HttpErrorResponse | undefined;
 
-  constructor(private bs: BookStoreService, private cd: ChangeDetectorRef) {
-    this.bs = bs;
-  }
+  constructor(private bs: BookStoreService, private cd: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.books$ = this.bs.getAll().pipe(
