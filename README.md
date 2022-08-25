@@ -17,3 +17,7 @@ instead of  https://semantic-ui.com/ we use:
 or use
 
 `stryker run --ignorePatterns '**','!src/**/book-details*.ts'  --fileLogLevel trace`
+
+## Dashboard
+api_key = 21a448eb-b1c4-4166-94cb-a7d91af66499
+[Bodos Dashboard](https://dashboard.stryker-mutator.io/repos/bodote)

@@ -22,13 +22,23 @@
   "reporters": [
     "progress",
     "clear-text",
-    "html"
+    "html",
+    "dashboard",
+    "json"
   ],
+
   "htmlReporter": { "fileName": "reports/mutation/mutation.all.html" },
   "concurrency": 4,
   "concurrency_comment": "Recommended to use about half of your available cores when running stryker with angular",
   "coverageAnalysis": "perTest",
   "timeoutFactor": 40,
   "checkers": ["typescript"],
-  "tsconfigFile": "tsconfig.json"
+  "tsconfigFile": "tsconfig.json",
+  "dashboard": {
+    "project": "github.com/bodote/book-monkey",
+    "version": "master",
+    "module": "main",
+    "baseUrl": "https://dashboard.stryker-mutator.io/api/reports",
+    "reportType": "full"
+  }
 }
