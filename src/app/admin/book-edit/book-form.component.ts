@@ -69,7 +69,7 @@ export class BookFormComponent implements OnInit, OnChanges {
   }
   ngOnChanges(changes: SimpleChanges) {
     const { aBook } = changes;
-    if (aBook.currentValue && !this.isNew) {
+    if (!!aBook && aBook.currentValue && !this.isNew) {
       this.fillForm(aBook.currentValue);
     }
   }

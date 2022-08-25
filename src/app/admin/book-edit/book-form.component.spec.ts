@@ -7,7 +7,11 @@ import {
   ReactiveFormsModule,
   ValidationErrors
 } from '@angular/forms';
-import { CUSTOM_ELEMENTS_SCHEMA, SimpleChange } from '@angular/core';
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  SimpleChange,
+  SimpleChanges
+} from '@angular/core';
 import { BodosValidatorService } from '../shared/bodos-validator.service';
 import { Book } from '../../shared/book';
 import { of } from 'rxjs';
@@ -158,7 +162,7 @@ describe('BookFormsComponent', () => {
       });
       expect(component.fillForm).toHaveBeenCalledTimes(0);
     });
-    it('should not call fillForm if  ngOnChanges has no book ', async () => {
+    it('should not call fillForm if  ngOnChanges has no book or if changes are null alltogether ', async () => {
       await prepareTests();
       component.isNew = true;
 
@@ -168,9 +172,12 @@ describe('BookFormsComponent', () => {
       component.aBook = testBookDataNoThumbs;
       // because of fixture.detectChanges() does not call it in a unittest directly,
       // and only the first fixture.detectChanges() call calls ngOnInit()
-      component.ngOnChanges({
-        aBook: new SimpleChange(null, testBookDataNoThumbs, false)
-      });
+      const change = new SimpleChange(null, testBookDataNoThumbs, false);
+      component.ngOnChanges({ aBook: change } as SimpleChanges);
+      expect(component.fillForm).toHaveBeenCalledTimes(0);
+      // @ts-ignore
+      // because it happens in browser for whatever reason! (Angular - Bug? )
+      component.ngOnChanges({ aBook: null });
       expect(component.fillForm).toHaveBeenCalledTimes(0);
     });
     it(
