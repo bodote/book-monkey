@@ -78,8 +78,8 @@
       <p>{{ book.description }}</p>
       <img
         class="h-full w-48"
-        src="{{book?.thumbnails?.[0]?.url}}"
-        alt="{{book?.thumbnails?.[0]?.title}}"
+        src="{{book.thumbnails?.[0]?.url}}"
+        alt="{{book.thumbnails?.[0]?.title}}"
       /><br />
       <br />
       <ng-container *ngIf="error">
@@ -106,13 +106,13 @@
         <button
           id="editButton"
           class="btn btn-primary basis-1/4 m-2"
-          [routerLink]="['/admin/edit', book?.isbn]"
+          [routerLink]="['/admin/edit', book.isbn]"
         >
           Edit
         </button>
         <button
           class="btn btn-secondary basis-1/4 m-2"
-          (click)="delete(book?.isbn)"
+          (click)="delete(book.isbn)"
           i18n="@@deleteButton"
         >
           Delete
