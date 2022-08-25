@@ -55,12 +55,18 @@ jobs:
           steps.cache-nodemodules.outputs.cache-hit != 'true'
           # 👆 if cache hits the skip this step.
         run: npm ci
+
       - name: Build
         run: npm run build --configuration=production
 
+      - name: Lint
+        run: npm run lint
+
+      - name: Test
+        run: npm run test --configuration=production
 
       # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      - name: End of main.yml
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          echo finished
+          echo 2nd line finished
