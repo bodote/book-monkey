@@ -10,7 +10,7 @@
     "extract-i18n": "ng extract-i18n --format=xmb --output-path=src ",
     "watch": "ng build --watch --configuration development",
     "test-watch": "ng test --watch",
-    "test": "ng test ",
+    "test": "ng test --watch=false",
     "test-coverage": "ng test --no-watch --code-coverage",
     "lint": "ng lint",
     "lint-fix": "ng lint --fix",
