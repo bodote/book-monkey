@@ -31,13 +31,13 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Use Node.js $
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version:
             16.15.x
       - name: Cache node modules
         id: cache-nodemodules
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         env:
           cache-name: cache-node-modules
         with:
