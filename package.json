@@ -14,7 +14,7 @@
     "test-coverage": "ng test --no-watch --code-coverage",
     "lint": "ng lint",
     "lint-fix": "ng lint --fix",
-    "deploy": "ng deploy --base-href=/book-monkey/"
+    "deploy": "ng deploy --no-silent --base-href=/book-monkey/"
   },
   "private": true,
   "dependencies": {
