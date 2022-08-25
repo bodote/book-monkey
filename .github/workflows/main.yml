@@ -19,7 +19,7 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    
+
     strategy:
       matrix:
         node-version: [16.15.x]
@@ -31,7 +31,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Use Node.js $
-      - uses: actions/setup-node@v1
+        uses: actions/setup-node@v1
         with:
           node-version:
             $
@@ -56,9 +56,9 @@ jobs:
           # 👆 if cache hits the skip this step.
         run: npm ci
       - name: Build
-        run: npm run build --configuration=production 
+        run: npm run build --configuration=production
 
-      
+
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
