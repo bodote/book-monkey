@@ -53,7 +53,7 @@ jobs:
       - name: Install Dependencies
         if:
           steps.cache-nodemodules.outputs.cache-hit != 'true'
-          # 👆 if cache hits the skip this step.
+          # 👆 if cache hits then skip this step.
         run: npm ci
 
       - name: Build
@@ -64,6 +64,13 @@ jobs:
 
       - name: Test
         run: npm run test --configuration=production
+
+      - name: Conventional Changelog Action
+        id: changelog
+        uses: TriPSs/conventional-changelog-action@v3
+        with:
+          github-token: ${{ secrets.TOKEN_GITHUB_ACTION }}
+          output-file: "false"
 
       # Runs a set of commands using the runners shell
       - name: End of main.yml
