@@ -21,3 +21,18 @@ or use
 ## stryker Dashboard
 - api_key = 21a448eb-b1c4-4166-94cb-a7d91af66499
 - [Bodos Dashboard](https://dashboard.stryker-mutator.io/reports/github.com/bodote/book-monkey/master)
+
+## Github Actions: 
+### Deploy :
+- use https://github.com/peaceiris/actions-gh-pages
+- `npm run deploy` doesn't work inside an github action because of authentication problem
+```yaml
+      - name: Deploy
+        if: success()
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: dist/book-monkey
+          enable_jekyll: true
+
+```
