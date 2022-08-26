@@ -88,7 +88,7 @@ jobs:
         run: |
           # instead of : npm run deploy
           npm run build-prod
-          npx ngh -S --dir dist/book-monkey
+          # npx ngh -S --dir dist/book-monkey
 
       # Runs a set of commands using the runners shell
       - name: End of main.yml
