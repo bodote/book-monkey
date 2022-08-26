@@ -82,14 +82,23 @@ jobs:
           release_name: ${{ steps.changelog.outputs.tag }}
           body: ${{ steps.changelog.outputs.clean_changelog }}
 
-      - name: Deploy
+      - name: Build
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB_ACTION }}
         run: |
           # instead of : npm run deploy
           npm run build-prod
-          echo --------start npx ngh --no-silent  --dir dist/book-monkey
-          npx ngh --no-silent  --dir dist/book-monkey
+          # echo --------start npx ngh --no-silent  --dir dist/book-monkey
+          # npx ngh --no-silent  --dir dist/book-monkey
+
+      - name: Deploy
+        if: success()
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: dist/book-monkey
+          enable_jekyll: true
+
 
       # Runs a set of commands using the runners shell
       - name: End of main.yml
