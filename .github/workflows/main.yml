@@ -89,7 +89,8 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: dist/book-monkey
           enable_jekyll: true
-
+      # or instead of using   uses: peaceiris/actions-gh-pages@v3
+      # see also https://github.com/angular-schule/angular-cli-ghpages/blob/master/docs/README_environment_github_actions.md
 
       # Runs a set of commands using the runners shell
       - name: End of main.yml

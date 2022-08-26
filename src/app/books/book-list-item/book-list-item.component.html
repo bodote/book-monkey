@@ -22,6 +22,7 @@
         <span>ISBN: {{ book?.isbn | isbn }} </span>
         <button
           class="btn btn-primary basis-1/4 m-2"
+          data-cy="btn/books/detail"
           [routerLink]="['/books/detail', book?.isbn]"
         >
           Details
