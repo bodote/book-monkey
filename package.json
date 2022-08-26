@@ -6,6 +6,7 @@
     "start": "ng serve",
     "start-de": "ng serve --configuration=de",
     "build": "ng build",
+    "build-prod": "ng build --configuration=production",
     "build-de": "ng build --configuration=production,de",
     "extract-i18n": "ng extract-i18n --format=xmb --output-path=src ",
     "watch": "ng build --watch --configuration development",

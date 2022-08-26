@@ -83,8 +83,12 @@ jobs:
           body: ${{ steps.changelog.outputs.clean_changelog }}
 
       - name: Deploy
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB_ACTION }}
         run: |
-          npm run deploy
+          # instead of : npm run deploy
+          npm run build-prod
+          npx ngh -S --dir dist/book-monkey
 
       # Runs a set of commands using the runners shell
       - name: End of main.yml
