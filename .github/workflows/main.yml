@@ -57,7 +57,7 @@ jobs:
         run: npm ci
 
       - name: Build
-        run: npm run build --configuration=production
+        run: npm run build-prod-gh
 
       - name: Lint
         run: npm run lint

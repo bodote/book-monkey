@@ -19,7 +19,7 @@
           {{ author }}<span *ngIf="!isLast">, </span>
         </div>
         <br />
-        <span>ISBN: {{ book?.isbn | isbn }} </span>
+        <span data-cy="isbn">ISBN: {{ book?.isbn | isbn }} </span>
         <button
           class="btn btn-primary basis-1/4 m-2"
           data-cy="btn/books/detail"

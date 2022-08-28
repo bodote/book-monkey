@@ -1,8 +1,11 @@
 {
-  "extends": "../tsconfig.json",
-  "include": ["**/*.ts"],
+  "_comment": " removed \"extends\": \"../tsconfig.json\",",
+  "include": [
+    "**/*.ts",
+  ],
   "compilerOptions": {
-    "sourceMap": false,
-    "types": ["cypress"]
+    "target": "es5",
+    "lib": ["es5", "dom"],
+    "types": ["cypress", "node"]
   }
 }

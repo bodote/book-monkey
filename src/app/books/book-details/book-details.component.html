@@ -111,6 +111,7 @@
           Edit
         </button>
         <button
+          data-cy="deleteBtn"
           class="btn btn-secondary basis-1/4 m-2"
           (click)="delete(book.isbn)"
           i18n="@@deleteButton"
@@ -118,6 +119,7 @@
           Delete
         </button>
         <button
+          data-cy="backToListBtn"
           class="btn btn-secondary basis-1/4 m-2"
           routerLink="/books/list"
           i18n="@@backToBookListButton"
