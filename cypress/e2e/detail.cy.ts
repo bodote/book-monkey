@@ -31,6 +31,5 @@ describe('details page', () => {
     cy.url()
       .should('contain', '/admin/edit/9783864907791')
       .then(() => expect(count).to.eq(1));
-    //expect(count).to.eq(1);
   });
 });

@@ -1,4 +1,4 @@
-<div class="container py-4">
+<div class="container py-4" [attr.data-cy]="'card-' + book?.isbn">
   <div class="card md:card-side bg-base-100 shadow-xl">
     <figure>
       <img
@@ -22,7 +22,6 @@
         <span data-cy="isbn">ISBN: {{ book?.isbn | isbn }} </span>
         <button
           class="btn btn-primary basis-1/4 m-2"
-          data-cy="btn/books/detail"
           [routerLink]="['/books/detail', book?.isbn]"
         >
           Details
