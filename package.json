@@ -6,7 +6,7 @@
     "start": "ng serve",
     "start-de": "ng serve --configuration=de",
     "build": "ng build",
-    "build-prod-gh": "ng build --configuration=production --base-href=/book-monkey ",
+    "build-prod-gh": "ng build --configuration=production --base-href=https://bodote.github.io/book-monkey/ && ln dist/book-monkey/index.html dist/book-monkey/404.html",
     "build-prod": "ng build --configuration=production ",
     "build-de": "ng build --configuration=production,de",
     "extract-i18n": "ng extract-i18n --format=xmb --output-path=src ",
