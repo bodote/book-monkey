@@ -6,9 +6,16 @@ describe('edit page', () => {
       }
     });
     cy.contains('h2', 'Edit existing Book:');
-    cy.get('form').find('#title');
+    cy.get('form').find('#title').should('have.attr', 'placeholder', 'Title');
     cy.get('@confirm')
       .should('have.been.calledOnce')
       .and('be.calledWith', 'Really want to be Admin?');
+    cy.get('form').find('#title').clear();
+    cy.get('.alert-error').find('span[data-cy="errorMsg"]');
+
+    cy.get('form').find('#title').type('Another Title');
+    cy.get('form').not('.alert');
+    cy.get('form').find('button[type="submit"]').click();
+    cy.get('form').find('.alert-info');
   });
 });
