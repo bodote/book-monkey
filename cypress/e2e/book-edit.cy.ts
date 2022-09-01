@@ -17,5 +17,12 @@ describe('edit page', () => {
     cy.get('form').not('.alert');
     cy.get('form').find('button[type="submit"]').click();
     cy.get('form').find('.alert-info');
+
+    // back to list und check if we can see changes there:
+    cy.get('a[ng-reflect-router-link="/books/list"]').click();
+    cy.get('[data-cy="title/9783864907791"]').should(
+      'contain',
+      'Another Title'
+    );
   });
 });

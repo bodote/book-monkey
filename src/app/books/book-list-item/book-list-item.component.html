@@ -9,7 +9,9 @@
       />
     </figure>
     <div class="card-body">
-      <h2 class="card-title">{{ book?.title }}</h2>
+      <h2 class="card-title" [attr.data-cy]="'title/' + book?.isbn">
+        {{ book?.title }}
+      </h2>
       <div class="text-lg">{{ book?.subtitle }}</div>
       <div>
         <div

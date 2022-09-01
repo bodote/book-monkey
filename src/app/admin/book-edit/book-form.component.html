@@ -96,6 +96,7 @@
           >
             <div class="flex flex-row py-2">
               <input
+                [attr.data-cy]="'author/' + i"
                 class="input input-bordered w-full p-2"
                 type="text"
                 [formControlName]="i"
