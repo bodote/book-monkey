@@ -36,3 +36,23 @@ or use
           enable_jekyll: true
 
 ```
+# ngrx additions:
+```
+ng add @ngrx/store
+ng add @ngrx/store-devtools
+
+ng add @ngrx/effects
+ng add @ngrx/schematics --defaultCollection
+```
+check if this is added to `app.module.ts`:
+```typescript
+StoreModule.forRoot({}, {}),
+StoreDevtoolsModule.instrument(
+{ maxAge: 25, logOnly: environment.production }
+)
+```
+then:
+`ng g feature books/store/book --module books/books --api --defaults`
+
+# cypress.config.ts 
+for the moment: commented out, since it gets intellij to show errors at jasmine.expect()....

@@ -9,6 +9,10 @@ import { ZoomDirective } from './shared/zoom.directive';
 import { DelayDirective } from './shared/delay.directive';
 import { BookListComponent } from './book-list/book-list.component';
 import { OutlineIconsModule, SolidIconsModule } from '@dimaslz/ng-heroicons';
+import { StoreModule } from '@ngrx/store';
+import * as fromBook from './store/book.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { BookEffects } from './store/book.effects';
 
 @NgModule({
   declarations: [
@@ -23,7 +27,9 @@ import { OutlineIconsModule, SolidIconsModule } from '@dimaslz/ng-heroicons';
     CommonModule,
     BooksRoutingModule,
     OutlineIconsModule,
-    SolidIconsModule
+    SolidIconsModule,
+    StoreModule.forFeature(fromBook.bookFeatureKey, fromBook.reducer),
+    EffectsModule.forFeature([BookEffects])
   ]
 })
 export class BooksModule {}
