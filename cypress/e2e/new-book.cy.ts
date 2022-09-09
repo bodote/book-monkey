@@ -42,6 +42,6 @@ describe('new book page', () => {
     cy.get('input#isbn').type('4567891');
     cy.get('button[type="submit"]').should('be.disabled');
     cy.get('[data-cy="author/0"]').type('author zero');
-    //cy.get('button[type="submit"]').should('be.enabled').click();
+    cy.get('button[type="submit"]').should('be.enabled').click();
   });
 });
