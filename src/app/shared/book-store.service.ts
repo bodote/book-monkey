@@ -67,7 +67,7 @@ export class BookStoreService {
     return this.http
       .get<BookRaw[]>('https://api4.angular-buch.com/secure/books')
       .pipe(
-        retry({ count: 3, delay: 1000 }),
+        retry({ count: 3, delay: 500 }),
         catchError(this.processError),
         map((rawBooksArray: BookRaw[]): Book[] =>
           rawBooksArray.map((rawBook) => BookFactoryService.getFromRaw(rawBook))

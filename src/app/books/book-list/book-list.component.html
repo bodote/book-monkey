@@ -1,5 +1,5 @@
 <div class="container px-8 py-8">
-  <ng-container *ngIf="error">
+  <ng-container *ngIf="error2$ | async as errorString">
     <div class="alert alert-error shadow-lg">
       <div>
         <svg
@@ -15,12 +15,19 @@
             d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
           />
         </svg>
-        <span> {{ error | json }} </span>
+        <div>
+          <h2 class="font-bold">{{ errorString.message }}</h2>
+          <div class="text-xs">
+            Status: {{ errorString.status }} <br />
+            JSON:
+            <pre><p>{{ errorString | json }}</p></pre>
+          </div>
+        </div>
       </div>
     </div>
   </ng-container>
   <ng-container *ngIf="!error">
-    <ng-container *ngIf="books$ | async as books; else loading">
+    <ng-container *ngIf="books2$ | async as books">
       <bm-book-list-item
         *ngFor="let b of books; index as id"
         [book]="b"
@@ -29,7 +36,7 @@
       ></bm-book-list-item>
     </ng-container>
   </ng-container>
-  <ng-template #loading>
+  <ng-container *ngIf="loading$ | async">
     <div class="relative rounded-xl overflow-auto p-8">
       <div class="flex items-center justify-center">
         Loading...
@@ -40,5 +47,5 @@
         </div>
       </div>
     </div>
-  </ng-template>
+  </ng-container>
 </div>

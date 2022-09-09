@@ -1,9 +1,13 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { Book } from '../../shared/book';
 import { BookStoreService } from '../../shared/book-store.service';
-import { Observable, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Store } from '@ngrx/store';
+import { loadBooks } from '../store/book.actions';
+import {
+  selectAllBooks,
+  selectError,
+  selectIsLoading
+} from '../store/book.selectors';
 
 @Component({
   selector: 'bm-book-list',
@@ -11,21 +15,29 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./book-list.component.css']
 })
 export class BookListComponent implements OnInit {
-  books$: Observable<Book[] | null> | undefined;
+  //books$: Observable<Book[] | null> | undefined;
+  books2$ = this.store.select(selectAllBooks);
   listView!: boolean;
-  detailBook!: Book;
   error: HttpErrorResponse | undefined;
+  loading$ = this.store.select(selectIsLoading);
+  error2$ = this.store.select(selectError);
 
-  constructor(private bs: BookStoreService, private cd: ChangeDetectorRef) {}
+  constructor(
+    private bs: BookStoreService,
+    private cd: ChangeDetectorRef,
+    private store: Store
+  ) {}
 
   ngOnInit(): void {
-    this.books$ = this.bs.getAll().pipe(
-      catchError((err) => {
-        this.error = err;
-        this.cd.detectChanges();
-        return of(null);
-      })
-    );
+    this.store.dispatch(loadBooks());
+    // this.books$ = this.bs.getAll().pipe(
+    //   catchError((err) => {
+    //     this.error = err;
+    //     this.cd.detectChanges();
+    //     return of(null);
+    //   })
+    // );
+
     this.listView = true;
   }
 }
