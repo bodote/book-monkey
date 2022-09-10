@@ -1,5 +1,6 @@
-//disabled since it messes up the Intellij's type checking on "jasmine.expect()"
-// import { defineConfig } from 'cypress'
+// //disabled since it messes up the Intellij's type checking on "jasmine.expect()"
+//
+// import { defineConfig } from 'cypress';
 //
 // export default defineConfig({
 //   videosFolder: 'cypress/videos',
@@ -10,9 +11,9 @@
 //     // We've imported your old cypress plugins here.
 //     // You may want to clean this up later by importing these.
 //     setupNodeEvents(on, config) {
-//       return require('./cypress/plugins/index.js')(on, config)
+//       return require('./cypress/plugins/index.js')(on, config);
 //     },
 //     baseUrl: 'http://localhost:4200',
-//     specPattern: 'cypress/e2e/**/*.{js,jsx,ts,tsx}',
-//   },
-// })
+//     specPattern: 'cypress/e2e/**/*.{js,jsx,ts,tsx}'
+//   }
+// });

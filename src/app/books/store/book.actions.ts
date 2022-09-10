@@ -9,7 +9,29 @@ export const loadBooksSuccess = createAction(
   props<{ books: Book[] }>()
 );
 
+export const setCurrentBook = createAction(
+  '[Book] Set Current Book',
+  props<{ isbn: string }>()
+);
+
+export const setCurrentBookSuccess = createAction(
+  '[Book] Set Current Book Success',
+  props<{ currentBook: Book }>()
+);
+
+export const loadAllAndSetCurrentBookSuccess = createAction(
+  '[Book] Load books and set Current Book Success',
+  props<{ books: Book[]; currentBook: Book }>()
+);
+
 export const loadBooksFailure = createAction(
   '[Book] Load Books Failure',
   props<{ error: HttpErrorResponse }>()
 );
+
+export const loadBooksOkButNotFound = createAction(
+  '[Book] Load Books Failure',
+  props<{ books: Book[]; errorMessage: string }>()
+);
+
+export const doNothing = createAction('[Do Nothing] ');

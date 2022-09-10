@@ -30,14 +30,6 @@ export class BookListComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(loadBooks());
-    // this.books$ = this.bs.getAll().pipe(
-    //   catchError((err) => {
-    //     this.error = err;
-    //     this.cd.detectChanges();
-    //     return of(null);
-    //   })
-    // );
-
     this.listView = true;
   }
 }

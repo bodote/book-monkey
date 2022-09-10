@@ -1,5 +1,5 @@
 <div class="container px-8 py-8">
-  <ng-container *ngIf="error2$ | async as errorString">
+  <ng-container *ngIf="error2$ | async as error">
     <div class="alert alert-error shadow-lg">
       <div>
         <svg
@@ -16,11 +16,12 @@
           />
         </svg>
         <div>
-          <h2 class="font-bold">{{ errorString.message }}</h2>
+          <h2 class="font-bold">Http: {{ error.http?.message }}</h2>
+          <h2 class="font-bold">Non-Http: {{ error.text }}</h2>
           <div class="text-xs">
-            Status: {{ errorString.status }} <br />
+            Status: {{ error.http?.status }} <br />
             JSON:
-            <pre><p>{{ errorString | json }}</p></pre>
+            <pre><p>{{ error | json }}</p></pre>
           </div>
         </div>
       </div>
