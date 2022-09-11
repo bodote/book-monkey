@@ -33,6 +33,7 @@
     "@cypress/schematic": "^1.0.0",
     "@dimaslz/ng-heroicons": "^0.1.5",
     "@ngrx/effects": "^14.3.1",
+    "@ngrx/router-store": "^14.3.1",
     "@ngrx/store": "^14.3.1",
     "@ngrx/store-devtools": "^14.3.1",
     "angular-date-value-accessor": "^2.0.1",
