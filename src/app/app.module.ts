@@ -29,10 +29,12 @@ const httpInterceptorProviders = [
     }),
     EffectsModule.forRoot([])
   ],
+
   providers: [
     httpInterceptorProviders
     //{provide: LOCALE_ID, useValue: 'de' }
   ],
+
   bootstrap: [AppComponent]
 })
 export class AppModule {

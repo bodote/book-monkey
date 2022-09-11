@@ -1,5 +1,5 @@
-<div class="container px-8 py-8">
-  <ng-container *ngIf="(!book$ || (book$ | async) === undefined) && !error">
+<div class="px-8 py-8">
+  <ng-container *ngIf="loading$ | async">
     <div class="relative rounded-xl overflow-auto p-8">
       <div class="flex items-center justify-center">
         Loading...
@@ -11,46 +11,10 @@
       </div>
     </div>
   </ng-container>
-  <ng-container *ngIf="notFoundError">
-    <div id="errorNoBook2" class="alert alert-error shadow-lg">
-      <div>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="stroke-current flex-shrink-0 h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-          />
-        </svg>
-        <span> {{ notFoundError }} </span>
-      </div>
-    </div>
+  <ng-container *ngIf="error$ | async as error">
+    <bm-notification-alert [error]="error"></bm-notification-alert>
   </ng-container>
-  <ng-container *ngIf="!book && error">
-    <div id="errorNoBook" class="alert alert-error shadow-lg">
-      <div>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="stroke-current flex-shrink-0 h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-          />
-        </svg>
-        <span> {{ error | json }} </span>
-      </div>
-    </div>
-  </ng-container>
+
   <ng-container *ngIf="book$ | async as book">
     <div class="container">
       <div class="text-2xl font-bold pb-8">{{ book.title }}</div>
@@ -102,25 +66,27 @@
         alt="{{book.thumbnails?.[0]?.title}}"
       /><br />
       <br />
-      <ng-container *ngIf="error">
-        <div id="error" class="alert alert-error shadow-lg">
-          <div>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="stroke-current flex-shrink-0 h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
-            <span> {{ error | json }} </span>
+      <ng-container *ngIf="error$ | async as error">
+        <ng-container *ngIf="!!error?.http || !!error?.text">
+          <div id="error" class="alert alert-error shadow-lg">
+            <div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="stroke-current flex-shrink-0 h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+              <span> {{ error | json }} </span>
+            </div>
           </div>
-        </div>
+        </ng-container>
       </ng-container>
       <div class="flex flex-row">
         <button

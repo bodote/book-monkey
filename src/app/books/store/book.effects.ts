@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { BookStoreService } from '../../shared/book-store.service';
 import {
-  doNothing,
+  internalErrorAction,
   loadAllAndSetCurrentBookSuccess,
   loadBooks,
   loadBooksFailure,
@@ -30,34 +30,55 @@ export class BookEffects {
       )
     );
   });
-  loadCurrentBook$ = createEffect(() => {
+  setCurrentBook$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(setCurrentBook),
-      concatLatestFrom((action) => this.store.select(selectBookState)),
+      concatLatestFrom(() => this.store.select(selectBookState)),
       switchMap(([action, state]) => {
-        let currentBook = state.books.find((book) => book.isbn == action.isbn);
-        if (!!currentBook) return of(setCurrentBookSuccess({ currentBook }));
-        if (state.books.length == 0 || action.isbn != state.currentBook?.isbn) {
-          return this.bs.getAll().pipe(
-            map((books: Book[]) => {
-              let currentBook = books.find((book) => book.isbn == action.isbn);
-              if (!!currentBook)
-                return loadAllAndSetCurrentBookSuccess({ books, currentBook });
-              else {
-                return loadBooksOkButNotFound({
-                  books,
-                  errorMessage:
-                    'All Books reloaded, but this ISBN was not found'
-                });
-              }
-            }),
-            catchError((error) => of(loadBooksFailure({ error })))
-          );
-        }
-        return of(doNothing());
+        return this.updateCurrentBook(
+          state.books,
+          state.uiState.currentBook,
+          action.isbn
+        );
       })
     );
   });
+
+  private updateCurrentBook(
+    books: Book[],
+    oldCurrentBook: Book | undefined,
+    isbn: string
+  ) {
+    let currentBook = books.find((book) => book.isbn == isbn);
+    if (!!currentBook) return of(setCurrentBookSuccess({ currentBook }));
+    if (books.length == 0 || isbn != oldCurrentBook?.isbn) {
+      return this.loadBooksAndFindnewCurrentBook(isbn);
+    }
+    return of(internalErrorAction());
+  }
+
+  private loadBooksAndFindnewCurrentBook(isbn: string) {
+    return this.bs.getAll().pipe(
+      map((books: Book[]) => {
+        let currentBook = books.find((book) => book.isbn == isbn);
+        if (!!currentBook)
+          return loadAllAndSetCurrentBookSuccess({ books, currentBook });
+        else {
+          return loadBooksOkButNotFound({
+            books,
+            errorMessage: 'All Books reloaded, but this ISBN was not found'
+          });
+        }
+      }),
+      catchError((error) => {
+        console.error(
+          'http error: in books.effect line 55:' + JSON.stringify(error)
+        );
+        return of(loadBooksFailure({ error }));
+      })
+    );
+  }
+
   constructor(
     private actions$: Actions,
     private bs: BookStoreService,

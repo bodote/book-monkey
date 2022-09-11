@@ -13,6 +13,7 @@ import { StoreModule } from '@ngrx/store';
 import * as fromBook from './store/book.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { BookEffects } from './store/book.effects';
+import { NotificationAlertComponent } from '../notification-alert/notification-alert.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { BookEffects } from './store/book.effects';
     BookDetailsComponent,
     IsbnPipe,
     ZoomDirective,
-    DelayDirective
+    DelayDirective,
+    NotificationAlertComponent
   ],
   imports: [
     CommonModule,

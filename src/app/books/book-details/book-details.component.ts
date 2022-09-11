@@ -3,9 +3,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { Book } from '../../shared/book';
 import { BookStoreService } from '../../shared/book-store.service';
-import { HttpErrorResponse } from '@angular/common/http';
 import { Store } from '@ngrx/store';
-import { selectCurrentBook, selectError } from '../store/book.selectors';
+import {
+  selectCurrentBook,
+  selectError,
+  selectIsLoading
+} from '../store/book.selectors';
 import { setCurrentBook } from '../store/book.actions';
 
 @Component({
@@ -16,10 +19,11 @@ import { setCurrentBook } from '../store/book.actions';
 export class BookDetailsComponent implements OnInit {
   book!: Book;
   book$ = this.store.select(selectCurrentBook);
+  loading$ = this.store.select(selectIsLoading);
   id: number = 0;
-  error: HttpErrorResponse | undefined;
-  loadingError$ = this.store.select(selectError);
-  notFoundError: string | null = null;
+  //error: HttpErrorResponse | undefined;
+  error$ = this.store.select(selectError);
+  //notFoundError: string | null = null;
 
   constructor(
     private router: Router,
@@ -31,7 +35,6 @@ export class BookDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       let isbn: string | null;
-      this.notFoundError = null;
       if ((isbn = params.get('isbn')) != null) {
         this.store.dispatch(setCurrentBook({ isbn }));
         // this.book$ = this.store.select(selectAllBooks).pipe(
@@ -78,7 +81,7 @@ export class BookDetailsComponent implements OnInit {
         this.router.navigate(['/books/list']);
       },
       error: (err) => {
-        this.error = err;
+        console.error('error deleting: ' + JSON.stringify(err));
       }
     });
   }

@@ -30,8 +30,8 @@ export const loadBooksFailure = createAction(
 );
 
 export const loadBooksOkButNotFound = createAction(
-  '[Book] Load Books Failure',
+  '[Book] Load Books Failure But Not Found',
   props<{ books: Book[]; errorMessage: string }>()
 );
 
-export const doNothing = createAction('[Do Nothing] ');
+export const internalErrorAction = createAction('[Should Never Happen] ');
