@@ -1,5 +1,4 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { BookStoreService } from '../../shared/book-store.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Store } from '@ngrx/store';
 import { loadBooks } from '../store/book.actions';
@@ -26,11 +25,7 @@ export class BookListComponent implements OnInit {
     text?: string | null;
   }> = this.store.select(selectError);
 
-  constructor(
-    private bs: BookStoreService,
-    private cd: ChangeDetectorRef,
-    private store: Store
-  ) {}
+  constructor(private cd: ChangeDetectorRef, private store: Store) {}
 
   ngOnInit(): void {
     this.books2$.pipe(first()).subscribe((books) => {

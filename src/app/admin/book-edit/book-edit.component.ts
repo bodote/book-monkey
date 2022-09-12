@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { BookStoreService } from '../../shared/book-store.service';
 import { Book } from '../../shared/book';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -21,7 +20,6 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./book-edit.component.css']
 })
 export class BookEditComponent implements OnInit, OnDestroy {
-  //TODO: clean up HTTP-Error massages
   book$ = this.store.select(selectCurrentBook);
   error$ = this.store.select(selectError);
   showSaveSuccess$ = this.store.select(selectSaveSuccess);
@@ -30,11 +28,7 @@ export class BookEditComponent implements OnInit, OnDestroy {
   saved = false;
   successMsg = '';
 
-  constructor(
-    private route: ActivatedRoute,
-    private bookStoreService: BookStoreService,
-    private store: Store
-  ) {}
+  constructor(private route: ActivatedRoute, private store: Store) {}
 
   ngOnDestroy(): void {
     if (this.subscriptionSuccess) {

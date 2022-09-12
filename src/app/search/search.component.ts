@@ -16,15 +16,16 @@ import { Book } from '../shared/book';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
-  private search$: Subject<string> | undefined;
+  private searchStringFromKeyBoard$: Subject<string> | undefined;
   foundBooks: Book[] | undefined;
   isLoading: boolean = false;
 
+  //TODO replace BookStoreService with a Store-Action
   constructor(private bookStoreService: BookStoreService) {}
 
   ngOnInit(): void {
-    this.search$ = new Subject<string>();
-    this.search$
+    this.searchStringFromKeyBoard$ = new Subject<string>();
+    this.searchStringFromKeyBoard$
       .pipe(
         filter((text: string) => text.length > 2),
         debounceTime(400),
@@ -48,6 +49,6 @@ export class SearchComponent implements OnInit {
   }
 
   keyup(text: string) {
-    this.search$?.next(text);
+    this.searchStringFromKeyBoard$?.next(text);
   }
 }

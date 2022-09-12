@@ -13,6 +13,7 @@ import { catchError, map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class BodosValidatorService {
+  //Todo: replace use of BookStoreService with a Store-Action
   constructor(private bookService: BookStoreService) {}
   checkIsbn(control: AbstractControl): ValidationErrors | null {
     if (!control.value) return { isbnLength: { valid: false } };

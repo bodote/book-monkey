@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { Book } from '../../shared/book';
-import { BookStoreService } from '../../shared/book-store.service';
 import { Store } from '@ngrx/store';
 import {
   selectCurrentBook,
@@ -28,7 +27,6 @@ export class BookDetailsComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private bookService: BookStoreService,
     private store: Store
   ) {}
 
