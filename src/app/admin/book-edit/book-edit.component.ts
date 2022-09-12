@@ -1,5 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { BookStoreService } from '../../shared/book-store.service';
 import { Book } from '../../shared/book';
 import { ActivatedRoute } from '@angular/router';
@@ -19,26 +18,19 @@ import {
   templateUrl: './book-edit.component.html',
   styleUrls: ['./book-edit.component.css']
 })
-export class BookEditComponent implements OnInit, OnDestroy {
+export class BookEditComponent implements OnInit {
   //TODO: clean up HTTP-Error massages
   book$ = this.store.select(selectCurrentBook);
   error$ = this.store.select(selectError);
-  errorMessage: string | undefined;
+
   saved = false;
   successMsg = '';
-  subscriptionError: Subscription | undefined;
-  //loadingError$ = new Subject<string>();
+
   constructor(
     private route: ActivatedRoute,
     private bookStoreService: BookStoreService,
     private store: Store
   ) {}
-
-  ngOnDestroy(): void {
-    if (this.subscriptionError) {
-      this.subscriptionError.unsubscribe();
-    }
-  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
@@ -52,11 +44,6 @@ export class BookEditComponent implements OnInit, OnDestroy {
           })
         );
       }
-    });
-    this.subscriptionError = this.error$.subscribe((error) => {
-      if (!!error.http || !!error.text) this.errorMessage = '';
-      if (error.http) this.errorMessage += error.http.message + '; ';
-      if (error.text) this.errorMessage += error.text;
     });
   }
 

@@ -65,7 +65,7 @@ export class BookStoreService {
 
   getAll(): Observable<Book[]> {
     return this.http
-      .get<BookRaw[]>('https://api4.angular-buch.com/secure/books')
+      .get<BookRaw[]>('https://api4.angular-buch.com/secure/bookis')
       .pipe(
         retry({ count: 1, delay: 100 }),
         catchError(this.processError),

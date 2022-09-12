@@ -1,6 +1,6 @@
 <div
-  *ngIf="!!error && (!!error.http || !!error.text)"
-  class="alert alert-error shadow-lg"
+  *ngIf="!!error && (!!error.http || !!error.text) && show"
+  class="fixed left-7 w-11/12 top-15 alert alert-error shadow-lg"
 >
   <div>
     <svg
@@ -8,6 +8,7 @@
       fill="none"
       viewBox="0 0 24 24"
       class="stroke-current flex-shrink-0 w-6 h-6"
+      (click)="close()"
     >
       <path
         stroke-linecap="round"
@@ -21,10 +22,10 @@
       <h3 class="font-bold">Non-Http: {{ error.text }}</h3>
       <div class="text-xs">
         Status: {{ error.http?.status }} <br />
-        JSON:
-        <pre><p>{{ error | json }}</p></pre>
+        HTTP-Error-Response:
+        <pre><p>{{stringify(error,undefined,2)}}</p></pre>
       </div>
     </div>
   </div>
-  <div class="flex-none">right</div>
+  <div class="flex-none"></div>
 </div>

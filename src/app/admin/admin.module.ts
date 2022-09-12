@@ -13,6 +13,7 @@ import { StoreModule } from '@ngrx/store';
 import * as fromBook from '../books/store/book.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { BookEffects } from '../books/store/book.effects';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { BookEffects } from '../books/store/book.effects';
     ReactiveFormsModule,
     LocalDateValueAccessorModule,
     SolidIconsModule,
+    SharedModule,
     StoreModule.forFeature(fromBook.bookFeatureKey, fromBook.reducer),
     EffectsModule.forFeature([BookEffects])
   ]

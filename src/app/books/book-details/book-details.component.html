@@ -11,8 +11,10 @@
       </div>
     </div>
   </ng-container>
-  <ng-container *ngIf="error$ | async as error">
-    <bm-notification-alert [error]="error"></bm-notification-alert>
+  <ng-container *ngIf="true">
+    <!-- || (error$ | async as error)
+    >-->
+    <bm-notification-alert [error]="{ text: 'test' }"></bm-notification-alert>
   </ng-container>
 
   <ng-container *ngIf="book$ | async as book">

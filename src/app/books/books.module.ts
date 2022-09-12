@@ -13,7 +13,7 @@ import { StoreModule } from '@ngrx/store';
 import * as fromBook from './store/book.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { BookEffects } from './store/book.effects';
-import { NotificationAlertComponent } from '../shared/notification-alert/notification-alert.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -22,14 +22,15 @@ import { NotificationAlertComponent } from '../shared/notification-alert/notific
     BookDetailsComponent,
     IsbnPipe,
     ZoomDirective,
-    DelayDirective,
-    NotificationAlertComponent
+    DelayDirective
+    //NotificationAlertComponent
   ],
   imports: [
     CommonModule,
     BooksRoutingModule,
     OutlineIconsModule,
     SolidIconsModule,
+    SharedModule,
     StoreModule.forFeature(fromBook.bookFeatureKey, fromBook.reducer),
     EffectsModule.forFeature([BookEffects])
   ]
