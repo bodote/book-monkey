@@ -1,27 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BookStoreService } from '../../shared/book-store.service';
 import { Book } from '../../shared/book';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import {
   selectCurrentBook,
-  selectError
+  selectError,
+  selectSaveSuccess
 } from '../../books/store/book.selectors';
 import {
   internalErrorAction,
   saveCurrentBook,
   setCurrentBook
 } from '../../books/store/book.actions';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'bm-book-edit',
   templateUrl: './book-edit.component.html',
   styleUrls: ['./book-edit.component.css']
 })
-export class BookEditComponent implements OnInit {
+export class BookEditComponent implements OnInit, OnDestroy {
   //TODO: clean up HTTP-Error massages
   book$ = this.store.select(selectCurrentBook);
   error$ = this.store.select(selectError);
+  showSaveSuccess$ = this.store.select(selectSaveSuccess);
+  subscriptionSuccess: Subscription | undefined;
 
   saved = false;
   successMsg = '';
@@ -31,6 +35,12 @@ export class BookEditComponent implements OnInit {
     private bookStoreService: BookStoreService,
     private store: Store
   ) {}
+
+  ngOnDestroy(): void {
+    if (this.subscriptionSuccess) {
+      this.subscriptionSuccess.unsubscribe();
+    }
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
@@ -49,5 +59,9 @@ export class BookEditComponent implements OnInit {
 
   saveBook(book: Book) {
     this.store.dispatch(saveCurrentBook({ book }));
+    this.subscriptionSuccess = this.showSaveSuccess$.subscribe((showSave) => {
+      this.saved = showSave;
+      this.successMsg = 'Book has been saved successfully';
+    });
   }
 }

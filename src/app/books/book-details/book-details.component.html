@@ -11,117 +11,97 @@
       </div>
     </div>
   </ng-container>
-  <ng-container *ngIf="true">
-    <!-- || (error$ | async as error)
-    >-->
-    <bm-notification-alert [error]="{ text: 'test' }"></bm-notification-alert>
+  <ng-container *ngIf="error$ | async as error">
+    <bm-notification-alert [error]="error"></bm-notification-alert>
   </ng-container>
 
   <ng-container *ngIf="book$ | async as book">
     <div class="container">
-      <div class="text-2xl font-bold pb-8">{{ book.title }}</div>
-      <div class="text-lg font-bold">{{ book.subtitle }}</div>
-      <div class="divider"></div>
-      <div class="flex flex-row flex-wrap pb-8">
-        <div class="basis-1/5 pr-2 pb-2">
-          <div class="text-lg font-bold" i18n="@@Authors">Authors:</div>
-          <ng-container *ngFor="let author of book.authors">
-            {{ author }}<br />
-          </ng-container>
-        </div>
-        <div class="basis-1/4 pr-2 pb-2" id="isbn">
-          <div class="text-lg font-bold">ISBN:</div>
-          {{ book.isbn | isbn }}
-        </div>
-        <div class="basis-1/4 pr-2 pb-2">
-          <div class="text-lg font-bold" i18n="@@published" id="published">
-            published:
+      <div class="mb-14">
+        <div class="text-2xl font-bold pb-8">{{ book.title }}</div>
+        <div class="text-lg font-bold">{{ book.subtitle }}</div>
+        <div class="divider"></div>
+        <div class="flex flex-row flex-wrap pb-8">
+          <div class="basis-1/5 pr-2 pb-2">
+            <div class="text-lg font-bold" i18n="@@Authors">Authors:</div>
+            <ng-container *ngFor="let author of book.authors">
+              {{ author }}<br />
+            </ng-container>
           </div>
-          {{ book.published | date: 'longDate' }}
-        </div>
-        <div class="basis-1/4 pr-2 pb-2">
-          <div class="text-lg font-bold" i18n="@@rating">Rating:</div>
-          <ng-container *ngIf="book.rating">
-            <div class="flex flex-wrap">
-              <ng-container
-                *ngFor="
-                  let dummy of ','.repeat(book.rating - 1).split(',');
-                  index as i
-                "
-              >
-                <star-solid-icon
-                  color="goldenrod"
-                  [bmDelay]="1000 + i * 500"
-                ></star-solid-icon>
-              </ng-container>
-            </div>
-          </ng-container>
-        </div>
-      </div>
-      <div class="text-lg font-bold pb-2" i18n="@@bookDescription">
-        Description:
-      </div>
-      <p>{{ book.description }}</p>
-      <img
-        class="h-full w-48"
-        src="{{book.thumbnails?.[0]?.url}}"
-        alt="{{book.thumbnails?.[0]?.title}}"
-      /><br />
-      <br />
-      <ng-container *ngIf="error$ | async as error">
-        <ng-container *ngIf="!!error?.http || !!error?.text">
-          <div id="error" class="alert alert-error shadow-lg">
-            <div>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="stroke-current flex-shrink-0 h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-              <span> {{ error | json }} </span>
-            </div>
+          <div class="basis-1/4 pr-2 pb-2" id="isbn">
+            <div class="text-lg font-bold">ISBN:</div>
+            {{ book.isbn | isbn }}
           </div>
-        </ng-container>
-      </ng-container>
-      <div class="flex flex-row">
-        <button
-          id="editButton"
-          data-cy="editBtn"
-          class="btn btn-primary basis-1/4 m-2"
-          [routerLink]="['/admin/edit', book.isbn]"
-        >
-          Edit
-        </button>
-        <button
-          data-cy="deleteBtn"
-          class="btn btn-secondary basis-1/4 m-2"
-          (click)="delete(book.isbn)"
-          i18n="@@deleteButton"
-        >
-          Delete
-        </button>
-        <button
-          data-cy="backToListBtn"
-          class="btn btn-secondary basis-1/4 m-2"
-          routerLink="/books/list"
-          i18n="@@backToBookListButton"
-        >
-          back to book list
-        </button>
-        <button
-          data-cy="nextBtn"
-          class="btn btn-secondary basis-1/4 m-2"
-          i18n="@@next"
-        >
-          Next
-        </button>
+          <div class="basis-1/4 pr-2 pb-2">
+            <div class="text-lg font-bold" i18n="@@published" id="published">
+              published:
+            </div>
+            {{ book.published | date: 'longDate' }}
+          </div>
+          <div class="basis-1/4 pr-2 pb-2">
+            <div class="text-lg font-bold" i18n="@@rating">Rating:</div>
+            <ng-container *ngIf="book.rating">
+              <div class="flex flex-wrap">
+                <ng-container
+                  *ngFor="
+                    let dummy of ','.repeat(book.rating - 1).split(',');
+                    index as i
+                  "
+                >
+                  <star-solid-icon
+                    color="goldenrod"
+                    [bmDelay]="1000 + i * 500"
+                  ></star-solid-icon>
+                </ng-container>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+        <div class="text-lg font-bold pb-2" i18n="@@bookDescription">
+          Description:
+        </div>
+        <p>{{ book.description }}</p>
+        <img
+          class="h-full w-48"
+          src="{{book.thumbnails?.[0]?.url}}"
+          alt="{{book.thumbnails?.[0]?.title}}"
+        /><br />
+        <br />
+      </div>
+      <div class="fixed left-7 w-11/12 bottom-2 z-10">
+        <div class="flex flex-row">
+          <button
+            id="editButton"
+            data-cy="editBtn"
+            class="btn btn-primary basis-1/4 m-2"
+            [routerLink]="['/admin/edit', book.isbn]"
+          >
+            Edit
+          </button>
+          <button
+            data-cy="deleteBtn"
+            class="btn btn-secondary basis-1/4 m-2"
+            (click)="delete(book.isbn)"
+            i18n="@@deleteButton"
+          >
+            Delete
+          </button>
+          <button
+            data-cy="backToListBtn"
+            class="btn btn-secondary basis-1/4 m-2"
+            routerLink="/books/list"
+            i18n="@@backToBookListButton"
+          >
+            back to book list
+          </button>
+          <button
+            data-cy="nextBtn"
+            class="btn btn-secondary basis-1/4 m-2"
+            i18n="@@next"
+          >
+            Next
+          </button>
+        </div>
       </div>
     </div>
   </ng-container>

@@ -31,7 +31,6 @@ export class CreateBookComponent implements OnDestroy {
     this.subscriptionSuccess = this.showSaveSuccess$.subscribe((showSave) => {
       this.saved = showSave;
       this.successMsg = 'Book has been saved successfully';
-      setTimeout(() => (this.saved = false), 5000);
     });
   }
   ngOnDestroy() {

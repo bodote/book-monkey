@@ -1,202 +1,186 @@
 <div class="container">
   <ng-container *ngIf="isNew || aBook; else loading">
+    <bm-success-alert
+      [saved]="saved"
+      [successMsg]="successMsg"
+    ></bm-success-alert>
     <form class="form-control" [formGroup]="editForm">
-      <div class="pb-4">
-        <label class="input-group">
-          <span class="bg-primary/30">Title</span>
-          <input
-            id="title"
-            type="text"
-            formControlName="title"
-            placeholder="Title"
-            class="input input-bordered w-full"
-          />
-        </label>
-      </div>
-      <bm-form-messages
-        [control]="editForm.get('title')"
-        controlName="title"
-      ></bm-form-messages>
-      <label class="input-group pb-4">
-        <span class="bg-primary/30">Subtitle: </span>
-        <input
-          class="input input-bordered w-full"
-          id="subtitle"
-          type="text"
-          placeholder="Subtitle"
-          formControlName="subtitle"
-        />
-      </label>
-      <div class="py-4">
-        <label class="input-group py-1">
-          <span
-            class="bg-primary/30"
-            [class.bg-error]="
-              editForm.get('isbn')?.invalid &&
-              (editForm.get('isbn')?.dirty || editForm.get('isbn')?.touched)
-            "
-            >ISBN:
-          </span>
-          <input
-            class="input input-bordered w-full"
-            [class.input-error]="
-              editForm.get('isbn')?.invalid &&
-              (editForm.get('isbn')?.dirty || editForm.get('isbn')?.touched)
-            "
-            id="isbn"
-            type="text"
-            formControlName="isbn"
-            placeholder="123-123456789"
-            required
-          />
-        </label>
+      <div class="mb-14">
+        <div class="pb-4">
+          <label class="input-group">
+            <span class="bg-primary/30">Title</span>
+            <input
+              id="title"
+              type="text"
+              formControlName="title"
+              placeholder="Title"
+              class="input input-bordered w-full"
+            />
+          </label>
+        </div>
         <bm-form-messages
-          [control]="editForm.get('isbn')"
-          controlName="isbn"
+          [control]="editForm.get('title')"
+          controlName="title"
         ></bm-form-messages>
-      </div>
+        <label class="input-group pb-4">
+          <span class="bg-primary/30">Subtitle: </span>
+          <input
+            class="input input-bordered w-full"
+            id="subtitle"
+            type="text"
+            placeholder="Subtitle"
+            formControlName="subtitle"
+          />
+        </label>
+        <div class="py-4">
+          <label class="input-group py-1">
+            <span
+              class="bg-primary/30"
+              [class.bg-error]="
+                editForm.get('isbn')?.invalid &&
+                (editForm.get('isbn')?.dirty || editForm.get('isbn')?.touched)
+              "
+              >ISBN:
+            </span>
+            <input
+              class="input input-bordered w-full"
+              [class.input-error]="
+                editForm.get('isbn')?.invalid &&
+                (editForm.get('isbn')?.dirty || editForm.get('isbn')?.touched)
+              "
+              id="isbn"
+              type="text"
+              formControlName="isbn"
+              placeholder="123-123456789"
+              required
+            />
+          </label>
+          <bm-form-messages
+            [control]="editForm.get('isbn')"
+            controlName="isbn"
+          ></bm-form-messages>
+        </div>
+        <label class="input-group pb-4">
+          <span class="bg-primary/30">Published: </span>
+          <input
+            class="input input-bordered w-full"
+            id="published"
+            type="date"
+            useValueAsLocalDate
+            placeholder="Date"
+            formControlName="published"
+          />
+        </label>
+        <label class="input-group pb-1">
+          <span class="bg-primary/30">Rating: </span>
+          <input
+            class="input input-bordered w-full"
+            id="rating"
+            type="number"
+            formControlName="rating"
+          />
+        </label>
+        <label class="input-group pb-4">
+          <span class="bg-primary/30">Description: </span>
+          <textarea
+            class="textarea input-bordered w-full h-80"
+            id="description"
+            type="text"
+            formControlName="description"
+          ></textarea>
+        </label>
+        <div class="flex flex-col w-full border-opacity-50">
+          <div class="divider">Authors:</div>
 
-      <label class="input-group pb-4">
-        <span class="bg-primary/30">Published: </span>
-        <input
-          class="input input-bordered w-full"
-          id="published"
-          type="date"
-          useValueAsLocalDate
-          placeholder="Date"
-          formControlName="published"
-        />
-      </label>
-      <label class="input-group pb-1">
-        <span class="bg-primary/30">Rating: </span>
-        <input
-          class="input input-bordered w-full"
-          id="rating"
-          type="number"
-          formControlName="rating"
-        />
-      </label>
-      <label class="input-group pb-4">
-        <span class="bg-primary/30">Description: </span>
-        <textarea
-          class="textarea input-bordered w-full h-80"
-          id="description"
-          type="text"
-          formControlName="description"
-        ></textarea>
-      </label>
-      <div class="flex flex-col w-full border-opacity-50">
-        <div class="divider">Authors:</div>
-
-        <ng-container *ngIf="authors?.controls">
-          <div
-            formArrayName="authors"
-            class=""
-            *ngFor="let auth of authors.controls; index as i"
-          >
-            <div class="flex flex-row py-2">
-              <input
-                [attr.data-cy]="'author/' + i"
-                class="input input-bordered w-full p-2"
-                type="text"
-                [formControlName]="i"
-              />
-              <div class="p-2">
-                <minus-circle-solid-icon
-                  (click)="removeAuthor(i)"
-                  id="removeAuthor"
-                  color="red"
-                ></minus-circle-solid-icon>
+          <ng-container *ngIf="authors?.controls">
+            <div
+              formArrayName="authors"
+              class=""
+              *ngFor="let auth of authors.controls; index as i"
+            >
+              <div class="flex flex-row py-2">
+                <input
+                  [attr.data-cy]="'author/' + i"
+                  class="input input-bordered w-full p-2"
+                  type="text"
+                  [formControlName]="i"
+                />
+                <div class="p-2">
+                  <minus-circle-solid-icon
+                    (click)="removeAuthor(i)"
+                    id="removeAuthor"
+                    color="red"
+                  ></minus-circle-solid-icon>
+                </div>
               </div>
             </div>
+          </ng-container>
+          <bm-form-messages
+            [control]="editForm.get('authors')"
+            controlName="authors"
+          ></bm-form-messages>
+          <div class="p-2">
+            <plus-circle-solid-icon
+              color="green"
+              id="addAuthor"
+              (click)="addAuthor()"
+            ></plus-circle-solid-icon>
           </div>
-        </ng-container>
-        <bm-form-messages
-          [control]="editForm.get('authors')"
-          controlName="authors"
-        ></bm-form-messages>
-        <div class="p-2">
-          <plus-circle-solid-icon
-            color="green"
-            id="addAuthor"
-            (click)="addAuthor()"
-          ></plus-circle-solid-icon>
         </div>
-      </div>
+        <div class="">
+          <div class="divider">Thumbs:</div>
 
-      <div class="">
-        <div class="divider">Thumbs:</div>
+          <ng-container *ngIf="thumbnails?.controls">
+            <div
+              class=""
+              formArrayName="thumbnails"
+              *ngFor="let thumb of thumbnails?.controls; index as j"
+            >
+              <div class="" [formGroupName]="j">
+                <div class="form-control">
+                  <div class="flex flex-row">
+                    <label class="input-group w-full px-2">
+                      <span class="bg-primary/30">URL: </span>
+                      <input
+                        class="input input-bordered w-full"
+                        id="url"
+                        type="text"
+                        formControlName="url"
+                      />
+                    </label>
 
-        <ng-container *ngIf="thumbnails?.controls">
-          <div
-            class=""
-            formArrayName="thumbnails"
-            *ngFor="let thumb of thumbnails?.controls; index as j"
-          >
-            <div class="" [formGroupName]="j">
-              <div class="form-control">
-                <div class="flex flex-row">
-                  <label class="input-group w-full px-2">
-                    <span class="bg-primary/30">URL: </span>
-                    <input
-                      class="input input-bordered w-full"
-                      id="url"
-                      type="text"
-                      formControlName="url"
-                    />
-                  </label>
-
-                  <label class="input-group">
-                    <span class="bg-primary/30">Name:</span>
-                    <input
-                      class="input input-bordered w-full"
-                      type="text"
-                      formControlName="title"
-                    />
-                  </label>
-                  <div class="p-2">
-                    <minus-circle-solid-icon
-                      id="removeThumb"
-                      (click)="removeThumb(j)"
-                      color="red"
-                    ></minus-circle-solid-icon>
+                    <label class="input-group">
+                      <span class="bg-primary/30">Name:</span>
+                      <input
+                        class="input input-bordered w-full"
+                        type="text"
+                        formControlName="title"
+                      />
+                    </label>
+                    <div class="p-2">
+                      <minus-circle-solid-icon
+                        id="removeThumb"
+                        (click)="removeThumb(j)"
+                        color="red"
+                      ></minus-circle-solid-icon>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+          </ng-container>
+          <div class="p-2">
+            <plus-circle-solid-icon
+              color="green"
+              id="addThumb"
+              (click)="addThumb()"
+            ></plus-circle-solid-icon>
           </div>
-        </ng-container>
-        <div class="p-2">
-          <plus-circle-solid-icon
-            color="green"
-            id="addThumb"
-            (click)="addThumb()"
-          ></plus-circle-solid-icon>
         </div>
       </div>
-
-      <div *ngIf="saved" class="alert alert-info shadow-lg">
-        <div>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            class="stroke-current flex-shrink-0 w-6 h-6"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-            ></path>
-          </svg>
-          <span> Book saved! {{ successMsg }}</span>
-        </div>
-      </div>
-
       <button
         type="submit"
-        class="btn btn-primary"
+        class="fixed left-7 w-11/12 bottom-1 z-10 btn btn-primary"
         (click)="bookFormSaveBook()"
         [disabled]="!editForm.valid"
         [class.disabled]="editForm.invalid"
