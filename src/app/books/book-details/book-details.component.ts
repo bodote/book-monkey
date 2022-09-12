@@ -9,7 +9,7 @@ import {
   selectError,
   selectIsLoading
 } from '../store/book.selectors';
-import { setCurrentBook } from '../store/book.actions';
+import { deleteBook, setCurrentBook } from '../store/book.actions';
 
 @Component({
   selector: 'bm-book-details',
@@ -37,25 +37,6 @@ export class BookDetailsComponent implements OnInit {
       let isbn: string | null;
       if ((isbn = params.get('isbn')) != null) {
         this.store.dispatch(setCurrentBook({ isbn }));
-        // this.book$ = this.store.select(selectAllBooks).pipe(
-        //   map((books) => books.find((book) => book.isbn === isbn)),
-        //   delay(100),
-        //   tap((book) => {
-        //     if (!book && retries < 2) {
-        //       console.error(' no book with this isbn found: ' + isbn);
-        //       console.log('retry once....' + retries);
-        //       this.store.dispatch(loadBooks());
-        //     } else if (!!book && retries < 2) {
-        //       console.log('store.selectAllBooks found it !');
-        //     } else if (retries >= 2 && !book) {
-        //       console.log('retrie counter=' + retries);
-        //       this.notFoundError =
-        //         'store.selectAllBooks already tried once, not found this isbn in store:' +
-        //         isbn;
-        //     }
-        //     retries++;
-        //   })
-        // );
       } else {
         console.error(
           'no isbn param found in route, rerouting to /home (should actually route to an error page) '
@@ -69,21 +50,15 @@ export class BookDetailsComponent implements OnInit {
 
   delete(isbn: string | undefined): void {
     this.confirm(this.confirmMessage).subscribe((ok) => {
-      if (ok) {
+      if (ok && !!isbn) {
         this.reallyDelete(isbn);
       }
     });
   }
 
-  reallyDelete(isbn: string | undefined): void {
-    this.bookService.deleteBook(isbn).subscribe({
-      next: () => {
-        this.router.navigate(['/books/list']);
-      },
-      error: (err) => {
-        console.error('error deleting: ' + JSON.stringify(err));
-      }
-    });
+  reallyDelete(isbn: string): void {
+    this.store.dispatch(deleteBook({ isbn }));
+    this.router.navigate(['/books/list']);
   }
 
   confirm(message?: string): Observable<boolean> {

@@ -10,21 +10,27 @@ export const selectAllBooks = createSelector(
   (state) => state.books
 );
 
-export const selectCurrentBook = createSelector(
-  selectBookState,
-  (state) => state.uiState.currentBook
-);
+export const selectCurrentBook = createSelector(selectBookState, (state) => {
+  if (!!state?.uiState) {
+    return state?.uiState?.currentBook;
+  } else return null;
+});
 
 export const selectIsLoading = createSelector(
   selectBookState,
   (state) => state.uiState.loading
 );
 
+export const selectSaveSuccess = createSelector(
+  selectBookState,
+  (state) => state.uiState.showSaveSuccess
+);
+
 export const selectError = createSelector(selectBookState, (state) => {
-  if (!!state.uiState.httpError || state.uiState.errorMessage)
+  if (!!state?.uiState?.httpError || !!state?.uiState?.errorMessage)
     return {
-      http: state.uiState.httpError,
-      text: state.uiState.errorMessage
+      http: state.uiState?.httpError,
+      text: state.uiState?.errorMessage
     };
   else return {};
 });

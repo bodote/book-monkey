@@ -15,7 +15,6 @@ import {
   Validators
 } from '@angular/forms';
 import { Book } from '../../shared/book';
-import { BookStoreService } from '../../shared/book-store.service';
 import { BodosValidatorService } from '../shared/bodos-validator.service';
 
 @Component({
@@ -32,9 +31,6 @@ export class BookFormComponent implements OnInit, OnChanges {
   @Output() saveBookEventEmitter = new EventEmitter();
 
   constructor(
-    //private route: ActivatedRoute,
-    //private router: Router,
-    private bookStoreService: BookStoreService,
     private fb: FormBuilder,
     private bodosValidatorService: BodosValidatorService
   ) {}

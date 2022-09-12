@@ -8,6 +8,7 @@ import {
   selectError,
   selectIsLoading
 } from '../store/book.selectors';
+import { first } from 'rxjs';
 
 @Component({
   selector: 'bm-book-list',
@@ -29,7 +30,15 @@ export class BookListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.store.dispatch(loadBooks());
+    this.books2$.pipe(first()).subscribe((books) => {
+      if (books.length == 0) {
+        console.log('dispatch loadBook');
+        this.store.dispatch(loadBooks());
+      } else {
+        console.log('NO dispatch , books are already in store');
+      }
+    });
+
     this.listView = true;
   }
 }

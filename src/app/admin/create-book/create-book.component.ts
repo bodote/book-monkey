@@ -1,7 +1,13 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Book } from '../../shared/book';
-import { BookStoreService } from '../../shared/book-store.service';
 import { Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { addBook } from '../../books/store/book.actions';
+import {
+  selectError,
+  selectIsLoading,
+  selectSaveSuccess
+} from '../../books/store/book.selectors';
 
 @Component({
   selector: 'bm-create-book',
@@ -9,28 +15,36 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./create-book.component.css']
 })
 export class CreateBookComponent implements OnDestroy {
+  //TODO: clean up HTTP-Error massages
+  loading$ = this.store.select(selectIsLoading);
+  showSaveSuccess$ = this.store.select(selectSaveSuccess);
+  errorMessage$ = this.store.select(selectError);
   errorMessage: string | undefined;
   saved = false;
   successMsg = '';
-  subscription: Subscription | undefined;
-  constructor(private bookStoreService: BookStoreService) {}
+  subscriptionSuccess: Subscription | undefined;
+  subscriptionError: Subscription | undefined;
+  constructor(private store: Store) {}
 
   createBookSave(book: Book) {
-    this.subscription = this.bookStoreService.postBook(book).subscribe({
-      next: (res) => {
-        this.saved = true;
-        this.successMsg = res;
-        setTimeout(() => (this.saved = false), 5000);
-      },
-      error: (err) => {
-        console.error('ERROR in createBookSave: ' + JSON.stringify(err));
-        this.errorMessage = JSON.stringify(err);
-      }
+    this.store.dispatch(addBook({ book }));
+    this.subscriptionSuccess = this.showSaveSuccess$.subscribe((showSave) => {
+      this.saved = showSave;
+      this.successMsg = 'Book has been saved successfully';
+      setTimeout(() => (this.saved = false), 5000);
+    });
+    this.subscriptionError = this.errorMessage$.subscribe((error) => {
+      if (!!error.http || !!error.text) this.errorMessage = '';
+      if (error.http) this.errorMessage += error.http.message + '; ';
+      if (error.text) this.errorMessage += error.text;
     });
   }
   ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
+    if (this.subscriptionSuccess) {
+      this.subscriptionSuccess.unsubscribe();
+    }
+    if (this.subscriptionError) {
+      this.subscriptionError.unsubscribe();
     }
   }
 }

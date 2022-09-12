@@ -9,6 +9,10 @@ import { BookEditComponent } from './book-edit/book-edit.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LocalDateValueAccessorModule } from 'angular-date-value-accessor';
 import { SolidIconsModule } from '@dimaslz/ng-heroicons';
+import { StoreModule } from '@ngrx/store';
+import * as fromBook from '../books/store/book.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { BookEffects } from '../books/store/book.effects';
 
 @NgModule({
   declarations: [
@@ -22,7 +26,9 @@ import { SolidIconsModule } from '@dimaslz/ng-heroicons';
     AdminRoutingModule,
     ReactiveFormsModule,
     LocalDateValueAccessorModule,
-    SolidIconsModule
+    SolidIconsModule,
+    StoreModule.forFeature(fromBook.bookFeatureKey, fromBook.reducer),
+    EffectsModule.forFeature([BookEffects])
   ]
 })
 export class AdminModule {}
