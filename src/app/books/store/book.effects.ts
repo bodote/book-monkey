@@ -14,6 +14,8 @@ import {
   loadBooksSuccess,
   saveCurrentBook,
   saveCurrentBookSuccess,
+  searchBooks,
+  searchBooksResult,
   setCurrentBook,
   setCurrentBookSuccess
 } from './book.actions';
@@ -36,6 +38,19 @@ export class BookEffects {
       )
     );
   });
+
+  searchBooks$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(searchBooks),
+      switchMap((action) =>
+        this.bs.getAllSearch(action.searchString).pipe(
+          map((books: Book[]) => searchBooksResult({ searchResults: books })),
+          catchError((error) => of(httpFailure({ httpError: error })))
+        )
+      )
+    );
+  });
+
   deleteBook$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(deleteBook),

@@ -1,5 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import * as fromBook from './book.reducer';
+import { Book } from '../../shared/book';
 
 export const selectBookState = createFeatureSelector<fromBook.State>(
   fromBook.bookFeatureKey
@@ -18,7 +19,7 @@ export const selectCurrentBook = createSelector(selectBookState, (state) => {
 
 export const selectIsLoading = createSelector(
   selectBookState,
-  (state) => state.uiState.loading
+  (state) => state?.uiState?.loading
 );
 
 export const selectSaveSuccess = createSelector(
@@ -34,3 +35,11 @@ export const selectError = createSelector(selectBookState, (state) => {
     };
   else return {};
 });
+
+export const selectSearchResults = createSelector(
+  selectBookState,
+  (state): Book[] => {
+    if (!!state?.uiState?.searchResults) return state.uiState.searchResults;
+    else return [];
+  }
+);

@@ -13,6 +13,7 @@ export interface State {
     httpError: HttpErrorResponse | null;
     errorMessage: string | null;
     showSaveSuccess: boolean;
+    searchResults: Book[];
   };
 }
 export const initialState: State = {
@@ -22,7 +23,8 @@ export const initialState: State = {
     loading: false,
     httpError: null,
     errorMessage: null,
-    showSaveSuccess: false
+    showSaveSuccess: false,
+    searchResults: []
   }
 };
 
@@ -153,6 +155,25 @@ export const reducer = createReducer(
       ...state,
       books: books,
       uiState: { ...state.uiState, loading: false, showSaveSuccess: true }
+    };
+  }),
+
+  on(BookActions.searchBooks, (state, action): State => {
+    //do nothing, handled by effect, and don't delete the old search results yet!
+    return {
+      ...state,
+      uiState: { ...state.uiState, loading: true }
+    };
+  }),
+
+  on(BookActions.searchBooksResult, (state, action): State => {
+    return {
+      ...state,
+      uiState: {
+        ...state.uiState,
+        searchResults: action.searchResults,
+        loading: false
+      }
     };
   })
 );

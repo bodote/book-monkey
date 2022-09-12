@@ -1,9 +1,11 @@
 <div class="container py-2">
   <h2 i18n="@@SearchCompenent:header" class="text-2xl py-2">Search books</h2>
   <div class="indicator relative">
-    <span class="indicator-item badge" [class.invisible]="!isLoading"
-      >is loading...</span
-    >
+    <ng-container *ngIf="isLoading$ | async as isLoading">
+      <span class="indicator-item badge" [class.invisible]="!isLoading"
+        >is loading...</span
+      >
+    </ng-container>
     <label class="relative text-gray-400 focus-within:text-gray-600 block">
       <search-outline-icon
         class="pointer-events-none w-8 h-8 absolute top-7 transform -translate-y-1/2 right-1"
@@ -18,27 +20,32 @@
       />
     </label>
   </div>
-  <div class="overflow-x-auto py-2" *ngIf="foundBooks && foundBooks.length > 0">
-    <table class="table w-full">
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <ng-container *ngFor="let book of foundBooks">
-          <tr class="hover" [routerLink]="['/books/detail', book.isbn]">
-            <th>{{ book?.title }}</th>
-            <td>{{ book?.subtitle }}</td>
+  <div
+    class="overflow-x-auto py-2"
+    *ngIf="searchBookResults$ | async as foundBooks"
+  >
+    <ng-container *ngIf="foundBooks.length > 0">
+      <table class="table w-full">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Description</th>
           </tr>
-        </ng-container>
-      </tbody>
-    </table>
-  </div>
-  <div class="py-2" *ngIf="foundBooks && foundBooks.length === 0">
-    <div class="alert alert-info shadow-lg">
-      <p i18n="@@SearchCompenent:not found">Sorry, nothing found.</p>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let book of foundBooks">
+            <tr class="hover" [routerLink]="['/books/detail', book.isbn]">
+              <th>{{ book?.title }}</th>
+              <td>{{ book?.subtitle }}</td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </ng-container>
+    <div class="py-2" *ngIf="foundBooks.length === 0 && !noSearchPerformedYet">
+      <div class="alert alert-info shadow-lg">
+        <p i18n="@@SearchCompenent:not found">Sorry, nothing found.</p>
+      </div>
     </div>
   </div>
 </div>
