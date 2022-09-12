@@ -8,7 +8,7 @@ import {
   selectError,
   selectIsLoading
 } from '../store/book.selectors';
-import { first } from 'rxjs';
+import { first, Observable } from 'rxjs';
 
 @Component({
   selector: 'bm-book-list',
@@ -21,7 +21,10 @@ export class BookListComponent implements OnInit {
   listView!: boolean;
   error: HttpErrorResponse | undefined;
   loading$ = this.store.select(selectIsLoading);
-  error2$ = this.store.select(selectError);
+  error2$: Observable<{
+    http?: HttpErrorResponse | null;
+    text?: string | null;
+  }> = this.store.select(selectError);
 
   constructor(
     private bs: BookStoreService,

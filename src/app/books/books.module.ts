@@ -13,7 +13,7 @@ import { StoreModule } from '@ngrx/store';
 import * as fromBook from './store/book.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { BookEffects } from './store/book.effects';
-import { NotificationAlertComponent } from '../notification-alert/notification-alert.component';
+import { NotificationAlertComponent } from '../shared/notification-alert/notification-alert.component';
 
 @NgModule({
   declarations: [

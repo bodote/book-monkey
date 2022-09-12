@@ -1,5 +1,8 @@
 <div class="container m-4">
   <h2 class="text-lg font-bold">Edit existing Book:</h2>
+  <ng-container *ngIf="error$ | async as error">
+    <!--bm-notification-alert [error]="error"></bm-notification-alert -->
+  </ng-container>
 
   <ng-container *ngIf="!!errorMessage && errorMessage.length > 0">
     <div class="alert alert-error shadow-lg">

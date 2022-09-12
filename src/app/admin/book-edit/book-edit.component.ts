@@ -22,7 +22,7 @@ import {
 export class BookEditComponent implements OnInit, OnDestroy {
   //TODO: clean up HTTP-Error massages
   book$ = this.store.select(selectCurrentBook);
-  errorMessage$ = this.store.select(selectError);
+  error$ = this.store.select(selectError);
   errorMessage: string | undefined;
   saved = false;
   successMsg = '';
@@ -53,7 +53,7 @@ export class BookEditComponent implements OnInit, OnDestroy {
         );
       }
     });
-    this.subscriptionError = this.errorMessage$.subscribe((error) => {
+    this.subscriptionError = this.error$.subscribe((error) => {
       if (!!error.http || !!error.text) this.errorMessage = '';
       if (error.http) this.errorMessage += error.http.message + '; ';
       if (error.text) this.errorMessage += error.text;

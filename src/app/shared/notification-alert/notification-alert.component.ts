@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'bm-notification-alert',
@@ -6,7 +7,12 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./notification-alert.component.css']
 })
 export class NotificationAlertComponent {
-  @Input() error: any;
+  @Input() error:
+    | {
+        http?: HttpErrorResponse | null;
+        text?: string | null;
+      }
+    | undefined;
 
   constructor() {}
 }
