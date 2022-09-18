@@ -1,13 +1,12 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Store } from '@ngrx/store';
-import { loadBooks } from '../store/book.actions';
 import {
   selectAllBooks,
   selectError,
   selectIsLoading
 } from '../store/book.selectors';
-import { first, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'bm-book-list',
@@ -28,15 +27,6 @@ export class BookListComponent implements OnInit {
   constructor(private cd: ChangeDetectorRef, private store: Store) {}
 
   ngOnInit(): void {
-    this.books2$.pipe(first()).subscribe((books) => {
-      if (books.length == 0) {
-        console.log('dispatch loadBook');
-        this.store.dispatch(loadBooks());
-      } else {
-        console.log('NO dispatch , books are already in store');
-      }
-    });
-
     this.listView = true;
   }
 }

@@ -2,7 +2,7 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 import * as fromBook from './book.reducer';
 import { Book } from '../../shared/book';
 
-export const selectBookState = createFeatureSelector<fromBook.State>(
+export const selectBookState = createFeatureSelector<fromBook.BookState>(
   fromBook.bookFeatureKey
 );
 

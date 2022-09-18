@@ -5,7 +5,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 export const bookFeatureKey = 'book';
 
-export interface State {
+export interface BookState {
   books: Book[];
   uiState: {
     currentBook: Book | undefined;
@@ -16,7 +16,7 @@ export interface State {
     searchResults: Book[];
   };
 }
-export const initialState: State = {
+export const initialState: BookState = {
   books: [],
   uiState: {
     currentBook: undefined,
@@ -28,30 +28,33 @@ export const initialState: State = {
   }
 };
 
-export const reducer = createReducer(
-  initialState,
-
-  on(BookActions.loadBooks, (state): State => {
+function loadBooksR() {
+  return (state: BookState): BookState => {
     return {
       ...state,
       uiState: { ...state.uiState, loading: true, httpError: null }
     };
-  }),
-  on(BookActions.loadBooksSuccess, (state, action): State => {
+  };
+}
+
+export const reducer = createReducer(
+  initialState,
+  on(BookActions.loadBooks, loadBooksR()),
+  on(BookActions.loadBooksSuccess, (state, action): BookState => {
     return {
       ...state,
       books: action.books,
       uiState: { ...state.uiState, loading: false }
     };
   }),
-  on(BookActions.httpFailure, (state, action): State => {
+  on(BookActions.httpFailure, (state, action): BookState => {
     //return state;
     return {
       ...state,
       uiState: { ...state.uiState, loading: false, httpError: action.httpError }
     };
   }),
-  on(BookActions.setCurrentBook, (state): State => {
+  on(BookActions.setCurrentBook, (state): BookState => {
     return {
       ...state,
       uiState: {
@@ -62,7 +65,7 @@ export const reducer = createReducer(
       }
     }; //processed by an effect only
   }),
-  on(BookActions.setCurrentBookSuccess, (state, action): State => {
+  on(BookActions.setCurrentBookSuccess, (state, action): BookState => {
     return {
       ...state,
       uiState: {
@@ -72,19 +75,22 @@ export const reducer = createReducer(
       }
     };
   }),
-  on(BookActions.loadAllAndSetCurrentBookSuccess, (state, action): State => {
-    return {
-      ...state,
-      books: action.books,
-      uiState: {
-        ...state.uiState,
-        loading: false,
-        currentBook: action.currentBook,
-        httpError: null
-      }
-    };
-  }),
-  on(BookActions.loadBooksOkButNotFound, (state, action): State => {
+  on(
+    BookActions.loadAllAndSetCurrentBookSuccess,
+    (state, action): BookState => {
+      return {
+        ...state,
+        books: action.books,
+        uiState: {
+          ...state.uiState,
+          loading: false,
+          currentBook: action.currentBook,
+          httpError: null
+        }
+      };
+    }
+  ),
+  on(BookActions.loadBooksOkButNotFound, (state, action): BookState => {
     return {
       ...state,
       books: action.books,
@@ -96,14 +102,14 @@ export const reducer = createReducer(
       }
     };
   }),
-  on(BookActions.deleteBook, (state, action): State => {
+  on(BookActions.deleteBook, (state, action): BookState => {
     console.log('deleteBook Action with isbn:' + action.isbn);
     return {
       ...state,
       uiState: { ...state.uiState, loading: true, httpError: null }
     };
   }),
-  on(BookActions.deleteBookSuccess, (state, action): State => {
+  on(BookActions.deleteBookSuccess, (state, action): BookState => {
     const index = state.books.findIndex((book) => book.isbn === action.isbn);
     let newBooksA = [...state.books];
     newBooksA.splice(index, 1);
@@ -113,7 +119,7 @@ export const reducer = createReducer(
       uiState: { ...state.uiState, loading: false }
     };
   }),
-  on(BookActions.addBook, (state, action): State => {
+  on(BookActions.addBook, (state, action): BookState => {
     return {
       ...state,
       uiState: {
@@ -124,7 +130,7 @@ export const reducer = createReducer(
       }
     };
   }),
-  on(BookActions.addBookSuccess, (state, action): State => {
+  on(BookActions.addBookSuccess, (state, action): BookState => {
     const books = [...state.books];
     books.push(action.book);
     return {
@@ -133,7 +139,7 @@ export const reducer = createReducer(
       uiState: { ...state.uiState, loading: false, showSaveSuccess: true }
     };
   }),
-  on(BookActions.saveCurrentBook, (state, action): State => {
+  on(BookActions.saveCurrentBook, (state, action): BookState => {
     return {
       ...state,
       uiState: {
@@ -144,7 +150,7 @@ export const reducer = createReducer(
       }
     };
   }),
-  on(BookActions.saveCurrentBookSuccess, (state, action): State => {
+  on(BookActions.saveCurrentBookSuccess, (state, action): BookState => {
     let books = [...state.books];
     //replace book
     books = books.map((book) => {
@@ -157,22 +163,31 @@ export const reducer = createReducer(
       uiState: { ...state.uiState, loading: false, showSaveSuccess: true }
     };
   }),
-
-  on(BookActions.searchBooks, (state, action): State => {
+  on(BookActions.searchBooks, (state, action): BookState => {
     //do nothing, handled by effect, and don't delete the old search results yet!
     return {
       ...state,
       uiState: { ...state.uiState, loading: true }
     };
   }),
-
-  on(BookActions.searchBooksResult, (state, action): State => {
+  on(BookActions.searchBooksResult, (state, action): BookState => {
     return {
       ...state,
       uiState: {
         ...state.uiState,
         searchResults: action.searchResults,
         loading: false
+      }
+    };
+  }),
+  on(BookActions.internalErrorAction, (state, action): BookState => {
+    //return state;
+    return {
+      ...state,
+      uiState: {
+        ...state.uiState,
+        loading: false,
+        errorMessage: action.message
       }
     };
   })

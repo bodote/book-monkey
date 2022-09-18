@@ -11,8 +11,10 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
-import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
-
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { CustomRouterStateSerializer } from './custom-router-state-serializer';
+import { ROOT_REDUCERS } from './store';
+//{serializer: CustomRouterStateSerializer}
 const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
 ];
@@ -23,13 +25,15 @@ const httpInterceptorProviders = [
     AppRoutingModule,
     HttpClientModule,
     NgHeroiconsModule,
-    StoreModule.forRoot({ router: routerReducer }, {}),
+    StoreModule.forRoot(ROOT_REDUCERS, {}),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production
     }),
     EffectsModule.forRoot([]),
-    StoreRouterConnectingModule.forRoot()
+    StoreRouterConnectingModule.forRoot({
+      serializer: CustomRouterStateSerializer
+    })
   ],
 
   providers: [
