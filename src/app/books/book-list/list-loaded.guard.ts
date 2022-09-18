@@ -7,7 +7,6 @@ import {
 import { first, Observable, of, switchMap, tap } from 'rxjs';
 import { BookStoreService } from '../../shared/book-store.service';
 import { Store } from '@ngrx/store';
-import { BookState } from '../store/book.reducer';
 import { selectAllBooks } from '../store/book.selectors';
 import { Book } from '../../shared/book';
 import { internalErrorAction, loadBooksSuccess } from '../store/book.actions';
@@ -17,22 +16,22 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ListLoadedGuard implements CanActivate {
-  constructor(private bs: BookStoreService, private store$: Store<BookState>) {}
+  constructor(private bs: BookStoreService, private store: Store) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> {
-    return this.store$.select(selectAllBooks).pipe(
+    return this.store.select(selectAllBooks).pipe(
       first(),
       switchMap((books: Book[]) =>
         books?.length > 0
           ? this.activateRoute()
           : this.bs.getAll().pipe(
-              tap((books) => this.store$.dispatch(loadBooksSuccess({ books }))),
+              tap((books) => this.store.dispatch(loadBooksSuccess({ books }))),
               switchMap(() => this.activateRoute()),
               catchError((error) => {
-                this.store$.dispatch(
+                this.store.dispatch(
                   internalErrorAction({ message: JSON.stringify(error) })
                 );
                 return of(false);

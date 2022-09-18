@@ -14,12 +14,20 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { CustomRouterStateSerializer } from './custom-router-state-serializer';
 import { ROOT_REDUCERS } from './store';
+import { ErrorPageComponent } from './error-page/error-page.component';
+import { RouterEffects } from './store/router.effects';
+import { SharedModule } from './shared/shared.module';
 //{serializer: CustomRouterStateSerializer}
 const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
 ];
 @NgModule({
-  declarations: [AppComponent, HomeComponent, SearchComponent],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    SearchComponent,
+    ErrorPageComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -30,10 +38,11 @@ const httpInterceptorProviders = [
       maxAge: 25,
       logOnly: environment.production
     }),
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([RouterEffects]),
     StoreRouterConnectingModule.forRoot({
       serializer: CustomRouterStateSerializer
-    })
+    }),
+    SharedModule
   ],
 
   providers: [

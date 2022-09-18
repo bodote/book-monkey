@@ -36,34 +36,44 @@ export class BookFormComponent implements OnInit, OnChanges {
   ) {}
 
   ngOnInit(): void {
-    let isbnControl!: FormControl;
-    if (this.isNew) {
-      isbnControl = new FormControl('', {
-        validators: [this.bodosValidatorService.checkIsbn],
-        asyncValidators: [this.bodosValidatorService.asyncIsbnExistsValidator()]
-      });
-    } else {
-      isbnControl = new FormControl(null, [
-        Validators.required,
-        this.bodosValidatorService.checkIsbn
-      ]);
-    }
-
-    this.editForm = this.fb.group({
-      title: ['', Validators.required],
-      subtitle: '',
-      isbn: isbnControl,
-      published: [new Date('2022-08-10'), Validators.required],
-      description: '',
-      rating: [null, [Validators.min(0), Validators.max(5)]]
-    });
+    this.checkEditForm();
     if (this.isNew) {
       this.fillEmptyBook();
     } else if (this.aBook) {
       this.fillForm(this.aBook);
     }
   }
+
+  private createIsbnControl() {
+    if (this.isNew) {
+      return new FormControl('', {
+        validators: [this.bodosValidatorService.checkIsbn],
+        asyncValidators: [this.bodosValidatorService.asyncIsbnExistsValidator()]
+      });
+    } else {
+      return new FormControl(null, [
+        Validators.required,
+        this.bodosValidatorService.checkIsbn
+      ]);
+    }
+  }
+
+  private checkEditForm() {
+    if (!this.editForm) {
+      let isbnControl = this.createIsbnControl();
+      this.editForm = this.fb.group({
+        title: ['', Validators.required],
+        subtitle: '',
+        isbn: isbnControl,
+        published: [new Date('2022-08-10'), Validators.required],
+        description: '',
+        rating: [null, [Validators.min(0), Validators.max(5)]]
+      });
+    }
+  }
+
   ngOnChanges(changes: SimpleChanges) {
+    this.checkEditForm();
     const { aBook } = changes;
     if (!!aBook && aBook.currentValue && !this.isNew) {
       this.fillForm(aBook.currentValue);

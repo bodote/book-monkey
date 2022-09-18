@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { CanNavigateToAdminGuard } from './shared/can-navigate-to-admin.guard';
+import { ErrorPageComponent } from './error-page/error-page.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,10 @@ const routes: Routes = [
     loadChildren: () =>
       import('./admin/admin.module').then((m) => m.AdminModule),
     canActivate: [CanNavigateToAdminGuard]
+  },
+  {
+    path: 'error',
+    component: ErrorPageComponent
   }
 ];
 

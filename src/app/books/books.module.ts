@@ -23,7 +23,6 @@ import { SharedModule } from '../shared/shared.module';
     IsbnPipe,
     ZoomDirective,
     DelayDirective
-    //NotificationAlertComponent
   ],
   imports: [
     CommonModule,

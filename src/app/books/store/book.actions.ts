@@ -9,11 +9,6 @@ export const loadBooksSuccess = createAction(
   props<{ books: Book[] }>()
 );
 
-export const setCurrentBook = createAction(
-  '[Book] Set Current Book',
-  props<{ isbn: string }>()
-);
-
 export const setCurrentBookSuccess = createAction(
   '[Book] Set Current Book Success',
   props<{ currentBook: Book }>()

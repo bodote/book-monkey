@@ -54,17 +54,6 @@ export const reducer = createReducer(
       uiState: { ...state.uiState, loading: false, httpError: action.httpError }
     };
   }),
-  on(BookActions.setCurrentBook, (state): BookState => {
-    return {
-      ...state,
-      uiState: {
-        ...state.uiState,
-        loading: true,
-        httpError: null,
-        errorMessage: null
-      }
-    }; //processed by an effect only
-  }),
   on(BookActions.setCurrentBookSuccess, (state, action): BookState => {
     return {
       ...state,
