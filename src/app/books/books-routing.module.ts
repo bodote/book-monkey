@@ -4,6 +4,8 @@ import { BookListComponent } from './book-list/book-list.component';
 import { BookDetailsComponent } from './book-details/book-details.component';
 import { ListLoadedGuard } from './book-list/list-loaded.guard';
 import { BookDetailsGuard } from './book-details/book-details.guard';
+import { BookEditComponent } from '../admin/book-edit/book-edit.component';
+import { CreateBookComponent } from '../admin/create-book/create-book.component';
 
 const routes: Routes = [
   {
@@ -15,7 +17,14 @@ const routes: Routes = [
     path: 'detail/:isbn',
     component: BookDetailsComponent,
     canActivate: [BookDetailsGuard]
-  }
+  },
+  {
+    path: 'edit/:isbn',
+    component: BookEditComponent,
+    canActivate: [BookDetailsGuard]
+  },
+  { path: 'create', component: CreateBookComponent },
+  { path: '', redirectTo: 'admin/create', pathMatch: 'full' }
 ];
 
 @NgModule({

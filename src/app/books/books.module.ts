@@ -14,6 +14,11 @@ import * as fromBook from './store/book.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { BookEffects } from './store/book.effects';
 import { SharedModule } from '../shared/shared.module';
+import { BookFormComponent } from '../admin/book-edit/book-form.component';
+import { CreateBookComponent } from '../admin/create-book/create-book.component';
+import { FormMessagesComponent } from '../admin/form-messages/form-messages.component';
+import { BookEditComponent } from '../admin/book-edit/book-edit.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,7 +27,11 @@ import { SharedModule } from '../shared/shared.module';
     BookDetailsComponent,
     IsbnPipe,
     ZoomDirective,
-    DelayDirective
+    DelayDirective,
+    BookFormComponent,
+    CreateBookComponent,
+    FormMessagesComponent,
+    BookEditComponent
   ],
   imports: [
     CommonModule,
@@ -31,7 +40,8 @@ import { SharedModule } from '../shared/shared.module';
     SolidIconsModule,
     SharedModule,
     StoreModule.forFeature(fromBook.bookFeatureKey, fromBook.reducer),
-    EffectsModule.forFeature([BookEffects])
+    EffectsModule.forFeature([BookEffects]),
+    ReactiveFormsModule
   ]
 })
 export class BooksModule {}

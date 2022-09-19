@@ -10,7 +10,11 @@ import { Store } from '@ngrx/store';
 
 import { selectIsLoading } from '../books/store/book.selectors';
 import { Book } from '../shared/book';
-import { selectSearchPerformed, selectSearchResults } from './search.selectors';
+import {
+  selectHttpError,
+  selectSearchPerformed,
+  selectSearchResults
+} from './search.selectors';
 import { loadSearchs } from './search.actions';
 
 @Component({
@@ -24,6 +28,7 @@ export class SearchComponent implements OnInit {
     this.store.select(selectSearchResults);
   isLoading$ = this.store.select(selectIsLoading);
   searchPerformed$ = this.store.select(selectSearchPerformed);
+  httpError$ = this.store.select(selectHttpError);
 
   constructor(private store: Store) {}
 

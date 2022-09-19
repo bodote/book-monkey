@@ -1,17 +1,24 @@
 import { createReducer, on } from '@ngrx/store';
 import { Book } from '../shared/book';
-import { loadSearchs, loadSearchsSuccess } from './search.actions';
+import {
+  loadSearchs,
+  loadSearchsFailure,
+  loadSearchsSuccess
+} from './search.actions';
+import { HttpErrorResponse } from '@angular/common/http';
 
 export const searchFeatureKey = 'search';
 
 export interface SearchState {
   books: Book[];
   searchPerformed: boolean;
+  httpError: HttpErrorResponse | undefined;
 }
 
 export const initialState: SearchState = {
   books: [],
-  searchPerformed: false
+  searchPerformed: false,
+  httpError: undefined
 };
 
 export const reducer = createReducer(
@@ -28,6 +35,14 @@ export const reducer = createReducer(
       ...state,
       books: action.searchResults,
       searchPerformed: true
+    };
+  }),
+  //
+  on(loadSearchsFailure, (state, action): SearchState => {
+    return {
+      ...state,
+      searchPerformed: true,
+      httpError: action.error
     };
   })
 );

@@ -13,9 +13,10 @@ import {
   saveCurrentBook,
   saveCurrentBookSuccess
 } from './book.actions';
-import { of, switchMap } from 'rxjs';
+import { of, switchMap, tap } from 'rxjs';
 import { Book } from '../../shared/book';
 import { catchError, map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class BookEffects {
@@ -55,6 +56,20 @@ export class BookEffects {
       })
     );
   });
+
+  addBookSuccedes$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(addBookSuccess),
+        tap(() => {
+          console.log('navigate to list ');
+          this.router.navigate(['/books/list']);
+        })
+      );
+    },
+    { dispatch: false }
+  );
+
   saveCurrentBook$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(saveCurrentBook),
@@ -68,5 +83,9 @@ export class BookEffects {
     );
   });
 
-  constructor(private actions$: Actions, private bs: BookStoreService) {}
+  constructor(
+    private actions$: Actions,
+    private bs: BookStoreService,
+    private router: Router
+  ) {}
 }

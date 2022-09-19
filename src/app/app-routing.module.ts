@@ -19,7 +19,7 @@ const routes: Routes = [
   {
     path: 'admin',
     loadChildren: () =>
-      import('./admin/admin.module').then((m) => m.AdminModule),
+      import('./books/books.module').then((m) => m.BooksModule),
     canActivate: [CanNavigateToAdminGuard]
   },
   {
