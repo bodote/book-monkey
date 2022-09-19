@@ -11,9 +11,7 @@ import {
   loadBooks,
   loadBooksSuccess,
   saveCurrentBook,
-  saveCurrentBookSuccess,
-  searchBooks,
-  searchBooksResult
+  saveCurrentBookSuccess
 } from './book.actions';
 import { of, switchMap } from 'rxjs';
 import { Book } from '../../shared/book';
@@ -27,18 +25,6 @@ export class BookEffects {
       switchMap(() =>
         this.bs.getAll().pipe(
           map((books: Book[]) => loadBooksSuccess({ books })),
-          catchError((error) => of(httpFailure({ httpError: error })))
-        )
-      )
-    );
-  });
-
-  searchBooks$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(searchBooks),
-      switchMap((action) =>
-        this.bs.getAllSearch(action.searchString).pipe(
-          map((books: Book[]) => searchBooksResult({ searchResults: books })),
           catchError((error) => of(httpFailure({ httpError: error })))
         )
       )

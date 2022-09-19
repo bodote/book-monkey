@@ -1,6 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import * as fromBook from './book.reducer';
-import { Book } from '../../shared/book';
 
 export const selectBookState = createFeatureSelector<fromBook.BookState>(
   fromBook.bookFeatureKey
@@ -35,11 +34,3 @@ export const selectError = createSelector(selectBookState, (state) => {
     };
   else return {};
 });
-
-export const selectSearchResults = createSelector(
-  selectBookState,
-  (state): Book[] => {
-    if (!!state?.uiState?.searchResults) return state.uiState.searchResults;
-    else return [];
-  }
-);

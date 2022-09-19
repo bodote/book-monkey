@@ -42,7 +42,10 @@
         </tbody>
       </table>
     </ng-container>
-    <div class="py-2" *ngIf="foundBooks.length === 0 && !noSearchPerformedYet">
+    <div
+      class="py-2"
+      *ngIf="foundBooks.length === 0 && (searchPerformed$ | async)"
+    >
       <div class="alert alert-info shadow-lg">
         <p i18n="@@SearchCompenent:not found">Sorry, nothing found.</p>
       </div>

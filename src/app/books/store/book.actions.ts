@@ -60,12 +60,3 @@ export const internalErrorAction = createAction(
   '[Internal Error] ',
   props<{ message: string }>()
 );
-
-export const searchBooks = createAction(
-  '[Book] Search For Books',
-  props<{ searchString: string }>()
-);
-export const searchBooksResult = createAction(
-  '[Book] Store Search Results',
-  props<{ searchResults: Book[] }>()
-);

@@ -152,23 +152,7 @@ export const reducer = createReducer(
       uiState: { ...state.uiState, loading: false, showSaveSuccess: true }
     };
   }),
-  on(BookActions.searchBooks, (state, action): BookState => {
-    //do nothing, handled by effect, and don't delete the old search results yet!
-    return {
-      ...state,
-      uiState: { ...state.uiState, loading: true }
-    };
-  }),
-  on(BookActions.searchBooksResult, (state, action): BookState => {
-    return {
-      ...state,
-      uiState: {
-        ...state.uiState,
-        searchResults: action.searchResults,
-        loading: false
-      }
-    };
-  }),
+
   on(BookActions.internalErrorAction, (state, action): BookState => {
     //return state;
     return {
