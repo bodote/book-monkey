@@ -35,7 +35,7 @@ export const deleteBook = createAction(
 );
 
 export const deleteBookSuccess = createAction(
-  '[Book] Delete Book Succeeded',
+  '[Book] Delete Book Success',
   props<{ isbn: string }>()
 );
 
@@ -50,6 +50,8 @@ export const saveCurrentBook = createAction(
   '[Book] Save Current Book',
   props<{ book: Book }>()
 );
+
+export const resetSavedFlag = createAction('[Book] Set Saved Flag to false');
 
 export const saveCurrentBookSuccess = createAction(
   '[Book] Save Current Book Success',

@@ -139,6 +139,15 @@ export const reducer = createReducer(
       }
     };
   }),
+  on(BookActions.resetSavedFlag, (state, action): BookState => {
+    return {
+      ...state,
+      uiState: {
+        ...state.uiState,
+        showSaveSuccess: false
+      }
+    };
+  }),
   on(BookActions.saveCurrentBookSuccess, (state, action): BookState => {
     let books = [...state.books];
     //replace book

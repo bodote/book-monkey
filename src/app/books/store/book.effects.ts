@@ -10,12 +10,13 @@ import {
   httpFailure,
   loadBooks,
   loadBooksSuccess,
+  resetSavedFlag,
   saveCurrentBook,
   saveCurrentBookSuccess
 } from './book.actions';
 import { of, switchMap, tap } from 'rxjs';
 import { Book } from '../../shared/book';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, delay, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 @Injectable()
@@ -57,18 +58,20 @@ export class BookEffects {
     );
   });
 
-  addBookSuccedes$ = createEffect(
-    () => {
-      return this.actions$.pipe(
-        ofType(addBookSuccess),
-        tap(() => {
-          console.log('navigate to list ');
-          this.router.navigate(['/books/list']);
-        })
-      );
-    },
-    { dispatch: false }
-  );
+  addBookSuccess$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(addBookSuccess),
+      tap(() => {
+        this.router.navigate(['/books/list']);
+        console.log('resetSavedFlag before delay');
+      }),
+      delay(5000), // show the success message for 5 more seconds
+      map((a) => {
+        console.log('resetSavedFlag after delay');
+        return resetSavedFlag();
+      })
+    );
+  });
 
   saveCurrentBook$ = createEffect(() => {
     return this.actions$.pipe(

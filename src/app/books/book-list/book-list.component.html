@@ -2,6 +2,12 @@
   <ng-container *ngIf="error2$ | async as error">
     <bm-notification-alert [error]="error"></bm-notification-alert>
   </ng-container>
+  <ng-container *ngIf="showSaveSuccess$ | async as saved">
+    <bm-success-alert
+      [saved]="saved"
+      [successMsg]="'Book has been saved successfully'"
+    ></bm-success-alert>
+  </ng-container>
   <ng-container *ngIf="!error">
     <ng-container *ngIf="books2$ | async as books">
       <bm-book-list-item
