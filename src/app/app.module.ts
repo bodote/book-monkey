@@ -45,7 +45,6 @@ const httpInterceptorProviders = [
     }),
     SharedModule
   ],
-
   providers: [
     httpInterceptorProviders
     //{provide: LOCALE_ID, useValue: 'de' }
