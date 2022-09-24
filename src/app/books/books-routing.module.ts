@@ -19,6 +19,10 @@ const routes: Routes = [
     canActivate: [BookDetailsGuard]
   },
   {
+    path: 'detail/:isbn',
+    redirectTo: '/error'
+  },
+  {
     path: 'edit/:isbn',
     component: BookEditComponent,
     canActivate: [BookDetailsGuard]

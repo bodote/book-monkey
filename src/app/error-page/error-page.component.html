@@ -1,5 +1,8 @@
 <div class="container px-8 py-8">
   <ng-container *ngIf="error$ | async as error">
-    <bm-notification-alert [error]="error"></bm-notification-alert>
+    <bm-notification-alert
+      [error]="error"
+      (closeErrorEventEmitter)="closeError()"
+    ></bm-notification-alert>
   </ng-container>
 </div>

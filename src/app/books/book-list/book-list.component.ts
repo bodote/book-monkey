@@ -4,7 +4,6 @@ import { Store } from '@ngrx/store';
 import {
   selectAllBooks,
   selectError,
-  selectIsLoading,
   selectSaveSuccess
 } from '../store/book.selectors';
 import { Observable } from 'rxjs';
@@ -15,11 +14,11 @@ import { Observable } from 'rxjs';
   styleUrls: ['./book-list.component.css']
 })
 export class BookListComponent implements OnInit {
-  books2$ = this.store.select(selectAllBooks);
+  books$ = this.store.select(selectAllBooks);
   showSaveSuccess$ = this.store.select(selectSaveSuccess);
   listView!: boolean;
   error: HttpErrorResponse | undefined;
-  loading$ = this.store.select(selectIsLoading);
+  //loading$ = this.store.select(selectIsLoading);
   error2$: Observable<{
     http?: HttpErrorResponse | null;
     text?: string | null;

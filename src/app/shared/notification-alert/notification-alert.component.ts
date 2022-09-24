@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
@@ -8,6 +8,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class NotificationAlertComponent implements OnInit {
   show: boolean = true;
+  @Output() closeErrorEventEmitter = new EventEmitter();
   @Input() error:
     | {
         http?: HttpErrorResponse | null;
@@ -19,6 +20,7 @@ export class NotificationAlertComponent implements OnInit {
 
   close() {
     this.show = false;
+    this.closeErrorEventEmitter.emit();
   }
 
   ngOnInit(): void {

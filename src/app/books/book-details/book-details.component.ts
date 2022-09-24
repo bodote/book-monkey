@@ -3,11 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { Book } from '../../shared/book';
 import { Store } from '@ngrx/store';
-import {
-  selectCurrentBook,
-  selectError,
-  selectIsLoading
-} from '../store/book.selectors';
+import { selectCurrentBook, selectError } from '../store/book.selectors';
 import { deleteBook } from '../store/book.actions';
 
 @Component({
@@ -18,7 +14,7 @@ import { deleteBook } from '../store/book.actions';
 export class BookDetailsComponent {
   book!: Book;
   book$ = this.store.select(selectCurrentBook);
-  loading$ = this.store.select(selectIsLoading);
+  //loading$ = this.store.select(selectIsLoading);
   id: number = 0;
   error$ = this.store.select(selectError);
 

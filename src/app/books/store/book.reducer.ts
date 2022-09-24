@@ -9,83 +9,112 @@ export interface BookState {
   books: Book[];
   uiState: {
     currentBook: Book | undefined;
-    loading: boolean;
+    //loading: boolean;
     httpError: HttpErrorResponse | null;
     errorMessage: string | null;
     showSaveSuccess: boolean;
     searchResults: Book[];
+    lastUpdateTS: number;
   };
 }
 export const initialState: BookState = {
   books: [],
   uiState: {
     currentBook: undefined,
-    loading: false,
+    //loading: false,
     httpError: null,
     errorMessage: null,
     showSaveSuccess: false,
-    searchResults: []
+    searchResults: [],
+    lastUpdateTS: 0
   }
 };
 
-function loadBooksR() {
+function loadBooksReducer() {
   return (state: BookState): BookState => {
     return {
       ...state,
-      uiState: { ...state.uiState, loading: true, httpError: null }
+      uiState: { ...state.uiState, httpError: null, errorMessage: null }
     };
   };
 }
 
 export const reducer = createReducer(
   initialState,
-  on(BookActions.loadBooks, loadBooksR()),
+  on(BookActions.loadBooks, loadBooksReducer()),
+  on(BookActions.resetErrorsAction, (state, action): BookState => {
+    return {
+      ...state,
+      uiState: { ...state.uiState, httpError: null, errorMessage: null }
+    };
+  }),
   on(BookActions.loadBooksSuccess, (state, action): BookState => {
     return {
       ...state,
       books: action.books,
-      uiState: { ...state.uiState, loading: false }
+      uiState: { ...state.uiState, lastUpdateTS: action.timeStamp }
     };
   }),
   on(BookActions.httpFailure, (state, action): BookState => {
     //return state;
     return {
       ...state,
-      uiState: { ...state.uiState, loading: false, httpError: action.httpError }
+      uiState: {
+        ...state.uiState,
+        httpError: action.httpError,
+        lastUpdateTS: action.timeStamp
+      } //loading: false,
     };
   }),
+
   on(BookActions.setCurrentBookSuccess, (state, action): BookState => {
     return {
       ...state,
       uiState: {
         ...state.uiState,
-        loading: false,
+        //loading: false,
         currentBook: action.currentBook
       }
+    };
+  }),
+  on(BookActions.loadAllAndSetCurrentBook, (state, action): BookState => {
+    console.log(
+      'loadAllAndSetCurrentBook Action with timestamp=' +
+        state.uiState.lastUpdateTS
+    );
+    return {
+      ...state,
+      uiState: { ...state.uiState }
     };
   }),
   on(
     BookActions.loadAllAndSetCurrentBookSuccess,
     (state, action): BookState => {
+      console.log(
+        'loadAllAndSetCurrentBookSuccess Action with old timestamp=' +
+          state.uiState.lastUpdateTS +
+          'new Timestamp = ' +
+          action.timeStamp
+      );
       return {
         ...state,
         books: action.books,
         uiState: {
           ...state.uiState,
-          loading: false,
+          //loading: false,
           currentBook: action.currentBook,
-          httpError: null
+          httpError: null,
+          lastUpdateTS: action.timeStamp
         }
       };
     }
   ),
-  on(BookActions.loadBooksOkButNotFound, (state, action): BookState => {
+  on(BookActions.isbnNotFound, (state, action): BookState => {
     return {
       ...state,
-      books: action.books,
       uiState: {
         ...state.uiState,
-        loading: false,
+        // loading: false,
         httpError: null,
         errorMessage: action.errorMessage
       }
@@ -95,7 +124,7 @@ export const reducer = createReducer(
     console.log('deleteBook Action with isbn:' + action.isbn);
     return {
       ...state,
-      uiState: { ...state.uiState, loading: true, httpError: null }
+      uiState: { ...state.uiState, httpError: null } // loading: true,
     };
   }),
   on(BookActions.deleteBookSuccess, (state, action): BookState => {
@@ -104,8 +133,8 @@ export const reducer = createReducer(
     newBooksA.splice(index, 1);
     return {
       ...state,
-      books: newBooksA,
-      uiState: { ...state.uiState, loading: false }
+      books: newBooksA
+      //uiState: { ...state.uiState, loading: false }
     };
   }),
   on(BookActions.addBook, (state, action): BookState => {
@@ -113,7 +142,7 @@ export const reducer = createReducer(
       ...state,
       uiState: {
         ...state.uiState,
-        loading: true,
+        // loading: true,
         httpError: null,
         showSaveSuccess: false
       }
@@ -125,7 +154,7 @@ export const reducer = createReducer(
     return {
       ...state,
       books: books,
-      uiState: { ...state.uiState, loading: false, showSaveSuccess: true }
+      uiState: { ...state.uiState, showSaveSuccess: true } //loading: false,
     };
   }),
   on(BookActions.saveCurrentBook, (state, action): BookState => {
@@ -133,7 +162,7 @@ export const reducer = createReducer(
       ...state,
       uiState: {
         ...state.uiState,
-        loading: true,
+        //loading: true,
         httpError: null,
         showSaveSuccess: false
       }
@@ -158,17 +187,17 @@ export const reducer = createReducer(
     return {
       ...state,
       books: books,
-      uiState: { ...state.uiState, loading: false, showSaveSuccess: true }
+      uiState: { ...state.uiState, showSaveSuccess: true } //loading: false,
     };
   }),
 
-  on(BookActions.internalErrorAction, (state, action): BookState => {
+  on(BookActions.bookErrorAction, (state, action): BookState => {
     //return state;
     return {
       ...state,
       uiState: {
         ...state.uiState,
-        loading: false,
+        // loading: false,
         errorMessage: action.message
       }
     };

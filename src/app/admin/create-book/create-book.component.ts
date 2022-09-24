@@ -5,7 +5,6 @@ import { Store } from '@ngrx/store';
 import { addBook } from '../../books/store/book.actions';
 import {
   selectError,
-  selectIsLoading,
   selectSaveSuccess
 } from '../../books/store/book.selectors';
 
@@ -16,7 +15,7 @@ import {
 })
 export class CreateBookComponent implements OnDestroy {
   //TODO: clean up HTTP-Error massages
-  loading$ = this.store.select(selectIsLoading);
+  //loading$ = this.store.select(selectIsLoading);
   showSaveSuccess$ = this.store.select(selectSaveSuccess);
   error$ = this.store.select(selectError);
 

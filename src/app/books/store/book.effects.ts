@@ -8,6 +8,8 @@ import {
   deleteBook,
   deleteBookSuccess,
   httpFailure,
+  loadAllAndSetCurrentBook,
+  loadAllAndSetCurrentBookSuccess,
   loadBooks,
   loadBooksSuccess,
   resetSavedFlag,
@@ -26,8 +28,12 @@ export class BookEffects {
       ofType(loadBooks),
       switchMap(() =>
         this.bs.getAll().pipe(
-          map((books: Book[]) => loadBooksSuccess({ books })),
-          catchError((error) => of(httpFailure({ httpError: error })))
+          map((books: Book[]) =>
+            loadBooksSuccess({ books, timeStamp: Date.now() })
+          ),
+          catchError((error) =>
+            of(httpFailure({ httpError: error, timeStamp: Date.now() }))
+          )
         )
       )
     );
@@ -40,7 +46,9 @@ export class BookEffects {
         let isbn = action.isbn;
         return this.bs.deleteBook(isbn).pipe(
           map((response: string) => deleteBookSuccess({ isbn })),
-          catchError((error) => of(httpFailure({ httpError: error })))
+          catchError((error) =>
+            of(httpFailure({ httpError: error, timeStamp: Date.now() }))
+          )
         );
       })
     );
@@ -52,7 +60,9 @@ export class BookEffects {
         let book = action.book;
         return this.bs.postBook(book).pipe(
           map((response: string) => addBookSuccess({ book })),
-          catchError((error) => of(httpFailure({ httpError: error })))
+          catchError((error) =>
+            of(httpFailure({ httpError: error, timeStamp: Date.now() }))
+          )
         );
       })
     );
@@ -80,9 +90,34 @@ export class BookEffects {
         let book = action.book;
         return this.bs.putBook(book).pipe(
           map((response: string) => saveCurrentBookSuccess({ book })),
-          catchError((error) => of(httpFailure({ httpError: error })))
+          catchError((error) =>
+            of(httpFailure({ httpError: error, timeStamp: Date.now() }))
+          )
         );
       })
+    );
+  });
+
+  reloadBooksAndSetCurrentBook$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(loadAllAndSetCurrentBook),
+      tap(() => console.log('effect: reloadBooksAndSetCurrentBook$')),
+      switchMap((action) =>
+        this.bs.getAll().pipe(
+          map((books: Book[]) => {
+            const currentBook = books.find((book) => book.isbn == action.isbn);
+
+            return loadAllAndSetCurrentBookSuccess({
+              books,
+              currentBook,
+              timeStamp: Date.now()
+            });
+          }),
+          catchError((error) =>
+            of(httpFailure({ httpError: error, timeStamp: Date.now() }))
+          )
+        )
+      )
     );
   });
 

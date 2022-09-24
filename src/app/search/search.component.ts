@@ -8,7 +8,7 @@ import {
 } from 'rxjs';
 import { Store } from '@ngrx/store';
 
-import { selectIsLoading } from '../books/store/book.selectors';
+//import { selectIsLoading } from '../books/store/book.selectors';
 import { Book } from '../shared/book';
 import {
   selectHttpError,
@@ -26,7 +26,7 @@ export class SearchComponent implements OnInit {
   private searchStringFromKeyBoard$: Subject<string> | undefined;
   searchBookResults$: Observable<Book[]> =
     this.store.select(selectSearchResults);
-  isLoading$ = this.store.select(selectIsLoading);
+  //isLoading$ = this.store.select(selectIsLoading);
   searchPerformed$ = this.store.select(selectSearchPerformed);
   httpError$ = this.store.select(selectHttpError);
 

@@ -6,16 +6,29 @@ import {
   RouterStateSnapshot,
   UrlTree
 } from '@angular/router';
-import { Observable, of, switchMap } from 'rxjs';
+import {
+  distinctUntilChanged,
+  filter,
+  Observable,
+  of,
+  switchMap,
+  take,
+  tap
+} from 'rxjs';
 import { Store } from '@ngrx/store';
-import { selectCurrentBook } from '../store/book.selectors';
+import { selectCurrentBookAndAll } from '../store/book.selectors';
 import { BookStoreService } from '../../shared/book-store.service';
 import { Book } from '../../shared/book';
-import { catchError, map } from 'rxjs/operators';
-import { TypedAction } from '@ngrx/store/src/models';
-import * as fromBookActions from '../store/book.actions';
-import { httpFailure } from '../store/book.actions';
+import { catchError } from 'rxjs/operators';
+import {
+  bookErrorAction,
+  isbnNotFound,
+  loadAllAndSetCurrentBook,
+  loadBooks,
+  setCurrentBookSuccess
+} from '../store/book.actions';
 import { HttpErrorResponse } from '@angular/common/http';
+import isEqual from 'lodash/isEqual';
 
 @Injectable({
   providedIn: 'root'
@@ -26,51 +39,107 @@ export class BookDetailsGuard implements CanActivate {
     private bs: BookStoreService,
     private router: Router
   ) {}
+
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> | boolean {
     let isbn = route.paramMap.get('isbn');
-    return this.store.select(selectCurrentBook).pipe(
-      switchMap((curBook) => {
-        if (!!curBook && curBook.isbn === isbn) {
-          return of(true);
-        } else {
-          return this.bs.getAll().pipe(
-            map((books: Book[]) => {
-              return this.setCurBookOrLoadAll(books, isbn);
-            }),
-            catchError((error: HttpErrorResponse) => {
-              this.store.dispatch(httpFailure({ httpError: error }));
-              return of(this.router.parseUrl('/error'));
-            })
-          );
-        }
+    if (!isbn) {
+      this.store.dispatch(
+        bookErrorAction({
+          message: 'isbn number not found in paramMap of route'
+        })
+      );
+      return of(this.router.parseUrl('/error'));
+    }
+    return this.getFromStoreOrAPI(isbn).pipe(
+      switchMap((data) => {
+        if (data.currentBook?.isbn === isbn) return of(true);
+        else return of(this.router.parseUrl('/error'));
+      }),
+      // otherwise, something went wrong
+      catchError((error: Error) => {
+        let errorMsg = error.message;
+        error instanceof HttpErrorResponse
+          ? (errorMsg = JSON.stringify(error))
+          : (errorMsg = error.toString());
+        console.error('errorMsg=' + errorMsg);
+        this.store.dispatch(
+          bookErrorAction({
+            message: errorMsg
+          })
+        );
+        return of(this.router.parseUrl('/error'));
       })
     );
   }
 
-  private setCurBookOrLoadAll(
-    books: Book[],
-    isbn: string | null
-  ): boolean | UrlTree {
-    const newCurrentBook = books.find((book) => book.isbn == isbn);
-    let action: TypedAction<any>;
+  private getFromStoreOrAPI(isbn: string): Observable<{
+    currentBook: Book | undefined;
+    allBooks: Book[];
+    lastUpdateTS: number;
+    httpError: HttpErrorResponse | null;
+    errorMessage: string | null;
+  }> {
+    return this.store.select(selectCurrentBookAndAll).pipe(
+      distinctUntilChanged((previous, current) => isEqual(previous, current)),
+      tap((data) => {
+        if (!this.isCurrentBookOrErrorAndUpToDate(data, isbn)) {
+          this.dispatchLoadAction(data.allBooks, data.lastUpdateTS, isbn);
+        }
+      }),
+      filter((data) =>
+        //current book or (httperror, and timestamp not older then 1 min).
+        this.isCurrentBookOrErrorAndUpToDate(data, isbn)
+      ),
+      take(1)
+    );
+  }
 
-    if (!!newCurrentBook) {
-      action = fromBookActions.loadAllAndSetCurrentBookSuccess({
-        books,
-        currentBook: newCurrentBook
-      });
-      this.store.dispatch(action);
-      return true;
+  private isCurrentBookOrErrorAndUpToDate<B>(
+    data: {
+      currentBook: Book | undefined;
+      allBooks: Book[];
+      httpError: HttpErrorResponse | null;
+      errorMessage: string | null;
+      lastUpdateTS: number;
+    },
+    isbn: string
+  ) {
+    return (
+      data.currentBook?.isbn === isbn ||
+      (!!data.httpError?.message &&
+        data.lastUpdateTS >= Date.now() - 1000 * 60) ||
+      (data.errorMessage !== null &&
+        data.lastUpdateTS >= Date.now() - 1000 * 60)
+    );
+  }
+
+  private dispatchLoadAction(
+    allBooks: Book[],
+    lastUpdateTS: number,
+    isbn: string
+  ) {
+    if (!allBooks?.length && lastUpdateTS < Date.now() - 1000 * 60) {
+      this.store.dispatch(loadBooks());
     } else {
-      action = fromBookActions.loadBooksOkButNotFound({
-        books,
-        errorMessage: 'All Books reloaded, but this ISBN was not found'
-      });
-      this.store.dispatch(action);
-      return this.router.parseUrl('/error');
+      const currentBook = allBooks?.find((book) => book.isbn == isbn);
+      if (!!currentBook) {
+        this.store.dispatch(setCurrentBookSuccess({ currentBook }));
+      } else {
+        //2nd reload from API and check again but not too often!
+        if (lastUpdateTS < Date.now() - 1000 * 60) {
+          this.store.dispatch(loadAllAndSetCurrentBook({ isbn }));
+        } else {
+          this.store.dispatch(
+            isbnNotFound({
+              errorMessage:
+                'reloaded books less then 1 min ago, but isbn not found'
+            })
+          );
+        }
+      }
     }
   }
 }

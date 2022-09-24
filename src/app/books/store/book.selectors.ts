@@ -5,21 +5,46 @@ export const selectBookState = createFeatureSelector<fromBook.BookState>(
   fromBook.bookFeatureKey
 );
 
-export const selectAllBooks = createSelector(
+export const selectAllBooksOrHttpError = createSelector(
   selectBookState,
-  (state) => state.books
+  (state) => {
+    return {
+      books: state.books,
+      lastUpdateTS: state.uiState.lastUpdateTS,
+      httpError: state.uiState?.httpError
+    };
+  }
 );
+
+export const selectAllBooks = createSelector(selectBookState, (state) => {
+  return state.books;
+});
 
 export const selectCurrentBook = createSelector(selectBookState, (state) => {
   if (!!state?.uiState) {
     return state?.uiState?.currentBook;
   } else return null;
 });
-
-export const selectIsLoading = createSelector(
+export const selectCurrentBookAndAll = createSelector(
   selectBookState,
-  (state) => state?.uiState?.loading
+  (state) => {
+    console.log(
+      'selectCurrentBookAndAll timestamp = ' + state.uiState.lastUpdateTS
+    );
+    return {
+      currentBook: state.uiState.currentBook,
+      allBooks: state.books,
+      lastUpdateTS: state.uiState.lastUpdateTS,
+      httpError: state.uiState.httpError,
+      errorMessage: state.uiState.errorMessage
+    };
+  }
 );
+
+// export const selectIsLoading = createSelector(
+//   selectBookState,
+//   (state) => state?.uiState?.loading
+// );
 
 export const selectSaveSuccess = createSelector(
   selectBookState,

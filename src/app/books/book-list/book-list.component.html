@@ -9,7 +9,7 @@
     ></bm-success-alert>
   </ng-container>
   <ng-container *ngIf="!error">
-    <ng-container *ngIf="books2$ | async as books">
+    <ng-container *ngIf="books$ | async as books">
       <bm-book-list-item
         *ngFor="let b of books; index as id"
         [book]="b"
@@ -18,7 +18,8 @@
       ></bm-book-list-item>
     </ng-container>
   </ng-container>
-  <ng-container *ngIf="loading$ | async">
+  <ng-container *ngIf="false">
+    <!--  loading$ | async">-->
     <div class="relative rounded-xl overflow-auto p-8">
       <div class="flex items-center justify-center">
         Loading...

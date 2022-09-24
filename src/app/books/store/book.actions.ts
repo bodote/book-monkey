@@ -6,7 +6,7 @@ export const loadBooks = createAction('[Book] Load Books');
 
 export const loadBooksSuccess = createAction(
   '[Book] Load Books Success',
-  props<{ books: Book[] }>()
+  props<{ books: Book[]; timeStamp: number }>()
 );
 
 export const setCurrentBookSuccess = createAction(
@@ -15,18 +15,22 @@ export const setCurrentBookSuccess = createAction(
 );
 
 export const loadAllAndSetCurrentBookSuccess = createAction(
-  '[Book] Load books and set Current Book Success',
-  props<{ books: Book[]; currentBook: Book }>()
+  '[Book] Load ass books and set Current Book Success',
+  props<{ books: Book[]; currentBook: Book | undefined; timeStamp: number }>()
+);
+export const loadAllAndSetCurrentBook = createAction(
+  '[Book] Load all books and set Current Book',
+  props<{ isbn: string }>()
 );
 
 export const httpFailure = createAction(
   '[Book] HTTP Error Response',
-  props<{ httpError: HttpErrorResponse }>()
+  props<{ httpError: HttpErrorResponse; timeStamp: number }>()
 );
 
-export const loadBooksOkButNotFound = createAction(
-  '[Book] Load Books ok, but ISBN Not Found',
-  props<{ books: Book[]; errorMessage: string }>()
+export const isbnNotFound = createAction(
+  '[Book] reloaded books from server, but ISBN still not Found',
+  props<{ errorMessage: string }>()
 );
 
 export const deleteBook = createAction(
@@ -58,7 +62,9 @@ export const saveCurrentBookSuccess = createAction(
   props<{ book: Book }>()
 );
 
-export const internalErrorAction = createAction(
-  '[Internal Error] ',
+export const bookErrorAction = createAction(
+  '[Book Error] ',
   props<{ message: string }>()
 );
+
+export const resetErrorsAction = createAction('[Book Reset] Error reset');
