@@ -8,6 +8,7 @@ export const selectBookState = createFeatureSelector<fromBook.BookState>(
 export const selectAllBooksOrHttpError = createSelector(
   selectBookState,
   (state) => {
+    console.log('selector, lastUpdateTS: ', state);
     return {
       books: state.books,
       lastUpdateTS: state.uiState.lastUpdateTS,

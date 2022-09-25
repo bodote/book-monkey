@@ -5,7 +5,15 @@ import {
   Router,
   RouterStateSnapshot
 } from '@angular/router';
-import { distinct, filter, Observable, of, switchMap, take, tap } from 'rxjs';
+import {
+  distinctUntilChanged,
+  filter,
+  Observable,
+  of,
+  switchMap,
+  take,
+  tap
+} from 'rxjs';
 import { BookStoreService } from '../../shared/book-store.service';
 import { Store } from '@ngrx/store';
 import { selectAllBooksOrHttpError } from '../store/book.selectors';
@@ -13,6 +21,7 @@ import { Book } from '../../shared/book';
 import { bookErrorAction, loadBooks } from '../store/book.actions';
 import { catchError } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
+import isEqual from 'lodash/isEqual';
 
 @Injectable({
   providedIn: 'root'
@@ -25,8 +34,10 @@ export class ListLoadedGuard implements CanActivate {
   ) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    console.log('can activate: ');
     return this.getFromStoreOrAPI().pipe(
       switchMap((data) => {
+        console.log('list loaded guard, switchMap: ' + JSON.stringify(data));
         if (data.books.length > 0 && !data.httpError) {
           return of(true);
         }
@@ -34,9 +45,17 @@ export class ListLoadedGuard implements CanActivate {
       }),
       // otherwise, something went wrong
       catchError((error) => {
+        let errorMsg = error.message;
+        error instanceof HttpErrorResponse
+          ? (errorMsg = JSON.stringify(error))
+          : (errorMsg = error.toString());
+        console.error('errorMsg=' + errorMsg);
         this.store.dispatch(
-          bookErrorAction({ message: JSON.stringify(error) })
+          bookErrorAction({
+            message: errorMsg
+          })
         );
+
         return of(this.router.parseUrl('/error'));
       })
     );
@@ -47,12 +66,16 @@ export class ListLoadedGuard implements CanActivate {
     lastUpdateTS: number;
     httpError: HttpErrorResponse | null;
   }> {
+    console.log('getFromStoreOrAPI ');
     return this.store.select(selectAllBooksOrHttpError).pipe(
-      distinct(
-        ({ books, lastUpdateTS, httpError }) =>
-          '' + books.length + lastUpdateTS + httpError?.message
-      ),
+      distinctUntilChanged((previous, current) => {
+        console.log(
+          'list loaded guard, distinctUntilChanged: ' + JSON.stringify(current)
+        );
+        return isEqual(previous, current);
+      }),
       tap((data) => {
+        console.log('list loaded guard, tap: ' + JSON.stringify(data));
         if (
           (!data.books?.length && !data.httpError) ||
           data.lastUpdateTS < Date.now() - 1000 * 60
