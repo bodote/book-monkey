@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { Book } from './book';
 import { catchError, delay, map, retry } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { BookEntity } from '../books/store/book-entity/book-entity.model';
 
 /*
  */
@@ -71,6 +72,20 @@ export class BookStoreService {
         catchError(this.processError),
         map((rawBooksArray: BookRaw[]): Book[] =>
           rawBooksArray.map((rawBook) => BookFactoryService.getFromRaw(rawBook))
+        ),
+        delay(500)
+      );
+  }
+  getAllEntities(): Observable<BookEntity[]> {
+    return this.http
+      .get<BookRaw[]>('https://api4.angular-buch.com/secure/books')
+      .pipe(
+        retry({ count: 1, delay: 500 }),
+        catchError(this.processError),
+        map((rawBooksArray: BookRaw[]): BookEntity[] =>
+          rawBooksArray.map((rawBook) =>
+            BookFactoryService.getFromRaw2Entity(rawBook)
+          )
         ),
         delay(500)
       );

@@ -6,8 +6,8 @@ import {
   selectCurrentBook,
   selectError,
   selectSaveSuccess
-} from '../../books/store/book.selectors';
-import { saveCurrentBook } from '../../books/store/book.actions';
+} from '../../books/store/old/book.selectors';
+import { saveCurrentBook } from '../../books/store/old/book.actions';
 import { Subscription } from 'rxjs';
 
 @Component({

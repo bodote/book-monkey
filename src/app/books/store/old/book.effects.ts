@@ -1,7 +1,7 @@
 // noinspection JSUnusedGlobalSymbols
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { BookStoreService } from '../../shared/book-store.service';
+import { BookStoreService } from '../../../shared/book-store.service';
 import {
   addBook,
   addBookSuccess,
@@ -17,7 +17,7 @@ import {
   saveCurrentBookSuccess
 } from './book.actions';
 import { of, switchMap, tap } from 'rxjs';
-import { Book } from '../../shared/book';
+import { Book } from '../../../shared/book';
 import { catchError, delay, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 

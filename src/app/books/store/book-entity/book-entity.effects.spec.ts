@@ -2,18 +2,21 @@ import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Observable } from 'rxjs';
 
-import { BookEffects } from './book.effects';
+import { BookEntityEffects } from './book-entity.effects';
 
-describe('BookEffects', () => {
+describe('BookEntityEffects', () => {
   let actions$: Observable<any>;
-  let effects: BookEffects;
+  let effects: BookEntityEffects;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [BookEffects, provideMockActions(() => actions$)]
+      providers: [
+        BookEntityEffects,
+        provideMockActions(() => actions$)
+      ]
     });
 
-    effects = TestBed.inject(BookEffects);
+    effects = TestBed.inject(BookEntityEffects);
   });
 
   it('should be created', () => {

@@ -10,15 +10,16 @@ import { DelayDirective } from './shared/delay.directive';
 import { BookListComponent } from './book-list/book-list.component';
 import { OutlineIconsModule, SolidIconsModule } from '@dimaslz/ng-heroicons';
 import { StoreModule } from '@ngrx/store';
-import * as fromBook from './store/book.reducer';
+//import * as fromBook from './store/book.reducer';
+import * as fromBook from './store/book-entity/book-entity.reducer';
 import { EffectsModule } from '@ngrx/effects';
-import { BookEffects } from './store/book.effects';
 import { SharedModule } from '../shared/shared.module';
 import { BookFormComponent } from '../admin/book-edit/book-form.component';
 import { CreateBookComponent } from '../admin/create-book/create-book.component';
 import { FormMessagesComponent } from '../admin/form-messages/form-messages.component';
 import { BookEditComponent } from '../admin/book-edit/book-edit.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BookEntityEffects } from './store/book-entity/book-entity.effects';
 
 @NgModule({
   declarations: [
@@ -39,8 +40,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     OutlineIconsModule,
     SolidIconsModule,
     SharedModule,
-    StoreModule.forFeature(fromBook.bookFeatureKey, fromBook.reducer),
-    EffectsModule.forFeature([BookEffects]),
+    //StoreModule.forFeature(fromBook.bookFeatureKey, fromBook.reducer),
+    StoreModule.forFeature(fromBook.bookEntitiesFeatureKey, fromBook.reducer),
+    EffectsModule.forFeature([BookEntityEffects]),
     ReactiveFormsModule
   ]
 })

@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import * as BookActions from './book.actions';
-import { Book } from '../../shared/book';
+import { Book } from '../../../shared/book';
 import { HttpErrorResponse } from '@angular/common/http';
 
 export const bookFeatureKey = 'book';

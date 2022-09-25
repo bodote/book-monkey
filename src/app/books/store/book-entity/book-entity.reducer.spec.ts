@@ -1,7 +1,7 @@
-import { reducer, initialState } from './book.reducer';
+import { reducer, initialState } from './book-entity.reducer';
 
-describe('Book Reducer', () => {
-  describe('an unknown action', () => {
+describe('BookEntity Reducer', () => {
+  describe('unknown action', () => {
     it('should return the previous state', () => {
       const action = {} as any;
 

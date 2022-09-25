@@ -11,8 +11,8 @@ export class NotificationAlertComponent implements OnInit {
   @Output() closeErrorEventEmitter = new EventEmitter();
   @Input() error:
     | {
-        http?: HttpErrorResponse | null;
-        text?: string | null;
+        httpError?: HttpErrorResponse | null;
+        errorMessage?: string | null;
       }
     | undefined;
 
@@ -30,10 +30,10 @@ export class NotificationAlertComponent implements OnInit {
   stringify(error: any, param2: any, param3: any) {
     //error?.http?.error
     const parser = new DOMParser();
-    const doc = parser.parseFromString(error?.http?.error, 'text/html');
+    const doc = parser.parseFromString(error?.httpError?.error, 'text/html');
     const errorTxt = doc?.getElementsByTagName('pre')[0]?.textContent;
-    if (!!error?.http?.error)
-      error = { ...error, http: { ...error.http, error: errorTxt } };
+    if (!!error?.httpError?.error)
+      error = { ...error, http: { ...error.httpError, error: errorTxt } };
     return JSON.stringify(error?.http, param2, param3);
   }
 }

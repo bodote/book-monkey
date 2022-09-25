@@ -6,17 +6,9 @@ import {
   RouterStateSnapshot,
   UrlTree
 } from '@angular/router';
-import {
-  distinctUntilChanged,
-  filter,
-  Observable,
-  of,
-  switchMap,
-  take,
-  tap
-} from 'rxjs';
+import { distinctUntilChanged, Observable, of, switchMap, take } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { selectCurrentBookAndAll } from '../store/book.selectors';
+import { selectCurrentBookAndAll } from '../store/old/book.selectors';
 import { BookStoreService } from '../../shared/book-store.service';
 import { Book } from '../../shared/book';
 import { catchError } from 'rxjs/operators';
@@ -26,7 +18,7 @@ import {
   loadAllAndSetCurrentBook,
   loadBooks,
   setCurrentBookSuccess
-} from '../store/book.actions';
+} from '../store/old/book.actions';
 import { HttpErrorResponse } from '@angular/common/http';
 import isEqual from 'lodash/isEqual';
 
@@ -60,7 +52,7 @@ export class BookDetailsGuard implements CanActivate {
       }),
       // otherwise, something went wrong
       catchError((error: Error) => {
-        let errorMsg = error.message;
+        let errorMsg: string;
         error instanceof HttpErrorResponse
           ? (errorMsg = JSON.stringify(error))
           : (errorMsg = error.toString());
@@ -84,15 +76,15 @@ export class BookDetailsGuard implements CanActivate {
   }> {
     return this.store.select(selectCurrentBookAndAll).pipe(
       distinctUntilChanged((previous, current) => isEqual(previous, current)),
-      tap((data) => {
-        if (!this.isCurrentBookOrErrorAndUpToDate(data, isbn)) {
-          this.dispatchLoadAction(data.allBooks, data.lastUpdateTS, isbn);
-        }
-      }),
-      filter((data) =>
-        //current book or (httperror, and timestamp not older then 1 min).
-        this.isCurrentBookOrErrorAndUpToDate(data, isbn)
-      ),
+      // tap((data) => {
+      //   if (!this.isCurrentBookOrErrorAndUpToDate(data, isbn)) {
+      //     this.dispatchLoadAction(data.allBooks, data.lastUpdateTS, isbn);
+      //   }
+      // }),
+      // filter((data) =>
+      //   //current book or (httperror, and timestamp not older then 1 min).
+      //   this.isCurrentBookOrErrorAndUpToDate(data, isbn)
+      // ),
       take(1)
     );
   }

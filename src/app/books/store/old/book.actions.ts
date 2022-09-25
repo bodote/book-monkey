@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Book } from '../../shared/book';
+import { Book } from '../../../shared/book';
 import { HttpErrorResponse } from '@angular/common/http';
 
 export const loadBooks = createAction('[Book] Load Books');

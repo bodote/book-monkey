@@ -5,20 +5,14 @@ import {
   Router,
   RouterStateSnapshot
 } from '@angular/router';
-import {
-  distinctUntilChanged,
-  filter,
-  Observable,
-  of,
-  switchMap,
-  take,
-  tap
-} from 'rxjs';
+import { distinctUntilChanged, filter, of, switchMap, take, tap } from 'rxjs';
 import { BookStoreService } from '../../shared/book-store.service';
 import { Store } from '@ngrx/store';
-import { selectAllBooksOrHttpError } from '../store/book.selectors';
-import { Book } from '../../shared/book';
-import { bookErrorAction, loadBooks } from '../store/book.actions';
+import { selectTotalAndErrors } from '../store/book-entity/book-entity.selectors';
+import {
+  bookErrorAction,
+  loadBookEntities
+} from '../store/book-entity/book-entity.actions';
 import { catchError } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 import isEqual from 'lodash/isEqual';
@@ -38,14 +32,14 @@ export class ListLoadedGuard implements CanActivate {
     return this.getFromStoreOrAPI().pipe(
       switchMap((data) => {
         console.log('list loaded guard, switchMap: ' + JSON.stringify(data));
-        if (data.books.length > 0 && !data.httpError) {
+        if (data.total > 0 && !data.httpError) {
           return of(true);
         }
         return of(this.router.parseUrl('/error'));
       }),
       // otherwise, something went wrong
       catchError((error) => {
-        let errorMsg = error.message;
+        let errorMsg;
         error instanceof HttpErrorResponse
           ? (errorMsg = JSON.stringify(error))
           : (errorMsg = error.toString());
@@ -55,19 +49,14 @@ export class ListLoadedGuard implements CanActivate {
             message: errorMsg
           })
         );
-
         return of(this.router.parseUrl('/error'));
       })
     );
   }
 
-  private getFromStoreOrAPI(): Observable<{
-    books: Book[];
-    lastUpdateTS: number;
-    httpError: HttpErrorResponse | null;
-  }> {
+  private getFromStoreOrAPI() {
     console.log('getFromStoreOrAPI ');
-    return this.store.select(selectAllBooksOrHttpError).pipe(
+    return this.store.select(selectTotalAndErrors).pipe(
       distinctUntilChanged((previous, current) => {
         console.log(
           'list loaded guard, distinctUntilChanged: ' + JSON.stringify(current)
@@ -77,13 +66,13 @@ export class ListLoadedGuard implements CanActivate {
       tap((data) => {
         console.log('list loaded guard, tap: ' + JSON.stringify(data));
         if (
-          (!data.books?.length && !data.httpError) ||
+          (!data.total && !data.httpError && !data.errorMessage) ||
           data.lastUpdateTS < Date.now() - 1000 * 60
         ) {
-          this.store.dispatch(loadBooks());
+          this.store.dispatch(loadBookEntities());
         }
       }),
-      filter((data) => !!data?.books.length || !!data.httpError),
+      filter((data) => !!data.total || !!data.httpError || !!data.errorMessage),
       take(1)
     );
   }

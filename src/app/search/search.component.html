@@ -51,7 +51,7 @@
       </div>
       <ng-container *ngIf="httpError$ | async as error">
         <bm-notification-alert
-          [error]="{ http: error }"
+          [error]="{ httpError: error }"
         ></bm-notification-alert>
       </ng-container>
     </div>

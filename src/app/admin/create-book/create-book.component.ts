@@ -2,11 +2,11 @@ import { Component, OnDestroy } from '@angular/core';
 import { Book } from '../../shared/book';
 import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { addBook } from '../../books/store/book.actions';
+import { addBook } from '../../books/store/old/book.actions';
 import {
   selectError,
   selectSaveSuccess
-} from '../../books/store/book.selectors';
+} from '../../books/store/old/book.selectors';
 
 @Component({
   selector: 'bm-create-book',
