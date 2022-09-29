@@ -22,7 +22,6 @@ export class BookEditComponent implements OnDestroy {
     selectShowSavedSuccess
   );
   subscriptionSuccess: Subscription | undefined;
-  //saved = false;
   successMsg = 'Book has been saved successfully';
 
   constructor(private route: ActivatedRoute, private store: Store) {}
@@ -36,9 +35,5 @@ export class BookEditComponent implements OnDestroy {
   saveBook(book: Book) {
     console.log('saveBook in book-edit component');
     this.store.dispatch(upsertBookEntity({ bookEntity: book }));
-    // this.subscriptionSuccess = this.showSaveSuccess$.subscribe((showSave) => {
-    //   //this.saved = showSave;
-    //   //this.successMsg = 'Book has been saved successfully';
-    // });
   }
 }

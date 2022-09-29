@@ -5,6 +5,7 @@
       [successMsg]="successMsg"
     ></bm-success-alert>
     <form class="form-control" [formGroup]="editForm">
+      <!-- TODO : mark invalid fields, print those fields ?-->
       <div class="mb-14">
         <div class="pb-4">
           <label class="input-group">
@@ -66,10 +67,9 @@
             class="input input-bordered w-full z-0"
             id="published"
             type="date"
-            ngModel
-            useValueAsLocalDate
             placeholder="Date"
             formControlName="published"
+            useValueAsLocalDate
           />
         </label>
         <label class="input-group pb-1">
@@ -183,9 +183,9 @@
         type="submit"
         class="fixed left-7 w-11/12 bottom-1 z-10 btn btn-primary"
         (click)="bookFormSaveBook()"
-        [disabled]="!editForm.valid"
         [class.disabled]="editForm.invalid"
         [class.primary]="!editForm.invalid"
+        [disabled]="!editForm.valid"
       >
         Save!
       </button>

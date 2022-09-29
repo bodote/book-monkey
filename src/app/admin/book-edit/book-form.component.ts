@@ -67,7 +67,10 @@ export class BookFormComponent implements OnInit, OnChanges {
         title: ['', Validators.required],
         subtitle: '',
         isbn: isbnControl,
-        published: [new Date('2022-08-10'), Validators.required],
+        published: [
+          new Date().toISOString().substring(0, 10),
+          Validators.required
+        ],
         description: '',
         rating: [null, [Validators.min(0), Validators.max(5)]]
       });
@@ -75,7 +78,7 @@ export class BookFormComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('ngOnChanges SimpleChanges');
+    console.log('ngOnChanges editForm valid?', this.editForm?.valid);
     this.checkEditForm();
     const { aBook } = changes;
     if (!!aBook && aBook.currentValue && !this.isNew) {
