@@ -5,10 +5,10 @@ import { Store } from '@ngrx/store';
 import {
   selectCurrentBook,
   selectError,
-  selectSaveSuccess
-} from '../../books/store/old/book.selectors';
-import { saveCurrentBook } from '../../books/store/old/book.actions';
-import { Subscription } from 'rxjs';
+  selectShowSavedSuccess
+} from '../../books/store/book-entity/book-entity.selectors';
+import { upsertBookEntity } from '../../books/store/book-entity/book-entity.actions';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'bm-book-edit',
@@ -18,11 +18,12 @@ import { Subscription } from 'rxjs';
 export class BookEditComponent implements OnDestroy {
   book$ = this.store.select(selectCurrentBook);
   error$ = this.store.select(selectError);
-  showSaveSuccess$ = this.store.select(selectSaveSuccess);
+  showSaveSuccess$: Observable<boolean> = this.store.select(
+    selectShowSavedSuccess
+  );
   subscriptionSuccess: Subscription | undefined;
-
-  saved = false;
-  successMsg = '';
+  //saved = false;
+  successMsg = 'Book has been saved successfully';
 
   constructor(private route: ActivatedRoute, private store: Store) {}
 
@@ -33,10 +34,11 @@ export class BookEditComponent implements OnDestroy {
   }
 
   saveBook(book: Book) {
-    this.store.dispatch(saveCurrentBook({ book }));
-    this.subscriptionSuccess = this.showSaveSuccess$.subscribe((showSave) => {
-      this.saved = showSave;
-      this.successMsg = 'Book has been saved successfully';
-    });
+    console.log('saveBook in book-edit component');
+    this.store.dispatch(upsertBookEntity({ bookEntity: book }));
+    // this.subscriptionSuccess = this.showSaveSuccess$.subscribe((showSave) => {
+    //   //this.saved = showSave;
+    //   //this.successMsg = 'Book has been saved successfully';
+    // });
   }
 }

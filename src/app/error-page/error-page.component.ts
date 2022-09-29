@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { selectErrorState } from '../books/store/book-entity/book-entity.selectors';
-import { resetErrorsAction } from '../books/store/old/book.actions';
+import { resetErrorsAction } from '../books/store/book-entity/book-entity.actions';
 import { Router } from '@angular/router';
 
 @Component({

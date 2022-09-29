@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { resetSavedSuccessFlag } from '../../books/store/book-entity/book-entity.actions';
 
 interface OnInit {}
 
@@ -8,20 +10,23 @@ interface OnInit {}
   styleUrls: ['./success-alert.component.css']
 })
 export class SuccessAlertComponent implements OnInit {
-  @Input() saved: boolean = false;
+  _saved: boolean = false;
   @Input() successMsg: string = 'Book has been saved successfully';
-  // @Input() set saved(value: boolean) {
-  //   this._saved = value;
-  //   console.log('set saved: ' + new Date().toLocaleTimeString());
-  //   if (this._saved) {
-  //     setTimeout(() => {
-  //       console.log('setTimeout reset: ' + new Date().toLocaleTimeString());
-  //       this._saved = false;
-  //     }, 5000);
-  //   }
-  // }
+  @Input() set saved(value: boolean) {
+    this._saved = value;
+    console.log('set saved: ' + new Date().toLocaleTimeString());
+    if (this._saved) {
+      setTimeout(() => {
+        console.log('setTimeout reset: ' + new Date().toLocaleTimeString());
+        this.store.dispatch(resetSavedSuccessFlag());
+      }, 5000);
+    }
+  }
 
-  constructor() {
+  get saved(): boolean {
+    return this._saved;
+  }
+  constructor(private store: Store) {
     console.log('constr: ' + new Date().toLocaleTimeString());
   }
   ngOnInit() {

@@ -6,9 +6,17 @@ import {
   RouterStateSnapshot,
   UrlTree
 } from '@angular/router';
-import { distinctUntilChanged, Observable, of, switchMap, take } from 'rxjs';
+import {
+  distinctUntilChanged,
+  filter,
+  Observable,
+  of,
+  switchMap,
+  take,
+  tap
+} from 'rxjs';
 import { Store } from '@ngrx/store';
-import { selectCurrentBookAndAll } from '../store/old/book.selectors';
+import { selectCurrentBookAndAll } from '../store/book-entity/book-entity.selectors';
 import { BookStoreService } from '../../shared/book-store.service';
 import { Book } from '../../shared/book';
 import { catchError } from 'rxjs/operators';
@@ -16,10 +24,11 @@ import {
   bookErrorAction,
   isbnNotFound,
   loadAllAndSetCurrentBook,
-  loadBooks,
+  loadBookEntities,
   setCurrentBookSuccess
-} from '../store/old/book.actions';
+} from '../store/book-entity/book-entity.actions';
 import { HttpErrorResponse } from '@angular/common/http';
+import { BookEntity } from '../store/book-entity/book-entity.model';
 import isEqual from 'lodash/isEqual';
 
 @Injectable({
@@ -47,7 +56,7 @@ export class BookDetailsGuard implements CanActivate {
     }
     return this.getFromStoreOrAPI(isbn).pipe(
       switchMap((data) => {
-        if (data.currentBook?.isbn === isbn) return of(true);
+        if (data.currentBookId === isbn) return of(true);
         else return of(this.router.parseUrl('/error'));
       }),
       // otherwise, something went wrong
@@ -68,39 +77,39 @@ export class BookDetailsGuard implements CanActivate {
   }
 
   private getFromStoreOrAPI(isbn: string): Observable<{
-    currentBook: Book | undefined;
-    allBooks: Book[];
-    lastUpdateTS: number;
+    currentBookId: string | undefined;
     httpError: HttpErrorResponse | null;
     errorMessage: string | null;
+    lastUpdateTS: number;
+    allBooks: (BookEntity | undefined)[];
   }> {
     return this.store.select(selectCurrentBookAndAll).pipe(
       distinctUntilChanged((previous, current) => isEqual(previous, current)),
-      // tap((data) => {
-      //   if (!this.isCurrentBookOrErrorAndUpToDate(data, isbn)) {
-      //     this.dispatchLoadAction(data.allBooks, data.lastUpdateTS, isbn);
-      //   }
-      // }),
-      // filter((data) =>
-      //   //current book or (httperror, and timestamp not older then 1 min).
-      //   this.isCurrentBookOrErrorAndUpToDate(data, isbn)
-      // ),
+      tap((data) => {
+        if (!this.isCurrentBookOrErrorAndUpToDate(data, isbn)) {
+          this.dispatchLoadAction(data.allBooks, data.lastUpdateTS, isbn);
+        }
+      }),
+      filter((data) =>
+        //current book or (httperror, and timestamp not older then 1 min).
+        this.isCurrentBookOrErrorAndUpToDate(data, isbn)
+      ),
       take(1)
     );
   }
 
   private isCurrentBookOrErrorAndUpToDate<B>(
     data: {
-      currentBook: Book | undefined;
-      allBooks: Book[];
+      currentBookId: string | undefined;
       httpError: HttpErrorResponse | null;
       errorMessage: string | null;
       lastUpdateTS: number;
+      allBooks: (BookEntity | undefined)[];
     },
     isbn: string
   ) {
     return (
-      data.currentBook?.isbn === isbn ||
+      data.currentBookId === isbn ||
       (!!data.httpError?.message &&
         data.lastUpdateTS >= Date.now() - 1000 * 60) ||
       (data.errorMessage !== null &&
@@ -114,11 +123,11 @@ export class BookDetailsGuard implements CanActivate {
     isbn: string
   ) {
     if (!allBooks?.length && lastUpdateTS < Date.now() - 1000 * 60) {
-      this.store.dispatch(loadBooks());
+      this.store.dispatch(loadBookEntities());
     } else {
       const currentBook = allBooks?.find((book) => book.isbn == isbn);
       if (!!currentBook) {
-        this.store.dispatch(setCurrentBookSuccess({ currentBook }));
+        this.store.dispatch(setCurrentBookSuccess({ currentBookId: isbn }));
       } else {
         //2nd reload from API and check again but not too often!
         if (lastUpdateTS < Date.now() - 1000 * 60) {

@@ -3,6 +3,7 @@ import { Update } from '@ngrx/entity';
 
 import { BookEntity } from './book-entity.model';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Book } from '../../../shared/book';
 
 export const loadBookEntities = createAction(
   '[BookEntity/API] Load BookEntities'
@@ -27,8 +28,17 @@ export const addBookEntity = createAction(
   props<{ bookEntity: BookEntity }>()
 );
 
+export const addBookEntitySuccess = createAction(
+  '[BookEntity/API] Add Book Succeeded',
+  props<{ bookEntity: BookEntity }>()
+);
 export const upsertBookEntity = createAction(
   '[BookEntity/API] Upsert BookEntity',
+  props<{ bookEntity: BookEntity }>()
+);
+
+export const upsertBookEntitySuccess = createAction(
+  '[BookEntity/API] Upsert BookEntity Success',
   props<{ bookEntity: BookEntity }>()
 );
 
@@ -57,6 +67,11 @@ export const deleteBookEntity = createAction(
   props<{ id: string }>()
 );
 
+export const deleteBookEntitySuccess = createAction(
+  '[BookEntity/API] Delete BookEntity Success',
+  props<{ id: string }>()
+);
+
 export const deleteBookEntitys = createAction(
   '[BookEntity/API] Delete BookEntitys',
   props<{ ids: string[] }>()
@@ -65,3 +80,27 @@ export const deleteBookEntitys = createAction(
 export const clearBookEntitys = createAction(
   '[BookEntity/API] Clear BookEntitys'
 );
+
+export const loadAllAndSetCurrentBookSuccess = createAction(
+  '[BookEntity/API] Load all and set Current Book Success',
+  props<{ books: Book[]; currentBook: Book | undefined; timeStamp: number }>()
+);
+export const loadAllAndSetCurrentBook = createAction(
+  '[BookEntity/API] Load all and set Current Book',
+  props<{ isbn: string }>()
+);
+export const isbnNotFound = createAction(
+  '[BookEntity/API] reloaded books from server, but ISBN still not Found',
+  props<{ errorMessage: string }>()
+);
+
+export const setCurrentBookSuccess = createAction(
+  '[BookEntity/API] Set Current Book Success',
+  props<{ currentBookId: string }>()
+);
+
+export const resetSavedSuccessFlag = createAction(
+  '[BookEntity/API] Reset Saved Success Flag'
+);
+
+export const resetErrorsAction = createAction('[BookEntity/API] Error reset');

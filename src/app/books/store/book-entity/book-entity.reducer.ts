@@ -2,18 +2,19 @@ import { createReducer, on } from '@ngrx/store';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { BookEntity } from './book-entity.model';
 import * as BookEntityActions from './book-entity.actions';
-import { Book } from '../../../shared/book';
+
 import { HttpErrorResponse } from '@angular/common/http';
+import * as BookActions from '../book-entity/book-entity.actions';
 
 export const bookEntitiesFeatureKey = 'bookEntities';
 
 export interface BookEntityState extends EntityState<BookEntity> {
   // additional entities state properties
-  currentBook: Book | undefined;
+  currentBookId: string | undefined;
   httpError: HttpErrorResponse | null;
   errorMessage: string | null;
   showSaveSuccess: boolean;
-  searchResults: Book[];
+  searchResults: BookEntity[];
   lastUpdateTS: number;
 }
 
@@ -23,7 +24,7 @@ export const adapter: EntityAdapter<BookEntity> =
   });
 
 export const initialState: BookEntityState = adapter.getInitialState({
-  currentBook: undefined,
+  currentBookId: undefined,
   httpError: null,
   errorMessage: null,
   showSaveSuccess: false,
@@ -33,12 +34,18 @@ export const initialState: BookEntityState = adapter.getInitialState({
 
 export const reducer = createReducer(
   initialState,
-  on(BookEntityActions.addBookEntity, (state, action) =>
-    adapter.addOne(action.bookEntity, state)
-  ),
-  on(BookEntityActions.upsertBookEntity, (state, action) =>
-    adapter.upsertOne(action.bookEntity, state)
-  ),
+  on(BookEntityActions.addBookEntitySuccess, (state, action) => {
+    state = adapter.addOne(action.bookEntity, state);
+    state.showSaveSuccess = true;
+    return state;
+  }),
+
+  on(BookEntityActions.upsertBookEntitySuccess, (state, action) => {
+    console.log('upsertBookEntitySuccess reducer');
+    state = adapter.upsertOne(action.bookEntity, state);
+    state.showSaveSuccess = true;
+    return state;
+  }),
   on(BookEntityActions.addBookEntitys, (state, action) =>
     adapter.addMany(action.bookEntitys, state)
   ),
@@ -51,9 +58,11 @@ export const reducer = createReducer(
   on(BookEntityActions.updateBookEntitys, (state, action) =>
     adapter.updateMany(action.bookEntitys, state)
   ),
-  on(BookEntityActions.deleteBookEntity, (state, action) =>
-    adapter.removeOne(action.id, state)
-  ),
+  on(BookEntityActions.deleteBookEntitySuccess, (state, action) => {
+    state = adapter.removeOne(action.id, state);
+    state.showSaveSuccess = true;
+    return state;
+  }),
   on(BookEntityActions.deleteBookEntitys, (state, action) =>
     adapter.removeMany(action.ids, state)
   ),
@@ -66,6 +75,35 @@ export const reducer = createReducer(
       ...state,
       httpError: action.httpError,
       lastUpdateTS: action.timeStamp
+    };
+  }),
+  on(
+    BookEntityActions.setCurrentBookSuccess,
+    (state, action): BookEntityState => {
+      return {
+        ...state,
+        currentBookId: action.currentBookId
+      };
+    }
+  ),
+  on(BookActions.isbnNotFound, (state, action): BookEntityState => {
+    return {
+      ...state,
+      httpError: null,
+      errorMessage: action.errorMessage
+    };
+  }),
+  on(BookActions.resetSavedSuccessFlag, (state, action): BookEntityState => {
+    return {
+      ...state,
+      showSaveSuccess: false
+    };
+  }),
+  on(BookActions.resetErrorsAction, (state, action): BookEntityState => {
+    return {
+      ...state,
+      httpError: null,
+      errorMessage: null
     };
   })
 );

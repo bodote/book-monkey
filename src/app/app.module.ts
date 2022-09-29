@@ -35,9 +35,10 @@ const httpInterceptorProviders = [
     HttpClientModule,
     NgHeroiconsModule,
     StoreModule.forRoot(ROOT_REDUCERS, {}),
-    StoreDevtoolsModule.instrument({
+    StoreDevtoolsModule.instrument(<any>{
       maxAge: 25,
-      logOnly: environment.production
+      logOnly: environment.production,
+      trace: true
     }),
     EffectsModule.forRoot([RouterEffects, SearchEffects]),
     StoreRouterConnectingModule.forRoot({

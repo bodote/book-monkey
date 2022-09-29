@@ -14,7 +14,7 @@
               type="text"
               formControlName="title"
               placeholder="Title"
-              class="input input-bordered w-full"
+              class="input input-bordered w-full z-0"
             />
           </label>
         </div>
@@ -25,7 +25,7 @@
         <label class="input-group pb-4">
           <span class="bg-primary/30">Subtitle: </span>
           <input
-            class="input input-bordered w-full"
+            class="input input-bordered w-full z-0"
             id="subtitle"
             type="text"
             placeholder="Subtitle"
@@ -43,7 +43,7 @@
               >ISBN:
             </span>
             <input
-              class="input input-bordered w-full"
+              class="input input-bordered w-full z-0"
               [class.input-error]="
                 editForm.get('isbn')?.invalid &&
                 (editForm.get('isbn')?.dirty || editForm.get('isbn')?.touched)
@@ -63,9 +63,10 @@
         <label class="input-group pb-4">
           <span class="bg-primary/30">Published: </span>
           <input
-            class="input input-bordered w-full"
+            class="input input-bordered w-full z-0"
             id="published"
             type="date"
+            ngModel
             useValueAsLocalDate
             placeholder="Date"
             formControlName="published"
@@ -74,7 +75,7 @@
         <label class="input-group pb-1">
           <span class="bg-primary/30">Rating: </span>
           <input
-            class="input input-bordered w-full"
+            class="input input-bordered w-full z-0"
             id="rating"
             type="number"
             formControlName="rating"
@@ -101,7 +102,7 @@
               <div class="flex flex-row py-2">
                 <input
                   [attr.data-cy]="'author/' + i"
-                  class="input input-bordered w-full p-2"
+                  class="input input-bordered w-full p-2 z-0"
                   type="text"
                   [formControlName]="i"
                 />

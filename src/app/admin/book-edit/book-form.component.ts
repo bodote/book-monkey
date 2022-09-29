@@ -25,15 +25,17 @@ import { BodosValidatorService } from '../shared/bodos-validator.service';
 export class BookFormComponent implements OnInit, OnChanges {
   @Input() aBook: Book | undefined | null;
   @Input() isNew!: boolean;
-  @Input() saved!: boolean;
+  @Input() saved: boolean;
   @Input() successMsg!: string;
   editForm!: FormGroup;
   @Output() saveBookEventEmitter = new EventEmitter();
-
+  clickCounter = 0;
   constructor(
     private fb: FormBuilder,
     private bodosValidatorService: BodosValidatorService
-  ) {}
+  ) {
+    this.saved = false;
+  }
 
   ngOnInit(): void {
     this.checkEditForm();
@@ -73,9 +75,11 @@ export class BookFormComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    console.log('ngOnChanges SimpleChanges');
     this.checkEditForm();
     const { aBook } = changes;
     if (!!aBook && aBook.currentValue && !this.isNew) {
+      console.log('fillForm aBook.currentValue');
       this.fillForm(aBook.currentValue);
     }
   }
@@ -135,6 +139,8 @@ export class BookFormComponent implements OnInit, OnChanges {
   }
 
   bookFormSaveBook() {
+    console.log('click event with counter: ' + this.clickCounter);
+    this.clickCounter++;
     if (this.editForm.valid) {
       this.saveBookEventEmitter.emit(this.editForm.value as Book);
     } else {

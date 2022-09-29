@@ -3,8 +3,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { Book } from '../../shared/book';
 import { Store } from '@ngrx/store';
-import { selectCurrentBook, selectError } from '../store/old/book.selectors';
-import { deleteBook } from '../store/old/book.actions';
+import {
+  selectCurrentBook,
+  selectError
+} from '../store/book-entity/book-entity.selectors';
+import { deleteBookEntity } from '../store/book-entity/book-entity.actions';
 
 @Component({
   selector: 'bm-book-details',
@@ -35,7 +38,7 @@ export class BookDetailsComponent {
   }
 
   reallyDelete(isbn: string): void {
-    this.store.dispatch(deleteBook({ isbn }));
+    this.store.dispatch(deleteBookEntity({ id: isbn }));
     this.router.navigate(['/books/list']);
   }
 

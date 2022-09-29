@@ -2,11 +2,11 @@ import { Component, OnDestroy } from '@angular/core';
 import { Book } from '../../shared/book';
 import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { addBook } from '../../books/store/old/book.actions';
+import { addBookEntity } from '../../books/store/book-entity/book-entity.actions';
 import {
   selectError,
-  selectSaveSuccess
-} from '../../books/store/old/book.selectors';
+  selectShowSavedSuccess
+} from '../../books/store/book-entity/book-entity.selectors';
 
 @Component({
   selector: 'bm-create-book',
@@ -16,7 +16,7 @@ import {
 export class CreateBookComponent implements OnDestroy {
   //TODO: clean up HTTP-Error massages
   //loading$ = this.store.select(selectIsLoading);
-  showSaveSuccess$ = this.store.select(selectSaveSuccess);
+  showSaveSuccess$ = this.store.select(selectShowSavedSuccess);
   error$ = this.store.select(selectError);
 
   saved = false;
@@ -26,7 +26,7 @@ export class CreateBookComponent implements OnDestroy {
   constructor(private store: Store) {}
 
   createBookSave(book: Book) {
-    this.store.dispatch(addBook({ book }));
+    this.store.dispatch(addBookEntity({ bookEntity: book }));
     this.subscriptionSuccess = this.showSaveSuccess$.subscribe((showSave) => {
       this.saved = showSave;
       this.successMsg = 'Book has been saved successfully';
