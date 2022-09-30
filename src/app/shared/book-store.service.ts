@@ -33,10 +33,7 @@ export class BookStoreService {
       .post(`${this.server}/book`, bookRaw, {
         responseType: 'text'
       })
-      .pipe(
-        //tap((val) => console.log('post book return: ' + JSON.stringify(val))),
-        catchError(this.processError)
-      );
+      .pipe(catchError(this.processError));
   }
   putBook(book: Book): Observable<string> {
     const bookRaw = BookFactoryService.getRawFromBook(book);

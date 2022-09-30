@@ -41,7 +41,6 @@ export const reducer = createReducer(
   }),
 
   on(BookEntityActions.upsertBookEntitySuccess, (state, action) => {
-    console.log('upsertBookEntitySuccess reducer');
     state = adapter.upsertOne(action.bookEntity, state);
     state.showSaveSuccess = true;
     return state;

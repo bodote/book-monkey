@@ -16,6 +16,7 @@ import {
 } from '@angular/forms';
 import { Book } from '../../shared/book';
 import { BodosValidatorService } from '../shared/bodos-validator.service';
+import { BookFactoryService } from '../../shared/book-factory.service';
 
 @Component({
   selector: 'bm-book-form',
@@ -78,11 +79,9 @@ export class BookFormComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('ngOnChanges editForm valid?', this.editForm?.valid);
     this.checkEditForm();
     const { aBook } = changes;
     if (!!aBook && aBook.currentValue && !this.isNew) {
-      console.log('fillForm aBook.currentValue');
       this.fillForm(aBook.currentValue);
     }
   }
@@ -109,7 +108,9 @@ export class BookFormComponent implements OnInit, OnChanges {
     this.editForm.get('subtitle')?.setValue(book.subtitle);
     this.editForm.get('isbn')?.setValue(book.isbn + '');
     this.editForm.get('description')?.setValue(book.description);
-    this.editForm.get('published')?.setValue(book.published);
+    const published: string = book.published.toISOString().substring(0, 10);
+    console.log('published in set editForm', published);
+    this.editForm.get('published')?.setValue(published);
     this.editForm.get('rating')?.setValue(book.rating);
 
     let authors = this.fb.array([], [this.bodosValidatorService.checkAuthors]);
@@ -142,10 +143,11 @@ export class BookFormComponent implements OnInit, OnChanges {
   }
 
   bookFormSaveBook() {
-    console.log('click event with counter: ' + this.clickCounter);
     this.clickCounter++;
     if (this.editForm.valid) {
-      this.saveBookEventEmitter.emit(this.editForm.value as Book);
+      this.saveBookEventEmitter.emit(
+        BookFactoryService.getFromRaw(this.editForm.value)
+      );
     } else {
       throw new Error('bookFormSave called although form is not valid!');
     }

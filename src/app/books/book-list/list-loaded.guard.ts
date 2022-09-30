@@ -28,10 +28,8 @@ export class ListLoadedGuard implements CanActivate {
   ) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    console.log('can activate: ');
     return this.getFromStoreOrAPI().pipe(
       switchMap((data) => {
-        console.log('list loaded guard, switchMap: ' + JSON.stringify(data));
         if (data.total > 0 && !data.httpError) {
           return of(true);
         }
@@ -55,16 +53,11 @@ export class ListLoadedGuard implements CanActivate {
   }
 
   private getFromStoreOrAPI() {
-    console.log('getFromStoreOrAPI ');
     return this.store.select(selectTotalAndErrors).pipe(
       distinctUntilChanged((previous, current) => {
-        console.log(
-          'list loaded guard, distinctUntilChanged: ' + JSON.stringify(current)
-        );
         return isEqual(previous, current);
       }),
       tap((data) => {
-        console.log('list loaded guard, tap: ' + JSON.stringify(data));
         if (
           (!data.total && !data.httpError && !data.errorMessage) ||
           data.lastUpdateTS < Date.now() - 1000 * 60

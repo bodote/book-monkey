@@ -13,14 +13,12 @@ export class BookFactoryService {
   static getFromRaw(bookRaw: BookRaw): Book {
     return {
       ...bookRaw,
-
       published: new Date(bookRaw.published)
     };
   }
   static getFromRaw2Entity(bookRaw: BookRaw): BookEntity {
     return {
       ...bookRaw,
-      isbn: bookRaw.isbn,
       published: new Date(bookRaw.published)
     };
   }

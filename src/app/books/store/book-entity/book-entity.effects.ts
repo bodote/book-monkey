@@ -11,7 +11,7 @@ import {
   upsertBookEntity,
   upsertBookEntitySuccess
 } from './book-entity.actions';
-import { distinctUntilChanged, of, switchMap, tap } from 'rxjs';
+import { distinctUntilChanged, of, switchMap } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { BookStoreService } from '../../../shared/book-store.service';
 import { Router } from '@angular/router';
@@ -51,12 +51,10 @@ export class BookEntityEffects {
   reloadBooksAndSetCurrentBook$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(loadAllAndSetCurrentBook),
-      tap(() => console.log('effect: reloadBooksAndSetCurrentBook$')),
       switchMap((action) =>
         this.bs.getAll().pipe(
           map((books: Book[]) => {
             const currentBook = books.find((book) => book.isbn == action.isbn);
-
             return loadAllAndSetCurrentBookSuccess({
               books,
               currentBook,
@@ -100,24 +98,14 @@ export class BookEntityEffects {
     );
   });
   saveCurrentBook$ = createEffect(() => {
-    console.log('Saved Current Book, and then upsertBookEntitySuccess');
     return this.actions$.pipe(
       ofType(upsertBookEntity),
       distinctUntilChanged((actual, current) => {
-        console.log('isEqual? actual', actual);
-        console.log('isEqual? current', current);
         return isEqual(actual, current);
       }),
-      tap((action) =>
-        console.log(
-          'action pipe in book saveCurrentBookEffect, action=' + action.type
-        )
-      ),
-
       switchMap((action) => {
         let book = action.bookEntity;
         return this.bs.putBook(book).pipe(
-          tap(() => console.log('in putBook pipe')),
           map((response: string) =>
             upsertBookEntitySuccess({ bookEntity: book })
           ),

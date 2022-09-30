@@ -33,7 +33,6 @@ export class BookEditComponent implements OnDestroy {
   }
 
   saveBook(book: Book) {
-    console.log('saveBook in book-edit component');
     this.store.dispatch(upsertBookEntity({ bookEntity: book }));
   }
 }
