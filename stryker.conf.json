@@ -1,13 +1,15 @@
 {
   "$schema": "./node_modules/@stryker-mutator/core/schema/stryker-schema.json",
   "_comment": "This config was generated using 'stryker init'. Please see the guide for more information: https://stryker-mutator.io/docs/stryker-js/guides/angular",
+  "_comment": "mutate: src/**/*.ts",
   "mutate": [
-    "src/**/*.ts",
+    "src/app/search/search.reducer.ts",
     "!src/**/*.spec.ts",
     "!src/test.ts",
     "!src/environments/*.ts",
     "!src/**/*.module.ts",
-    "!src/main.ts"
+    "!src/main.ts",
+    "!cypress/**"
   ],
   "testRunner": "karma",
   "karma": {
@@ -33,12 +35,14 @@
   "coverageAnalysis": "perTest",
   "timeoutFactor": 40,
   "checkers": ["typescript"],
-  "tsconfigFile": "tsconfig.json",
+  "tsconfigFile": "tsconfig.stryker.json",
   "dashboard": {
     "project": "github.com/bodote/book-monkey",
     "version": "master",
     "module": "main",
     "baseUrl": "https://dashboard.stryker-mutator.io/api/reports",
     "reportType": "full"
-  }
+  },
+  "disableTypeChecks": "{node_modules,cypress}/**/*.{js,ts,jsx,tsx,html,vue}",
+  "ignorePatterns": ["dist/**", "coverage/**","cypress/**","node_modules/**",".angular/**"]
 }

@@ -29,7 +29,7 @@ export const addBookEntity = createAction(
 );
 
 export const addBookEntitySuccess = createAction(
-  '[BookEntity/API] Add Book Succeeded',
+  '[BookEntity/API] Add Book Success',
   props<{ bookEntity: BookEntity }>()
 );
 export const upsertBookEntity = createAction(
@@ -43,12 +43,12 @@ export const upsertBookEntitySuccess = createAction(
 );
 
 export const addBookEntitys = createAction(
-  '[BookEntity/API] Add BookEntitys',
+  '[BookEntity/API] Add BookEntities',
   props<{ bookEntitys: BookEntity[] }>()
 );
 
 export const upsertBookEntitys = createAction(
-  '[BookEntity/API] Upsert BookEntitys',
+  '[BookEntity/API] Upsert BookEntities',
   props<{ bookEntitys: BookEntity[] }>()
 );
 
@@ -58,7 +58,7 @@ export const updateBookEntity = createAction(
 );
 
 export const updateBookEntitys = createAction(
-  '[BookEntity/API] Update BookEntitys',
+  '[BookEntity/API] Update BookEntities',
   props<{ bookEntitys: Update<BookEntity>[] }>()
 );
 
@@ -78,7 +78,7 @@ export const deleteBookEntitys = createAction(
 );
 
 export const clearBookEntitys = createAction(
-  '[BookEntity/API] Clear BookEntitys'
+  '[BookEntity/API] Clear BookEntities'
 );
 
 export const loadAllAndSetCurrentBookSuccess = createAction(
