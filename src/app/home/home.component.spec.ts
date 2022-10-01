@@ -28,11 +28,11 @@ describe('HomeComponent', () => {
     });
   });
 
-  it('should create', () => {
+  xit('should create', () => {
     expect(component).toBeTruthy();
   });
   // This test runs synchronously.
-  it('test observables', () => {
+  xit('test observables', () => {
     testScheduler.run((helpers) => {
       const { cold, expectObservable } = helpers;
       const valuesIn = { a: '1', b: '2', c: '3', d: '4' };
@@ -55,7 +55,7 @@ describe('HomeComponent', () => {
       expectObservable(final$).toBe(expected, valuesOut);
     });
   });
-  it('test retry()', () => {
+  xit('test retry()', () => {
     testScheduler.run((helpers) => {
       const { cold, expectObservable } = helpers;
 

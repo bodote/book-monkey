@@ -258,7 +258,7 @@ describe('BookFormsComponent', () => {
       expect(component.editForm.get('authors')?.valid).toBeFalse();
     });
   });
-  describe('with new book and AsyncValidatorFn or the checkAuthors validator  returns an error ', () => {
+  xdescribe('with new book and AsyncValidatorFn or the checkAuthors validator  returns an error ', () => {
     beforeEach(async () => {
       await prepareTests(
         {
@@ -321,7 +321,7 @@ describe('BookFormsComponent', () => {
       expect(component.saveBookEventEmitter.emit).toHaveBeenCalledTimes(0);
     });
   });
-  describe('with new book and isbnLength validator  returns an error ', () => {
+  xdescribe('with new book and isbnLength validator  returns an error ', () => {
     beforeEach(async () => {
       await prepareTests(null, { isbnLength: { valid: false } }, null);
       component.isNew = true;

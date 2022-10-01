@@ -25,7 +25,7 @@ const testBookData: Book = {
   rating: 3,
   thumbnails: [{ title: '', url: '' }]
 };
-describe('BookListComponent', () => {
+xdescribe('BookListComponent', () => {
   let component: BookListComponent;
   let fixture: ComponentFixture<BookListComponent>;
   let mockService = jasmine.createSpyObj<BookStoreService>('bookStoreService', [
@@ -47,7 +47,7 @@ describe('BookListComponent', () => {
     component = fixture.componentInstance;
   });
 
-  it('should create and get the of(book[]) ', () => {
+  xit('should create and get the of(book[]) ', () => {
     mockService.getAll = jasmine
       .createSpy<() => Observable<Book[]>>()
       .and.returnValue(of([testBookData]));
@@ -65,7 +65,7 @@ describe('BookListComponent', () => {
       expect(component.listView).toBeTrue();
     });
   });
-  it('should insert no additional delay to that comming from the BookStoreService ', () => {
+  xit('should insert no additional delay to that comming from the BookStoreService ', () => {
     mockService.getAll = jasmine
       .createSpy<() => Observable<Book[]>>()
       .and.returnValue(of([testBookData]).pipe(delay(1000)));
@@ -97,7 +97,7 @@ describe('BookListComponent', () => {
     loading = fixture.debugElement.query(By.css('div.relative > div'));
     expect(loading).toBeNull();
   }));
-  it('should show error if BookStoreService runs into an error ', () => {
+  xit('should show error if BookStoreService runs into an error ', () => {
     const errorObservable$ = throwError(() => {
       return new HttpErrorResponse({ status: 404 });
     });

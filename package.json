@@ -18,7 +18,8 @@
     "lint-fix": "ng lint --fix",
     "deploy": "ng deploy --no-silent --base-href=/book-monkey/",
     "cy:open": "cypress open",
-    "cy:run": "cypress run"
+    "cy:run": "cypress run",
+    "stryker:run": "stryker run  --ignorePatterns '**','!src/**/search.reducer*.ts'"
   },
   "private": true,
   "dependencies": {

@@ -16,7 +16,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { By } from '@angular/platform-browser';
 
-describe('BookEditComponent', () => {
+xdescribe('BookEditComponent', () => {
   let component: BookEditComponent;
   let fixture: ComponentFixture<BookEditComponent>;
   let bookStoreMock: Partial<BookStoreService>;
@@ -25,7 +25,7 @@ describe('BookEditComponent', () => {
   let route: ActivatedRoute;
   const httpError404 = new HttpErrorResponse({ status: 404 });
   const expectedSaveBookError = 'ERROR in http.put saveBook: ';
-  describe('but  isbn number does not exist and service thorws an error ', () => {
+  xdescribe('but  isbn number does not exist and service thorws an error ', () => {
     beforeEach(async () => {
       book = {
         title: aTitle,

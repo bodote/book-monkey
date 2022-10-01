@@ -885,3 +885,1786 @@ Chrome Headless 105.0.5195.125 (Mac OS 10.15.7): Executed 0 of 0[32m SUCCESS[3
 10:35:06 (31320) DEBUG ChildProcessProxy Disposing of worker process 31324
 10:35:06 (31320) DEBUG ChildProcessProxy Kill 31324
 10:35:06 (31320) DEBUG ChildProcessProxy Kill 31323
+11:33:36 (37107) DEBUG ConfigReader Loading config from stryker.conf.json
+11:33:36 (37107) DEBUG ConfigReader Loaded config: {
+  "$schema": "./node_modules/@stryker-mutator/core/schema/stryker-schema.json",
+  "_comment": "mutate: src/**/*.ts",
+  "mutate": [
+    "!src/**/*.spec.ts",
+    "!src/test.ts",
+    "!src/environments/*.ts",
+    "!src/**/*.module.ts",
+    "!src/main.ts",
+    "!cypress/**"
+  ],
+  "testRunner": "karma",
+  "karma": {
+    "configFile": "karma.conf.js",
+    "projectType": "angular-cli",
+    "config": {
+      "browsers": [
+        "ChromeHeadless"
+      ]
+    }
+  },
+  "reporters": [
+    "progress",
+    "clear-text",
+    "html",
+    "dashboard",
+    "json"
+  ],
+  "htmlReporter": {
+    "fileName": "reports/mutation/mutation.all.html"
+  },
+  "concurrency": 4,
+  "concurrency_comment": "Recommended to use about half of your available cores when running stryker with angular",
+  "coverageAnalysis": "perTest",
+  "timeoutFactor": 40,
+  "checkers": [
+    "typescript"
+  ],
+  "tsconfigFile": "tsconfig.stryker.json",
+  "dashboard": {
+    "project": "github.com/bodote/book-monkey",
+    "version": "master",
+    "module": "main",
+    "baseUrl": "https://dashboard.stryker-mutator.io/api/reports",
+    "reportType": "full"
+  },
+  "disableTypeChecks": "{node_modules,cypress}/**/*.{js,ts,jsx,tsx,html,vue}",
+  "ignorePatterns": [
+    "**",
+    "!src/app/search/search.reducer.ts"
+  ],
+  "inPlace": true,
+  "fileLogLevel": "debug",
+  "allowConsoleColors": true,
+  "checkerNodeArgs": [],
+  "maxTestRunnerReuse": 0,
+  "commandRunner": {
+    "command": "npm test"
+  },
+  "clearTextReporter": {
+    "allowColor": true,
+    "logTests": true,
+    "maxTestsToLog": 3
+  },
+  "eventReporter": {
+    "baseDir": "reports/mutation/events"
+  },
+  "ignoreStatic": false,
+  "logLevel": "info",
+  "maxConcurrentTestRunners": 9007199254740991,
+  "mutator": {
+    "plugins": null,
+    "excludedMutations": []
+  },
+  "plugins": [
+    "@stryker-mutator/*"
+  ],
+  "appendPlugins": [],
+  "jsonReporter": {
+    "fileName": "reports/mutation/mutation.json"
+  },
+  "symlinkNodeModules": true,
+  "tempDirName": ".stryker-tmp",
+  "cleanTempDir": true,
+  "testRunnerNodeArgs": [],
+  "thresholds": {
+    "high": 80,
+    "low": 60,
+    "break": null
+  },
+  "timeoutMS": 5000,
+  "dryRunTimeoutMinutes": 5,
+  "warnings": true,
+  "disableBail": false
+}
+11:33:36 (37107) DEBUG PluginLoader Loading @stryker-mutator/* from /Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/@stryker-mutator
+11:33:36 (37107) DEBUG PluginLoader Loading plugin "@stryker-mutator/karma-runner" (matched with expression @stryker-mutator/*)
+11:33:36 (37107) DEBUG PluginLoader Loading plugin "@stryker-mutator/typescript-checker" (matched with expression @stryker-mutator/*)
+11:33:36 (37107) DEBUG PluginLoader Loading plugin @stryker-mutator/karma-runner
+11:33:36 (37107) DEBUG PluginLoader Loading plugin @stryker-mutator/typescript-checker
+11:33:36 (37107) DEBUG PluginLoader Loading plugin file:///Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/@stryker-mutator/core/dist/src/reporters/index.js
+11:33:37 (37107) DEBUG MetaSchemaBuilder Contributing 1 schemas from plugins to options validation.
+11:33:37 (37107) WARN ProjectReader Glob pattern "!src/**/*.spec.ts" did not exclude any files.
+11:33:37 (37107) WARN ProjectReader Glob pattern "!src/test.ts" did not exclude any files.
+11:33:37 (37107) WARN ProjectReader Glob pattern "!src/environments/*.ts" did not exclude any files.
+11:33:37 (37107) WARN ProjectReader Glob pattern "!src/**/*.module.ts" did not exclude any files.
+11:33:37 (37107) WARN ProjectReader Glob pattern "!src/main.ts" did not exclude any files.
+11:33:37 (37107) WARN ProjectReader Glob pattern "!cypress/**" did not exclude any files.
+11:33:37 (37107) WARN ProjectReader No files marked to be mutated, Stryker will perform a dry-run without actually mutating anything. You can configure the `mutate` property in your config file (or use `--mutate` via command line).
+11:33:37 (37107) DEBUG ProjectReader All input files: [
+  "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/app/search/search.reducer.ts"
+]
+11:33:37 (37107) DEBUG ProjectReader Files to mutate: []
+11:33:37 (37107) DEBUG TemporaryDirectory Using temp directory "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/.stryker-tmp"
+11:33:37 (37107) DEBUG Instrumenter Instrumenting 0 source files with mutants
+11:33:37 (37107) INFO Instrumenter Instrumented 0 source file(s) with 0 mutant(s)
+11:33:37 (37107) INFO ConcurrencyTokenProvider Creating 2 checker process(es) and 2 test runner process(es).
+11:33:37 (37107) DEBUG ChildProcessProxy Started CheckerWorker in child process 37110
+11:33:37 (37107) DEBUG ChildProcessProxy Started CheckerWorker in child process 37111
+11:33:37 (37110) DEBUG PluginLoader Loading plugin @stryker-mutator/karma-runner
+11:33:37 (37110) DEBUG PluginLoader Loading plugin @stryker-mutator/typescript-checker
+11:33:37 (37110) DEBUG PluginLoader Loading plugin file:///Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/@stryker-mutator/core/dist/src/reporters/index.js
+11:33:37 (37111) DEBUG PluginLoader Loading plugin @stryker-mutator/karma-runner
+11:33:37 (37111) DEBUG PluginLoader Loading plugin @stryker-mutator/typescript-checker
+11:33:37 (37111) DEBUG PluginLoader Loading plugin file:///Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/@stryker-mutator/core/dist/src/reporters/index.js
+11:33:42 (37107) INFO Sandbox In place mode is enabled, Stryker will be overriding YOUR files. Find your backup at: .stryker-tmp/backup9261401
+11:33:42 (37107) DEBUG Sandbox Start symlink node_modules
+11:33:42 (37107) DEBUG BroadcastReporter Broadcasting to reporters ["progress","clear-text","html","dashboard","json"]
+11:33:42 (37107) DEBUG ChildProcessProxy Started ChildProcessTestRunnerWorker in child process 37113
+11:33:42 (37107) DEBUG ChildProcessProxy Started ChildProcessTestRunnerWorker in child process 37114
+11:33:42 (37114) DEBUG PluginLoader Loading plugin @stryker-mutator/karma-runner
+11:33:42 (37114) DEBUG PluginLoader Loading plugin @stryker-mutator/typescript-checker
+11:33:42 (37114) DEBUG PluginLoader Loading plugin file:///Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/@stryker-mutator/core/dist/src/reporters/index.js
+11:33:42 (37113) DEBUG PluginLoader Loading plugin @stryker-mutator/karma-runner
+11:33:42 (37113) DEBUG PluginLoader Loading plugin @stryker-mutator/typescript-checker
+11:33:42 (37113) DEBUG PluginLoader Loading plugin file:///Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/@stryker-mutator/core/dist/src/reporters/index.js
+11:33:43 (37114) DEBUG AngularProjectStarter Starting Angular tests: ng test --progress=false --karma-config=/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/@stryker-mutator/karma-runner/stryker-karma.conf.cjs
+11:33:43 (37113) DEBUG AngularProjectStarter Starting Angular tests: ng test --progress=false --karma-config=/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/@stryker-mutator/karma-runner/stryker-karma.conf.cjs
+11:33:56 (37107) INFO DryRunExecutor Starting initial test run (karma test runner with "perTest" coverage analysis). This may take a while.
+11:33:56 (37107) DEBUG DryRunExecutor Using timeout of 300000 ms.
+11:33:56 (37107) DEBUG TimeoutDecorator Starting timeout timer (300000 ms) for a test run
+11:33:59 (37107) ERROR DryRunExecutor One or more tests failed in the initial test run:
+	BookEditComponent but  isbn number does not exist and service thorws an error  should  show an error if isbn number does not exist 
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>, NullInjectorError: R3InjectorError(DynamicTestModule)[Store -> Store]: 
+  NullInjectorError: No provider for Store!
+error properties: Object({ ngTempTokenPath: null, ngTokenPath: [ 'Store', 'Store' ] })
+    at NullInjector.get (node_modules/@angular/core/fesm2020/core.mjs:6364:27)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at ChainedInjector.get (node_modules/@angular/core/fesm2020/core.mjs:13868:36)
+    at lookupTokenUsingModuleInjector (node_modules/@angular/core/fesm2020/core.mjs:3286:39)
+    at getOrCreateInjectable (node_modules/@angular/core/fesm2020/core.mjs:3331:12)
+    at ɵɵdirectiveInject (node_modules/@angular/core/fesm2020/core.mjs:10881:12)
+    at NodeInjectorFactory.factory (ng:///BookEditComponent/ɵfac.js:5:7)
+    at getNodeInjectable (node_modules/@angular/core/fesm2020/core.mjs:3516:44)
+    at instantiateRootComponent (node_modules/@angular/core/fesm2020/core.mjs:12587:23)
+	BookEditComponent but  isbn number does not exist and service thorws NO error but an empty response  should  show an error if isbn number does not exist 
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>, NullInjectorError: R3InjectorError(DynamicTestModule)[Store -> Store]: 
+  NullInjectorError: No provider for Store!
+error properties: Object({ ngTempTokenPath: null, ngTokenPath: [ 'Store', 'Store' ] })
+    at NullInjector.get (node_modules/@angular/core/fesm2020/core.mjs:6364:27)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at ChainedInjector.get (node_modules/@angular/core/fesm2020/core.mjs:13868:36)
+    at lookupTokenUsingModuleInjector (node_modules/@angular/core/fesm2020/core.mjs:3286:39)
+    at getOrCreateInjectable (node_modules/@angular/core/fesm2020/core.mjs:3331:12)
+    at ɵɵdirectiveInject (node_modules/@angular/core/fesm2020/core.mjs:10881:12)
+    at NodeInjectorFactory.factory (ng:///BookEditComponent/ɵfac.js:5:7)
+    at getNodeInjectable (node_modules/@angular/core/fesm2020/core.mjs:3516:44)
+    at instantiateRootComponent (node_modules/@angular/core/fesm2020/core.mjs:12587:23)
+	BookEditComponent with existing isbn number should create component and should call bookStoreService.get() with ISBN number on ngOnInit()
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>, NullInjectorError: R3InjectorError(DynamicTestModule)[Store -> Store]: 
+  NullInjectorError: No provider for Store!
+error properties: Object({ ngTempTokenPath: null, ngTokenPath: [ 'Store', 'Store' ] })
+    at NullInjector.get (node_modules/@angular/core/fesm2020/core.mjs:6364:27)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at ChainedInjector.get (node_modules/@angular/core/fesm2020/core.mjs:13868:36)
+    at lookupTokenUsingModuleInjector (node_modules/@angular/core/fesm2020/core.mjs:3286:39)
+    at getOrCreateInjectable (node_modules/@angular/core/fesm2020/core.mjs:3331:12)
+    at ɵɵdirectiveInject (node_modules/@angular/core/fesm2020/core.mjs:10881:12)
+    at NodeInjectorFactory.factory (ng:///BookEditComponent/ɵfac.js:5:7)
+    at getNodeInjectable (node_modules/@angular/core/fesm2020/core.mjs:3516:44)
+    at instantiateRootComponent (node_modules/@angular/core/fesm2020/core.mjs:12587:23)
+	BookFormsComponent with existing book where AsyncValidatorFn is not used,  form should be valid and emit the new book data to the saveBookEventEmitter Output emitterif a book is given to ngOnChanges
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookFormsComponent with new book and AsyncValidatorFn or the checkAuthors validator  returns an error  should create
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookFormsComponent with new book and isbnLength validator  returns an error  should create the edit form, which should not be valid
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>, Expected $.published = '2022-10-01' to equal Date(Wed Aug 10 2022 01:00:00 GMT+0100 (British Summer Time)).
+    at <Jasmine>
+    at UserContext.apply (src/app/admin/book-edit/book-form.component.spec.ts:332:40)
+    at _ZoneDelegate.invoke (node_modules/zone.js/fesm2015/zone.js:372:26)
+    at ProxyZoneSpec.onInvoke (node_modules/zone.js/fesm2015/zone-testing.js:287:39)
+	BookFormsComponent with new book and AsyncValidatorFn that returns no errors should call bookFormSaveBook method, when button is clicked, and emit Event if Form is  valid
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookFormsComponent with new book and required or isbn validator that returns an error should disable the save button, when isbn number is not valid, or rating is not valid
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	CreateBookComponent should create, set "save" to true for 5 sec and set successmessage to the result
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>, NullInjectorError: R3InjectorError(DynamicTestModule)[Store -> Store]: 
+  NullInjectorError: No provider for Store!
+error properties: Object({ ngTempTokenPath: null, ngTokenPath: [ 'Store', 'Store' ] })
+    at NullInjector.get (node_modules/@angular/core/fesm2020/core.mjs:6364:27)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at ChainedInjector.get (node_modules/@angular/core/fesm2020/core.mjs:13868:36)
+    at lookupTokenUsingModuleInjector (node_modules/@angular/core/fesm2020/core.mjs:3286:39)
+    at getOrCreateInjectable (node_modules/@angular/core/fesm2020/core.mjs:3331:12)
+    at ɵɵdirectiveInject (node_modules/@angular/core/fesm2020/core.mjs:10881:12)
+    at NodeInjectorFactory.factory (ng:///CreateBookComponent/ɵfac.js:4:47)
+    at getNodeInjectable (node_modules/@angular/core/fesm2020/core.mjs:3516:44)
+    at instantiateRootComponent (node_modules/@angular/core/fesm2020/core.mjs:12587:23)
+	FormMessagesComponent should create an array of errormessage that fit to a "title" control 
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BodosValidatorService should return null if FormControlArray has at least one author
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	AppComponent should create the app
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>, NullInjectorError: R3InjectorError(DynamicTestModule)[Store -> Store]: 
+  NullInjectorError: No provider for Store!
+error properties: Object({ ngTempTokenPath: null, ngTokenPath: [ 'Store', 'Store' ] })
+    at NullInjector.get (node_modules/@angular/core/fesm2020/core.mjs:6364:27)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at ChainedInjector.get (node_modules/@angular/core/fesm2020/core.mjs:13868:36)
+    at lookupTokenUsingModuleInjector (node_modules/@angular/core/fesm2020/core.mjs:3286:39)
+    at getOrCreateInjectable (node_modules/@angular/core/fesm2020/core.mjs:3331:12)
+    at ɵɵdirectiveInject (node_modules/@angular/core/fesm2020/core.mjs:10881:12)
+    at NodeInjectorFactory.factory (ng:///AppComponent/ɵfac.js:4:40)
+    at getNodeInjectable (node_modules/@angular/core/fesm2020/core.mjs:3516:44)
+    at instantiateRootComponent (node_modules/@angular/core/fesm2020/core.mjs:12587:23)
+	BookDetailsComponent and IsbnPipe should create
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>, NullInjectorError: R3InjectorError(DynamicTestModule)[Store -> Store]: 
+  NullInjectorError: No provider for Store!
+error properties: Object({ ngTempTokenPath: null, ngTokenPath: [ 'Store', 'Store' ] })
+    at NullInjector.get (node_modules/@angular/core/fesm2020/core.mjs:6364:27)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at ChainedInjector.get (node_modules/@angular/core/fesm2020/core.mjs:13868:36)
+    at lookupTokenUsingModuleInjector (node_modules/@angular/core/fesm2020/core.mjs:3286:39)
+    at getOrCreateInjectable (node_modules/@angular/core/fesm2020/core.mjs:3331:12)
+    at ɵɵdirectiveInject (node_modules/@angular/core/fesm2020/core.mjs:10881:12)
+    at NodeInjectorFactory.factory (ng:///BookDetailsComponent/ɵfac.js:5:53)
+    at getNodeInjectable (node_modules/@angular/core/fesm2020/core.mjs:3516:44)
+    at instantiateRootComponent (node_modules/@angular/core/fesm2020/core.mjs:12587:23)
+	BookListItemComponent should create
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookListComponent should create and get the of(book[]) 
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>, NullInjectorError: R3InjectorError(DynamicTestModule)[Store -> Store]: 
+  NullInjectorError: No provider for Store!
+error properties: Object({ ngTempTokenPath: null, ngTokenPath: [ 'Store', 'Store' ] })
+    at NullInjector.get (node_modules/@angular/core/fesm2020/core.mjs:6364:27)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at ChainedInjector.get (node_modules/@angular/core/fesm2020/core.mjs:13868:36)
+    at lookupTokenUsingModuleInjector (node_modules/@angular/core/fesm2020/core.mjs:3286:39)
+    at getOrCreateInjectable (node_modules/@angular/core/fesm2020/core.mjs:3331:12)
+    at ɵɵdirectiveInject (node_modules/@angular/core/fesm2020/core.mjs:10881:12)
+    at NodeInjectorFactory.factory (ng:///BookListComponent/ɵfac.js:5:7)
+    at getNodeInjectable (node_modules/@angular/core/fesm2020/core.mjs:3516:44)
+    at instantiateRootComponent (node_modules/@angular/core/fesm2020/core.mjs:12587:23)
+	ListLoadedGuard should be created
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>, NullInjectorError: R3InjectorError(DynamicTestModule)[ListLoadedGuard -> BookStoreService -> HttpClient -> HttpClient]: 
+  NullInjectorError: No provider for HttpClient!
+error properties: Object({ ngTempTokenPath: null, ngTokenPath: [ 'ListLoadedGuard', 'BookStoreService', 'HttpClient', 'HttpClient' ] })
+    at NullInjector.get (node_modules/@angular/core/fesm2020/core.mjs:6364:27)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at injectInjectorOnly (node_modules/@angular/core/fesm2020/core.mjs:4775:33)
+    at ɵɵinject (node_modules/@angular/core/fesm2020/core.mjs:4779:12)
+    at Object.factory (ng:///BookStoreService/ɵfac.js:4:44)
+    at R3Injector.hydrate (node_modules/@angular/core/fesm2020/core.mjs:6892:35)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6780:33)
+    at injectInjectorOnly (node_modules/@angular/core/fesm2020/core.mjs:4775:33)
+    at ɵɵinject (node_modules/@angular/core/fesm2020/core.mjs:4779:12)
+	DelayDirective ..delay 100ms   should create an instance of the parent test component with style.visiblity = hidden, after 10ms should change to visible 
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	DelayDirective ..delay undefined (same as 0ms!) ..  should create an instance of the parent test component with style.visiblity = hidden, after 10ms should change to visible 
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	IsbnPipe create an instance
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	ZoomDirective should create an instance
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookEntityEffects should be created
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>, NullInjectorError: R3InjectorError(DynamicTestModule)[BookEntityEffects -> BookStoreService -> HttpClient -> HttpClient]: 
+  NullInjectorError: No provider for HttpClient!
+error properties: Object({ ngTempTokenPath: null, ngTokenPath: [ 'BookEntityEffects', 'BookStoreService', 'HttpClient', 'HttpClient' ] })
+    at NullInjector.get (node_modules/@angular/core/fesm2020/core.mjs:6364:27)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at injectInjectorOnly (node_modules/@angular/core/fesm2020/core.mjs:4775:33)
+    at ɵɵinject (node_modules/@angular/core/fesm2020/core.mjs:4779:12)
+    at Object.factory (ng:///BookStoreService/ɵfac.js:4:44)
+    at R3Injector.hydrate (node_modules/@angular/core/fesm2020/core.mjs:6892:35)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6780:33)
+    at injectInjectorOnly (node_modules/@angular/core/fesm2020/core.mjs:4775:33)
+    at ɵɵinject (node_modules/@angular/core/fesm2020/core.mjs:4779:12)
+	BookEntity Reducer unknown action should return the previous state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	ErrorPageComponent should create
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>, NullInjectorError: R3InjectorError(DynamicTestModule)[Store -> Store]: 
+  NullInjectorError: No provider for Store!
+error properties: Object({ ngTempTokenPath: null, ngTokenPath: [ 'Store', 'Store' ] })
+    at NullInjector.get (node_modules/@angular/core/fesm2020/core.mjs:6364:27)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at ChainedInjector.get (node_modules/@angular/core/fesm2020/core.mjs:13868:36)
+    at lookupTokenUsingModuleInjector (node_modules/@angular/core/fesm2020/core.mjs:3286:39)
+    at getOrCreateInjectable (node_modules/@angular/core/fesm2020/core.mjs:3331:12)
+    at ɵɵdirectiveInject (node_modules/@angular/core/fesm2020/core.mjs:10881:12)
+    at NodeInjectorFactory.factory (ng:///ErrorPageComponent/ɵfac.js:4:46)
+    at getNodeInjectable (node_modules/@angular/core/fesm2020/core.mjs:3516:44)
+    at instantiateRootComponent (node_modules/@angular/core/fesm2020/core.mjs:12587:23)
+	HomeComponent should create
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>, NullInjectorError: R3InjectorError(DynamicTestModule)[Store -> Store]: 
+  NullInjectorError: No provider for Store!
+error properties: Object({ ngTempTokenPath: null, ngTokenPath: [ 'Store', 'Store' ] })
+    at NullInjector.get (node_modules/@angular/core/fesm2020/core.mjs:6364:27)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at ChainedInjector.get (node_modules/@angular/core/fesm2020/core.mjs:13868:36)
+    at lookupTokenUsingModuleInjector (node_modules/@angular/core/fesm2020/core.mjs:3286:39)
+    at getOrCreateInjectable (node_modules/@angular/core/fesm2020/core.mjs:3331:12)
+    at ɵɵdirectiveInject (node_modules/@angular/core/fesm2020/core.mjs:10881:12)
+    at NodeInjectorFactory.factory (ng:///SearchComponent/ɵfac.js:4:43)
+    at getNodeInjectable (node_modules/@angular/core/fesm2020/core.mjs:3516:44)
+    at instantiateAllDirectives (node_modules/@angular/core/fesm2020/core.mjs:12726:27)
+	SearchComponent should create
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>, NullInjectorError: R3InjectorError(DynamicTestModule)[Store -> Store]: 
+  NullInjectorError: No provider for Store!
+error properties: Object({ ngTempTokenPath: null, ngTokenPath: [ 'Store', 'Store' ] })
+    at NullInjector.get (node_modules/@angular/core/fesm2020/core.mjs:6364:27)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at ChainedInjector.get (node_modules/@angular/core/fesm2020/core.mjs:13868:36)
+    at lookupTokenUsingModuleInjector (node_modules/@angular/core/fesm2020/core.mjs:3286:39)
+    at getOrCreateInjectable (node_modules/@angular/core/fesm2020/core.mjs:3331:12)
+    at ɵɵdirectiveInject (node_modules/@angular/core/fesm2020/core.mjs:10881:12)
+    at NodeInjectorFactory.factory (ng:///SearchComponent/ɵfac.js:4:43)
+    at getNodeInjectable (node_modules/@angular/core/fesm2020/core.mjs:3516:44)
+    at instantiateRootComponent (node_modules/@angular/core/fesm2020/core.mjs:12587:23)
+	SearchEffects should be created
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>, NullInjectorError: R3InjectorError(DynamicTestModule)[SearchEffects -> BookStoreService -> HttpClient -> HttpClient]: 
+  NullInjectorError: No provider for HttpClient!
+error properties: Object({ ngTempTokenPath: null, ngTokenPath: [ 'SearchEffects', 'BookStoreService', 'HttpClient', 'HttpClient' ] })
+    at NullInjector.get (node_modules/@angular/core/fesm2020/core.mjs:6364:27)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at injectInjectorOnly (node_modules/@angular/core/fesm2020/core.mjs:4775:33)
+    at ɵɵinject (node_modules/@angular/core/fesm2020/core.mjs:4779:12)
+    at Object.factory (ng:///BookStoreService/ɵfac.js:4:44)
+    at R3Injector.hydrate (node_modules/@angular/core/fesm2020/core.mjs:6892:35)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6780:33)
+    at injectInjectorOnly (node_modules/@angular/core/fesm2020/core.mjs:4775:33)
+    at ɵɵinject (node_modules/@angular/core/fesm2020/core.mjs:4779:12)
+	Search Reducer an unknown action should return the previous state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	Search Selectors should select the feature state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookFactoryService should get an empty book
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookStoreService  with Testbed should be created
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookStoreService  but without Testbed getAll() should call http GET with url and return a Book array converted from BookRaw array
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	CanNavigateToAdminGuard should return true if window.confirm is true
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	NotificationAlertComponent should create
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	SuccessAlertComponent should create
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>, NullInjectorError: R3InjectorError(DynamicTestModule)[Store -> Store]: 
+  NullInjectorError: No provider for Store!
+error properties: Object({ ngTempTokenPath: null, ngTokenPath: [ 'Store', 'Store' ] })
+    at NullInjector.get (node_modules/@angular/core/fesm2020/core.mjs:6364:27)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at ChainedInjector.get (node_modules/@angular/core/fesm2020/core.mjs:13868:36)
+    at lookupTokenUsingModuleInjector (node_modules/@angular/core/fesm2020/core.mjs:3286:39)
+    at getOrCreateInjectable (node_modules/@angular/core/fesm2020/core.mjs:3331:12)
+    at ɵɵdirectiveInject (node_modules/@angular/core/fesm2020/core.mjs:10881:12)
+    at NodeInjectorFactory.factory (ng:///SuccessAlertComponent/ɵfac.js:4:49)
+    at getNodeInjectable (node_modules/@angular/core/fesm2020/core.mjs:3516:44)
+    at instantiateRootComponent (node_modules/@angular/core/fesm2020/core.mjs:12587:23)
+	TokenInterceptor should increment the counter for all apis except getUsers
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	RouterEffects should be created
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>, NullInjectorError: R3InjectorError(DynamicTestModule)[RouterEffects -> ActivatedRoute -> ActivatedRoute]: 
+  NullInjectorError: No provider for ActivatedRoute!
+error properties: Object({ ngTempTokenPath: null, ngTokenPath: [ 'RouterEffects', 'ActivatedRoute', 'ActivatedRoute' ] })
+    at NullInjector.get (node_modules/@angular/core/fesm2020/core.mjs:6364:27)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at injectInjectorOnly (node_modules/@angular/core/fesm2020/core.mjs:4775:33)
+    at ɵɵinject (node_modules/@angular/core/fesm2020/core.mjs:4779:12)
+    at Object.factory (ng:///RouterEffects/ɵfac.js:5:7)
+    at R3Injector.hydrate (node_modules/@angular/core/fesm2020/core.mjs:6892:35)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6780:33)
+    at TestBedRender3.inject (node_modules/@angular/core/fesm2020/testing.mjs:26300:52)
+    at Function.inject (node_modules/@angular/core/fesm2020/testing.mjs:26172:37)
+	Router Reducer an unknown action should return the previous state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+11:33:59 (37107) DEBUG Stryker Not removing the temp dir because an error occurred
+11:33:59 (37107) ERROR Stryker There were failed tests in the initial test run.
+11:33:59 (37107) DEBUG ChildProcessProxy Disposing of worker process 37113
+11:33:59 (37107) DEBUG ChildProcessProxy Disposing of worker process 37114
+11:33:59 (37107) DEBUG ChildProcessProxy Kill 37114
+11:33:59 (37107) DEBUG ChildProcessProxy Kill 37113
+11:33:59 (37107) INFO Sandbox Resetting your original files from .stryker-tmp/backup9261401.
+11:33:59 (37107) DEBUG ChildProcessProxy Disposing of worker process 37110
+11:33:59 (37107) DEBUG ChildProcessProxy Disposing of worker process 37111
+11:33:59 (37107) DEBUG ChildProcessProxy Kill 37110
+11:33:59 (37107) DEBUG ChildProcessProxy Kill 37111
+11:37:13 (37245) DEBUG ConfigReader Loading config from stryker.conf.json
+11:37:13 (37245) DEBUG ConfigReader Loaded config: {
+  "$schema": "./node_modules/@stryker-mutator/core/schema/stryker-schema.json",
+  "_comment": "mutate: src/**/*.ts",
+  "mutate": [
+    "!src/**/*.spec.ts",
+    "!src/test.ts",
+    "!src/environments/*.ts",
+    "!src/**/*.module.ts",
+    "!src/main.ts",
+    "!cypress/**"
+  ],
+  "testRunner": "karma",
+  "karma": {
+    "configFile": "karma.conf.js",
+    "projectType": "angular-cli",
+    "config": {
+      "browsers": [
+        "ChromeHeadless"
+      ]
+    }
+  },
+  "reporters": [
+    "progress",
+    "clear-text",
+    "html",
+    "dashboard",
+    "json"
+  ],
+  "htmlReporter": {
+    "fileName": "reports/mutation/mutation.all.html"
+  },
+  "concurrency": 4,
+  "concurrency_comment": "Recommended to use about half of your available cores when running stryker with angular",
+  "coverageAnalysis": "perTest",
+  "timeoutFactor": 40,
+  "checkers": [
+    "typescript"
+  ],
+  "tsconfigFile": "tsconfig.stryker.json",
+  "dashboard": {
+    "project": "github.com/bodote/book-monkey",
+    "version": "master",
+    "module": "main",
+    "baseUrl": "https://dashboard.stryker-mutator.io/api/reports",
+    "reportType": "full"
+  },
+  "disableTypeChecks": "{node_modules,cypress}/**/*.{js,ts,jsx,tsx,html,vue}",
+  "ignorePatterns": [
+    "**",
+    "!src/app/search/search.reducer.ts"
+  ],
+  "inPlace": true,
+  "fileLogLevel": "debug",
+  "allowConsoleColors": true,
+  "checkerNodeArgs": [],
+  "maxTestRunnerReuse": 0,
+  "commandRunner": {
+    "command": "npm test"
+  },
+  "clearTextReporter": {
+    "allowColor": true,
+    "logTests": true,
+    "maxTestsToLog": 3
+  },
+  "eventReporter": {
+    "baseDir": "reports/mutation/events"
+  },
+  "ignoreStatic": false,
+  "logLevel": "info",
+  "maxConcurrentTestRunners": 9007199254740991,
+  "mutator": {
+    "plugins": null,
+    "excludedMutations": []
+  },
+  "plugins": [
+    "@stryker-mutator/*"
+  ],
+  "appendPlugins": [],
+  "jsonReporter": {
+    "fileName": "reports/mutation/mutation.json"
+  },
+  "symlinkNodeModules": true,
+  "tempDirName": ".stryker-tmp",
+  "cleanTempDir": true,
+  "testRunnerNodeArgs": [],
+  "thresholds": {
+    "high": 80,
+    "low": 60,
+    "break": null
+  },
+  "timeoutMS": 5000,
+  "dryRunTimeoutMinutes": 5,
+  "warnings": true,
+  "disableBail": false
+}
+11:37:13 (37245) DEBUG PluginLoader Loading @stryker-mutator/* from /Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/@stryker-mutator
+11:37:13 (37245) DEBUG PluginLoader Loading plugin "@stryker-mutator/karma-runner" (matched with expression @stryker-mutator/*)
+11:37:13 (37245) DEBUG PluginLoader Loading plugin "@stryker-mutator/typescript-checker" (matched with expression @stryker-mutator/*)
+11:37:13 (37245) DEBUG PluginLoader Loading plugin @stryker-mutator/karma-runner
+11:37:13 (37245) DEBUG PluginLoader Loading plugin @stryker-mutator/typescript-checker
+11:37:13 (37245) DEBUG PluginLoader Loading plugin file:///Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/@stryker-mutator/core/dist/src/reporters/index.js
+11:37:13 (37245) DEBUG MetaSchemaBuilder Contributing 1 schemas from plugins to options validation.
+11:37:13 (37245) WARN ProjectReader Glob pattern "!src/**/*.spec.ts" did not exclude any files.
+11:37:13 (37245) WARN ProjectReader Glob pattern "!src/test.ts" did not exclude any files.
+11:37:13 (37245) WARN ProjectReader Glob pattern "!src/environments/*.ts" did not exclude any files.
+11:37:13 (37245) WARN ProjectReader Glob pattern "!src/**/*.module.ts" did not exclude any files.
+11:37:13 (37245) WARN ProjectReader Glob pattern "!src/main.ts" did not exclude any files.
+11:37:13 (37245) WARN ProjectReader Glob pattern "!cypress/**" did not exclude any files.
+11:37:13 (37245) WARN ProjectReader No files marked to be mutated, Stryker will perform a dry-run without actually mutating anything. You can configure the `mutate` property in your config file (or use `--mutate` via command line).
+11:37:13 (37245) DEBUG ProjectReader All input files: [
+  "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/app/search/search.reducer.ts"
+]
+11:37:13 (37245) DEBUG ProjectReader Files to mutate: []
+11:37:13 (37245) DEBUG TemporaryDirectory Using temp directory "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/.stryker-tmp"
+11:37:13 (37245) DEBUG Instrumenter Instrumenting 0 source files with mutants
+11:37:13 (37245) INFO Instrumenter Instrumented 0 source file(s) with 0 mutant(s)
+11:37:13 (37245) INFO ConcurrencyTokenProvider Creating 2 checker process(es) and 2 test runner process(es).
+11:37:13 (37245) DEBUG ChildProcessProxy Started CheckerWorker in child process 37248
+11:37:13 (37245) DEBUG ChildProcessProxy Started CheckerWorker in child process 37249
+11:37:14 (37248) DEBUG PluginLoader Loading plugin @stryker-mutator/karma-runner
+11:37:14 (37248) DEBUG PluginLoader Loading plugin @stryker-mutator/typescript-checker
+11:37:14 (37248) DEBUG PluginLoader Loading plugin file:///Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/@stryker-mutator/core/dist/src/reporters/index.js
+11:37:14 (37249) DEBUG PluginLoader Loading plugin @stryker-mutator/karma-runner
+11:37:14 (37249) DEBUG PluginLoader Loading plugin @stryker-mutator/typescript-checker
+11:37:14 (37249) DEBUG PluginLoader Loading plugin file:///Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/@stryker-mutator/core/dist/src/reporters/index.js
+11:37:18 (37245) INFO Sandbox In place mode is enabled, Stryker will be overriding YOUR files. Find your backup at: .stryker-tmp/backup7237366
+11:37:18 (37245) DEBUG Sandbox Start symlink node_modules
+11:37:18 (37245) DEBUG BroadcastReporter Broadcasting to reporters ["progress","clear-text","html","dashboard","json"]
+11:37:18 (37245) DEBUG ChildProcessProxy Started ChildProcessTestRunnerWorker in child process 37250
+11:37:18 (37245) DEBUG ChildProcessProxy Started ChildProcessTestRunnerWorker in child process 37251
+11:37:18 (37250) DEBUG PluginLoader Loading plugin @stryker-mutator/karma-runner
+11:37:18 (37250) DEBUG PluginLoader Loading plugin @stryker-mutator/typescript-checker
+11:37:18 (37250) DEBUG PluginLoader Loading plugin file:///Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/@stryker-mutator/core/dist/src/reporters/index.js
+11:37:18 (37251) DEBUG PluginLoader Loading plugin @stryker-mutator/karma-runner
+11:37:18 (37251) DEBUG PluginLoader Loading plugin @stryker-mutator/typescript-checker
+11:37:18 (37251) DEBUG PluginLoader Loading plugin file:///Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/@stryker-mutator/core/dist/src/reporters/index.js
+11:37:19 (37250) DEBUG AngularProjectStarter Starting Angular tests: ng test --progress=false --karma-config=/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/@stryker-mutator/karma-runner/stryker-karma.conf.cjs
+11:37:19 (37251) DEBUG AngularProjectStarter Starting Angular tests: ng test --progress=false --karma-config=/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/@stryker-mutator/karma-runner/stryker-karma.conf.cjs
+11:37:36 (37245) INFO DryRunExecutor Starting initial test run (karma test runner with "perTest" coverage analysis). This may take a while.
+11:37:36 (37245) DEBUG DryRunExecutor Using timeout of 300000 ms.
+11:37:36 (37245) DEBUG TimeoutDecorator Starting timeout timer (300000 ms) for a test run
+11:37:39 (37245) ERROR DryRunExecutor One or more tests failed in the initial test run:
+	BookEditComponent but  isbn number does not exist and service thorws an error  should  show an error if isbn number does not exist 
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>, NullInjectorError: R3InjectorError(DynamicTestModule)[Store -> Store]: 
+  NullInjectorError: No provider for Store!
+error properties: Object({ ngTempTokenPath: null, ngTokenPath: [ 'Store', 'Store' ] })
+    at NullInjector.get (node_modules/@angular/core/fesm2020/core.mjs:6364:27)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at ChainedInjector.get (node_modules/@angular/core/fesm2020/core.mjs:13868:36)
+    at lookupTokenUsingModuleInjector (node_modules/@angular/core/fesm2020/core.mjs:3286:39)
+    at getOrCreateInjectable (node_modules/@angular/core/fesm2020/core.mjs:3331:12)
+    at ɵɵdirectiveInject (node_modules/@angular/core/fesm2020/core.mjs:10881:12)
+    at NodeInjectorFactory.factory (ng:///BookEditComponent/ɵfac.js:5:7)
+    at getNodeInjectable (node_modules/@angular/core/fesm2020/core.mjs:3516:44)
+    at instantiateRootComponent (node_modules/@angular/core/fesm2020/core.mjs:12587:23)
+	BookEditComponent but  isbn number does not exist and service thorws NO error but an empty response  should  show an error if isbn number does not exist 
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>, NullInjectorError: R3InjectorError(DynamicTestModule)[Store -> Store]: 
+  NullInjectorError: No provider for Store!
+error properties: Object({ ngTempTokenPath: null, ngTokenPath: [ 'Store', 'Store' ] })
+    at NullInjector.get (node_modules/@angular/core/fesm2020/core.mjs:6364:27)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at ChainedInjector.get (node_modules/@angular/core/fesm2020/core.mjs:13868:36)
+    at lookupTokenUsingModuleInjector (node_modules/@angular/core/fesm2020/core.mjs:3286:39)
+    at getOrCreateInjectable (node_modules/@angular/core/fesm2020/core.mjs:3331:12)
+    at ɵɵdirectiveInject (node_modules/@angular/core/fesm2020/core.mjs:10881:12)
+    at NodeInjectorFactory.factory (ng:///BookEditComponent/ɵfac.js:5:7)
+    at getNodeInjectable (node_modules/@angular/core/fesm2020/core.mjs:3516:44)
+    at instantiateRootComponent (node_modules/@angular/core/fesm2020/core.mjs:12587:23)
+	BookEditComponent with existing isbn number should create component and should call bookStoreService.get() with ISBN number on ngOnInit()
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>, NullInjectorError: R3InjectorError(DynamicTestModule)[Store -> Store]: 
+  NullInjectorError: No provider for Store!
+error properties: Object({ ngTempTokenPath: null, ngTokenPath: [ 'Store', 'Store' ] })
+    at NullInjector.get (node_modules/@angular/core/fesm2020/core.mjs:6364:27)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at ChainedInjector.get (node_modules/@angular/core/fesm2020/core.mjs:13868:36)
+    at lookupTokenUsingModuleInjector (node_modules/@angular/core/fesm2020/core.mjs:3286:39)
+    at getOrCreateInjectable (node_modules/@angular/core/fesm2020/core.mjs:3331:12)
+    at ɵɵdirectiveInject (node_modules/@angular/core/fesm2020/core.mjs:10881:12)
+    at NodeInjectorFactory.factory (ng:///BookEditComponent/ɵfac.js:5:7)
+    at getNodeInjectable (node_modules/@angular/core/fesm2020/core.mjs:3516:44)
+    at instantiateRootComponent (node_modules/@angular/core/fesm2020/core.mjs:12587:23)
+	BookFormsComponent with existing book where AsyncValidatorFn is not used,  form should be valid and emit the new book data to the saveBookEventEmitter Output emitterif a book is given to ngOnChanges
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookFormsComponent with new book and AsyncValidatorFn or the checkAuthors validator  returns an error  should create
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookFormsComponent with new book and isbnLength validator  returns an error  should create the edit form, which should not be valid
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>, Expected $.published = '2022-10-01' to equal Date(Wed Aug 10 2022 01:00:00 GMT+0100 (British Summer Time)).
+    at <Jasmine>
+    at UserContext.apply (src/app/admin/book-edit/book-form.component.spec.ts:332:40)
+    at _ZoneDelegate.invoke (node_modules/zone.js/fesm2015/zone.js:372:26)
+    at ProxyZoneSpec.onInvoke (node_modules/zone.js/fesm2015/zone-testing.js:287:39)
+	BookFormsComponent with new book and AsyncValidatorFn that returns no errors should call bookFormSaveBook method, when button is clicked, and emit Event if Form is  valid
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookFormsComponent with new book and required or isbn validator that returns an error should disable the save button, when isbn number is not valid, or rating is not valid
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	CreateBookComponent should create, set "save" to true for 5 sec and set successmessage to the result
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>, NullInjectorError: R3InjectorError(DynamicTestModule)[Store -> Store]: 
+  NullInjectorError: No provider for Store!
+error properties: Object({ ngTempTokenPath: null, ngTokenPath: [ 'Store', 'Store' ] })
+    at NullInjector.get (node_modules/@angular/core/fesm2020/core.mjs:6364:27)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at ChainedInjector.get (node_modules/@angular/core/fesm2020/core.mjs:13868:36)
+    at lookupTokenUsingModuleInjector (node_modules/@angular/core/fesm2020/core.mjs:3286:39)
+    at getOrCreateInjectable (node_modules/@angular/core/fesm2020/core.mjs:3331:12)
+    at ɵɵdirectiveInject (node_modules/@angular/core/fesm2020/core.mjs:10881:12)
+    at NodeInjectorFactory.factory (ng:///CreateBookComponent/ɵfac.js:4:47)
+    at getNodeInjectable (node_modules/@angular/core/fesm2020/core.mjs:3516:44)
+    at instantiateRootComponent (node_modules/@angular/core/fesm2020/core.mjs:12587:23)
+	FormMessagesComponent should create an array of errormessage that fit to a "title" control 
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BodosValidatorService should return null if FormControlArray has at least one author
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	AppComponent should create the app
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>, NullInjectorError: R3InjectorError(DynamicTestModule)[Store -> Store]: 
+  NullInjectorError: No provider for Store!
+error properties: Object({ ngTempTokenPath: null, ngTokenPath: [ 'Store', 'Store' ] })
+    at NullInjector.get (node_modules/@angular/core/fesm2020/core.mjs:6364:27)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at ChainedInjector.get (node_modules/@angular/core/fesm2020/core.mjs:13868:36)
+    at lookupTokenUsingModuleInjector (node_modules/@angular/core/fesm2020/core.mjs:3286:39)
+    at getOrCreateInjectable (node_modules/@angular/core/fesm2020/core.mjs:3331:12)
+    at ɵɵdirectiveInject (node_modules/@angular/core/fesm2020/core.mjs:10881:12)
+    at NodeInjectorFactory.factory (ng:///AppComponent/ɵfac.js:4:40)
+    at getNodeInjectable (node_modules/@angular/core/fesm2020/core.mjs:3516:44)
+    at instantiateRootComponent (node_modules/@angular/core/fesm2020/core.mjs:12587:23)
+	BookDetailsComponent and IsbnPipe should create
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>, NullInjectorError: R3InjectorError(DynamicTestModule)[Store -> Store]: 
+  NullInjectorError: No provider for Store!
+error properties: Object({ ngTempTokenPath: null, ngTokenPath: [ 'Store', 'Store' ] })
+    at NullInjector.get (node_modules/@angular/core/fesm2020/core.mjs:6364:27)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at ChainedInjector.get (node_modules/@angular/core/fesm2020/core.mjs:13868:36)
+    at lookupTokenUsingModuleInjector (node_modules/@angular/core/fesm2020/core.mjs:3286:39)
+    at getOrCreateInjectable (node_modules/@angular/core/fesm2020/core.mjs:3331:12)
+    at ɵɵdirectiveInject (node_modules/@angular/core/fesm2020/core.mjs:10881:12)
+    at NodeInjectorFactory.factory (ng:///BookDetailsComponent/ɵfac.js:5:53)
+    at getNodeInjectable (node_modules/@angular/core/fesm2020/core.mjs:3516:44)
+    at instantiateRootComponent (node_modules/@angular/core/fesm2020/core.mjs:12587:23)
+	BookListItemComponent should create
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookListComponent should create and get the of(book[]) 
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>, NullInjectorError: R3InjectorError(DynamicTestModule)[Store -> Store]: 
+  NullInjectorError: No provider for Store!
+error properties: Object({ ngTempTokenPath: null, ngTokenPath: [ 'Store', 'Store' ] })
+    at NullInjector.get (node_modules/@angular/core/fesm2020/core.mjs:6364:27)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at ChainedInjector.get (node_modules/@angular/core/fesm2020/core.mjs:13868:36)
+    at lookupTokenUsingModuleInjector (node_modules/@angular/core/fesm2020/core.mjs:3286:39)
+    at getOrCreateInjectable (node_modules/@angular/core/fesm2020/core.mjs:3331:12)
+    at ɵɵdirectiveInject (node_modules/@angular/core/fesm2020/core.mjs:10881:12)
+    at NodeInjectorFactory.factory (ng:///BookListComponent/ɵfac.js:5:7)
+    at getNodeInjectable (node_modules/@angular/core/fesm2020/core.mjs:3516:44)
+    at instantiateRootComponent (node_modules/@angular/core/fesm2020/core.mjs:12587:23)
+	ListLoadedGuard should be created
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>, NullInjectorError: R3InjectorError(DynamicTestModule)[ListLoadedGuard -> BookStoreService -> HttpClient -> HttpClient]: 
+  NullInjectorError: No provider for HttpClient!
+error properties: Object({ ngTempTokenPath: null, ngTokenPath: [ 'ListLoadedGuard', 'BookStoreService', 'HttpClient', 'HttpClient' ] })
+    at NullInjector.get (node_modules/@angular/core/fesm2020/core.mjs:6364:27)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at injectInjectorOnly (node_modules/@angular/core/fesm2020/core.mjs:4775:33)
+    at ɵɵinject (node_modules/@angular/core/fesm2020/core.mjs:4779:12)
+    at Object.factory (ng:///BookStoreService/ɵfac.js:4:44)
+    at R3Injector.hydrate (node_modules/@angular/core/fesm2020/core.mjs:6892:35)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6780:33)
+    at injectInjectorOnly (node_modules/@angular/core/fesm2020/core.mjs:4775:33)
+    at ɵɵinject (node_modules/@angular/core/fesm2020/core.mjs:4779:12)
+	DelayDirective ..delay 100ms   should create an instance of the parent test component with style.visiblity = hidden, after 10ms should change to visible 
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	DelayDirective ..delay undefined (same as 0ms!) ..  should create an instance of the parent test component with style.visiblity = hidden, after 10ms should change to visible 
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	IsbnPipe create an instance
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	ZoomDirective should create an instance
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookEntityEffects should be created
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>, NullInjectorError: R3InjectorError(DynamicTestModule)[BookEntityEffects -> BookStoreService -> HttpClient -> HttpClient]: 
+  NullInjectorError: No provider for HttpClient!
+error properties: Object({ ngTempTokenPath: null, ngTokenPath: [ 'BookEntityEffects', 'BookStoreService', 'HttpClient', 'HttpClient' ] })
+    at NullInjector.get (node_modules/@angular/core/fesm2020/core.mjs:6364:27)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at injectInjectorOnly (node_modules/@angular/core/fesm2020/core.mjs:4775:33)
+    at ɵɵinject (node_modules/@angular/core/fesm2020/core.mjs:4779:12)
+    at Object.factory (ng:///BookStoreService/ɵfac.js:4:44)
+    at R3Injector.hydrate (node_modules/@angular/core/fesm2020/core.mjs:6892:35)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6780:33)
+    at injectInjectorOnly (node_modules/@angular/core/fesm2020/core.mjs:4775:33)
+    at ɵɵinject (node_modules/@angular/core/fesm2020/core.mjs:4779:12)
+	BookEntity Reducer unknown action should return the previous state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	ErrorPageComponent should create
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>, NullInjectorError: R3InjectorError(DynamicTestModule)[Store -> Store]: 
+  NullInjectorError: No provider for Store!
+error properties: Object({ ngTempTokenPath: null, ngTokenPath: [ 'Store', 'Store' ] })
+    at NullInjector.get (node_modules/@angular/core/fesm2020/core.mjs:6364:27)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at ChainedInjector.get (node_modules/@angular/core/fesm2020/core.mjs:13868:36)
+    at lookupTokenUsingModuleInjector (node_modules/@angular/core/fesm2020/core.mjs:3286:39)
+    at getOrCreateInjectable (node_modules/@angular/core/fesm2020/core.mjs:3331:12)
+    at ɵɵdirectiveInject (node_modules/@angular/core/fesm2020/core.mjs:10881:12)
+    at NodeInjectorFactory.factory (ng:///ErrorPageComponent/ɵfac.js:4:46)
+    at getNodeInjectable (node_modules/@angular/core/fesm2020/core.mjs:3516:44)
+    at instantiateRootComponent (node_modules/@angular/core/fesm2020/core.mjs:12587:23)
+	HomeComponent should create
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>, NullInjectorError: R3InjectorError(DynamicTestModule)[Store -> Store]: 
+  NullInjectorError: No provider for Store!
+error properties: Object({ ngTempTokenPath: null, ngTokenPath: [ 'Store', 'Store' ] })
+    at NullInjector.get (node_modules/@angular/core/fesm2020/core.mjs:6364:27)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at ChainedInjector.get (node_modules/@angular/core/fesm2020/core.mjs:13868:36)
+    at lookupTokenUsingModuleInjector (node_modules/@angular/core/fesm2020/core.mjs:3286:39)
+    at getOrCreateInjectable (node_modules/@angular/core/fesm2020/core.mjs:3331:12)
+    at ɵɵdirectiveInject (node_modules/@angular/core/fesm2020/core.mjs:10881:12)
+    at NodeInjectorFactory.factory (ng:///SearchComponent/ɵfac.js:4:43)
+    at getNodeInjectable (node_modules/@angular/core/fesm2020/core.mjs:3516:44)
+    at instantiateAllDirectives (node_modules/@angular/core/fesm2020/core.mjs:12726:27)
+	SearchComponent should create
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>, NullInjectorError: R3InjectorError(DynamicTestModule)[Store -> Store]: 
+  NullInjectorError: No provider for Store!
+error properties: Object({ ngTempTokenPath: null, ngTokenPath: [ 'Store', 'Store' ] })
+    at NullInjector.get (node_modules/@angular/core/fesm2020/core.mjs:6364:27)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at ChainedInjector.get (node_modules/@angular/core/fesm2020/core.mjs:13868:36)
+    at lookupTokenUsingModuleInjector (node_modules/@angular/core/fesm2020/core.mjs:3286:39)
+    at getOrCreateInjectable (node_modules/@angular/core/fesm2020/core.mjs:3331:12)
+    at ɵɵdirectiveInject (node_modules/@angular/core/fesm2020/core.mjs:10881:12)
+    at NodeInjectorFactory.factory (ng:///SearchComponent/ɵfac.js:4:43)
+    at getNodeInjectable (node_modules/@angular/core/fesm2020/core.mjs:3516:44)
+    at instantiateRootComponent (node_modules/@angular/core/fesm2020/core.mjs:12587:23)
+	SearchEffects should be created
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>, NullInjectorError: R3InjectorError(DynamicTestModule)[SearchEffects -> BookStoreService -> HttpClient -> HttpClient]: 
+  NullInjectorError: No provider for HttpClient!
+error properties: Object({ ngTempTokenPath: null, ngTokenPath: [ 'SearchEffects', 'BookStoreService', 'HttpClient', 'HttpClient' ] })
+    at NullInjector.get (node_modules/@angular/core/fesm2020/core.mjs:6364:27)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at injectInjectorOnly (node_modules/@angular/core/fesm2020/core.mjs:4775:33)
+    at ɵɵinject (node_modules/@angular/core/fesm2020/core.mjs:4779:12)
+    at Object.factory (ng:///BookStoreService/ɵfac.js:4:44)
+    at R3Injector.hydrate (node_modules/@angular/core/fesm2020/core.mjs:6892:35)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6780:33)
+    at injectInjectorOnly (node_modules/@angular/core/fesm2020/core.mjs:4775:33)
+    at ɵɵinject (node_modules/@angular/core/fesm2020/core.mjs:4779:12)
+	Search Reducer an unknown action should return the previous state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	Search Selectors should select the feature state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookFactoryService should get an empty book
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookStoreService  with Testbed should be created
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookStoreService  but without Testbed getAll() should call http GET with url and return a Book array converted from BookRaw array
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	CanNavigateToAdminGuard should return true if window.confirm is true
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	NotificationAlertComponent should create
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	SuccessAlertComponent should create
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>, NullInjectorError: R3InjectorError(DynamicTestModule)[Store -> Store]: 
+  NullInjectorError: No provider for Store!
+error properties: Object({ ngTempTokenPath: null, ngTokenPath: [ 'Store', 'Store' ] })
+    at NullInjector.get (node_modules/@angular/core/fesm2020/core.mjs:6364:27)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at ChainedInjector.get (node_modules/@angular/core/fesm2020/core.mjs:13868:36)
+    at lookupTokenUsingModuleInjector (node_modules/@angular/core/fesm2020/core.mjs:3286:39)
+    at getOrCreateInjectable (node_modules/@angular/core/fesm2020/core.mjs:3331:12)
+    at ɵɵdirectiveInject (node_modules/@angular/core/fesm2020/core.mjs:10881:12)
+    at NodeInjectorFactory.factory (ng:///SuccessAlertComponent/ɵfac.js:4:49)
+    at getNodeInjectable (node_modules/@angular/core/fesm2020/core.mjs:3516:44)
+    at instantiateRootComponent (node_modules/@angular/core/fesm2020/core.mjs:12587:23)
+	TokenInterceptor should increment the counter for all apis except getUsers
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	RouterEffects should be created
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>, NullInjectorError: R3InjectorError(DynamicTestModule)[RouterEffects -> ActivatedRoute -> ActivatedRoute]: 
+  NullInjectorError: No provider for ActivatedRoute!
+error properties: Object({ ngTempTokenPath: null, ngTokenPath: [ 'RouterEffects', 'ActivatedRoute', 'ActivatedRoute' ] })
+    at NullInjector.get (node_modules/@angular/core/fesm2020/core.mjs:6364:27)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at injectInjectorOnly (node_modules/@angular/core/fesm2020/core.mjs:4775:33)
+    at ɵɵinject (node_modules/@angular/core/fesm2020/core.mjs:4779:12)
+    at Object.factory (ng:///RouterEffects/ɵfac.js:5:7)
+    at R3Injector.hydrate (node_modules/@angular/core/fesm2020/core.mjs:6892:35)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6780:33)
+    at TestBedRender3.inject (node_modules/@angular/core/fesm2020/testing.mjs:26300:52)
+    at Function.inject (node_modules/@angular/core/fesm2020/testing.mjs:26172:37)
+	Router Reducer an unknown action should return the previous state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+11:37:39 (37245) DEBUG Stryker Not removing the temp dir because an error occurred
+11:37:39 (37245) ERROR Stryker There were failed tests in the initial test run.
+11:37:39 (37245) DEBUG ChildProcessProxy Disposing of worker process 37251
+11:37:39 (37245) DEBUG ChildProcessProxy Kill 37251
+11:37:39 (37245) DEBUG ChildProcessProxy Disposing of worker process 37250
+11:37:39 (37245) DEBUG ChildProcessProxy Kill 37250
+11:37:39 (37245) INFO Sandbox Resetting your original files from .stryker-tmp/backup7237366.
+11:37:39 (37245) DEBUG ChildProcessProxy Disposing of worker process 37248
+11:37:39 (37245) DEBUG ChildProcessProxy Disposing of worker process 37249
+11:37:39 (37245) DEBUG ChildProcessProxy Kill 37249
+11:37:39 (37245) DEBUG ChildProcessProxy Kill 37248
+11:39:28 (37334) WARN ProjectReader Glob pattern "!src/**/*.spec.ts" did not exclude any files.
+11:39:28 (37334) WARN ProjectReader Glob pattern "!src/test.ts" did not exclude any files.
+11:39:28 (37334) WARN ProjectReader Glob pattern "!src/environments/*.ts" did not exclude any files.
+11:39:28 (37334) WARN ProjectReader Glob pattern "!src/**/*.module.ts" did not exclude any files.
+11:39:28 (37334) WARN ProjectReader Glob pattern "!src/main.ts" did not exclude any files.
+11:39:28 (37334) WARN ProjectReader Glob pattern "!cypress/**" did not exclude any files.
+11:39:28 (37334) WARN ProjectReader No files marked to be mutated, Stryker will perform a dry-run without actually mutating anything. You can configure the `mutate` property in your config file (or use `--mutate` via command line).
+11:39:28 (37334) INFO Instrumenter Instrumented 0 source file(s) with 0 mutant(s)
+11:39:28 (37334) INFO ConcurrencyTokenProvider Creating 2 checker process(es) and 2 test runner process(es).
+11:39:33 (37334) INFO Sandbox In place mode is enabled, Stryker will be overriding YOUR files. Find your backup at: .stryker-tmp/backup885663
+11:39:49 (37334) INFO DryRunExecutor Starting initial test run (karma test runner with "perTest" coverage analysis). This may take a while.
+11:39:52 (37334) ERROR DryRunExecutor One or more tests failed in the initial test run:
+	BookEditComponent but  isbn number does not exist and service thorws an error  should  show an error if isbn number does not exist 
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9876/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>, NullInjectorError: R3InjectorError(DynamicTestModule)[Store -> Store]: 
+  NullInjectorError: No provider for Store!
+error properties: Object({ ngTempTokenPath: null, ngTokenPath: [ 'Store', 'Store' ] })
+    at NullInjector.get (node_modules/@angular/core/fesm2020/core.mjs:6364:27)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at ChainedInjector.get (node_modules/@angular/core/fesm2020/core.mjs:13868:36)
+    at lookupTokenUsingModuleInjector (node_modules/@angular/core/fesm2020/core.mjs:3286:39)
+    at getOrCreateInjectable (node_modules/@angular/core/fesm2020/core.mjs:3331:12)
+    at ɵɵdirectiveInject (node_modules/@angular/core/fesm2020/core.mjs:10881:12)
+    at NodeInjectorFactory.factory (ng:///BookEditComponent/ɵfac.js:5:7)
+    at getNodeInjectable (node_modules/@angular/core/fesm2020/core.mjs:3516:44)
+    at instantiateRootComponent (node_modules/@angular/core/fesm2020/core.mjs:12587:23)
+	BookEditComponent but  isbn number does not exist and service thorws NO error but an empty response  should  show an error if isbn number does not exist 
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9876/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>, NullInjectorError: R3InjectorError(DynamicTestModule)[Store -> Store]: 
+  NullInjectorError: No provider for Store!
+error properties: Object({ ngTempTokenPath: null, ngTokenPath: [ 'Store', 'Store' ] })
+    at NullInjector.get (node_modules/@angular/core/fesm2020/core.mjs:6364:27)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at ChainedInjector.get (node_modules/@angular/core/fesm2020/core.mjs:13868:36)
+    at lookupTokenUsingModuleInjector (node_modules/@angular/core/fesm2020/core.mjs:3286:39)
+    at getOrCreateInjectable (node_modules/@angular/core/fesm2020/core.mjs:3331:12)
+    at ɵɵdirectiveInject (node_modules/@angular/core/fesm2020/core.mjs:10881:12)
+    at NodeInjectorFactory.factory (ng:///BookEditComponent/ɵfac.js:5:7)
+    at getNodeInjectable (node_modules/@angular/core/fesm2020/core.mjs:3516:44)
+    at instantiateRootComponent (node_modules/@angular/core/fesm2020/core.mjs:12587:23)
+	BookEditComponent with existing isbn number should create component and should call bookStoreService.get() with ISBN number on ngOnInit()
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9876/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>, NullInjectorError: R3InjectorError(DynamicTestModule)[Store -> Store]: 
+  NullInjectorError: No provider for Store!
+error properties: Object({ ngTempTokenPath: null, ngTokenPath: [ 'Store', 'Store' ] })
+    at NullInjector.get (node_modules/@angular/core/fesm2020/core.mjs:6364:27)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at ChainedInjector.get (node_modules/@angular/core/fesm2020/core.mjs:13868:36)
+    at lookupTokenUsingModuleInjector (node_modules/@angular/core/fesm2020/core.mjs:3286:39)
+    at getOrCreateInjectable (node_modules/@angular/core/fesm2020/core.mjs:3331:12)
+    at ɵɵdirectiveInject (node_modules/@angular/core/fesm2020/core.mjs:10881:12)
+    at NodeInjectorFactory.factory (ng:///BookEditComponent/ɵfac.js:5:7)
+    at getNodeInjectable (node_modules/@angular/core/fesm2020/core.mjs:3516:44)
+    at instantiateRootComponent (node_modules/@angular/core/fesm2020/core.mjs:12587:23)
+	BookFormsComponent with existing book where AsyncValidatorFn is not used,  form should be valid and emit the new book data to the saveBookEventEmitter Output emitterif a book is given to ngOnChanges
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9876/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookFormsComponent with new book and AsyncValidatorFn or the checkAuthors validator  returns an error  should create
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9876/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookFormsComponent with new book and isbnLength validator  returns an error  should create the edit form, which should not be valid
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9876/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>, Expected $.published = '2022-10-01' to equal Date(Wed Aug 10 2022 01:00:00 GMT+0100 (British Summer Time)).
+    at <Jasmine>
+    at UserContext.apply (src/app/admin/book-edit/book-form.component.spec.ts:332:40)
+    at _ZoneDelegate.invoke (node_modules/zone.js/fesm2015/zone.js:372:26)
+    at ProxyZoneSpec.onInvoke (node_modules/zone.js/fesm2015/zone-testing.js:287:39)
+	BookFormsComponent with new book and AsyncValidatorFn that returns no errors should call bookFormSaveBook method, when button is clicked, and emit Event if Form is  valid
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9876/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookFormsComponent with new book and required or isbn validator that returns an error should disable the save button, when isbn number is not valid, or rating is not valid
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9876/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	CreateBookComponent should create, set "save" to true for 5 sec and set successmessage to the result
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9876/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>, NullInjectorError: R3InjectorError(DynamicTestModule)[Store -> Store]: 
+  NullInjectorError: No provider for Store!
+error properties: Object({ ngTempTokenPath: null, ngTokenPath: [ 'Store', 'Store' ] })
+    at NullInjector.get (node_modules/@angular/core/fesm2020/core.mjs:6364:27)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at ChainedInjector.get (node_modules/@angular/core/fesm2020/core.mjs:13868:36)
+    at lookupTokenUsingModuleInjector (node_modules/@angular/core/fesm2020/core.mjs:3286:39)
+    at getOrCreateInjectable (node_modules/@angular/core/fesm2020/core.mjs:3331:12)
+    at ɵɵdirectiveInject (node_modules/@angular/core/fesm2020/core.mjs:10881:12)
+    at NodeInjectorFactory.factory (ng:///CreateBookComponent/ɵfac.js:4:47)
+    at getNodeInjectable (node_modules/@angular/core/fesm2020/core.mjs:3516:44)
+    at instantiateRootComponent (node_modules/@angular/core/fesm2020/core.mjs:12587:23)
+	FormMessagesComponent should create an array of errormessage that fit to a "title" control 
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9876/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BodosValidatorService should return null if FormControlArray has at least one author
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9876/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	AppComponent should create the app
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9876/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>, NullInjectorError: R3InjectorError(DynamicTestModule)[Store -> Store]: 
+  NullInjectorError: No provider for Store!
+error properties: Object({ ngTempTokenPath: null, ngTokenPath: [ 'Store', 'Store' ] })
+    at NullInjector.get (node_modules/@angular/core/fesm2020/core.mjs:6364:27)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at ChainedInjector.get (node_modules/@angular/core/fesm2020/core.mjs:13868:36)
+    at lookupTokenUsingModuleInjector (node_modules/@angular/core/fesm2020/core.mjs:3286:39)
+    at getOrCreateInjectable (node_modules/@angular/core/fesm2020/core.mjs:3331:12)
+    at ɵɵdirectiveInject (node_modules/@angular/core/fesm2020/core.mjs:10881:12)
+    at NodeInjectorFactory.factory (ng:///AppComponent/ɵfac.js:4:40)
+    at getNodeInjectable (node_modules/@angular/core/fesm2020/core.mjs:3516:44)
+    at instantiateRootComponent (node_modules/@angular/core/fesm2020/core.mjs:12587:23)
+	BookDetailsComponent and IsbnPipe should create
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9876/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>, NullInjectorError: R3InjectorError(DynamicTestModule)[Store -> Store]: 
+  NullInjectorError: No provider for Store!
+error properties: Object({ ngTempTokenPath: null, ngTokenPath: [ 'Store', 'Store' ] })
+    at NullInjector.get (node_modules/@angular/core/fesm2020/core.mjs:6364:27)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at ChainedInjector.get (node_modules/@angular/core/fesm2020/core.mjs:13868:36)
+    at lookupTokenUsingModuleInjector (node_modules/@angular/core/fesm2020/core.mjs:3286:39)
+    at getOrCreateInjectable (node_modules/@angular/core/fesm2020/core.mjs:3331:12)
+    at ɵɵdirectiveInject (node_modules/@angular/core/fesm2020/core.mjs:10881:12)
+    at NodeInjectorFactory.factory (ng:///BookDetailsComponent/ɵfac.js:5:53)
+    at getNodeInjectable (node_modules/@angular/core/fesm2020/core.mjs:3516:44)
+    at instantiateRootComponent (node_modules/@angular/core/fesm2020/core.mjs:12587:23)
+	BookListItemComponent should create
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9876/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookListComponent should create and get the of(book[]) 
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9876/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>, NullInjectorError: R3InjectorError(DynamicTestModule)[Store -> Store]: 
+  NullInjectorError: No provider for Store!
+error properties: Object({ ngTempTokenPath: null, ngTokenPath: [ 'Store', 'Store' ] })
+    at NullInjector.get (node_modules/@angular/core/fesm2020/core.mjs:6364:27)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at ChainedInjector.get (node_modules/@angular/core/fesm2020/core.mjs:13868:36)
+    at lookupTokenUsingModuleInjector (node_modules/@angular/core/fesm2020/core.mjs:3286:39)
+    at getOrCreateInjectable (node_modules/@angular/core/fesm2020/core.mjs:3331:12)
+    at ɵɵdirectiveInject (node_modules/@angular/core/fesm2020/core.mjs:10881:12)
+    at NodeInjectorFactory.factory (ng:///BookListComponent/ɵfac.js:5:7)
+    at getNodeInjectable (node_modules/@angular/core/fesm2020/core.mjs:3516:44)
+    at instantiateRootComponent (node_modules/@angular/core/fesm2020/core.mjs:12587:23)
+	ListLoadedGuard should be created
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9876/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>, NullInjectorError: R3InjectorError(DynamicTestModule)[ListLoadedGuard -> BookStoreService -> HttpClient -> HttpClient]: 
+  NullInjectorError: No provider for HttpClient!
+error properties: Object({ ngTempTokenPath: null, ngTokenPath: [ 'ListLoadedGuard', 'BookStoreService', 'HttpClient', 'HttpClient' ] })
+    at NullInjector.get (node_modules/@angular/core/fesm2020/core.mjs:6364:27)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at injectInjectorOnly (node_modules/@angular/core/fesm2020/core.mjs:4775:33)
+    at ɵɵinject (node_modules/@angular/core/fesm2020/core.mjs:4779:12)
+    at Object.factory (ng:///BookStoreService/ɵfac.js:4:44)
+    at R3Injector.hydrate (node_modules/@angular/core/fesm2020/core.mjs:6892:35)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6780:33)
+    at injectInjectorOnly (node_modules/@angular/core/fesm2020/core.mjs:4775:33)
+    at ɵɵinject (node_modules/@angular/core/fesm2020/core.mjs:4779:12)
+	DelayDirective ..delay 100ms   should create an instance of the parent test component with style.visiblity = hidden, after 10ms should change to visible 
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9876/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	DelayDirective ..delay undefined (same as 0ms!) ..  should create an instance of the parent test component with style.visiblity = hidden, after 10ms should change to visible 
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9876/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	IsbnPipe create an instance
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9876/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	ZoomDirective should create an instance
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9876/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookEntityEffects should be created
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9876/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>, NullInjectorError: R3InjectorError(DynamicTestModule)[BookEntityEffects -> BookStoreService -> HttpClient -> HttpClient]: 
+  NullInjectorError: No provider for HttpClient!
+error properties: Object({ ngTempTokenPath: null, ngTokenPath: [ 'BookEntityEffects', 'BookStoreService', 'HttpClient', 'HttpClient' ] })
+    at NullInjector.get (node_modules/@angular/core/fesm2020/core.mjs:6364:27)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at injectInjectorOnly (node_modules/@angular/core/fesm2020/core.mjs:4775:33)
+    at ɵɵinject (node_modules/@angular/core/fesm2020/core.mjs:4779:12)
+    at Object.factory (ng:///BookStoreService/ɵfac.js:4:44)
+    at R3Injector.hydrate (node_modules/@angular/core/fesm2020/core.mjs:6892:35)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6780:33)
+    at injectInjectorOnly (node_modules/@angular/core/fesm2020/core.mjs:4775:33)
+    at ɵɵinject (node_modules/@angular/core/fesm2020/core.mjs:4779:12)
+	BookEntity Reducer unknown action should return the previous state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9876/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	ErrorPageComponent should create
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9876/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>, NullInjectorError: R3InjectorError(DynamicTestModule)[Store -> Store]: 
+  NullInjectorError: No provider for Store!
+error properties: Object({ ngTempTokenPath: null, ngTokenPath: [ 'Store', 'Store' ] })
+    at NullInjector.get (node_modules/@angular/core/fesm2020/core.mjs:6364:27)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at ChainedInjector.get (node_modules/@angular/core/fesm2020/core.mjs:13868:36)
+    at lookupTokenUsingModuleInjector (node_modules/@angular/core/fesm2020/core.mjs:3286:39)
+    at getOrCreateInjectable (node_modules/@angular/core/fesm2020/core.mjs:3331:12)
+    at ɵɵdirectiveInject (node_modules/@angular/core/fesm2020/core.mjs:10881:12)
+    at NodeInjectorFactory.factory (ng:///ErrorPageComponent/ɵfac.js:4:46)
+    at getNodeInjectable (node_modules/@angular/core/fesm2020/core.mjs:3516:44)
+    at instantiateRootComponent (node_modules/@angular/core/fesm2020/core.mjs:12587:23)
+	HomeComponent should create
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9876/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>, NullInjectorError: R3InjectorError(DynamicTestModule)[Store -> Store]: 
+  NullInjectorError: No provider for Store!
+error properties: Object({ ngTempTokenPath: null, ngTokenPath: [ 'Store', 'Store' ] })
+    at NullInjector.get (node_modules/@angular/core/fesm2020/core.mjs:6364:27)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at ChainedInjector.get (node_modules/@angular/core/fesm2020/core.mjs:13868:36)
+    at lookupTokenUsingModuleInjector (node_modules/@angular/core/fesm2020/core.mjs:3286:39)
+    at getOrCreateInjectable (node_modules/@angular/core/fesm2020/core.mjs:3331:12)
+    at ɵɵdirectiveInject (node_modules/@angular/core/fesm2020/core.mjs:10881:12)
+    at NodeInjectorFactory.factory (ng:///SearchComponent/ɵfac.js:4:43)
+    at getNodeInjectable (node_modules/@angular/core/fesm2020/core.mjs:3516:44)
+    at instantiateAllDirectives (node_modules/@angular/core/fesm2020/core.mjs:12726:27)
+	SearchComponent should create
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9876/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>, NullInjectorError: R3InjectorError(DynamicTestModule)[Store -> Store]: 
+  NullInjectorError: No provider for Store!
+error properties: Object({ ngTempTokenPath: null, ngTokenPath: [ 'Store', 'Store' ] })
+    at NullInjector.get (node_modules/@angular/core/fesm2020/core.mjs:6364:27)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at ChainedInjector.get (node_modules/@angular/core/fesm2020/core.mjs:13868:36)
+    at lookupTokenUsingModuleInjector (node_modules/@angular/core/fesm2020/core.mjs:3286:39)
+    at getOrCreateInjectable (node_modules/@angular/core/fesm2020/core.mjs:3331:12)
+    at ɵɵdirectiveInject (node_modules/@angular/core/fesm2020/core.mjs:10881:12)
+    at NodeInjectorFactory.factory (ng:///SearchComponent/ɵfac.js:4:43)
+    at getNodeInjectable (node_modules/@angular/core/fesm2020/core.mjs:3516:44)
+    at instantiateRootComponent (node_modules/@angular/core/fesm2020/core.mjs:12587:23)
+	SearchEffects should be created
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9876/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>, NullInjectorError: R3InjectorError(DynamicTestModule)[SearchEffects -> BookStoreService -> HttpClient -> HttpClient]: 
+  NullInjectorError: No provider for HttpClient!
+error properties: Object({ ngTempTokenPath: null, ngTokenPath: [ 'SearchEffects', 'BookStoreService', 'HttpClient', 'HttpClient' ] })
+    at NullInjector.get (node_modules/@angular/core/fesm2020/core.mjs:6364:27)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at injectInjectorOnly (node_modules/@angular/core/fesm2020/core.mjs:4775:33)
+    at ɵɵinject (node_modules/@angular/core/fesm2020/core.mjs:4779:12)
+    at Object.factory (ng:///BookStoreService/ɵfac.js:4:44)
+    at R3Injector.hydrate (node_modules/@angular/core/fesm2020/core.mjs:6892:35)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6780:33)
+    at injectInjectorOnly (node_modules/@angular/core/fesm2020/core.mjs:4775:33)
+    at ɵɵinject (node_modules/@angular/core/fesm2020/core.mjs:4779:12)
+	Search Reducer an unknown action should return the previous state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9876/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	Search Selectors should select the feature state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9876/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookFactoryService should get an empty book
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9876/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookStoreService  with Testbed should be created
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9876/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookStoreService  but without Testbed getAll() should call http GET with url and return a Book array converted from BookRaw array
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9876/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	CanNavigateToAdminGuard should return true if window.confirm is true
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9876/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	NotificationAlertComponent should create
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9876/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	SuccessAlertComponent should create
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9876/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>, NullInjectorError: R3InjectorError(DynamicTestModule)[Store -> Store]: 
+  NullInjectorError: No provider for Store!
+error properties: Object({ ngTempTokenPath: null, ngTokenPath: [ 'Store', 'Store' ] })
+    at NullInjector.get (node_modules/@angular/core/fesm2020/core.mjs:6364:27)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at ChainedInjector.get (node_modules/@angular/core/fesm2020/core.mjs:13868:36)
+    at lookupTokenUsingModuleInjector (node_modules/@angular/core/fesm2020/core.mjs:3286:39)
+    at getOrCreateInjectable (node_modules/@angular/core/fesm2020/core.mjs:3331:12)
+    at ɵɵdirectiveInject (node_modules/@angular/core/fesm2020/core.mjs:10881:12)
+    at NodeInjectorFactory.factory (ng:///SuccessAlertComponent/ɵfac.js:4:49)
+    at getNodeInjectable (node_modules/@angular/core/fesm2020/core.mjs:3516:44)
+    at instantiateRootComponent (node_modules/@angular/core/fesm2020/core.mjs:12587:23)
+	TokenInterceptor should increment the counter for all apis except getUsers
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9876/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	RouterEffects should be created
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9876/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>, NullInjectorError: R3InjectorError(DynamicTestModule)[RouterEffects -> ActivatedRoute -> ActivatedRoute]: 
+  NullInjectorError: No provider for ActivatedRoute!
+error properties: Object({ ngTempTokenPath: null, ngTokenPath: [ 'RouterEffects', 'ActivatedRoute', 'ActivatedRoute' ] })
+    at NullInjector.get (node_modules/@angular/core/fesm2020/core.mjs:6364:27)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6791:33)
+    at injectInjectorOnly (node_modules/@angular/core/fesm2020/core.mjs:4775:33)
+    at ɵɵinject (node_modules/@angular/core/fesm2020/core.mjs:4779:12)
+    at Object.factory (ng:///RouterEffects/ɵfac.js:5:7)
+    at R3Injector.hydrate (node_modules/@angular/core/fesm2020/core.mjs:6892:35)
+    at R3Injector.get (node_modules/@angular/core/fesm2020/core.mjs:6780:33)
+    at TestBedRender3.inject (node_modules/@angular/core/fesm2020/testing.mjs:26300:52)
+    at Function.inject (node_modules/@angular/core/fesm2020/testing.mjs:26172:37)
+	Router Reducer an unknown action should return the previous state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9876/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+11:39:52 (37334) ERROR Stryker There were failed tests in the initial test run.
+11:39:52 (37334) INFO Sandbox Resetting your original files from .stryker-tmp/backup885663.
+11:53:27 (38143) WARN ProjectReader Glob pattern "!src/**/*.spec.ts" did not exclude any files.
+11:53:27 (38143) WARN ProjectReader Glob pattern "!src/test.ts" did not exclude any files.
+11:53:27 (38143) WARN ProjectReader Glob pattern "!src/environments/*.ts" did not exclude any files.
+11:53:27 (38143) WARN ProjectReader Glob pattern "!src/**/*.module.ts" did not exclude any files.
+11:53:27 (38143) WARN ProjectReader Glob pattern "!src/main.ts" did not exclude any files.
+11:53:27 (38143) WARN ProjectReader Glob pattern "!cypress/**" did not exclude any files.
+11:53:27 (38143) WARN ProjectReader No files marked to be mutated, Stryker will perform a dry-run without actually mutating anything. You can configure the `mutate` property in your config file (or use `--mutate` via command line).
+11:53:27 (38143) INFO Instrumenter Instrumented 0 source file(s) with 0 mutant(s)
+11:53:27 (38143) INFO ConcurrencyTokenProvider Creating 2 checker process(es) and 2 test runner process(es).
+11:53:32 (38143) INFO Sandbox In place mode is enabled, Stryker will be overriding YOUR files. Find your backup at: stryker-tmp/backup1810063
+11:53:40 (38143) INFO DryRunExecutor Starting initial test run (karma test runner with "perTest" coverage analysis). This may take a while.
+11:53:41 (38143) ERROR DryRunExecutor One or more tests failed in the initial test run:
+	BookFormsComponent with existing book where AsyncValidatorFn is not used,  form should be valid and emit the new book data to the saveBookEventEmitter Output emitterif a book is given to ngOnChanges
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9878/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookFormsComponent with new book and AsyncValidatorFn that returns no errors should call bookFormSaveBook method, when button is clicked, and emit Event if Form is  valid
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9878/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookFormsComponent with new book and required or isbn validator that returns an error should disable the save button, when isbn number is not valid, or rating is not valid
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9878/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	FormMessagesComponent should create an array of errormessage that fit to a "title" control 
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9878/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BodosValidatorService should return null if FormControlArray has at least one author
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9878/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookListItemComponent should create
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9878/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	DelayDirective ..delay 100ms   should create an instance of the parent test component with style.visiblity = hidden, after 10ms should change to visible 
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9878/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	DelayDirective ..delay undefined (same as 0ms!) ..  should create an instance of the parent test component with style.visiblity = hidden, after 10ms should change to visible 
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9878/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	IsbnPipe create an instance
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9878/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	ZoomDirective should create an instance
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9878/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookEntity Reducer unknown action should return the previous state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9878/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	Search Reducer an unknown action should return the previous state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9878/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	Search Selectors should select the feature state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9878/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookFactoryService should get an empty book
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9878/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	CanNavigateToAdminGuard should return true if window.confirm is true
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9878/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	NotificationAlertComponent should create
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9878/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	TokenInterceptor should increment the counter for all apis except getUsers
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9878/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	Router Reducer an unknown action should return the previous state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9878/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+11:53:41 (38143) ERROR Stryker There were failed tests in the initial test run.
+11:53:41 (38143) INFO Sandbox Resetting your original files from stryker-tmp/backup1810063.
+11:54:10 (38228) WARN ProjectReader Glob pattern "!src/test.ts" did not exclude any files.
+11:54:10 (38228) WARN ProjectReader Glob pattern "!src/environments/*.ts" did not exclude any files.
+11:54:10 (38228) WARN ProjectReader Glob pattern "!src/**/*.module.ts" did not exclude any files.
+11:54:10 (38228) WARN ProjectReader Glob pattern "!src/main.ts" did not exclude any files.
+11:54:10 (38228) WARN ProjectReader Glob pattern "!cypress/**" did not exclude any files.
+11:54:10 (38228) WARN ProjectReader No files marked to be mutated, Stryker will perform a dry-run without actually mutating anything. You can configure the `mutate` property in your config file (or use `--mutate` via command line).
+11:54:10 (38228) INFO Instrumenter Instrumented 0 source file(s) with 0 mutant(s)
+11:54:10 (38228) INFO ConcurrencyTokenProvider Creating 2 checker process(es) and 2 test runner process(es).
+11:54:15 (38228) INFO Sandbox In place mode is enabled, Stryker will be overriding YOUR files. Find your backup at: stryker-tmp/backup2038361
+11:54:24 (38228) INFO DryRunExecutor Starting initial test run (karma test runner with "perTest" coverage analysis). This may take a while.
+11:54:25 (38228) ERROR DryRunExecutor One or more tests failed in the initial test run:
+	BookFormsComponent with existing book where AsyncValidatorFn is not used,  form should be valid and emit the new book data to the saveBookEventEmitter Output emitterif a book is given to ngOnChanges
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookFormsComponent with new book and AsyncValidatorFn that returns no errors should call bookFormSaveBook method, when button is clicked, and emit Event if Form is  valid
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookFormsComponent with new book and required or isbn validator that returns an error should disable the save button, when isbn number is not valid, or rating is not valid
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	FormMessagesComponent should create an array of errormessage that fit to a "title" control 
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BodosValidatorService should return null if FormControlArray has at least one author
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookListItemComponent should create
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	DelayDirective ..delay 100ms   should create an instance of the parent test component with style.visiblity = hidden, after 10ms should change to visible 
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	DelayDirective ..delay undefined (same as 0ms!) ..  should create an instance of the parent test component with style.visiblity = hidden, after 10ms should change to visible 
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	IsbnPipe create an instance
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	ZoomDirective should create an instance
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookEntity Reducer unknown action should return the previous state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	Search Reducer an unknown action should return the previous state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	Search Selectors should select the feature state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookFactoryService should get an empty book
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	CanNavigateToAdminGuard should return true if window.confirm is true
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	NotificationAlertComponent should create
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	TokenInterceptor should increment the counter for all apis except getUsers
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	Router Reducer an unknown action should return the previous state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+11:54:25 (38228) ERROR Stryker There were failed tests in the initial test run.
+11:54:25 (38228) INFO Sandbox Resetting your original files from stryker-tmp/backup2038361.

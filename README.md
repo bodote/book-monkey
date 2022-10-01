@@ -18,6 +18,12 @@ or use
 
 `stryker run --ignorePatterns '**','!src/**/book-details*.ts'  --fileLogLevel trace`
 
+because of bug https://github.com/stryker-mutator/stryker-js/issues/3688 , you allways need to set the
+```
+"inPlace": true
+```
+flag to `true`
+
 ## stryker Dashboard
 - [Bodos Dashboard](https://dashboard.stryker-mutator.io/reports/github.com/bodote/book-monkey/master)
 
