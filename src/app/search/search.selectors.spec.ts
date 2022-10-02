@@ -1,6 +1,5 @@
 import { initialState, SearchState } from './search.reducer';
 import {
-  searchFeatureKey,
   selectHttpError,
   selectSearchPerformed,
   selectSearchResults,
@@ -13,6 +12,7 @@ import { of, toArray } from 'rxjs';
 import { TestBed } from '@angular/core/testing';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { select } from '@ngrx/store';
+import { searchFeatureKey } from '../store';
 
 describe('Search Selectors', () => {
   const aBook: Book = {
@@ -82,14 +82,14 @@ describe('Search Selectors', () => {
       store = TestBed.inject(MockStore);
     });
     it('selectSearchPerformed should emit the search state', (done) => {
-      const unloadedState = mockState({
+      const unloadedState: { [index: string]: any } = mockState({
         [searchFeatureKey]: {
           books: [aBook],
           searchPerformed: false,
           httpError: undefined
         }
       });
-      const searchResultsState = mockState({
+      const searchResultsState: { [index: string]: any } = mockState({
         [searchFeatureKey]: {
           books: [],
           searchPerformed: true,

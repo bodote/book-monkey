@@ -33,7 +33,7 @@
   "checkers": ["typescript"],
   "tsconfigFile": "tsconfig.stryker.json",
 
-  "logLevel": "debug",
+  "logLevel": "trace",
   "tempDirName": "stryker-tmp",
   "inPlace": true
 }

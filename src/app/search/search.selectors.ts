@@ -2,8 +2,8 @@ import { Book } from '../shared/book';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import * as fromSearch from './search.reducer';
 import { HttpErrorResponse } from '@angular/common/http';
+import { searchFeatureKey } from '../store';
 
-export const searchFeatureKey = 'search';
 export const selectSearchState =
   createFeatureSelector<fromSearch.SearchState>(searchFeatureKey);
 

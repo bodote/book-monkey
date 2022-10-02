@@ -6,8 +6,6 @@ import {
   routerNavigationAction
 } from '@ngrx/router-store';
 
-export const loaderFeatureKey = 'loader';
-
 export interface LoaderState {
   loading: boolean;
 }
