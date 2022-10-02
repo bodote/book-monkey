@@ -7,8 +7,6 @@ import {
 } from './search.actions';
 import { HttpErrorResponse } from '@angular/common/http';
 
-export const searchFeatureKey = 'search';
-
 export interface SearchState {
   books: Book[];
   searchPerformed: boolean;

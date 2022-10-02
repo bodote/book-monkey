@@ -4,7 +4,7 @@ import * as fromRouterStore from '@ngrx/router-store';
 import * as fromLoaderState from './router.reducer';
 import { loaderFeatureKey } from './router.reducer';
 import * as fromSearchState from '../search/search.reducer';
-import { searchFeatureKey } from '../search/search.reducer';
+import { searchFeatureKey } from '../search/search.selectors';
 
 export interface AppState {
   router: RouterState;

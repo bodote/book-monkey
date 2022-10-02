@@ -3,16 +3,13 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 import * as fromSearch from './search.reducer';
 import { HttpErrorResponse } from '@angular/common/http';
 
-export const selectSearchState = createFeatureSelector<fromSearch.SearchState>(
-  fromSearch.searchFeatureKey
-);
+export const searchFeatureKey = 'search';
+export const selectSearchState =
+  createFeatureSelector<fromSearch.SearchState>(searchFeatureKey);
 
 export const selectSearchResults = createSelector(
   selectSearchState,
-  (state): Book[] => {
-    if (!!state?.books) return state.books;
-    else return [];
-  }
+  (state): Book[] => state.books
 );
 
 export const selectSearchPerformed = createSelector(

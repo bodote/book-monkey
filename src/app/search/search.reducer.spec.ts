@@ -9,12 +9,12 @@ import { HttpErrorResponse } from '@angular/common/http';
 describe('Search Reducer', () => {
   describe('an unknown action', () => {
     it('should return the previous state', () => {
-      const action = {} as any;
-      const result = reducer(initialState, action);
+      const result = reducer(initialState, {} as any);
       expect(result).toBe(initialState);
+      expect(result.httpError).toBeFalsy();
+      expect(result.searchPerformed).toBeFalse();
     });
     it('should delete the searchPerformed flag if loadSearchs action', () => {
-      const action = loadSearchs;
       const stateBefore: SearchState = {
         ...initialState,
         searchPerformed: true
@@ -23,7 +23,7 @@ describe('Search Reducer', () => {
         ...initialState,
         searchPerformed: false
       };
-      const result = reducer(stateBefore, action);
+      const result = reducer(stateBefore, loadSearchs);
       expect(result).toEqual(stateAfter);
     });
     it('should delete the searchPerformed flag if loadSearchSuccess action', () => {
@@ -33,7 +33,6 @@ describe('Search Reducer', () => {
         published: new Date('2020-02-02'),
         isbn: '1234'
       };
-      const action = loadSearchsSuccess({ searchResults: [aBook] });
       const stateBefore: SearchState = {
         ...initialState,
         searchPerformed: false
@@ -43,12 +42,14 @@ describe('Search Reducer', () => {
         searchPerformed: true,
         books: [aBook]
       };
-      const result = reducer(stateBefore, action);
+      const result = reducer(
+        stateBefore,
+        loadSearchsSuccess({ searchResults: [aBook] })
+      );
       expect(result).toEqual(stateAfter);
     });
     it('should delete the searchPerformed flag if loadSearchFailure action', () => {
       const httpError = new HttpErrorResponse({ status: 404 });
-      const action = loadSearchsFailure({ error: httpError });
       const stateBefore: SearchState = {
         ...initialState,
         searchPerformed: false
@@ -58,7 +59,10 @@ describe('Search Reducer', () => {
         searchPerformed: true,
         httpError: httpError
       };
-      const result = reducer(stateBefore, action);
+      const result = reducer(
+        stateBefore,
+        loadSearchsFailure({ error: httpError })
+      );
       expect(result).toEqual(stateAfter);
     });
   });
