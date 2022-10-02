@@ -26,14 +26,12 @@
     "html"
   ],
   "htmlReporter": { "fileName": "reports/mutation/mutation.all.html" },
-  "concurrency": 4,
+  "concurrency": 1,
   "concurrency_comment": "Recommended to use about half of your available cores when running stryker with angular",
   "coverageAnalysis": "perTest",
   "timeoutFactor": 40,
-  "checkers": ["typescript"],
-  "tsconfigFile": "tsconfig.stryker.json",
-
-  "logLevel": "trace",
+  "_comment":"\"checkers\": [],typescript \"tsconfigFile\": \"tsconfig.stryker.json\",",
+  "fileLogLevel": "trace",
   "tempDirName": "stryker-tmp",
   "inPlace": true
 }

@@ -13,13 +13,15 @@
     "watch": "ng build --watch --configuration development",
     "test-watch": "ng test --watch",
     "test": "ng test --watch=false",
+
+    "test-filelog":"ng test --watch=false  > karma.log ",
     "test-coverage": "ng test --no-watch --code-coverage",
     "lint": "ng lint",
     "lint-fix": "ng lint --fix",
     "deploy": "ng deploy --no-silent --base-href=/book-monkey/",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
-    "stryker:run": "stryker run  --ignorePatterns '**','!src/**/search.effects.ts'"
+    "stryker:run": "stryker run  --ignorePatterns '**','!src/**/search.effects.ts' --fileLogLevel=trace"
   },
   "private": true,
   "dependencies": {
