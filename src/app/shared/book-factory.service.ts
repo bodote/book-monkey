@@ -1,6 +1,5 @@
 import { BookRaw } from './book-raw';
 import { Injectable } from '@angular/core';
-import { Book } from './book';
 import { formatDate } from '@angular/common';
 import { BookEntity } from '../books/store/book-entity/book-entity.model';
 
@@ -10,7 +9,7 @@ import { BookEntity } from '../books/store/book-entity/book-entity.model';
 export class BookFactoryService {
   constructor() {}
 
-  static getFromRaw(bookRaw: BookRaw): Book {
+  static getFromRaw(bookRaw: BookRaw): BookEntity {
     return {
       ...bookRaw,
       published: new Date(bookRaw.published)
@@ -22,13 +21,13 @@ export class BookFactoryService {
       published: new Date(bookRaw.published)
     };
   }
-  static getRawFromBook(book: Book): BookRaw {
+  static getRawFromBook(book: BookEntity): BookRaw {
     return <BookRaw>{
       ...book,
       published: formatDate(book.published, 'YYYY-MM-dd', 'en', 'Z')
     };
   }
-  static getEmptyBook(): Book {
+  static getEmptyBook(): BookEntity {
     return {
       title: '',
       subtitle: '',
