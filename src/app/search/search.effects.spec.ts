@@ -42,7 +42,7 @@ describe('SearchEffects', () => {
     expect(effects).toBeTruthy();
   });
 
-  it('should be get a book as the search result', (done) => {
+  it('should be get a book as the search result on loadSearchs-action', (done) => {
     effects.searchBooks$.pipe(toArray()).subscribe((actions) => {
       expect(actions.length).toBe(1);
       expect(actions).toEqual([
