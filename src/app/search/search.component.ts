@@ -26,7 +26,7 @@ export class SearchComponent implements OnInit {
   private searchStringFromKeyBoard$: Subject<string> | undefined;
   searchBookResults$: Observable<Book[] | undefined> =
     this.store.select(selectSearchResults);
-  //isLoading$ = this.store.select(selectIsLoading);
+
   searchPerformed$ = this.store.select(selectSearchPerformed);
   httpError$ = this.store.select(selectHttpError);
 

@@ -26,25 +26,24 @@ describe('SearchEffects', () => {
     mockService.getAllSearch = jasmine
       .createSpy<() => Observable<Book[]>>()
       .and.returnValue(of([bookEntity]));
+    TestBed.configureTestingModule({
+      providers: [
+        SearchEffects,
+        provideMockActions(() => actions$),
+        { provide: BookStoreService, useValue: mockService }
+      ]
+    });
+    effects = TestBed.inject(SearchEffects);
   });
   describe(' with action loadSearchs', () => {
-    beforeEach(() => {
-      actions$ = of(loadSearchs({ searchString: 'test' }));
-      TestBed.configureTestingModule({
-        providers: [
-          SearchEffects,
-          provideMockActions(() => actions$),
-          { provide: BookStoreService, useValue: mockService }
-        ]
-      });
-      effects = TestBed.inject(SearchEffects);
-    });
+    beforeEach(() => {});
 
     it('should be created', () => {
       expect(effects).toBeTruthy();
     });
 
     it('should be get a book as the search result on loadSearchs-action', (done) => {
+      actions$ = of(loadSearchs({ searchString: 'test' }));
       effects.searchBooks$.pipe(toArray()).subscribe((actions) => {
         expect(actions.length).toBe(1);
         expect(actions).toEqual([
@@ -55,19 +54,10 @@ describe('SearchEffects', () => {
     });
   });
   describe(' with action loadSearchsSuccess ', () => {
-    beforeEach(() => {
-      actions$ = of(loadSearchsSuccess({ searchResults: [] }));
-      TestBed.configureTestingModule({
-        providers: [
-          SearchEffects,
-          provideMockActions(() => actions$),
-          { provide: BookStoreService, useValue: mockService }
-        ]
-      });
-      effects = TestBed.inject(SearchEffects);
-    });
+    beforeEach(() => {});
 
     it('effects should NOT do anything', (done) => {
+      actions$ = of(loadSearchsSuccess({ searchResults: [] }));
       effects.searchBooks$.pipe(toArray()).subscribe((actions) => {
         expect(actions.length).toBe(0);
         done();
