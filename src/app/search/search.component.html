@@ -33,8 +33,12 @@
           </tr>
         </thead>
         <tbody>
-          <ng-container *ngFor="let book of foundBooks">
-            <tr class="hover" [routerLink]="['/books/detail', book.isbn]">
+          <ng-container *ngFor="let book of foundBooks; let i = index">
+            <tr
+              [attr.data-id]="'foundBook-' + i"
+              class="hover"
+              [routerLink]="['/books/detail', book.isbn]"
+            >
               <th>{{ book?.title }}</th>
               <td>{{ book?.subtitle }}</td>
             </tr>

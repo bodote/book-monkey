@@ -13,14 +13,14 @@ export interface SearchState {
   httpError: HttpErrorResponse | undefined;
 }
 
-export const initialState: SearchState = {
+export const initialSearchState: SearchState = {
   books: [],
   searchPerformed: false,
   httpError: undefined
 };
 
 export const reducer = createReducer(
-  initialState,
+  initialSearchState,
   on(loadSearchs, (state, action): SearchState => {
     //do nothing, handled by effect, and don't delete the old search results yet!
     return {

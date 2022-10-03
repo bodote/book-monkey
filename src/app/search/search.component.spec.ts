@@ -7,12 +7,18 @@ import {
 
 import { SearchComponent } from './search.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { BookStoreService } from '../shared/book-store.service';
 import { mergeMap, Observable, of, throwError, timer } from 'rxjs';
 import { Book } from '../shared/book';
 import { delay } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { mockState } from '../store/index.spec';
+import { BookFactory } from '../books/book.factory.spec';
+import { AppState } from '../store';
+import { By } from '@angular/platform-browser';
+import { loadSearchs } from './search.actions';
 
 const testBookData: Book = {
   authors: ['author'],
@@ -24,54 +30,76 @@ const testBookData: Book = {
   rating: 3,
   thumbnails: [{ title: '', url: '' }]
 };
-xdescribe('SearchComponent', () => {
+describe('SearchComponent', () => {
   let component: SearchComponent;
   let fixture: ComponentFixture<SearchComponent>;
   let mockService = jasmine.createSpyObj<BookStoreService>('bookStoreService', [
     'getAllSearch'
   ]);
+  let store: MockStore;
+  let dispatchSpy: jasmine.Spy<any>;
+  let factory: BookFactory;
 
   beforeEach(async () => {
+    factory = new BookFactory();
     await TestBed.configureTestingModule({
       declarations: [SearchComponent],
       imports: [HttpClientTestingModule],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      providers: [{ provide: BookStoreService, useValue: mockService }]
+      schemas: [NO_ERRORS_SCHEMA], // NEU
+      providers: [provideMockStore<AppState>({ initialState: mockState() })]
     }).compileComponents();
 
     fixture = TestBed.createComponent(SearchComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    store = TestBed.inject(MockStore);
+    dispatchSpy = spyOn(store, 'dispatch');
   });
 
-  xit('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
   it(
-    'should call BookStoreService.getAllSearch after 400ms if keyup() is called with a string ' +
+    'should store.dispatch(loadSearchs) after 400ms if keyup() is called with a string ' +
       'longer then 2 chars and should subscribe and set foundBooks',
     fakeAsync(() => {
-      mockService.getAllSearch = jasmine
-        .createSpy<() => Observable<Book[]>>()
-        .and.returnValue(of([testBookData]).pipe(delay(10)));
+      const firstB = factory.bookEntity();
+      const secondB = factory.bookEntity();
       const searchString = 'test';
-      // expect(component.isLoading).toBeFalse();
-      // component.keyup(searchString);
-      // tick(390);
-      // expect(component.foundBooks).toBeUndefined();
-      // expect(component.isLoading).toBeFalse();
-      // expect(mockService.getAllSearch).toHaveBeenCalledTimes(0);
-      // tick(10);
-      // expect(component.isLoading).toBeTrue();
-      // expect(mockService.getAllSearch).toHaveBeenCalledOnceWith(searchString);
-      // tick(8);
-      // expect(component.isLoading).toBeTrue();
-      // tick(2);
-      // expect(component.foundBooks).toEqual([testBookData]);
-      // expect(component.isLoading).toBeFalse();
+      let bookFound0;
+      fixture.detectChanges();
+
+      bookFound0 = fixture.debugElement.query(
+        By.css('[data-id="foundBook-0"]')
+      );
+      expect(bookFound0).toBeFalsy();
+      store.setState(
+        mockState({
+          search: {
+            books: [firstB, secondB],
+            searchPerformed: true,
+            httpError: undefined
+          }
+        })
+      );
+      component.keyup(searchString);
+      tick(390);
+      fixture.detectChanges();
+      expect(dispatchSpy).toHaveBeenCalledTimes(0);
+      tick(10);
+      fixture.detectChanges();
+      bookFound0 = fixture.debugElement.query(
+        By.css('[data-id="foundBook-0"]')
+      );
+      const bookFound1 = fixture.debugElement.query(
+        By.css('[data-id="foundBook-1"]')
+      );
+
+      expect(bookFound0).toBeTruthy();
+      expect(bookFound1).toBeTruthy();
+      expect(dispatchSpy).toHaveBeenCalledWith(loadSearchs({ searchString }));
     })
   );
-  it(
+  xit(
     'should not call BookStoreService.getAllSearch after 400ms if keyup() is called with a string ' +
       'of only  2 chars and should not subscribe and set foundBooks',
     fakeAsync(() => {
@@ -94,7 +122,7 @@ xdescribe('SearchComponent', () => {
       // expect(component.isLoading).toBeFalse();
     })
   );
-  it(
+  xit(
     'should call BookStoreService.getAllSearch after 400ms if keyup() is called with a string ' +
       'longer then 2 chars and should print error on console',
     fakeAsync(() => {

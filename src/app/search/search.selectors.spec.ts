@@ -1,4 +1,4 @@
-import { initialState, SearchState } from './search.reducer';
+import { initialSearchState, SearchState } from './search.reducer';
 import {
   selectHttpError,
   selectSearchPerformed,
@@ -22,20 +22,20 @@ describe('Search Selectors', () => {
     title: 'mytitle'
   };
   it('should select the feature state', () => {
-    const rootState = mockState({ [searchFeatureKey]: initialState });
-    expect(selectSearchState(rootState)).toEqual(initialState);
+    const rootState = mockState({ [searchFeatureKey]: initialSearchState });
+    expect(selectSearchState(rootState)).toEqual(initialSearchState);
   });
 
   it('should select the searchState', () => {
     const state1: SearchState = {
-      ...initialState,
+      ...initialSearchState,
       searchPerformed: false
     };
 
     let filtered = selectSearchPerformed.projector(state1);
     expect(filtered).toBeFalse();
     const state2: SearchState = {
-      ...initialState,
+      ...initialSearchState,
       searchPerformed: true
     };
     filtered = selectSearchPerformed.projector(state2);
@@ -43,7 +43,7 @@ describe('Search Selectors', () => {
   });
   it('should select the SearchResults', () => {
     const state1: SearchState = {
-      ...initialState,
+      ...initialSearchState,
       books: []
     };
 
@@ -51,7 +51,7 @@ describe('Search Selectors', () => {
     expect(filtered).toEqual([]);
 
     const state2: SearchState = {
-      ...initialState,
+      ...initialSearchState,
       books: [aBook]
     };
     filtered = selectSearchResults.projector(state2);
@@ -60,7 +60,7 @@ describe('Search Selectors', () => {
   it('should select the HttpError', () => {
     const error = new HttpErrorResponse({ status: 404 });
     const state1: SearchState = {
-      ...initialState,
+      ...initialSearchState,
       httpError: error
     };
     let filtered = selectHttpError.projector(state1);
@@ -74,7 +74,7 @@ describe('Search Selectors', () => {
           // any modules needed
         ],
         providers: [
-          provideMockStore({ initialState })
+          provideMockStore({ initialState: initialSearchState })
           // other providers
         ]
       });

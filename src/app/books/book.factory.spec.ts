@@ -1,6 +1,6 @@
 import { BookEntity } from './store/book-entity/book-entity.model';
 import { Dictionary } from '@ngrx/entity';
-import { initialState, SearchState } from '../search/search.reducer';
+import { initialSearchState, SearchState } from '../search/search.reducer';
 import { BookRaw } from '../shared/book-raw';
 
 export class BookFactory {
@@ -41,7 +41,7 @@ export class BookFactory {
   }
   state(state: Partial<SearchState>): SearchState {
     return {
-      ...initialState,
+      ...initialSearchState,
       ...state
     };
   }
