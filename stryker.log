@@ -1,9 +1,9 @@
-01:06:28 (50695) DEBUG ConfigReader Loading config from stryker.conf.json
-01:06:28 (50695) DEBUG ConfigReader Loaded config: {
+12:00:37 (34479) DEBUG ConfigReader Loading config from stryker.conf.json
+12:00:37 (34479) DEBUG ConfigReader Loaded config: {
   "$schema": "./node_modules/@stryker-mutator/core/schema/stryker-schema.json",
-  "_comment": "\"checkers\": [],typescript \"tsconfigFile\": \"tsconfig.stryker.json\",",
+  "_comment": "This config was generated using 'stryker init'. Please see the guide for more information: https://stryker-mutator.io/docs/stryker-js/guides/angular",
   "mutate": [
-    "src/**/*.ts",
+    "src/**/search.effects.ts",
     "!src/**/*.spec.ts",
     "!src/test.ts",
     "!src/environments/*.ts",
@@ -29,11 +29,15 @@
   "htmlReporter": {
     "fileName": "reports/mutation/mutation.all.html"
   },
-  "concurrency": 1,
+  "concurrency": 2,
   "concurrency_comment": "Recommended to use about half of your available cores when running stryker with angular",
   "coverageAnalysis": "perTest",
   "timeoutFactor": 40,
+  "checkers": [
+    "typescript"
+  ],
   "fileLogLevel": "trace",
+  "tsconfigFile": "tsconfig.stryker.json",
   "tempDirName": "stryker-tmp",
   "inPlace": true,
   "ignorePatterns": [
@@ -41,9 +45,7 @@
     "!src/**/search.effects.ts"
   ],
   "allowConsoleColors": true,
-  "checkers": [],
   "checkerNodeArgs": [],
-  "maxTestRunnerReuse": 0,
   "commandRunner": {
     "command": "npm test"
   },
@@ -60,8 +62,12 @@
     "baseDir": "reports/mutation/events"
   },
   "ignoreStatic": false,
+  "incremental": false,
+  "incrementalFile": "reports/stryker-incremental.json",
+  "force": false,
   "logLevel": "info",
   "maxConcurrentTestRunners": 9007199254740991,
+  "maxTestRunnerReuse": 0,
   "mutator": {
     "plugins": null,
     "excludedMutations": []
@@ -84,59 +90,2155 @@
   },
   "timeoutMS": 5000,
   "dryRunTimeoutMinutes": 5,
-  "tsconfigFile": "tsconfig.json",
   "warnings": true,
   "disableBail": false
 }
-01:06:28 (50695) DEBUG PluginLoader Loading @stryker-mutator/* from /Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/@stryker-mutator
-01:06:28 (50695) DEBUG PluginLoader Loading plugin "@stryker-mutator/karma-runner" (matched with expression @stryker-mutator/*)
-01:06:28 (50695) DEBUG PluginLoader Loading plugin "@stryker-mutator/typescript-checker" (matched with expression @stryker-mutator/*)
-01:06:28 (50695) DEBUG PluginLoader Loading plugin @stryker-mutator/karma-runner
-01:06:28 (50695) DEBUG PluginLoader Loading plugin @stryker-mutator/typescript-checker
-01:06:28 (50695) DEBUG PluginLoader Loading plugin file:///Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/@stryker-mutator/core/dist/src/reporters/index.js
-01:06:28 (50695) DEBUG MetaSchemaBuilder Contributing 1 schemas from plugins to options validation.
-01:06:28 (50695) WARN ProjectReader Glob pattern "!src/**/*.spec.ts" did not exclude any files.
-01:06:28 (50695) WARN ProjectReader Glob pattern "!src/test.ts" did not exclude any files.
-01:06:28 (50695) WARN ProjectReader Glob pattern "!src/environments/*.ts" did not exclude any files.
-01:06:28 (50695) WARN ProjectReader Glob pattern "!src/**/*.module.ts" did not exclude any files.
-01:06:28 (50695) WARN ProjectReader Glob pattern "!main.ts" did not exclude any files.
-01:06:28 (50695) WARN ProjectReader Glob pattern "!cypress/**" did not exclude any files.
-01:06:28 (50695) INFO ProjectReader Found 1 of 1 file(s) to be mutated.
-01:06:28 (50695) DEBUG ProjectReader All input files: [
+12:00:37 (34479) DEBUG PluginLoader Loading @stryker-mutator/* from /Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/@stryker-mutator
+12:00:37 (34479) DEBUG PluginLoader Loading plugin "@stryker-mutator/karma-runner" (matched with expression @stryker-mutator/*)
+12:00:37 (34479) DEBUG PluginLoader Loading plugin "@stryker-mutator/typescript-checker" (matched with expression @stryker-mutator/*)
+12:00:37 (34479) DEBUG PluginLoader Loading plugin @stryker-mutator/karma-runner
+12:00:37 (34479) DEBUG PluginLoader Loading plugin @stryker-mutator/typescript-checker
+12:00:37 (34479) DEBUG PluginLoader Loading plugin file:///Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/@stryker-mutator/core/dist/src/reporters/index.js
+12:00:37 (34479) DEBUG MetaSchemaBuilder Contributing 1 schemas from plugins to options validation.
+12:00:37 (34479) WARN ProjectReader Glob pattern "!src/**/*.spec.ts" did not exclude any files.
+12:00:37 (34479) WARN ProjectReader Glob pattern "!src/test.ts" did not exclude any files.
+12:00:37 (34479) WARN ProjectReader Glob pattern "!src/environments/*.ts" did not exclude any files.
+12:00:37 (34479) WARN ProjectReader Glob pattern "!src/**/*.module.ts" did not exclude any files.
+12:00:37 (34479) WARN ProjectReader Glob pattern "!main.ts" did not exclude any files.
+12:00:37 (34479) WARN ProjectReader Glob pattern "!cypress/**" did not exclude any files.
+12:00:37 (34479) INFO ProjectReader Found 1 of 1 file(s) to be mutated.
+12:00:37 (34479) DEBUG ProjectReader All input files: [
   "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/app/search/search.effects.ts"
 ]
-01:06:28 (50695) DEBUG ProjectReader Files to mutate: [
+12:00:37 (34479) DEBUG ProjectReader Files to mutate: [
   "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/app/search/search.effects.ts"
 ]
-01:06:28 (50695) DEBUG TemporaryDirectory Using temp directory "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/stryker-tmp"
-01:06:28 (50695) DEBUG Instrumenter Instrumenting 1 source files with mutants
-01:06:28 (50695) DEBUG Instrumenter Instrumented src/app/search/search.effects.ts (6 mutant(s))
-01:06:28 (50695) INFO Instrumenter Instrumented 1 source file(s) with 6 mutant(s)
-01:06:28 (50695) INFO ConcurrencyTokenProvider Creating 1 test runner process(es).
-01:06:28 (50695) DEBUG ChildProcessProxy Started CheckerWorker in child process 50696
-01:06:28 (50696) DEBUG PluginLoader Loading plugin @stryker-mutator/karma-runner
-01:06:28 (50696) DEBUG PluginLoader Loading plugin @stryker-mutator/typescript-checker
-01:06:28 (50696) DEBUG PluginLoader Loading plugin file:///Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/@stryker-mutator/core/dist/src/reporters/index.js
-01:06:28 (50695) INFO Sandbox In place mode is enabled, Stryker will be overriding YOUR files. Find your backup at: stryker-tmp/backup8060742
-01:06:28 (50695) DEBUG Sandbox Stored backup file at /Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/stryker-tmp/backup8060742/src/app/search/search.effects.ts
-01:06:28 (50695) DEBUG Sandbox Start symlink node_modules
-01:06:28 (50695) DEBUG BroadcastReporter Broadcasting to reporters ["progress","clear-text","html"]
-01:06:28 (50695) DEBUG ChildProcessProxy Started ChildProcessTestRunnerWorker in child process 50697
-01:06:29 (50697) DEBUG PluginLoader Loading plugin @stryker-mutator/karma-runner
-01:06:29 (50697) DEBUG PluginLoader Loading plugin @stryker-mutator/typescript-checker
-01:06:29 (50697) DEBUG PluginLoader Loading plugin file:///Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/@stryker-mutator/core/dist/src/reporters/index.js
-01:06:29 (50697) DEBUG AngularProjectStarter Starting Angular tests: ng test --progress=false --karma-config=/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/@stryker-mutator/karma-runner/stryker-karma.conf.cjs
-01:06:31 (50695) TRACE ChildProcessProxy [33m03 10 2022 01:06:31.004:WARN [karma-server]: [39m`autowatch` and `singleRun` are both `false`. In order to execute tests use `karma run`.
+12:00:37 (34479) DEBUG TemporaryDirectory Using temp directory "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/stryker-tmp"
+12:00:37 (34479) DEBUG Instrumenter Instrumenting 1 source files with mutants
+12:00:37 (34479) DEBUG Instrumenter Instrumented src/app/search/search.effects.ts (6 mutant(s))
+12:00:37 (34479) INFO Instrumenter Instrumented 1 source file(s) with 6 mutant(s)
+12:00:37 (34479) INFO ConcurrencyTokenProvider Creating 1 checker process(es) and 1 test runner process(es).
+12:00:37 (34479) DEBUG ChildProcessProxy Started CheckerWorker in child process 34487
+12:00:38 (34487) DEBUG PluginLoader Loading plugin @stryker-mutator/karma-runner
+12:00:38 (34487) DEBUG PluginLoader Loading plugin @stryker-mutator/typescript-checker
+12:00:38 (34487) DEBUG PluginLoader Loading plugin file:///Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/@stryker-mutator/core/dist/src/reporters/index.js
+12:00:40 (34487) TRACE TypescriptChecker summary message TS6194: Found 0 errors. Watching for file changes.
 
-01:06:33 (50695) TRACE ChildProcessProxy 
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/tsconfig.stryker.json"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/tsconfig.json"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/main.ts"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/polyfills.ts"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/test.ts"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/app/app-routing.module.ts"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/app/app.component.ts"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/app/app.module.ts"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/app/custom-router-state-serializer.ts"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/app/admin/book-edit/book-edit.component.ts"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/app/admin/book-edit/book-form.component.ts"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/app/admin/create-book/create-book.component.ts"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/app/admin/form-messages/form-messages.component.ts"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/app/admin/shared/bodos-validator.service.ts"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/app/books/books-routing.module.ts"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/app/books/books.module.ts"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/app/books/book-details/book-details.component.ts"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/app/books/book-details/book-details.guard.ts"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/app/books/book-list/book-list.component.ts"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/app/books/book-list/list-loaded.guard.ts"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/app/books/book-list-item/book-list-item.component.ts"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/app/books/shared/delay.directive.ts"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/app/books/shared/isbn.pipe.ts"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/app/books/shared/zoom.directive.ts"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/app/books/store/book-entity/book-entity.actions.ts"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/app/books/store/book-entity/book-entity.effects.ts"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/app/books/store/book-entity/book-entity.model.ts"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/app/books/store/book-entity/book-entity.reducer.ts"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/app/books/store/book-entity/book-entity.selectors.ts"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/app/error-page/error-page.component.ts"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/app/home/home.component.ts"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/app/search/search.actions.ts"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/app/search/search.component.ts"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/app/search/search.effects.ts"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/app/search/search.reducer.ts"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/app/search/search.selectors.ts"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/app/shared/book-factory.service.ts"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/app/shared/book-raw.ts"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/app/shared/book-store.service.ts"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/app/shared/book.ts"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/app/shared/can-navigate-to-admin.guard.ts"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/app/shared/shared.module.ts"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/app/shared/token.interceptor.ts"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/app/shared/notification-alert/notification-alert.component.ts"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/app/shared/success-alert/success-alert.component.ts"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/app/store/index.ts"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/app/store/router.effects.ts"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/app/store/router.reducer.ts"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/app/store/router.selectors.ts"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/environments/environment.prod.ts"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/environments/environment.ts"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/tslib/package.json"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/@angular/core/package.json"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/@angular/platform-browser-dynamic/package.json"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/rxjs/package.json"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/@types/node/package.json"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/events/package.json"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/@angular/common/package.json"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/@angular/platform-browser/package.json"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/@dimaslz/ng-heroicons/package.json"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/@ngrx/store/package.json"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/@ngrx/store-devtools/package.json"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/@ngrx/effects/package.json"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/@ngrx/router-store/package.json"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/@angular/router/package.json"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/@ngrx/entity/package.json"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/@angular/forms/package.json"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/rxjs/operators/package.json"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/lodash/package.json"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/@types/lodash/package.json"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/@angular/localize/package.json"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/zone.js/package.json"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/@angular/compiler/package.json"
+12:00:40 (34487) TRACE TypescriptChecker.HybridFileSystem Registering watcher for file "/users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/zone.js/testing/package.json"
+12:00:40 (34479) INFO Sandbox In place mode is enabled, Stryker will be overriding YOUR files. Find your backup at: stryker-tmp/backup9516127
+12:00:40 (34479) DEBUG Sandbox Stored backup file at /Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/stryker-tmp/backup9516127/src/app/search/search.effects.ts
+12:00:40 (34479) DEBUG Sandbox Start symlink node_modules
+12:00:40 (34479) DEBUG BroadcastReporter Broadcasting to reporters ["progress","clear-text","html"]
+12:00:40 (34479) DEBUG ChildProcessProxy Started ChildProcessTestRunnerWorker in child process 34504
+12:00:40 (34504) DEBUG PluginLoader Loading plugin @stryker-mutator/karma-runner
+12:00:40 (34504) DEBUG PluginLoader Loading plugin @stryker-mutator/typescript-checker
+12:00:40 (34504) DEBUG PluginLoader Loading plugin file:///Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/@stryker-mutator/core/dist/src/reporters/index.js
+12:00:41 (34504) DEBUG AngularProjectStarter Starting Angular tests: ng test --progress=false --karma-config=/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/@stryker-mutator/karma-runner/stryker-karma.conf.cjs
+12:00:42 (34479) TRACE ChildProcessProxy 03 10 2022 12:00:42.804:DEBUG [config]: Loading config /Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/@stryker-mutator/karma-runner/stryker-karma.conf.cjs
 
-01:06:33 (50695) TRACE ChildProcessProxy 🌼 daisyUI components 2.24.0  https://github.com/saadeghi/daisyui
+12:00:42 (34479) TRACE ChildProcessProxy 03 10 2022 12:00:42.813:DEBUG [karma-server]: Final config Config {
+  LOG_DISABLE: 'OFF',
+  LOG_ERROR: 'ERROR',
+  LOG_WARN: 'WARN',
+  LOG_INFO: 'INFO',
+  LOG_DEBUG: 'DEBUG',
+  frameworks: [ 'jasmine', '@angular-devkit/build-angular' ],
+  protocol: 'http:',
+  port: 9876,
+  listenAddress: '0.0.0.0',
+  hostname: 'localhost',
+  httpsServerConfig: {},
+  basePath: '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey',
+  files: [
+    Pattern {
+      pattern: '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/stryker-mutant-coverage-adapter.js',
+      served: true,
+      included: true,
+      watched: false,
+      nocache: true,
+      weight: [ 1, 0, 0, 0, 0, 0 ],
+      type: undefined,
+      isBinary: undefined,
+      integrity: undefined
+    },
+    Pattern {
+      pattern: '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js',
+      served: false,
+      included: true,
+      watched: false,
+      nocache: true,
+      weight: [ 1, 0, 0, 0, 0, 0 ],
+      type: undefined,
+      isBinary: undefined,
+      integrity: undefined
+    }
+  ],
+  browserConsoleLogOptions: { level: 'debug', format: '%b %T: %m', terminal: true },
+  customContextFile: null,
+  customDebugFile: null,
+  customClientContextFile: null,
+  exclude: [
+    '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/@stryker-mutator/karma-runner/stryker-karma.conf.cjs'
+  ],
+  logLevel: 'DEBUG',
+  colors: true,
+  autoWatch: false,
+  autoWatchBatchDelay: 250,
+  restartOnFileChange: true,
+  usePolling: false,
+  reporters: [ 'progress', 'kjhtml', 'StrykerReporter' ],
+  singleRun: false,
+  browsers: [ 'ChromeHeadless' ],
+  captureTimeout: 60000,
+  pingTimeout: 5000,
+  proxies: {},
+  proxyValidateSSL: true,
+  preprocessors: [Object: null prototype] {},
+  preprocessor_priority: {},
+  urlRoot: '/',
+  upstreamProxy: undefined,
+  reportSlowerThan: 0,
+  loggers: [
+    {
+      type: 'console',
+      layout: { type: 'pattern', pattern: '%[%d{DATETIME}:%p [%c]: %]%m' }
+    }
+  ],
+  transports: [ 'polling', 'websocket' ],
+  forceJSONP: false,
+  plugins: [
+    {
+      'framework:jasmine': [
+        'factory',
+        [Function: initJasmine] { '$inject': [ 'config.files' ] }
+      ],
+      'reporter:karma-jasmine': [
+        'factory',
+        [Function: InjectKarmaJasmineReporter] {
+          '$inject': [ 'config.singleRun' ]
+        }
+      ]
+    },
+    {
+      'launcher:Chrome': [
+        'type',
+        [Function: ChromeBrowser] {
+          '$inject': [ 'baseBrowserDecorator', 'args' ]
+        }
+      ],
+      'launcher:ChromeHeadless': [
+        'type',
+        [Function: ChromeHeadlessBrowser] {
+          '$inject': [ 'baseBrowserDecorator', 'args' ]
+        }
+      ],
+      'launcher:ChromeCanary': [
+        'type',
+        [Function: ChromeCanaryBrowser] {
+          '$inject': [ 'baseBrowserDecorator', 'args' ]
+        }
+      ],
+      'launcher:ChromeCanaryHeadless': [
+        'type',
+        [Function: ChromeCanaryHeadlessBrowser] {
+          '$inject': [ 'baseBrowserDecorator', 'args' ]
+        }
+      ],
+      'launcher:Chromium': [
+        'type',
+        [Function: ChromiumBrowser] {
+          '$inject': [ 'baseBrowserDecorator', 'args' ]
+        }
+      ],
+      'launcher:ChromiumHeadless': [ 'type', [Function: ChromiumHeadlessBrowser] ],
+      'launcher:Dartium': [
+        'type',
+        [Function: DartiumBrowser] {
+          '$inject': [ 'baseBrowserDecorator', 'args' ]
+        }
+      ],
+      test: {
+        isJSFlags: [Function: isJSFlags],
+        sanitizeJSFlags: [Function: sanitizeJSFlags],
+        headlessGetOptions: [Function: headlessGetOptions],
+        canaryGetOptions: [Function: canaryGetOptions]
+      }
+    },
+    {
+      'reporter:kjhtml': [
+        'type',
+        [Function: initReporter] {
+          '$inject': [ 'config', 'baseReporterDecorator' ]
+        }
+      ]
+    },
+    {
+      'preprocessor:coverage': [
+        'factory',
+        [Function: createCoveragePreprocessor] {
+          '$inject': [
+            'logger',
+            'config.basePath',
+            'config.reporters',
+            'config.coverageReporter'
+          ]
+        }
+      ],
+      'reporter:coverage': [
+        'type',
+        [Function: CoverageReporter] {
+          '$inject': [ 'config', 'helper', 'logger', 'emitter' ]
+        }
+      ]
+    },
+    {
+      'framework:@angular-devkit/build-angular': [
+        'factory',
+        [Function: init] { '$inject': [ 'config', 'emitter' ] }
+      ],
+      'reporter:@angular-devkit/build-angular--sourcemap-reporter': [
+        'type',
+        [Function: sourceMapReporter] {
+          '$inject': [ 'baseReporterDecorator', 'config' ]
+        }
+      ],
+      'reporter:@angular-devkit/build-angular--event-reporter': [
+        'type',
+        [Function: eventReporter] {
+          '$inject': [ 'baseReporterDecorator', 'config' ]
+        }
+      ],
+      'middleware:@angular-devkit/build-angular--blocker': [ 'factory', [Function: requestBlocker] ],
+      'middleware:@angular-devkit/build-angular--fallback': [ 'factory', [Function: fallbackMiddleware] ]
+    },
+    {
+      'middleware:TestHooksMiddleware': [ 'value', [Function (anonymous)] ]
+    },
+    {
+      'reporter:StrykerReporter': [
+        'factory',
+        [Function: strykerReporterFactory] {
+          '$inject': [ 'server', 'config' ]
+        }
+      ]
+    }
+  ],
+  client: {
+    args: [],
+    useIframe: true,
+    runInParent: false,
+    captureConsole: true,
+    clearContext: false,
+    allowedReturnUrlPatterns: [ '^https?://' ],
+    jasmine: {
+      random: false,
+      failFast: true,
+      oneFailurePerSpec: true,
+      stopOnSpecFailure: true,
+      stopSpecOnExpectationFailure: true
+    }
+  },
+  defaultClient: {
+    args: [],
+    useIframe: true,
+    runInParent: false,
+    captureConsole: true,
+    clearContext: false,
+    allowedReturnUrlPatterns: [ '^https?://' ],
+    jasmine: {
+      random: false,
+      failFast: true,
+      oneFailurePerSpec: true,
+      stopOnSpecFailure: true,
+      stopSpecOnExpectationFailure: true
+    }
+  },
+  browserDisconnectTimeout: 2000,
+  browserDisconnectTolerance: 0,
+  browserNoActivityTimeout: 1000000,
+  processKillTimeout: 2000,
+  concurrency: Infinity,
+  failOnEmptyTestSuite: true,
+  retryLimit: 2,
+  detached: false,
+  crossOriginAttribute: true,
+  browserSocketTimeout: 20000,
+  buildWebpack: {
+    options: {
+      main: 'src/test.ts',
+      polyfills: 'src/polyfills.ts',
+      tsConfig: 'tsconfig.spec.json',
+      karmaConfig: '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/@stryker-mutator/karma-runner/stryker-karma.conf.cjs',
+      assets: [ 'src/favicon.ico', 'src/assets' ],
+      styles: [ 'src/styles.css' ],
+      scripts: [],
+      progress: false,
+      inlineStyleLanguage: 'css',
+      stylePreprocessorOptions: { includePaths: [] },
+      include: [],
+      sourceMap: true,
+      watch: undefined,
+      poll: undefined,
+      preserveSymlinks: undefined,
+      browsers: undefined,
+      codeCoverage: false,
+      codeCoverageExclude: [],
+      fileReplacements: [],
+      reporters: [],
+      webWorkerTsConfig: undefined
+    },
+    webpackConfig: {
+      mode: 'development',
+      devtool: false,
+      target: [ 'web', 'es2015' ],
+      profile: false,
+      resolve: {
+        roots: [
+          '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey'
+        ],
+        extensions: [ '.ts', '.tsx', '.mjs', '.js' ],
+        symlinks: true,
+        modules: [
+          '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey',
+          'node_modules'
+        ],
+        mainFields: [ 'es2020', 'es2015', 'browser', 'module', 'main' ],
+        conditionNames: [ 'es2020', 'es2015', '...' ]
+      },
+      resolveLoader: { symlinks: true },
+      context: '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey',
+      entry: {
+        main: [
+          '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/test.ts'
+        ],
+        polyfills: [
+          '/Users/
+12:00:42 (34479) TRACE ChildProcessProxy bodo.teichmann/dev/learning/angular_buch/book-monkey/src/polyfills.ts'
+        ],
+        styles: [
+          '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/styles.css'
+        ]
+      },
+      externals: [],
+      output: {
+        uniqueName: 'book-monkey',
+        hashFunction: 'xxhash64',
+        clean: true,
+        path: '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey',
+        publicPath: '',
+        filename: '[name].js',
+        chunkFilename: '[name].js',
+        libraryTarget: undefined,
+        crossOriginLoading: false,
+        trustedTypes: 'angular#bundler',
+        scriptType: 'module'
+      },
+      watch: true,
+      watchOptions: { poll: undefined, followSymlinks: false, ignored: undefined },
+      snapshot: { module: { hash: false } },
+      performance: { hints: false },
+      ignoreWarnings: [
+        /Failed to parse source map from/,
+        /Add postcss as project dependency/,
+        /"@charset" must be the first rule in the file/
+      ],
+      module: {
+        strictExportPresence: true,
+        parser: { javascript: { url: false, worker: false } },
+        rules: [
+          {
+            test: /\.?(svg|html)$/,
+            resourceQuery: /\?ngResource/,
+            type: 'asset/source'
+          },
+          { test: /[/\\]rxjs[/\\]add[/\\].+\.js$/, sideEffects: true },
+          {
+            test: /\.[cm]?[tj]sx?$/,
+            resolve: { fullySpecified: false },
+            exclude: [
+              /[\\/]node_modules[/\\](?:core-js|@babel|tslib|web-animations-js|web-streams-polyfill|whatwg-url)[/\\]/
+            ],
+            use: [
+              {
+                loader: '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/@angular-devkit/build-angular/src/babel/webpack-loader.js',
+                options: {
+                  cacheDirectory: '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/.angular/cache/14.2.4/babel-webpack',
+                  scriptTarget: 7,
+                  aot: false,
+                  optimize: false,
+                  supportedBrowsers: [
+                    'chrome 106',
+                    'edge 105',
+                    'edge 104',
+                    'firefox 105',
+                    'firefox 102',
+                    'ios_saf 16.0',
+                    'ios_saf 15.6',
+                    'ios_saf 15.5',
+                    'ios_saf 15.4',
+                    'ios_saf 15.2-15.3',
+                    'ios_saf 15.0-15.1',
+                    'safari 16.0',
+                    'safari 15.6',
+                    'safari 15.5',
+                    'safari 15.4',
+                    'safari 15.2-15.3',
+                    'safari 15.1',
+                    'safari 15'
+                  ],
+                  instrumentCode: undefined
+                }
+              }
+            ]
+          },
+          {
+            test: /\.[cm]?jsx?$/,
+            enforce: 'pre',
+            loader: '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/source-map-loader/dist/cjs.js',
+            options: {
+              filterSourceMappingUrl: [Function: filterSourceMappingUrl]
+            }
+          },
+          {
+            test: /\.[cm]?tsx?$/,
+            loader: '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/@ngtools/webpack/src/ivy/index.js',
+            exclude: [
+              /[\\/]node_modules[/\\](?:css-loader|mini-css-extract-plugin|webpack-dev-server|webpack)[/\\]/
+            ]
+          },
+          {
+            test: /\.(?:css)$/i,
+            rules: [
+              {
+                oneOf: [
+                  {
+                    use: [
+                      {
+                        loader: '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/mini-css-extract-plugin/dist/loader.js'
+                      },
+                      {
+                        loader: '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/css-loader/dist/cjs.js',
+                        options: { url: false, sourceMap: true }
+                      },
+                      {
+                        loader: '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/postcss-loader/dist/cjs.js',
+                        options: {
+                          implementation: <ref *18> [Function: postcss] {
+                            plugin: [Function: plugin],
+                            stringify: <ref *1> [Function: stringify] {
+                              default: [Circular *1]
+                            },
+                            parse: <ref *2> [Function: parse] {
+                              default: [Circular *2]
+                            },
+                            fromJSON: <ref *3> [Function: fromJSON] {
+                              default: [Circular *3]
+                            },
+                            list: <ref *4> {
+                              split: [Function: split],
+                              space: [Function: space],
+                              comma: [Function: comma],
+                              default: [Circular *4]
+                            },
+                            comment: [Function (anonymous)],
+                            atRule: [Function (anonymous)],
+                            decl: [Function (anonymous)],
+                            rule: [Function (anonymous)],
+                            root: [Function (anonymous)],
+                            document: [Function (anonymous)],
+                            CssSyntaxError: <ref *5> [class CssSyntaxError extends Error] {
+                              default: [Circular *5]
+                            },
+                            Declaration: <ref *6> [class Declaration extends Node] {
+                              default: [Circular *6]
+                            },
+                            Container: <ref *7> [class Container extends Node] {
+                              registerParse: [Function (anonymous)],
+                              registerRule: [Function (anonymous)],
+                              registerAtRule: [Function (anonymous)],
+                              registerRoot: [Function (anonymous)],
+                              default: [Circular *7],
+                              rebuild: [Function (anonymous)]
+                            },
+                            Processor: <ref *8> [class Processor] {
+                              default: [Circular *8]
+                            },
+                            Document: <ref *9> [class Document extends Container] {
+                              registerLazyResult: [Function (anonymous)],
+                              registerProcessor: [Function (anonymous)],
+                              default: [Circular *9]
+                            },
+                            Comment: <ref *10> [class Comment extends Node] {
+                              default: [Circular *10]
+                            },
+                            Warning: <ref *11> [class Warning] {
+                              default: [Circular *11]
+                            },
+                            AtRule: <ref *12> [class AtRule extends Container] {
+                              default: [Circular *12]
+                            },
+                            Result: <ref *13> [class Result] {
+                              default: [Circular *13]
+                            },
+                            Input: <ref *14> [class Input] {
+                              default: [Circular *14]
+                            },
+                            Rule: <ref *15> [class Rule extends Container] {
+                              default: [Circular *15]
+                            },
+                            Root: <ref *16> [class Root extends Container] {
+                              registerLazyResult: [Function (anonymous)],
+                              registerProcessor: [Function (anonymous)],
+                              default: [Circular *16]
+                            },
+                            Node: <ref *17> [class Node] {
+                      
+12:00:42 (34479) TRACE ChildProcessProxy         default: [Circular *17]
+                            },
+                            default: [Circular *18]
+                          },
+                          postcssOptions: [Function: optionGenerator] { config: false },
+                          sourceMap: true
+                        }
+                      }
+                    ],
+                    include: [
+                      '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/styles.css'
+                    ],
+                    resourceQuery: { not: [ /\?ngResource/ ] }
+                  },
+                  {
+                    use: [
+                      {
+                        loader: '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/postcss-loader/dist/cjs.js',
+                        options: {
+                          implementation: <ref *18> [Function: postcss] {
+                            plugin: [Function: plugin],
+                            stringify: <ref *1> [Function: stringify] {
+                              default: [Circular *1]
+                            },
+                            parse: <ref *2> [Function: parse] {
+                              default: [Circular *2]
+                            },
+                            fromJSON: <ref *3> [Function: fromJSON] {
+                              default: [Circular *3]
+                            },
+                            list: <ref *4> {
+                              split: [Function: split],
+                              space: [Function: space],
+                              comma: [Function: comma],
+                              default: [Circular *4]
+                            },
+                            comment: [Function (anonymous)],
+                            atRule: [Function (anonymous)],
+                            decl: [Function (anonymous)],
+                            rule: [Function (anonymous)],
+                            root: [Function (anonymous)],
+                            document: [Function (anonymous)],
+                            CssSyntaxError: <ref *5> [class CssSyntaxError extends Error] {
+                              default: [Circular *5]
+                            },
+                            Declaration: <ref *6> [class Declaration extends Node] {
+                              default: [Circular *6]
+                            },
+                            Container: <ref *7> [class Container extends Node] {
+                              registerParse: [Function (anonymous)],
+                              registerRule: [Function (anonymous)],
+                              registerAtRule: [Function (anonymous)],
+                              registerRoot: [Function (anonymous)],
+                              default: [Circular *7],
+                              rebuild: [Function (anonymous)]
+                            },
+                            Processor: <ref *8> [class Processor] {
+                              default: [Circular *8]
+                            },
+                            Document: <ref *9> [class Document extends Container] {
+                              registerLazyResult: [Function (anonymous)],
+                              registerProcessor: [Function (anonymous)],
+                              default: [Circular *9]
+                            },
+                            Comment: <ref *10> [class Comment extends Node] {
+                              default: [Circular *10]
+                            },
+                            Warning: <ref *11> [class Warning] {
+                              default: [Circular *11]
+                            },
+                            AtRule: <ref *12> [class AtRule extends Container] {
+                              default: [Circular *12]
+                            },
+                            Result: <ref *13> [class Result] {
+                              default: [Circular *13]
+                            },
+                            Input: <ref *14> [class Input] {
+                              default: [Circular *14]
+                            },
+                            Rule: <ref *15> [class Rule extends Container] {
+                              default: [Circular *15]
+                            },
+                            Root: <ref *16> [class Root extends Container] {
+                              registerLazyResult: [Function (anonymous)],
+                              registerProcessor: [Function (anonymous)],
+                              default: [Circular *16]
+                            },
+                            Node: <ref *17> [class Node] {
+                              default: [Circular *17]
+                            },
+                            default: [Circular *18]
+                          },
+                          postcssOptions: [Function: optionGenerator] { config: false }
+                        }
+                      }
+                    ],
+                    type: 'asset/source',
+                    resourceQuery: /\?ngResource/
+                  }
+                ]
+              },
+              { use: [] }
+            ]
+          },
+          {
+            test: /\.(?:scss)$/i,
+            rules: [
+              {
+                oneOf: [
+                  {
+                    use: [
+                      {
+                        loader: '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/mini-css-extract-plugin/dist/loader.js'
+                      },
+                      {
+                        loader: '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/css-loader/dist/cjs.js',
+                        options: { url: false, sourceMap: true }
+                      },
+                      {
+                        loader: '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/postcss-loader/dist/cjs.js',
+                        options: {
+                          implementation: <ref *18> [Function: postcss] {
+                            plugin: [Function: plugin],
+                            stringify: <ref *1> [Function: stringify] {
+                              default: [Circular *1]
+                            },
+                            parse: <ref *2> [Function: parse] {
+                              default: [Circular *2]
+                            },
+                            fromJSON: <ref *3> [Function: fromJSON] {
+                              default: [Circular *3]
+                            },
+                            list: <ref *4> {
+                              split: [Function: split],
+                              space: [Function: space],
+                              comma: [Function: comma],
+                              default: [Circular *4]
+                            },
+                            comment: [Function (anonymous)],
+                            atRule: [Function (anonymous)],
+                            decl: [Function (anonymous)],
+                            rule: [Function (anonymous)],
+                            root: [Function (anonymous)],
+                            document: [Function (anonymous)],
+                            CssSyntaxError: <ref *5> [class CssSyntaxError extends Error] {
+                              default: [Circular *5]
+                            },
+                            Declaration: <ref *6> [class Declaration extends Node] {
+                              default: [Circular *6]
+                            },
+                            Container: <ref *7> [class Container extends Node] {
+                              registerParse: [Function (anonymous)],
+                              registerRule: [Function (anonymous)],
+                              registerAtRule: [Function (anonymous)],
+                              registerRoot: [Function (anonymous)],
+                              default: [Circular *7],
+                              rebuild: [Function (anonymous)]
+                            },
+                            Processor: <ref *8> [class Processor] {
+                              de
+12:00:42 (34479) TRACE ChildProcessProxy fault: [Circular *8]
+                            },
+                            Document: <ref *9> [class Document extends Container] {
+                              registerLazyResult: [Function (anonymous)],
+                              registerProcessor: [Function (anonymous)],
+                              default: [Circular *9]
+                            },
+                            Comment: <ref *10> [class Comment extends Node] {
+                              default: [Circular *10]
+                            },
+                            Warning: <ref *11> [class Warning] {
+                              default: [Circular *11]
+                            },
+                            AtRule: <ref *12> [class AtRule extends Container] {
+                              default: [Circular *12]
+                            },
+                            Result: <ref *13> [class Result] {
+                              default: [Circular *13]
+                            },
+                            Input: <ref *14> [class Input] {
+                              default: [Circular *14]
+                            },
+                            Rule: <ref *15> [class Rule extends Container] {
+                              default: [Circular *15]
+                            },
+                            Root: <ref *16> [class Root extends Container] {
+                              registerLazyResult: [Function (anonymous)],
+                              registerProcessor: [Function (anonymous)],
+                              default: [Circular *16]
+                            },
+                            Node: <ref *17> [class Node] {
+                              default: [Circular *17]
+                            },
+                            default: [Circular *18]
+                          },
+                          postcssOptions: [Function: optionGenerator] { config: false },
+                          sourceMap: true
+                        }
+                      }
+                    ],
+                    include: [
+                      '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/styles.css'
+                    ],
+                    resourceQuery: { not: [ /\?ngResource/ ] }
+                  },
+                  {
+                    use: [
+                      {
+                        loader: '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/postcss-loader/dist/cjs.js',
+                        options: {
+                          implementation: <ref *18> [Function: postcss] {
+                            plugin: [Function: plugin],
+                            stringify: <ref *1> [Function: stringify] {
+                              default: [Circular *1]
+                            },
+                            parse: <ref *2> [Function: parse] {
+                              default: [Circular *2]
+                            },
+                            fromJSON: <ref *3> [Function: fromJSON] {
+                              default: [Circular *3]
+                            },
+                            list: <ref *4> {
+                              split: [Function: split],
+                              space: [Function: space],
+                              comma: [Function: comma],
+                              default: [Circular *4]
+                            },
+                            comment: [Function (anonymous)],
+                            atRule: [Function (anonymous)],
+                            decl: [Function (anonymous)],
+                            rule: [Function (anonymous)],
+                            root: [Function (anonymous)],
+                            document: [Function (anonymous)],
+                            CssSyntaxError: <ref *5> [class CssSyntaxError extends Error] {
+                              default: [Circular *5]
+                            },
+                            Declaration: <ref *6> [class Declaration extends Node] {
+                              default: [Circular *6]
+                            },
+                            Container: <ref *7> [class Container extends Node] {
+                              registerParse: [Function (anonymous)],
+                              registerRule: [Function (anonymous)],
+                              registerAtRule: [Function (anonymous)],
+                              registerRoot: [Function (anonymous)],
+                              default: [Circular *7],
+                              rebuild: [Function (anonymous)]
+                            },
+                            Processor: <ref *8> [class Processor] {
+                              default: [Circular *8]
+                            },
+                            Document: <ref *9> [class Document extends Container] {
+                              registerLazyResult: [Function (anonymous)],
+                              registerProcessor: [Function (anonymous)],
+                              default: [Circular *9]
+                            },
+                            Comment: <ref *10> [class Comment extends Node] {
+                              default: [Circular *10]
+                            },
+                            Warning: <ref *11> [class Warning] {
+                              default: [Circular *11]
+                            },
+                            AtRule: <ref *12> [class AtRule extends Container] {
+                              default: [Circular *12]
+                            },
+                            Result: <ref *13> [class Result] {
+                              default: [Circular *13]
+                            },
+                            Input: <ref *14> [class Input] {
+                              default: [Circular *14]
+                            },
+                            Rule: <ref *15> [class Rule extends Container] {
+                              default: [Circular *15]
+                            },
+                            Root: <ref *16> [class Root extends Container] {
+                              registerLazyResult: [Function (anonymous)],
+                              registerProcessor: [Function (anonymous)],
+                              default: [Circular *16]
+                            },
+                            Node: <ref *17> [class Node] {
+                              default: [Circular *17]
+                            },
+                            default: [Circular *18]
+                          },
+                          postcssOptions: [Function: optionGenerator] { config: false }
+                        }
+                      }
+                    ],
+                    type: 'asset/source',
+                    resourceQuery: /\?ngResource/
+                  }
+                ]
+              },
+              {
+                use: [
+                  {
+                    loader: '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/resolve-url-loader/index.js',
+                    options: { sourceMap: true }
+                  },
+                  {
+                    loader: '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/sass-loader/dist/cjs.js',
+                    options: {
+                      implementation: SassWorkerImplementation {
+                        workers: [],
+                        availableWorkers: [],
+                        requests: Map(0) {},
+                        idCounter: 1,
+                        nextWorkerIndex: 0
+                      },
+                      sourceMap: true,
+                      sassOptions: {
+                        importer: [Function: importer],
+                        fiber: false,
+                        precision: 8,
+                        includePaths: [],
+                        outputStyle: 'expanded',
+                        quietDeps: true,
+                        verbose: undefined
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            test: /\.(?:sass)$/i,
+            rules: [
+              {
+        
+12:00:42 (34479) TRACE ChildProcessProxy         oneOf: [
+                  {
+                    use: [
+                      {
+                        loader: '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/mini-css-extract-plugin/dist/loader.js'
+                      },
+                      {
+                        loader: '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/css-loader/dist/cjs.js',
+                        options: { url: false, sourceMap: true }
+                      },
+                      {
+                        loader: '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/postcss-loader/dist/cjs.js',
+                        options: {
+                          implementation: <ref *18> [Function: postcss] {
+                            plugin: [Function: plugin],
+                            stringify: <ref *1> [Function: stringify] {
+                              default: [Circular *1]
+                            },
+                            parse: <ref *2> [Function: parse] {
+                              default: [Circular *2]
+                            },
+                            fromJSON: <ref *3> [Function: fromJSON] {
+                              default: [Circular *3]
+                            },
+                            list: <ref *4> {
+                              split: [Function: split],
+                              space: [Function: space],
+                              comma: [Function: comma],
+                              default: [Circular *4]
+                            },
+                            comment: [Function (anonymous)],
+                            atRule: [Function (anonymous)],
+                            decl: [Function (anonymous)],
+                            rule: [Function (anonymous)],
+                            root: [Function (anonymous)],
+                            document: [Function (anonymous)],
+                            CssSyntaxError: <ref *5> [class CssSyntaxError extends Error] {
+                              default: [Circular *5]
+                            },
+                            Declaration: <ref *6> [class Declaration extends Node] {
+                              default: [Circular *6]
+                            },
+                            Container: <ref *7> [class Container extends Node] {
+                              registerParse: [Function (anonymous)],
+                              registerRule: [Function (anonymous)],
+                              registerAtRule: [Function (anonymous)],
+                              registerRoot: [Function (anonymous)],
+                              default: [Circular *7],
+                              rebuild: [Function (anonymous)]
+                            },
+                            Processor: <ref *8> [class Processor] {
+                              default: [Circular *8]
+                            },
+                            Document: <ref *9> [class Document extends Container] {
+                              registerLazyResult: [Function (anonymous)],
+                              registerProcessor: [Function (anonymous)],
+                              default: [Circular *9]
+                            },
+                            Comment: <ref *10> [class Comment extends Node] {
+                              default: [Circular *10]
+                            },
+                            Warning: <ref *11> [class Warning] {
+                              default: [Circular *11]
+                            },
+                            AtRule: <ref *12> [class AtRule extends Container] {
+                              default: [Circular *12]
+                            },
+                            Result: <ref *13> [class Result] {
+                              default: [Circular *13]
+                            },
+                            Input: <ref *14> [class Input] {
+                              default: [Circular *14]
+                            },
+                            Rule: <ref *15> [class Rule extends Container] {
+                              default: [Circular *15]
+                            },
+                            Root: <ref *16> [class Root extends Container] {
+                              registerLazyResult: [Function (anonymous)],
+                              registerProcessor: [Function (anonymous)],
+                              default: [Circular *16]
+                            },
+                            Node: <ref *17> [class Node] {
+                              default: [Circular *17]
+                            },
+                            default: [Circular *18]
+                          },
+                          postcssOptions: [Function: optionGenerator] { config: false },
+                          sourceMap: true
+                        }
+                      }
+                    ],
+                    include: [
+                      '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/styles.css'
+                    ],
+                    resourceQuery: { not: [ /\?ngResource/ ] }
+                  },
+                  {
+                    use: [
+                      {
+                        loader: '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/postcss-loader/dist/cjs.js',
+                        options: {
+                          implementation: <ref *18> [Function: postcss] {
+                            plugin: [Function: plugin],
+                            stringify: <ref *1> [Function: stringify] {
+                              default: [Circular *1]
+                            },
+                            parse: <ref *2> [Function: parse] {
+                              default: [Circular *2]
+                            },
+                            fromJSON: <ref *3> [Function: fromJSON] {
+                              default: [Circular *3]
+                            },
+                            list: <ref *4> {
+                              split: [Function: split],
+                              space: [Function: space],
+                              comma: [Function: comma],
+                              default: [Circular *4]
+                            },
+                            comment: [Function (anonymous)],
+                            atRule: [Function (anonymous)],
+                            decl: [Function (anonymous)],
+                            rule: [Function (anonymous)],
+                            root: [Function (anonymous)],
+                            document: [Function (anonymous)],
+                            CssSyntaxError: <ref *5> [class CssSyntaxError extends Error] {
+                              default: [Circular *5]
+                            },
+                            Declaration: <ref *6> [class Declaration extends Node] {
+                              default: [Circular *6]
+                            },
+                            Container: <ref *7> [class Container extends Node] {
+                              registerParse: [Function (anonymous)],
+                              registerRule: [Function (anonymous)],
+                              registerAtRule: [Function (anonymous)],
+                              registerRoot: [Function (anonymous)],
+                              default: [Circular *7],
+                              rebuild: [Function (anonymous)]
+                            },
+                            Processor: <ref *8> [class Processor] {
+                              default: [Circular *8]
+                            },
+                            Document: <ref *9> [class Document extends Container] {
+                              registerLazyResult: [Function (anonymous)],
+                              registerProcessor: [Function (anonymous)],
+                              default: [Circular *9]
+                            },
+                            Comment: <ref *10> [class Comment extends Node] {
+                              default: [Circular *10]
+                            },
+                            Warning: <ref *11> [class Warning] {
+ 
+12:00:43 (34479) TRACE ChildProcessProxy                              default: [Circular *11]
+                            },
+                            AtRule: <ref *12> [class AtRule extends Container] {
+                              default: [Circular *12]
+                            },
+                            Result: <ref *13> [class Result] {
+                              default: [Circular *13]
+                            },
+                            Input: <ref *14> [class Input] {
+                              default: [Circular *14]
+                            },
+                            Rule: <ref *15> [class Rule extends Container] {
+                              default: [Circular *15]
+                            },
+                            Root: <ref *16> [class Root extends Container] {
+                              registerLazyResult: [Function (anonymous)],
+                              registerProcessor: [Function (anonymous)],
+                              default: [Circular *16]
+                            },
+                            Node: <ref *17> [class Node] {
+                              default: [Circular *17]
+                            },
+                            default: [Circular *18]
+                          },
+                          postcssOptions: [Function: optionGenerator] { config: false }
+                        }
+                      }
+                    ],
+                    type: 'asset/source',
+                    resourceQuery: /\?ngResource/
+                  }
+                ]
+              },
+              {
+                use: [
+                  {
+                    loader: '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/resolve-url-loader/index.js',
+                    options: { sourceMap: true }
+                  },
+                  {
+                    loader: '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/sass-loader/dist/cjs.js',
+                    options: {
+                      implementation: SassWorkerImplementation {
+                        workers: [],
+                        availableWorkers: [],
+                        requests: Map(0) {},
+                        idCounter: 1,
+                        nextWorkerIndex: 0
+                      },
+                      sourceMap: true,
+                      sassOptions: {
+                        importer: [Function: importer],
+                        fiber: false,
+                        indentedSyntax: true,
+                        precision: 8,
+                        includePaths: [],
+                        outputStyle: 'expanded',
+                        quietDeps: true,
+                        verbose: undefined
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            test: /\.(?:less)$/i,
+            rules: [
+              {
+                oneOf: [
+                  {
+                    use: [
+                      {
+                        loader: '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/mini-css-extract-plugin/dist/loader.js'
+                      },
+                      {
+                        loader: '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/css-loader/dist/cjs.js',
+                        options: { url: false, sourceMap: true }
+                      },
+                      {
+                        loader: '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/postcss-loader/dist/cjs.js',
+                        options: {
+                          implementation: <ref *18> [Function: postcss] {
+                            plugin: [Function: plugin],
+                            stringify: <ref *1> [Function: stringify] {
+                              default: [Circular *1]
+                            },
+                            parse: <ref *2> [Function: parse] {
+                              default: [Circular *2]
+                            },
+                            fromJSON: <ref *3> [Function: fromJSON] {
+                              default: [Circular *3]
+                            },
+                            list: <ref *4> {
+                              split: [Function: split],
+                              space: [Function: space],
+                              comma: [Function: comma],
+                              default: [Circular *4]
+                            },
+                            comment: [Function (anonymous)],
+                            atRule: [Function (anonymous)],
+                            decl: [Function (anonymous)],
+                            rule: [Function (anonymous)],
+                            root: [Function (anonymous)],
+                            document: [Function (anonymous)],
+                            CssSyntaxError: <ref *5> [class CssSyntaxError extends Error] {
+                              default: [Circular *5]
+                            },
+                            Declaration: <ref *6> [class Declaration extends Node] {
+                              default: [Circular *6]
+                            },
+                            Container: <ref *7> [class Container extends Node] {
+                              registerParse: [Function (anonymous)],
+                              registerRule: [Function (anonymous)],
+                              registerAtRule: [Function (anonymous)],
+                              registerRoot: [Function (anonymous)],
+                              default: [Circular *7],
+                              rebuild: [Function (anonymous)]
+                            },
+                            Processor: <ref *8> [class Processor] {
+                              default: [Circular *8]
+                            },
+                            Document: <ref *9> [class Document extends Container] {
+                              registerLazyResult: [Function (anonymous)],
+                              registerProcessor: [Function (anonymous)],
+                              default: [Circular *9]
+                            },
+                            Comment: <ref *10> [class Comment extends Node] {
+                              default: [Circular *10]
+                            },
+                            Warning: <ref *11> [class Warning] {
+                              default: [Circular *11]
+                            },
+                            AtRule: <ref *12> [class AtRule extends Container] {
+                              default: [Circular *12]
+                            },
+                            Result: <ref *13> [class Result] {
+                              default: [Circular *13]
+                            },
+                            Input: <ref *14> [class Input] {
+                              default: [Circular *14]
+                            },
+                            Rule: <ref *15> [class Rule extends Container] {
+                              default: [Circular *15]
+                            },
+                            Root: <ref *16> [class Root extends Container] {
+                              registerLazyResult: [Function (anonymous)],
+                              registerProcessor: [Function (anonymous)],
+                              default: [Circular *16]
+                            },
+                            Node: <ref *17> [class Node] {
+                              default: [Circular *17]
+                            },
+                            default: [Circular *18]
+                          },
+                          postcssOptions: [Function: optionGenerator] { config: false },
+                          sourceMap: true
+                        }
+                      }
+                    ],
+                    include: [
+                      '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/styles.css'
+                    ],
+                    resourceQuery: { not: [ /\?ngResource/ ] }
+                  },
+                  {
+                    use: [
+                      {
+                      
+12:00:43 (34479) TRACE ChildProcessProxy   loader: '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/postcss-loader/dist/cjs.js',
+                        options: {
+                          implementation: <ref *18> [Function: postcss] {
+                            plugin: [Function: plugin],
+                            stringify: <ref *1> [Function: stringify] {
+                              default: [Circular *1]
+                            },
+                            parse: <ref *2> [Function: parse] {
+                              default: [Circular *2]
+                            },
+                            fromJSON: <ref *3> [Function: fromJSON] {
+                              default: [Circular *3]
+                            },
+                            list: <ref *4> {
+                              split: [Function: split],
+                              space: [Function: space],
+                              comma: [Function: comma],
+                              default: [Circular *4]
+                            },
+                            comment: [Function (anonymous)],
+                            atRule: [Function (anonymous)],
+                            decl: [Function (anonymous)],
+                            rule: [Function (anonymous)],
+                            root: [Function (anonymous)],
+                            document: [Function (anonymous)],
+                            CssSyntaxError: <ref *5> [class CssSyntaxError extends Error] {
+                              default: [Circular *5]
+                            },
+                            Declaration: <ref *6> [class Declaration extends Node] {
+                              default: [Circular *6]
+                            },
+                            Container: <ref *7> [class Container extends Node] {
+                              registerParse: [Function (anonymous)],
+                              registerRule: [Function (anonymous)],
+                              registerAtRule: [Function (anonymous)],
+                              registerRoot: [Function (anonymous)],
+                              default: [Circular *7],
+                              rebuild: [Function (anonymous)]
+                            },
+                            Processor: <ref *8> [class Processor] {
+                              default: [Circular *8]
+                            },
+                            Document: <ref *9> [class Document extends Container] {
+                              registerLazyResult: [Function (anonymous)],
+                              registerProcessor: [Function (anonymous)],
+                              default: [Circular *9]
+                            },
+                            Comment: <ref *10> [class Comment extends Node] {
+                              default: [Circular *10]
+                            },
+                            Warning: <ref *11> [class Warning] {
+                              default: [Circular *11]
+                            },
+                            AtRule: <ref *12> [class AtRule extends Container] {
+                              default: [Circular *12]
+                            },
+                            Result: <ref *13> [class Result] {
+                              default: [Circular *13]
+                            },
+                            Input: <ref *14> [class Input] {
+                              default: [Circular *14]
+                            },
+                            Rule: <ref *15> [class Rule extends Container] {
+                              default: [Circular *15]
+                            },
+                            Root: <ref *16> [class Root extends Container] {
+                              registerLazyResult: [Function (anonymous)],
+                              registerProcessor: [Function (anonymous)],
+                              default: [Circular *16]
+                            },
+                            Node: <ref *17> [class Node] {
+                              default: [Circular *17]
+                            },
+                            default: [Circular *18]
+                          },
+                          postcssOptions: [Function: optionGenerator] { config: false }
+                        }
+                      }
+                    ],
+                    type: 'asset/source',
+                    resourceQuery: /\?ngResource/
+                  }
+                ]
+              },
+              {
+                use: [
+                  {
+                    loader: '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/less-loader/dist/cjs.js',
+                    options: {
+                      implementation: {
+                        node: [Function (anonymous)],
+                        color: [Function (anonymous)],
+                        atrule: [Function (anonymous)],
+                        detachedruleset: [Function (anonymous)],
+                        operation: [Function (anonymous)],
+                        dimension: [Function (anonymous)],
+                        unit: [Function (anonymous)],
+                        keyword: [Function (anonymous)],
+                        variable: [Function (anonymous)],
+                        property: [Function (anonymous)],
+                        ruleset: [Function (anonymous)],
+                        element: [Function (anonymous)],
+                        attribute: [Function (anonymous)],
+                        combinator: [Function (anonymous)],
+                        selector: [Function (anonymous)],
+                        quoted: [Function (anonymous)],
+                        expression: [Function (anonymous)],
+                        declaration: [Function (anonymous)],
+                        call: [Function (anonymous)],
+                        url: [Function (anonymous)],
+                        import: [Function (anonymous)],
+                        comment: [Function (anonymous)],
+                        anonymous: [Function (anonymous)],
+                        value: [Function (anonymous)],
+                        javascript: [Function (anonymous)],
+                        assignment: [Function (anonymous)],
+                        condition: [Function (anonymous)],
+                        paren: [Function (anonymous)],
+                        media: [Function (anonymous)],
+                        unicodedescriptor: [Function (anonymous)],
+                        negative: [Function (anonymous)],
+                        extend: [Function (anonymous)],
+                        variablecall: [Function (anonymous)],
+                        namespacevalue: [Function (anonymous)],
+                        mixin: [Object: null prototype] {
+                          call: [Function (anonymous)],
+                          definition: [Function (anonymous)]
+                        },
+                        createFromEnvironment: [Function: default_1],
+                        lesscHelper: {
+                          stylize: [Function: stylize],
+                          printUsage: [Function: printUsage]
+                        },
+                        PluginLoader: [Function: PluginLoader],
+                        fs: {
+                          appendFile: [Function: appendFile],
+                          appendFileSync: [Function: appendFileSync],
+                          access: [Function: access],
+                          accessSync: [Function: accessSync],
+                          chown: [Function (anonymous)],
+                          chownSync: [Function (anonymous)],
+                          chmod: [Function (anonymous)],
+                          chmodSync: [Function (anonymous)],
+                          close: [Function: close],
+                          closeSync: [Function: closeSync],
+                          copyFile: [Function: copyFile],
+                          copyFileSync: [Function: copyFileSync],
+                          cp: [Function: cp],
+                          cpSync: [Function: cpSync],
+                          createReadStream: [Function: createReadStream],
+                          createWrit
+12:00:43 (34479) TRACE ChildProcessProxy eStream: [Function: createWriteStream],
+                          exists: [Function: exists],
+                          existsSync: [Function: existsSync],
+                          fchown: [Function (anonymous)],
+                          fchownSync: [Function (anonymous)],
+                          fchmod: [Function (anonymous)],
+                          fchmodSync: [Function (anonymous)],
+                          fdatasync: [Function: fdatasync],
+                          fdatasyncSync: [Function: fdatasyncSync],
+                          fstat: [Function (anonymous)],
+                          fstatSync: [Function (anonymous)],
+                          fsync: [Function: fsync],
+                          fsyncSync: [Function: fsyncSync],
+                          ftruncate: [Function: ftruncate],
+                          ftruncateSync: [Function: ftruncateSync],
+                          futimes: [Function: futimes],
+                          futimesSync: [Function: futimesSync],
+                          lchown: [Function (anonymous)],
+                          lchownSync: [Function (anonymous)],
+                          lchmod: [Function (anonymous)],
+                          lchmodSync: [Function (anonymous)],
+                          link: [Function: link],
+                          linkSync: [Function: linkSync],
+                          lstat: [Function (anonymous)],
+                          lstatSync: [Function (anonymous)],
+                          lutimes: [Function: lutimes],
+                          lutimesSync: [Function: lutimesSync],
+                          mkdir: [Function: mkdir],
+                          mkdirSync: [Function: mkdirSync],
+                          mkdtemp: [Function: mkdtemp],
+                          mkdtempSync: [Function: mkdtempSync],
+                          open: [Function: open],
+                          openSync: [Function: openSync],
+                          opendir: [Function: opendir],
+                          opendirSync: [Function: opendirSync],
+                          readdir: [Function: readdir],
+                          readdirSync: [Function: readdirSync],
+                          read: [Function: read],
+                          readSync: [Function (anonymous)],
+                          readv: [Function: readv],
+                          readvSync: [Function: readvSync],
+                          readFile: [Function: readFile],
+                          readFileSync: [Function: readFileSync],
+                          readlink: [Function: readlink],
+                          readlinkSync: [Function: readlinkSync],
+                          realpath: [Function: realpath] {
+                            native: [Function (anonymous)]
+                          },
+                          realpathSync: [Function: realpathSync] {
+                            native: [Function (anonymous)]
+                          },
+                          rename: [Function: rename],
+                          renameSync: [Function: renameSync],
+                          rm: [Function: rm],
+                          rmSync: [Function: rmSync],
+                          rmdir: [Function: rmdir],
+                          rmdirSync: [Function: rmdirSync],
+                          stat: [Function (anonymous)],
+                          statSync: [Function (anonymous)],
+                          symlink: [Function: symlink],
+                          symlinkSync: [Function: symlinkSync],
+                          truncate: [Function: truncate],
+                          truncateSync: [Function: truncateSync],
+                          unwatchFile: [Function: unwatchFile],
+                          unlink: [Function: unlink],
+                          unlinkSync: [Function: unlinkSync],
+                          utimes: [Function: utimes],
+                          utimesSync: [Function: utimesSync],
+                          watch: [Function: watch],
+                          watchFile: [Function: watchFile],
+                          writeFile: [Function: writeFile],
+                          writeFileSync: [Function: writeFileSync],
+                          write: [Function: write],
+                          writeSync: [Function: writeSync],
+                          writev: [Function: writev],
+                          writevSync: [Function: writevSync],
+                          Dir: [class Dir],
+                          Dirent: [class Dirent],
+                          Stats: [Function: Stats],
+                          ReadStream: [Getter/Setter],
+                          WriteStream: [Getter/Setter],
+                          FileReadStream: [Getter/Setter],
+                          FileWriteStream: [Getter/Setter],
+                          _toUnixTimestamp: [Function: toUnixTimestamp],
+                          F_OK: 0,
+                          R_OK: 4,
+                          W_OK: 2,
+                          X_OK: 1,
+                          constants: [Object: null prototype] {
+                            UV_FS_SYMLINK_DIR: 1,
+                            UV_FS_SYMLINK_JUNCTION: 2,
+                            O_RDONLY: 0,
+                            O_WRONLY: 1,
+                            O_RDWR: 2,
+                            UV_DIRENT_UNKNOWN: 0,
+                            UV_DIRENT_FILE: 1,
+                            UV_DIRENT_DIR: 2,
+                            UV_DIRENT_LINK: 3,
+                            UV_DIRENT_FIFO: 4,
+                            UV_DIRENT_SOCKET: 5,
+                            UV_DIRENT_CHAR: 6,
+                            UV_DIRENT_BLOCK: 7,
+                            S_IFMT: 61440,
+                            S_IFREG: 32768,
+                            S_IFDIR: 16384,
+                            S_IFCHR: 8192,
+                            S_IFBLK: 24576,
+                            S_IFIFO: 4096,
+                            S_IFLNK: 40960,
+                            S_IFSOCK: 49152,
+                            O_CREAT: 512,
+                            O_EXCL: 2048,
+                            UV_FS_O_FILEMAP: 0,
+                            O_NOCTTY: 131072,
+                            O_TRUNC: 1024,
+                            O_APPEND: 8,
+                            O_DIRECTORY: 1048576,
+                            O_NOFOLLOW: 256,
+                            O_SYNC: 128,
+                            O_DSYNC: 4194304,
+                            O_SYMLINK: 2097152,
+                            O_NONBLOCK: 4,
+                            S_IRWXU: 448,
+                            S_IRUSR: 256,
+                            S_IWUSR: 128,
+                            S_IXUSR: 64,
+                            S_IRWXG: 56,
+                            S_IRGRP: 32,
+                            S_IWGRP: 16,
+                            S_IXGRP: 8,
+                            S_IRWXO: 7,
+                            S_IROTH: 4,
+                            S_IWOTH: 2,
+                            S_IXOTH: 1,
+                            F_OK: 0,
+                            R_OK: 4,
+                            W_OK: 2,
+                            X_OK: 1,
+                            UV_FS_COPYFILE_EXCL: 1,
+                            COPYFILE_EXCL: 1,
+                            UV_FS_COPYFILE_FICLONE: 2,
+                            COPYFILE_FICLONE: 2,
+                            UV_FS_COPYFILE_FICLONE_FORCE: 4,
+                            COPYFILE_FICLONE_FORCE: 4
+                          },
+                          promises: [Getter],
+                          gracefulify: [Function: patch]
+                        },
+                        FileManager: [Function: FileManager],
+                        UrlFileManager: [Function: UrlFileManager],
+                        options: {
+                          javascriptEnabled: false,
+                          depends: false,
+                          compress: false,
+                          lint: false,
+                          paths: [],
+                          color: true,
+                          strictImports: false,
+                          insecure: false,
+                          rootpat
+12:00:46 (34479) TRACE ChildProcessProxy h: '',
+                          rewriteUrls: false,
+                          math: 1,
+                          strictUnits: false,
+                          globalVars: null,
+                          modifyVars: null,
+                          urlArgs: ''
+                        }
+                      },
+                      sourceMap: true,
+                      lessOptions: { javascriptEnabled: true, paths: [] }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            test: /\.(?:styl)$/i,
+            rules: [
+              {
+                oneOf: [
+                  {
+                    use: [
+                      {
+                        loader: '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/mini-css-extract-plugin/dist/loader.js'
+                      },
+                      {
+                        loader: '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/css-loader/dist/cjs.js',
+                        options: { url: false, sourceMap: true }
+                      },
+                      {
+                        loader: '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/postcss-loader/dist/cjs.js',
+                        options: {
+                          implementation: <ref *18> [Function: postcss] {
+                            plugin: [Function: plugin],
+                            stringify: <ref *1> [Function: stringify] {
+                              default: [Circular *1]
+                            },
+                            parse: <ref *2> [Function: parse] {
+                              default: [Circular *2]
+                            },
+                            fromJSON: <ref *3> [Function: fromJSON] {
+                              default: [Circular *3]
+                            },
+                            list: <ref *4> {
+                              split: [Function: split],
+                              space: [Function: space],
+                              comma: [Function: comma],
+                              default: [Circular *4]
+                            },
+                            comment: [Function (anonymous)],
+                            atRule: [Function (anonymous)],
+                            decl: [Function (anonymous)],
+                            rule: [Function (anonymous)],
+                            root: [Function (anonymous)],
+                            document: [Function (anonymous)],
+                            CssSyntaxError: <ref *5> [class CssSyntaxError extends Error] {
+                              default: [Circular *5]
+                            },
+                            Declaration: <ref *6> [class Declaration extends Node] {
+                              default: [Circular *6]
+                            },
+                            Container: <ref *7> [class Container extends Node] {
+                              registerParse: [Function (anonymous)],
+                              registerRule: [Function (anonymous)],
+                              registerAtRule: [Function (anonymous)],
+                              registerRoot: [Function (anonymous)],
+                              default: [Circular *7],
+                              rebuild: [Function (anonymous)]
+                            },
+                            Processor: <ref *8> [class Processor] {
+                              default: [Circular *8]
+                            },
+                            Document: <ref *9> [class Document extends Container] {
+                              registerLazyResult: [Function (anonymous)],
+                              registerProcessor: [Function (anonymous)],
+                              default: [Circular *9]
+                            },
+                            Comment: <ref *10> [class Comment extends Node] {
+                              default: [Circular *10]
+                            },
+                            Warning: <ref *11> [class Warning] {
+                              default: [Circular *11]
+                            },
+                            AtRule: <ref *12> [class AtRule extends Container] {
+                              default: [Circular *12]
+                            },
+                            Result: <ref *13> [class Result] {
+                              default: [Circular *13]
+                            },
+                            Input: <ref *14> [class Input] {
+                              default: [Circular *14]
+                            },
+                            Rule: <ref *15> [class Rule extends Container] {
+                              default: [Circular *15]
+                            },
+                            Root: <ref *16> [class Root extends Container] {
+                              registerLazyResult: [Function (anonymous)],
+                              registerProcessor: [Function (anonymous)],
+                              default: [Circular *16]
+                            },
+                            Node: <ref *17> [class Node] {
+                              default: [Circular *17]
+                            },
+                            default: [Circular *18]
+                          },
+                          postcssOptions: [Function: optionGenerator] { config: false },
+                          sourceMap: true
+                        }
+                      }
+                    ],
+                    include: [
+                      '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/styles.css'
+                    ],
+                    resourceQuery: { not: [ /\?ngResource/ ] }
+                  },
+                  {
+                    use: [
+                      {
+                        loader: '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/postcss-loader/dist/cjs.js',
+                        options: {
+                          implementation: <ref *18> [Function: postcss] {
+                            plugin: [Function: plugin],
+                            stringify: <ref *1> [Function: stringify] {
+                              default: [Circular *1]
+                            },
+                            parse: <ref *2> [Function: parse] {
+                              default: [Circular *2]
+                            },
+                            fromJSON: <ref *3> [Function: fromJSON] {
+                              default: [Circular *3]
+                            },
+                            list: <ref *4> {
+                              split: [Function: split],
+                              space: [Function: space],
+                              comma: [Function: comma],
+                              default: [Circular *4]
+                            },
+                            comment: [Function (anonymous)],
+                            atRule: [Function (anonymous)],
+                            decl: [Function (anonymous)],
+                            rule: [Function (anonymous)],
+                            root: [Function (anonymous)],
+                            document: [Function (anonymous)],
+                            CssSyntaxError: <ref *5> [class CssSyntaxError extends Error] {
+                              default: [Circular *5]
+                            },
+                            Declaration: <ref *6> [class Declaration extends Node] {
+                              default: [Circular *6]
+                            },
+                            Container: <ref *7> [class Container extends Node] {
+                              registerParse: [Function (anonymous)],
+                              registerRule: [Function (anonymous)],
+                              registerAtRule: [Function (anonymous)],
+                              registerRoot: [Function (anonymous)],
+                              default: [Circular *7],
+                              rebuild: [Function (anonymous)]
+                            },
+                            Processor: <ref *8> [class Processor] {
+          
+12:00:46 (34479) TRACE ChildProcessProxy                     default: [Circular *8]
+                            },
+                            Document: <ref *9> [class Document extends Container] {
+                              registerLazyResult: [Function (anonymous)],
+                              registerProcessor: [Function (anonymous)],
+                              default: [Circular *9]
+                            },
+                            Comment: <ref *10> [class Comment extends Node] {
+                              default: [Circular *10]
+                            },
+                            Warning: <ref *11> [class Warning] {
+                              default: [Circular *11]
+                            },
+                            AtRule: <ref *12> [class AtRule extends Container] {
+                              default: [Circular *12]
+                            },
+                            Result: <ref *13> [class Result] {
+                              default: [Circular *13]
+                            },
+                            Input: <ref *14> [class Input] {
+                              default: [Circular *14]
+                            },
+                            Rule: <ref *15> [class Rule extends Container] {
+                              default: [Circular *15]
+                            },
+                            Root: <ref *16> [class Root extends Container] {
+                              registerLazyResult: [Function (anonymous)],
+                              registerProcessor: [Function (anonymous)],
+                              default: [Circular *16]
+                            },
+                            Node: <ref *17> [class Node] {
+                              default: [Circular *17]
+                            },
+                            default: [Circular *18]
+                          },
+                          postcssOptions: [Function: optionGenerator] { config: false }
+                        }
+                      }
+                    ],
+                    type: 'asset/source',
+                    resourceQuery: /\?ngResource/
+                  }
+                ]
+              },
+              {
+                use: [
+                  {
+                    loader: '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/stylus-loader/dist/cjs.js',
+                    options: {
+                      sourceMap: true,
+                      stylusOptions: {
+                        compress: false,
+                        sourceMap: { comment: false },
+                        paths: []
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      experiments: {
+        backCompat: false,
+        syncWebAssembly: true,
+        asyncWebAssembly: true
+      },
+      infrastructureLogging: { debug: undefined, level: 'error' },
+      stats: {
+        all: false,
+        colors: true,
+        hash: true,
+        timings: true,
+        chunks: true,
+        builtAt: true,
+        warnings: true,
+        errors: true,
+        assets: true,
+        cachedAssets: true,
+        ids: true,
+        entrypoints: true
+      },
+      cache: {
+        type: 'filesystem',
+        profile: undefined,
+        cacheDirectory: '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/.angular/cache/14.2.4/angular-webpack',
+        maxMemoryGenerations: 1,
+        name: '509500af3953ad93944df8cd62918a5582725d06'
+      },
+      optimization: {
+        minimizer: [],
+        moduleIds: 'deterministic',
+        chunkIds: 'named',
+        emitOnErrors: false,
+        runtimeChunk: 'single',
+        splitChunks: {
+          maxAsyncRequests: Infinity,
+          cacheGroups: {
+            default: false,
+            common: false,
+            vendors: false,
+            defaultVendors: {
+              name: 'vendor',
+              chunks: [Function: chunks],
+              enforce: true,
+              test: /[\\/]node_modules[\\/]/
+            }
+          }
+        }
+      },
+      plugins: [
+        NamedChunksPlugin {},
+        DedupeModuleResolvePlugin {
+          options: { verbose: undefined },
+          modules: Map(0) {}
+        },
+        CopyPlugin {
+          patterns: [
+            {
+              context: '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/',
+              to: '',
+              from: 'favicon.ico',
+              noErrorOnMissing: true,
+              force: true,
+              globOptions: {
+                dot: true,
+                followSymbolicLinks: false,
+                ignore: [
+                  '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/.gitkeep',
+                  '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/**/.DS_Store',
+                  '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/**/Thumbs.db'
+                ]
+              },
+              priority: 0
+            },
+            {
+              context: '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/assets/',
+              to: 'assets/',
+              from: '**/*',
+              noErrorOnMissing: true,
+              force: true,
+              globOptions: {
+                dot: true,
+                followSymbolicLinks: false,
+                ignore: [
+                  '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/assets/.gitkeep',
+                  '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/assets/**/.DS_Store',
+                  '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/src/assets/**/Thumbs.db'
+                ]
+              },
+              priority: 1
+            }
+          ],
+          options: {}
+        },
+        DevToolsIgnorePlugin {},
+        SourceMapDevToolPlugin {
+          sourceMapFilename: '[file].map',
+          sourceMappingURLComment: '\n//# sourceMappingURL=[url]',
+          moduleFilenameTemplate: '[resource-path]',
+          fallbackModuleFilenameTemplate: 'webpack://[namespace]/[resourcePath]?[hash]',
+          namespace: '',
+          options: {
+            filename: '[file].map',
+            include: [ /js$/, /css$/ ],
+            sourceRoot: 'webpack:///',
+            moduleFilenameTemplate: '[resource-path]',
+            append: undefined
+          }
+        },
+        AngularWebpackPlugin {
+          fileDependencies: Map(0) {},
+          requiredFilesToEmit: Set(0) {},
+          requiredFilesToEmitCache: Map(0) {},
+          fileEmitHistory: Map(0) {},
+          pluginOptions: {
+            emitClassMetadata: false,
+            emitNgModuleScope: true,
+            jitMode: true,
+            fileReplacements: {},
+            substitutions: {},
+            directTemplateLoading: true,
+            tsconfig: '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/tsconfig.spec.json',
+            compilerOptions: {
+              sourceMap: true,
+              declaration: false,
+              declarationMap: false,
+              preserveSymlinks: false
+            },
+            inlineStyleFileExtension: 'css'
+          }
+        },
+        AnyComponentStyleBudgetChecker { budgets: [] },
+        { apply: [Function: apply] },
+        MiniCssExtractPlugin {
+          _sortedModulesCache: WeakMap { <items unknown> },
+          options: {
+            filename: '[name].css',
+            ignoreOrder: false,
+            experimentalUseImportModule: undefined,
+            runtime: true,
+            chunkFilename: '[name].css'
+          },
+          runtimeOptions: {
+            insert: undefined,
+            linkType: 'text/css',
+            attributes: undefined
+          }
+        },
+        SuppressExtractedTextChunksWebpackPlugin {}
+      ],
+      node: false
+    },
+    logger: Logger {
+      _isScalar: false,
+      name: 'book-monkey:test:',
+      parent: null,
+      _subject: <ref *20> Subject {
+        _isScalar: false,
+        observers: [
+          <ref *19> Subscriber {
+            closed: false,
+            _parentOrParents: null,
+            _subscriptions: [
+              SubjectSubscription {
+                closed: false,
+        
+12:00:46 (34479) TRACE ChildProcessProxy         _parentOrParents: [Circular *19],
+                _subscriptions: null,
+                subject: [Circular *20],
+                subscriber: [Circular *19]
+              }
+            ],
+            syncErrorValue: null,
+            syncErrorThrown: false,
+            syncErrorThrowable: true,
+            isStopped: false,
+            destination: <ref *21> SafeSubscriber {
+              closed: false,
+              _parentOrParents: null,
+              _subscriptions: null,
+              syncErrorValue: null,
+              syncErrorThrown: false,
+              syncErrorThrowable: false,
+              isStopped: false,
+              destination: {
+                closed: true,
+                next: [Function: next],
+                error: [Function: error],
+                complete: [Function: complete]
+              },
+              _parentSubscriber: [Circular *19],
+              _context: [Circular *21],
+              _next: [Function (anonymous)],
+              _error: undefined,
+              _complete: undefined
+            }
+          },
+          <ref *22> Subscriber {
+            closed: false,
+            _parentOrParents: null,
+            _subscriptions: [
+              SubjectSubscription {
+                closed: false,
+                _parentOrParents: [Circular *22],
+                _subscriptions: null,
+                subject: [Circular *20],
+                subscriber: [Circular *22]
+              }
+            ],
+            syncErrorValue: null,
+            syncErrorThrown: false,
+            syncErrorThrowable: true,
+            isStopped: false,
+            destination: <ref *23> SafeSubscriber {
+              closed: false,
+              _parentOrParents: null,
+              _subscriptions: null,
+              syncErrorValue: null,
+              syncErrorThrown: false,
+              syncErrorThrowable: false,
+              isStopped: false,
+              destination: {
+                closed: true,
+                next: [Function: next],
+                error: [Function: error],
+                complete: [Function: complete]
+              },
+              _parentSubscriber: [Circular *22],
+              _context: [Circular *23],
+              _next: undefined,
+              _error: undefined,
+              _complete: [Function (anonymous)]
+            }
+          }
+        ],
+        closed: false,
+        isStopped: false,
+        hasError: false,
+        thrownError: null
+      },
+      _obs: Observable {
+        _isScalar: false,
+        source: <ref *20> Subject {
+          _isScalar: false,
+          observers: [
+            <ref *19> Subscriber {
+              closed: false,
+              _parentOrParents: null,
+              _subscriptions: [
+                SubjectSubscription {
+                  closed: false,
+                  _parentOrParents: [Circular *19],
+                  _subscriptions: null,
+                  subject: [Circular *20],
+                  subscriber: [Circular *19]
+                }
+              ],
+              syncErrorValue: null,
+              syncErrorThrown: false,
+              syncErrorThrowable: true,
+              isStopped: false,
+              destination: <ref *21> SafeSubscriber {
+                closed: false,
+                _parentOrParents: null,
+                _subscriptions: null,
+                syncErrorValue: null,
+                syncErrorThrown: false,
+                syncErrorThrowable: false,
+                isStopped: false,
+                destination: {
+                  closed: true,
+                  next: [Function: next],
+                  error: [Function: error],
+                  complete: [Function: complete]
+                },
+                _parentSubscriber: [Circular *19],
+                _context: [Circular *21],
+                _next: [Function (anonymous)],
+                _error: undefined,
+                _complete: undefined
+              }
+            },
+            <ref *22> Subscriber {
+              closed: false,
+              _parentOrParents: null,
+              _subscriptions: [
+                SubjectSubscription {
+                  closed: false,
+                  _parentOrParents: [Circular *22],
+                  _subscriptions: null,
+                  subject: [Circular *20],
+                  subscriber: [Circular *22]
+                }
+              ],
+              syncErrorValue: null,
+              syncErrorThrown: false,
+              syncErrorThrowable: true,
+              isStopped: false,
+              destination: <ref *23> SafeSubscriber {
+                closed: false,
+                _parentOrParents: null,
+                _subscriptions: null,
+                syncErrorValue: null,
+                syncErrorThrown: false,
+                syncErrorThrowable: false,
+                isStopped: false,
+                destination: {
+                  closed: true,
+                  next: [Function: next],
+                  error: [Function: error],
+                  complete: [Function: complete]
+                },
+                _parentSubscriber: [Circular *22],
+                _context: [Circular *23],
+                _next: undefined,
+                _error: undefined,
+                _complete: [Function (anonymous)]
+              }
+            }
+          ],
+          closed: false,
+          isStopped: false,
+          hasError: false,
+          thrownError: null
+        }
+      },
+      _subscription: null,
+      _metadata: { name: 'book-monkey:test:', path: [] }
+    },
+    failureCb: [Function (anonymous)],
+    successCb: [Function (anonymous)]
+  },
+  jasmineHtmlReporter: { suppressAll: true },
+  coverageReporter: {
+    dir: '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/coverage/book-monkey',
+    subdir: '.',
+    reporters: [ { type: 'html' }, { type: 'text-summary' } ]
+  },
+  configFile: '/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/karma.conf.js',
+  beforeMiddleware: [ 'TestHooksMiddleware' ]
+}
 
-01:06:33 (50695) TRACE ChildProcessProxy   ✔︎ Including:  base, components, themes[29], utilities
+12:00:46 (34479) TRACE ChildProcessProxy 03 10 2022 12:00:42.813:WARN [karma-server]: `autowatch` and `singleRun` are both `false`. In order to execute tests use `karma run`.
+03 10 2022 12:00:42.813:DEBUG [plugin]: Loading inline plugin defining framework:jasmine, reporter:karma-jasmine.
+03 10 2022 12:00:42.813:DEBUG [plugin]: Loading inline plugin defining launcher:Chrome, launcher:ChromeHeadless, launcher:ChromeCanary, launcher:ChromeCanaryHeadless, launcher:Chromium, launcher:ChromiumHeadless, launcher:Dartium, test.
+03 10 2022 12:00:42.813:DEBUG [plugin]: Loading inline plugin defining reporter:kjhtml.
+03 10 2022 12:00:42.813:DEBUG [plugin]: Loading inline plugin defining preprocessor:coverage, reporter:coverage.
+03 10 2022 12:00:42.813:DEBUG [plugin]: Loading inline plugin defining framework:@angular-devkit/build-angular, reporter:@angular-devkit/build-angular--sourcemap-reporter, reporter:@angular-devkit/build-angular--event-reporter, middleware:@angular-devkit/build-angular--blocker, middleware:@angular-devkit/build-angular--fallback.
+03 10 2022 12:00:42.814:DEBUG [plugin]: Loading inline plugin defining middleware:TestHooksMiddleware.
+03 10 2022 12:00:42.814:DEBUG [plugin]: Loading inline plugin defining reporter:StrykerReporter.
 
-01:06:33 (50695) TRACE ChildProcessProxy   
+12:00:46 (34479) TRACE ChildProcessProxy 
 
-01:06:34 (50695) TRACE ChildProcessProxy 
+12:00:46 (34479) TRACE ChildProcessProxy 🌼 daisyUI components 2.31.0  https://github.com/saadeghi/daisyui
+
+12:00:46 (34479) TRACE ChildProcessProxy   ✔︎ Including:  base, components, themes[29], utilities
+
+12:00:46 (34479) TRACE ChildProcessProxy   
+
+12:00:49 (34479) TRACE ChildProcessProxy 03 10 2022 12:00:49.112:DEBUG [web-server]: Instantiating middleware
+
+12:00:49 (34479) TRACE ChildProcessProxy 03 10 2022 12:00:49.112:DEBUG [reporter]: Trying to load reporter: @angular-devkit/build-angular--event-reporter
+
+12:00:49 (34479) TRACE ChildProcessProxy 03 10 2022 12:00:49.113:DEBUG [reporter]: Trying to load color-version of reporter: @angular-devkit/build-angular--event-reporter (@angular-devkit/build-angular--event-reporter_color)
+
+12:00:49 (34479) TRACE ChildProcessProxy 03 10 2022 12:00:49.113:DEBUG [reporter]: Couldn't load color-version.
+03 10 2022 12:00:49.113:DEBUG [reporter]: Trying to load reporter: @angular-devkit/build-angular--sourcemap-reporter
+
+12:00:49 (34479) TRACE ChildProcessProxy 03 10 2022 12:00:49.113:DEBUG [reporter]: Trying to load color-version of reporter: @angular-devkit/build-angular--sourcemap-reporter (@angular-devkit/build-angular--sourcemap-reporter_color)
+
+12:00:49 (34479) TRACE ChildProcessProxy 03 10 2022 12:00:49.113:DEBUG [reporter]: Couldn't load color-version.
+
+12:00:49 (34479) TRACE ChildProcessProxy 03 10 2022 12:00:49.121:DEBUG [reporter]: Trying to load reporter: kjhtml
+
+12:00:49 (34479) TRACE ChildProcessProxy 03 10 2022 12:00:49.121:DEBUG [reporter]: Trying to load color-version of reporter: kjhtml (kjhtml_color)
+
+12:00:49 (34479) TRACE ChildProcessProxy 03 10 2022 12:00:49.121:DEBUG [reporter]: Couldn't load color-version.
+
+12:00:49 (34479) TRACE ChildProcessProxy 03 10 2022 12:00:49.121:DEBUG [reporter]: Trying to load reporter: StrykerReporter
+
+12:00:49 (34479) TRACE ChildProcessProxy 03 10 2022 12:00:49.121:DEBUG [reporter]: Trying to load color-version of reporter: StrykerReporter (StrykerReporter_color)
+
+12:00:49 (34479) TRACE ChildProcessProxy 03 10 2022 12:00:49.121:DEBUG [reporter]: Couldn't load color-version.
+
+12:00:49 (34479) TRACE ChildProcessProxy 03 10 2022 12:00:49.126:DEBUG [filelist]: Not preprocessing "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/stryker-mutant-coverage-adapter.js" due to nocache
+
+12:00:49 (34479) TRACE ChildProcessProxy 03 10 2022 12:00:49.126:DEBUG [filelist]: Not preprocessing "/Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js" due to nocache
+
+12:00:49 (34479) TRACE ChildProcessProxy 
 Error: src/app/search/search.effects.spec.ts:46:26 - error TS2339: Property 'pipe' does not exist on type 'EffectResult<Action> & CreateEffectMetadata'.
   Property 'pipe' does not exist on type '((...args: any[]) => Observable<Action>) & CreateEffectMetadata'.
 
@@ -152,38 +2254,58 @@ Error: src/app/search/search.effects.spec.ts:46:53 - error TS7006: Parameter 'ac
 
 
 
-01:06:34 (50695) TRACE ChildProcessProxy [32m03 10 2022 01:06:34.236:INFO [karma-server]: [39mKarma v6.3.20 server started at http://localhost:9877/
+12:00:49 (34479) TRACE ChildProcessProxy 03 10 2022 12:00:49.183:INFO [karma-server]: Karma v6.4.1 server started at http://localhost:9876/
 
-01:06:34 (50695) TRACE ChildProcessProxy [32m03 10 2022 01:06:34.236:INFO [launcher]: [39mLaunching browsers ChromeHeadless with concurrency unlimited
+12:00:49 (34479) TRACE ChildProcessProxy 03 10 2022 12:00:49.183:INFO [launcher]: Launching browsers ChromeHeadless with concurrency unlimited
 
-01:06:34 (50695) TRACE ChildProcessProxy [32m03 10 2022 01:06:34.238:INFO [launcher]: [39mStarting browser ChromeHeadless
+12:00:49 (34479) TRACE ChildProcessProxy 03 10 2022 12:00:49.185:INFO [launcher]: Starting browser ChromeHeadless
 
-01:06:34 (50695) TRACE ChildProcessProxy [32m03 10 2022 01:06:34.681:INFO [Chrome Headless 105.0.5195.125 (Mac OS 10.15.7)]: [39mConnected on socket crPeiRN7Q3Fx5uTRAAAB with id 46847141
+12:00:49 (34479) TRACE ChildProcessProxy 03 10 2022 12:00:49.186:DEBUG [launcher]: null -> BEING_CAPTURED
 
-01:06:34 (50695) INFO DryRunExecutor Starting initial test run (karma test runner with "perTest" coverage analysis). This may take a while.
-01:06:34 (50695) DEBUG DryRunExecutor Using timeout of 300000 ms.
-01:06:34 (50695) DEBUG TimeoutDecorator Starting timeout timer (300000 ms) for a test run
-01:06:34 (50695) TRACE ChildProcessProxy [33m03 10 2022 01:06:34.719:WARN [web-server]: [39m404: /_karma_webpack_/main.js
+12:00:49 (34479) TRACE ChildProcessProxy 03 10 2022 12:00:49.186:DEBUG [temp-dir]: Creating temp dir at /var/folders/3z/5hsmh7s91nx4rcdk9f29f0smgwp36k/T/karma-36232599
 
-01:06:34 (50695) TRACE ChildProcessProxy Chrome Headless 105.0.5195.125 (Mac OS 10.15.7): Executed 0 of 0[32m SUCCESS[39m (0 secs / 0 secs)
+12:00:49 (34479) TRACE ChildProcessProxy 03 10 2022 12:00:49.186:DEBUG [launcher]: /Applications/Google Chrome.app/Contents/MacOS/Google Chrome --user-data-dir=/var/folders/3z/5hsmh7s91nx4rcdk9f29f0smgwp36k/T/karma-36232599 --enable-automation --no-default-browser-check --no-first-run --disable-default-apps --disable-popup-blocking --disable-translate --disable-background-timer-throttling --disable-renderer-backgrounding --disable-device-discovery-notifications http://localhost:9876/?id=36232599 --headless --disable-gpu --disable-dev-shm-usage --remote-debugging-port=9222
 
-01:06:34 (50695) TRACE ChildProcessProxy [1A[2KChrome Headless 105.0.5195.125 (Mac OS 10.15.7): Executed 0 of 0[32m SUCCESS[39m (0.006 secs / 0 secs)
+12:00:49 (34479) TRACE ChildProcessProxy 03 10 2022 12:00:49.511:DEBUG [web-server]: serving: /Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/karma/static/client.html
 
-01:06:34 (50695) TRACE ChildProcessProxy [32mTOTAL: 0 SUCCESS[39m
+12:00:49 (34479) TRACE ChildProcessProxy 03 10 2022 12:00:49.521:DEBUG [web-server]: serving: /Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/node_modules/karma/static/karma.js
 
-01:06:34 (50695) INFO DryRunExecutor Initial test run succeeded. Ran 0 tests in 0 seconds (net 0 ms, overhead 57 ms).
-01:06:34 (50695) DEBUG Stryker Not removing the temp dir because an error occurred
-01:06:34 (50695) ERROR Stryker No tests were executed. Stryker will exit prematurely. Please check your configuration.
-01:06:34 (50695) TRACE ChildProcessProxy [33m03 10 2022 01:06:34.810:WARN [Chrome Headless 105.0.5195.125 (Mac OS 10.15.7)]: [39mDisconnected (0 times) Client disconnected from CONNECTED state (transport close)
+12:00:49 (34479) TRACE ChildProcessProxy 03 10 2022 12:00:49.575:DEBUG [karma-server]: A browser has connected on socket Lx_ZkqBC55dJm64vAAAB
 
-01:06:34 (50695) TRACE ChildProcessProxy [1A[2K[31mChrome Headless 105.0.5195.125 (Mac OS 10.15.7) ERROR[39m
+12:00:49 (34479) TRACE ChildProcessProxy 03 10 2022 12:00:49.576:DEBUG [web-server]: upgrade /socket.io/?EIO=4&transport=websocket&sid=hK8SI-YAxRLglaT0AAAA
+
+12:00:49 (34479) TRACE ChildProcessProxy 03 10 2022 12:00:49.586:DEBUG [Chrome Headless 105.0.5195.125 (Mac OS 10.15.7)]: undefined -> CONNECTED
+
+12:00:49 (34479) TRACE ChildProcessProxy 03 10 2022 12:00:49.586:INFO [Chrome Headless 105.0.5195.125 (Mac OS 10.15.7)]: Connected on socket Lx_ZkqBC55dJm64vAAAB with id 36232599
+
+12:00:49 (34479) TRACE ChildProcessProxy 03 10 2022 12:00:49.587:DEBUG [launcher]: BEING_CAPTURED -> CAPTURED
+
+12:00:49 (34479) TRACE ChildProcessProxy 03 10 2022 12:00:49.587:DEBUG [launcher]: ChromeHeadless (id 36232599) captured in 0.404 secs
+
+12:00:49 (34479) INFO DryRunExecutor Starting initial test run (karma test runner with "perTest" coverage analysis). This may take a while.
+12:00:49 (34479) DEBUG DryRunExecutor Using timeout of 300000 ms.
+12:00:49 (34479) DEBUG TimeoutDecorator Starting timeout timer (300000 ms) for a test run
+12:00:49 (34479) TRACE ChildProcessProxy 03 10 2022 12:00:49.620:WARN [web-server]: 404: /_karma_webpack_/main.js
+
+12:00:49 (34479) TRACE ChildProcessProxy Chrome Headless 105.0.5195.125 (Mac OS 10.15.7): Executed 0 of 0 SUCCESS (0 secs / 0 secs)
+
+12:00:49 (34479) TRACE ChildProcessProxy Chrome Headless 105.0.5195.125 (Mac OS 10.15.7): Executed 0 of 0 SUCCESS (0.002 secs / 0 secs)
+
+12:00:49 (34479) TRACE ChildProcessProxy TOTAL: 0 SUCCESS
+
+12:00:49 (34479) INFO DryRunExecutor Initial test run succeeded. Ran 0 tests in 0 seconds (net 0 ms, overhead 48 ms).
+12:00:49 (34479) DEBUG Stryker Not removing the temp dir because an error occurred
+12:00:49 (34479) ERROR Stryker No tests were executed. Stryker will exit prematurely. Please check your configuration.
+12:00:49 (34479) TRACE ChildProcessProxy 03 10 2022 12:00:49.706:WARN [Chrome Headless 105.0.5195.125 (Mac OS 10.15.7)]: Disconnected (0 times) Client disconnected from CONNECTED state (transport close)
+
+12:00:49 (34479) TRACE ChildProcessProxy Chrome Headless 105.0.5195.125 (Mac OS 10.15.7) ERROR
   Disconnected Client disconnected from CONNECTED state (transport close)
-Chrome Headless 105.0.5195.125 (Mac OS 10.15.7): Executed 0 of 0[32m SUCCESS[39m (0.006 secs / 0 secs)
+Chrome Headless 105.0.5195.125 (Mac OS 10.15.7): Executed 0 of 0 SUCCESS (0.002 secs / 0 secs)
 Chrome Headless 105.0.5195.125 (Mac OS 10.15.7) ERROR
   Disconnected Client disconnected from CONNECTED state (transport close)
 
-01:06:35 (50695) DEBUG ChildProcessProxy Disposing of worker process 50697
-01:06:35 (50695) DEBUG ChildProcessProxy Kill 50697
-01:06:35 (50695) INFO Sandbox Resetting your original files from stryker-tmp/backup8060742.
-01:06:35 (50695) DEBUG ChildProcessProxy Disposing of worker process 50696
-01:06:35 (50695) DEBUG ChildProcessProxy Kill 50696
+12:00:50 (34479) DEBUG ChildProcessProxy Disposing of worker process 34504
+12:00:50 (34479) DEBUG ChildProcessProxy Kill 34504
+12:00:50 (34479) INFO Sandbox Resetting your original files from stryker-tmp/backup9516127.
+12:00:50 (34479) DEBUG ChildProcessProxy Disposing of worker process 34487
+12:00:50 (34479) DEBUG ChildProcessProxy Kill 34487

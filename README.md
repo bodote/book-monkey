@@ -14,15 +14,18 @@ instead of  https://semantic-ui.com/ we use:
 "tempDirName": "stryker-tmp"
 "inPlace": true
 ```
-or use
+but DON'T  use
 
 `stryker run --ignorePatterns '**','!src/**/book-details*.ts'  --fileLogLevel trace`
+because of https://github.com/stryker-mutator/stryker-js/issues/3688
 
-because of bug https://github.com/stryker-mutator/stryker-js/issues/3688 , you allways need to set the
+even with `inPlace` which you allways need to set :
 ```
 "inPlace": true
 ```
 flag to `true`
+
+instead only use the stryker config file `mutate` pattern to include only specific files for testing
 
 ## stryker Dashboard
 - [Bodos Dashboard](https://dashboard.stryker-mutator.io/reports/github.com/bodote/book-monkey/master)
@@ -62,3 +65,5 @@ then:
 
 # cypress.config.ts 
 for the moment: commented out, since it gets intellij to show errors at jasmine.expect()....
+
+## update packages

@@ -141,16 +141,12 @@
           "options": {
             "watch": true,
             "headless": false
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "book-monkey:serve:production"
-            }
           }
         },
         "e2e": {
           "builder": "@cypress/schematic:cypress",
           "options": {
+            "devServerTarget": "book-monkey:serve",
             "watch": true,
             "headless": false
           },

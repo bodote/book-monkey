@@ -31,7 +31,7 @@
   "coverageAnalysis": "perTest",
   "timeoutFactor": 40,
   "checkers": ["typescript"],
-  "fileLogLevel": "trace",
+  "fileLogLevel": "info",
   "tsconfigFile": "tsconfig.stryker.json",
   "tempDirName": "stryker-tmp",
   "inPlace": true
