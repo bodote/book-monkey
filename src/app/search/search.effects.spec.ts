@@ -26,29 +26,52 @@ describe('SearchEffects', () => {
     mockService.getAllSearch = jasmine
       .createSpy<() => Observable<Book[]>>()
       .and.returnValue(of([bookEntity]));
-    actions$ = of(loadSearchs({ searchString: 'test' }));
-    TestBed.configureTestingModule({
-      providers: [
-        SearchEffects,
-        provideMockActions(() => actions$),
-        { provide: BookStoreService, useValue: mockService }
-      ]
+  });
+  describe(' with action loadSearchs', () => {
+    beforeEach(() => {
+      actions$ = of(loadSearchs({ searchString: 'test' }));
+      TestBed.configureTestingModule({
+        providers: [
+          SearchEffects,
+          provideMockActions(() => actions$),
+          { provide: BookStoreService, useValue: mockService }
+        ]
+      });
+      effects = TestBed.inject(SearchEffects);
     });
 
-    effects = TestBed.inject(SearchEffects);
-  });
+    it('should be created', () => {
+      expect(effects).toBeTruthy();
+    });
 
-  it('should be created', () => {
-    expect(effects).toBeTruthy();
+    it('should be get a book as the search result on loadSearchs-action', (done) => {
+      effects.searchBooks$.pipe(toArray()).subscribe((actions) => {
+        expect(actions.length).toBe(1);
+        expect(actions).toEqual([
+          loadSearchsSuccess({ searchResults: [bookEntity] })
+        ]);
+        done();
+      });
+    });
   });
+  describe(' with action loadSearchsSuccess ', () => {
+    beforeEach(() => {
+      actions$ = of(loadSearchsSuccess({ searchResults: [] }));
+      TestBed.configureTestingModule({
+        providers: [
+          SearchEffects,
+          provideMockActions(() => actions$),
+          { provide: BookStoreService, useValue: mockService }
+        ]
+      });
+      effects = TestBed.inject(SearchEffects);
+    });
 
-  it('should be get a book as the search result on loadSearchs-action', (done) => {
-    effects.searchBooks$.pipe(toArray()).subscribe((actions) => {
-      expect(actions.length).toBe(1);
-      expect(actions).toEqual([
-        loadSearchsSuccess({ searchResults: [bookEntity] })
-      ]);
-      done();
+    it('effects should NOT do anything', (done) => {
+      effects.searchBooks$.pipe(toArray()).subscribe((actions) => {
+        expect(actions.length).toBe(0);
+        done();
+      });
     });
   });
 });
