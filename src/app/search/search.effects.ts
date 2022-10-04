@@ -16,12 +16,20 @@ export class SearchEffects {
   searchBooks$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(loadSearchs),
-      switchMap((action) =>
-        this.bs.getAllSearch(action.searchString).pipe(
-          map((books: Book[]) => loadSearchsSuccess({ searchResults: books })),
-          catchError((error) => of(loadSearchsFailure({ error })))
-        )
-      )
+      switchMap((action) => {
+        try {
+          return this.bs.getAllSearch(action.searchString).pipe(
+            map((books: Book[]) => {
+              return loadSearchsSuccess({ searchResults: books });
+            }),
+            catchError((error) => {
+              return of(loadSearchsFailure({ error }));
+            })
+          );
+        } catch (error) {
+          return of(loadSearchsFailure({ error }));
+        }
+      })
     );
   });
 }

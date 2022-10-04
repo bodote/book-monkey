@@ -40,14 +40,9 @@ export class SearchComponent implements OnInit {
         debounceTime(400),
         distinctUntilChanged()
       )
-      .subscribe({
-        next: (searchString) => {
-          this.store.dispatch(loadSearchs({ searchString }));
-          return;
-        },
-        error: (e) => {
-          console.error(e);
-        }
+      .subscribe((searchString) => {
+        this.store.dispatch(loadSearchs({ searchString }));
+        return;
       });
   }
 

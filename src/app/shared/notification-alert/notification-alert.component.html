@@ -20,7 +20,7 @@
     <div>
       <h3 class="font-bold">Http: {{ error.httpError?.message }}</h3>
       <h3 class="font-bold">Non-Http: {{ error.errorMessage }}</h3>
-      <div class="text-xs">
+      <div [attr.data-id]="'errorAlert'" class="text-xs">
         Status: {{ error.httpError?.status }} <br />
         HTTP-Error-Response:
         <pre><p>{{stringify(error,undefined,2)}}</p></pre>
