@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
-import { Observable, of, toArray } from 'rxjs';
+import { Observable, of, throwError, toArray } from 'rxjs';
 
 import { SearchEffects } from './search.effects';
 import { BookStoreService } from '../shared/book-store.service';
@@ -80,7 +80,7 @@ describe('SearchEffects', () => {
       httpError = new HttpErrorResponse({ status: 404 });
       mockService.getAllSearch = jasmine
         .createSpy<() => Observable<Book[]>>()
-        .and.throwError(httpError);
+        .and.returnValue(throwError(() => httpError));
     });
     it('should return a error action ', (done) => {
       actions$ = of(loadSearchs({ searchString: 'test' }));

@@ -3,8 +3,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'bm-notification-alert',
-  templateUrl: './notification-alert.component.html',
-  styleUrls: ['./notification-alert.component.css']
+  templateUrl: './notification-alert.component.html'
 })
 export class NotificationAlertComponent implements OnInit {
   show: boolean = true;

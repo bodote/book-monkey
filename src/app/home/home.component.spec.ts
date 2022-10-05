@@ -6,6 +6,9 @@ import { catchError, retry } from 'rxjs/operators';
 import { SearchComponent } from '../search/search.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { provideMockStore } from '@ngrx/store/testing';
+import { AppState } from '../store';
+import { mockState } from '../store/index.spec';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -15,7 +18,8 @@ describe('HomeComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [HomeComponent, SearchComponent],
       imports: [HttpClientTestingModule],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      providers: [provideMockStore<AppState>({ initialState: mockState() })]
     }).compileComponents();
 
     fixture = TestBed.createComponent(HomeComponent);
@@ -28,11 +32,11 @@ describe('HomeComponent', () => {
     });
   });
 
-  xit('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
   // This test runs synchronously.
-  xit('test observables', () => {
+  it('test observables', () => {
     testScheduler.run((helpers) => {
       const { cold, expectObservable } = helpers;
       const valuesIn = { a: '1', b: '2', c: '3', d: '4' };
@@ -55,7 +59,7 @@ describe('HomeComponent', () => {
       expectObservable(final$).toBe(expected, valuesOut);
     });
   });
-  xit('test retry()', () => {
+  it('test retry()', () => {
     testScheduler.run((helpers) => {
       const { cold, expectObservable } = helpers;
 
@@ -66,7 +70,7 @@ describe('HomeComponent', () => {
         tap((value) => console.error('in :' + value)),
         retry({ count: 1, delay: 10 }),
         catchError((err) => {
-          return of('An Error Has occured');
+          return of('An Error Has occured' + err);
         })
         //tap((value) => console.error('out :' + value))
       );

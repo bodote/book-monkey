@@ -40,3 +40,51 @@
 20:47:17 (38900) INFO HtmlReporter Your report can be found at: file:///Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/reports/mutation/mutation.all.html
 20:47:17 (38900) INFO MutationTestExecutor Done in 39 seconds.
 20:47:17 (38900) INFO Sandbox Resetting your original files from stryker-tmp/backup409926.
+07:24:20 (62696) WARN ProjectReader Glob pattern "!main.ts" did not exclude any files.
+07:24:20 (62696) INFO ProjectReader Found 5 of 1033 file(s) to be mutated.
+07:24:20 (62696) INFO Instrumenter Instrumented 5 source file(s) with 34 mutant(s)
+07:24:20 (62696) INFO ConcurrencyTokenProvider Creating 1 checker process(es) and 1 test runner process(es).
+07:24:23 (62696) INFO Sandbox In place mode is enabled, Stryker will be overriding YOUR files. Find your backup at: stryker-tmp/backup4120454
+07:24:33 (62696) INFO DryRunExecutor Starting initial test run (karma test runner with "perTest" coverage analysis). This may take a while.
+07:24:33 (62696) INFO DryRunExecutor Initial test run succeeded. Ran 114 tests in 0 seconds (net 76 ms, overhead 666 ms).
+07:24:33 (62696) WARN MutantTestPlanner Detected 7 static mutants (21% of total) that are estimated to take 86% of the time running the tests!
+  You might want to enable "ignoreStatic" to ignore these static mutants for your next run. 
+  For more information about static mutants visit: https://stryker-mutator.io/docs/mutation-testing-elements/static-mutants.
+  (disable "warnings.slow" to ignore this warning)
+07:24:59 (62696) INFO HtmlReporter Your report can be found at: file:///Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/reports/mutation/mutation.all.html
+07:24:59 (62696) INFO MutationTestExecutor Done in 39 seconds.
+07:24:59 (62696) INFO Sandbox Resetting your original files from stryker-tmp/backup4120454.
+15:16:42 (91905) WARN ProjectReader Glob pattern "!main.ts" did not exclude any files.
+15:16:42 (91905) INFO ProjectReader Found 5 of 1097 file(s) to be mutated.
+15:16:42 (91905) INFO Instrumenter Instrumented 5 source file(s) with 34 mutant(s)
+15:16:42 (91905) INFO ConcurrencyTokenProvider Creating 1 checker process(es) and 1 test runner process(es).
+15:16:45 (91905) INFO Sandbox In place mode is enabled, Stryker will be overriding YOUR files. Find your backup at: stryker-tmp/backup4948755
+15:16:55 (91905) INFO DryRunExecutor Starting initial test run (karma test runner with "perTest" coverage analysis). This may take a while.
+15:16:56 (91905) INFO DryRunExecutor Initial test run succeeded. Ran 117 tests in 0 seconds (net 87 ms, overhead 589 ms).
+15:16:56 (91905) WARN MutantTestPlanner Detected 7 static mutants (21% of total) that are estimated to take 84% of the time running the tests!
+  You might want to enable "ignoreStatic" to ignore these static mutants for your next run. 
+  For more information about static mutants visit: https://stryker-mutator.io/docs/mutation-testing-elements/static-mutants.
+  (disable "warnings.slow" to ignore this warning)
+15:17:21 (91905) INFO HtmlReporter Your report can be found at: file:///Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/reports/mutation/mutation.all.html
+15:17:21 (91905) INFO MutationTestExecutor Done in 39 seconds.
+15:17:22 (91905) INFO Sandbox Resetting your original files from stryker-tmp/backup4948755.
+16:26:29 (92650) WARN ProjectReader Glob pattern "!main.ts" did not exclude any files.
+16:26:29 (92650) INFO ProjectReader Found 6 of 1111 file(s) to be mutated.
+16:26:29 (92650) INFO Instrumenter Instrumented 6 source file(s) with 67 mutant(s)
+16:26:29 (92650) INFO ConcurrencyTokenProvider Creating 1 checker process(es) and 1 test runner process(es).
+16:26:32 (92650) INFO Sandbox In place mode is enabled, Stryker will be overriding YOUR files. Find your backup at: stryker-tmp/backup1386973
+16:26:43 (92650) INFO DryRunExecutor Starting initial test run (karma test runner with "perTest" coverage analysis). This may take a while.
+16:26:44 (92650) INFO DryRunExecutor Initial test run succeeded. Ran 117 tests in 1 second (net 100 ms, overhead 967 ms).
+16:27:40 (92650) INFO HtmlReporter Your report can be found at: file:///Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/reports/mutation/mutation.all.html
+16:27:40 (92650) INFO MutationTestExecutor Done in 1 minute 10 seconds.
+16:27:40 (92650) INFO Sandbox Resetting your original files from stryker-tmp/backup1386973.
+16:31:14 (92862) WARN ProjectReader Glob pattern "!main.ts" did not exclude any files.
+16:31:14 (92862) INFO ProjectReader Found 1 of 1127 file(s) to be mutated.
+16:31:14 (92862) INFO Instrumenter Instrumented 1 source file(s) with 21 mutant(s)
+16:31:14 (92862) INFO ConcurrencyTokenProvider Creating 1 checker process(es) and 1 test runner process(es).
+16:31:17 (92862) INFO Sandbox In place mode is enabled, Stryker will be overriding YOUR files. Find your backup at: stryker-tmp/backup9596553
+16:31:26 (92862) INFO DryRunExecutor Starting initial test run (karma test runner with "perTest" coverage analysis). This may take a while.
+16:31:27 (92862) INFO DryRunExecutor Initial test run succeeded. Ran 117 tests in 0 seconds (net 87 ms, overhead 672 ms).
+16:31:43 (92862) INFO HtmlReporter Your report can be found at: file:///Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/reports/mutation/mutation.all.html
+16:31:43 (92862) INFO MutationTestExecutor Done in 28 seconds.
+16:31:43 (92862) INFO Sandbox Resetting your original files from stryker-tmp/backup9596553.

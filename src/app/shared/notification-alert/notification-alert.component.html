@@ -4,6 +4,7 @@
 >
   <div>
     <svg
+      data-id="closeBtn"
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
@@ -18,8 +19,12 @@
       />
     </svg>
     <div>
-      <h3 class="font-bold">Http: {{ error.httpError?.message }}</h3>
-      <h3 class="font-bold">Non-Http: {{ error.errorMessage }}</h3>
+      <h3 data-id="httpError" class="font-bold">
+        Http: {{ error.httpError?.message }}
+      </h3>
+      <h3 data-id="errorMessage" class="font-bold">
+        Non-Http: {{ error.errorMessage }}
+      </h3>
       <div [attr.data-id]="'errorAlert'" class="text-xs">
         Status: {{ error.httpError?.status }} <br />
         HTTP-Error-Response:
