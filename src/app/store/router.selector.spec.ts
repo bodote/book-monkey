@@ -5,7 +5,9 @@ import { LoaderState } from './router.reducer';
 
 describe('router selectors', () => {
   const routerFactory = new RouterFactory();
-
+  it('should router state', () => {
+    //TODO: check that "router" is indead the key for the router - state
+  });
   it('should select feature  loader state and initial loading-state=false', () => {
     const loaderState: LoaderState = routerFactory.loaderState({
       loading: false

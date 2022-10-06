@@ -11,6 +11,5 @@ export class RouterEffects {
     private router: Router,
     private route: ActivatedRoute
   ) {}
-
-  // currently empty
+  // currently empty,no router effects, we use ActivateGuard instead
 }
