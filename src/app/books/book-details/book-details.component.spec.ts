@@ -7,13 +7,14 @@ import { Observable, of, throwError } from 'rxjs';
 import { TestScheduler } from 'rxjs/testing';
 import { ActivatedRoute, ParamMap, Router, RouterLink } from '@angular/router';
 import { BookStoreService } from '../../shared/book-store.service';
-import { Book } from '../../shared/book';
+
 import { IsbnPipe } from '../shared/isbn.pipe';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { HttpErrorResponse } from '@angular/common/http';
+import { BookEntity } from '../store/book-entity/book-entity.model';
 
-const testBookData: Book = {
+const testBookData: BookEntity = {
   authors: ['author'],
   isbn: '1234567890',
   published: new Date('2022-02-02'),
@@ -70,7 +71,7 @@ xdescribe('BookDetailsComponent and IsbnPipe', () => {
     } as unknown as ParamMap;
     beforeEach(async () => {
       mockService.getBook = jasmine
-        .createSpy<() => Observable<Book>>()
+        .createSpy<() => Observable<BookEntity>>()
         .and.returnValue(of(testBookData));
     });
     it(
@@ -203,7 +204,7 @@ xdescribe('BookDetailsComponent and IsbnPipe', () => {
         .createSpy<(a: string) => string>()
         .and.returnValue('12345567');
       mockService.getBook = jasmine
-        .createSpy<() => Observable<Book>>()
+        .createSpy<() => Observable<BookEntity>>()
         .and.returnValue(throwError(() => theError));
       let propertySpy = spyOnProperty(route, 'paramMap', 'get').and.returnValue(
         of(params)
@@ -233,10 +234,9 @@ xdescribe('BookDetailsComponent and IsbnPipe', () => {
       spyOn(console, 'error');
       spyOn(router, 'navigate').and.callThrough();
       mockService.getBook = jasmine
-        .createSpy<() => Observable<Book>>()
-        .and.returnValue(of({} as Book));
-      let x = jasmine.createSpyObj({ basename: [], propertyNames: ['isbn'] });
-      //spyOn(params, 'get').and.returnValue('1234567');
+        .createSpy<() => Observable<BookEntity>>()
+        .and.returnValue(of({} as BookEntity));
+
       let propertySpy = spyOnProperty(route, 'paramMap', 'get').and.returnValue(
         of(params)
       );

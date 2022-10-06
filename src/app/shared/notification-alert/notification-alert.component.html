@@ -1,5 +1,5 @@
 <div
-  *ngIf="!!error && (!!error.httpError || !!error.errorMessage) && show"
+  *ngIf="!!error && (!!error.httpError || !!error.errorMessage)"
   class="fixed left-7 w-11/12 top-15 z-50 alert alert-error shadow-lg"
 >
   <div>
@@ -19,14 +19,18 @@
       />
     </svg>
     <div>
-      <h3 data-id="httpError" class="font-bold">
-        Http: {{ error.httpError?.message }}
+      <h3 *ngIf="!!error.httpError" data-id="httpError" class="font-bold">
+        Http: {{ error.httpError.message }}
       </h3>
       <h3 data-id="errorMessage" class="font-bold">
         Non-Http: {{ error.errorMessage }}
       </h3>
-      <div [attr.data-id]="'errorAlert'" class="text-xs">
-        Status: {{ error.httpError?.status }} <br />
+      <div
+        *ngIf="!!error.httpError"
+        [attr.data-id]="'errorAlert'"
+        class="text-xs"
+      >
+        Status: {{ error.httpError.status }} <br />
         HTTP-Error-Response:
         <pre><p>{{stringify(error,undefined,2)}}</p></pre>
       </div>

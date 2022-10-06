@@ -6,16 +6,16 @@ import {
   selectSearchState
 } from './search.selectors';
 import { mockState } from '../store/index.spec';
-import { Book } from '../shared/book';
 import { HttpErrorResponse } from '@angular/common/http';
 import { of, toArray } from 'rxjs';
 import { TestBed } from '@angular/core/testing';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { select } from '@ngrx/store';
 import { searchFeatureKey } from '../store';
+import { BookEntity } from '../books/store/book-entity/book-entity.model';
 
 describe('Search Selectors', () => {
-  const aBook: Book = {
+  const aBook: BookEntity = {
     authors: [],
     isbn: '123',
     published: new Date('2020-02-02'),

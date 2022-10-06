@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Book } from '../shared/book';
+import { BookEntity } from '../books/store/book-entity/book-entity.model';
 
 export const loadSearchs = createAction(
   '[Search] Load Book Searchs',
@@ -8,7 +8,7 @@ export const loadSearchs = createAction(
 
 export const loadSearchsSuccess = createAction(
   '[Search] Load Searchs Success',
-  props<{ searchResults: Book[] }>()
+  props<{ searchResults: BookEntity[] }>()
 );
 
 export const loadSearchsFailure = createAction(

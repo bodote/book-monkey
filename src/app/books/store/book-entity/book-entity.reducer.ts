@@ -23,7 +23,7 @@ export const adapter: EntityAdapter<BookEntity> =
     selectId: (bookEntity) => bookEntity.isbn
   });
 
-export const initialState: BookEntityState = adapter.getInitialState({
+export const initialBookEntityState: BookEntityState = adapter.getInitialState({
   currentBookId: undefined,
   httpError: null,
   errorMessage: null,
@@ -33,7 +33,7 @@ export const initialState: BookEntityState = adapter.getInitialState({
 });
 
 export const reducer = createReducer(
-  initialState,
+  initialBookEntityState,
   on(BookEntityActions.addBookEntitySuccess, (state, action) => {
     state = adapter.addOne(action.bookEntity, state);
     state.showSaveSuccess = true;
@@ -66,9 +66,11 @@ export const reducer = createReducer(
     adapter.removeMany(action.ids, state)
   ),
   on(BookEntityActions.clearBookEntitys, (state) => adapter.removeAll(state)),
-  on(BookEntityActions.loadBookEntitiesSuccess, (state, action) =>
-    adapter.setAll(action.bookEntities, state)
-  ),
+  on(BookEntityActions.loadBookEntitiesSuccess, (state, action) => {
+    state = adapter.setAll(action.bookEntities, state);
+    state.lastUpdateTS = action.timeStamp;
+    return state;
+  }),
   on(BookEntityActions.httpFailure, (state, action): BookEntityState => {
     return {
       ...state,

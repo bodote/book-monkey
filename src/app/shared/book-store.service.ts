@@ -3,7 +3,6 @@ import { BookRaw } from './book-raw';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
-import { Book } from './book';
 import { catchError, delay, map, retry } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { BookEntity } from '../books/store/book-entity/book-entity.model';
@@ -26,7 +25,7 @@ export class BookStoreService {
       .pipe(retry({ count: 3, delay: 1000 }), catchError(this.processError));
   }
 
-  postBook(book: Book): Observable<string> {
+  postBook(book: BookEntity): Observable<string> {
     const bookRaw = BookFactoryService.getRawFromBook(book);
 
     return this.http
@@ -35,7 +34,7 @@ export class BookStoreService {
       })
       .pipe(catchError(this.processError));
   }
-  putBook(book: Book): Observable<string> {
+  putBook(book: BookEntity): Observable<string> {
     const bookRaw = BookFactoryService.getRawFromBook(book);
     return this.http
       .put(`${this.server}/book/${book.isbn}`, bookRaw, {
@@ -44,7 +43,7 @@ export class BookStoreService {
       .pipe(catchError(this.processError));
   }
 
-  getBook(isbn: string | null): Observable<Book> {
+  getBook(isbn: string | null): Observable<BookEntity> {
     return this.http.get<BookRaw>(`${this.server}/book/${isbn}`).pipe(
       retry({ count: 3, delay: 1000 }),
       catchError(this.processError),
@@ -52,43 +51,34 @@ export class BookStoreService {
       delay(1000)
     );
   }
-  getBookFast(isbn: string | null): Observable<Book | null> {
+  getBookFast(isbn: string | null): Observable<BookEntity | null> {
     return this.http.get<BookRaw>(`${this.server}/book/${isbn}`).pipe(
       catchError(this.processError),
       map((rawBook) => BookFactoryService.getFromRaw(rawBook))
     );
   }
 
-  getAll(): Observable<Book[]> {
-    return this.http.get<BookRaw[]>(`${this.server}/books`).pipe(
-      retry({ count: 1, delay: 500 }),
-      catchError(this.processError),
-      map((rawBooksArray: BookRaw[]): Book[] =>
-        rawBooksArray.map((rawBook) => BookFactoryService.getFromRaw(rawBook))
-      ),
-      delay(500)
-    );
-  }
   getAllEntities(): Observable<BookEntity[]> {
     return this.http.get<BookRaw[]>(`${this.server}/books`).pipe(
-      retry({ count: 1, delay: 500 }),
+      retry({ count: 2, delay: 400 }),
       catchError(this.processError),
       map((rawBooksArray: BookRaw[]): BookEntity[] =>
         rawBooksArray.map((rawBook) =>
           BookFactoryService.getFromRaw2Entity(rawBook)
         )
       ),
-      delay(500)
+      delay(400)
     );
   }
 
-  getAllSearch(text: string): Observable<Book[]> {
+  getAllSearch(text: string): Observable<BookEntity[]> {
     return this.http.get<BookRaw[]>(`${this.server}/books/search/${text}`).pipe(
-      retry({ count: 1, delay: 100 }),
+      retry({ count: 2, delay: 100 }),
       catchError(this.processError),
-      map((rawBooksArray: BookRaw[]): Book[] =>
+      map((rawBooksArray: BookRaw[]): BookEntity[] =>
         rawBooksArray.map((rawBook) => BookFactoryService.getFromRaw(rawBook))
-      )
+      ),
+      delay(500)
     );
   }
 

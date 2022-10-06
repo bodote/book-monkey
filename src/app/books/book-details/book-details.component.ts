@@ -1,13 +1,16 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { Book } from '../../shared/book';
 import { Store } from '@ngrx/store';
 import {
   selectCurrentBook,
   selectError
 } from '../store/book-entity/book-entity.selectors';
-import { deleteBookEntity } from '../store/book-entity/book-entity.actions';
+import {
+  deleteBookEntity,
+  resetErrorsAction
+} from '../store/book-entity/book-entity.actions';
+import { BookEntity } from '../store/book-entity/book-entity.model';
 
 @Component({
   selector: 'bm-book-details',
@@ -15,9 +18,8 @@ import { deleteBookEntity } from '../store/book-entity/book-entity.actions';
   styleUrls: ['./book-details.component.css']
 })
 export class BookDetailsComponent {
-  book!: Book;
+  book!: BookEntity;
   book$ = this.store.select(selectCurrentBook);
-  //loading$ = this.store.select(selectIsLoading);
   id: number = 0;
   error$ = this.store.select(selectError);
 
@@ -45,5 +47,8 @@ export class BookDetailsComponent {
   confirm(message?: string): Observable<boolean> {
     const confirmation = window.confirm(message);
     return of(confirmation);
+  }
+  closeError() {
+    this.store.dispatch(resetErrorsAction());
   }
 }

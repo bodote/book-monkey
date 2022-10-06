@@ -70,7 +70,7 @@ describe('HomeComponent', () => {
         tap((value) => console.error('in :' + value)),
         retry({ count: 1, delay: 10 }),
         catchError((err) => {
-          return of('An Error Has occured' + err);
+          return of('An Error Has occured:' + err);
         })
         //tap((value) => console.error('out :' + value))
       );
@@ -78,7 +78,7 @@ describe('HomeComponent', () => {
       //            100ms ----#
       //            200ms    ------y
       const expected = '--- 10ms ---(x|)';
-      const valuesOut = { x: 'An Error Has occured', y: undefined };
+      const valuesOut = { x: 'An Error Has occured:error', y: undefined };
       expectObservable(final$).toBe(expected, valuesOut);
     });
   });

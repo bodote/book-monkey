@@ -1,13 +1,13 @@
-import { reducer, initialState } from './book-entity.reducer';
+import { initialBookEntityState, reducer } from './book-entity.reducer';
 
 describe('BookEntity Reducer', () => {
   describe('unknown action', () => {
     it('should return the previous state', () => {
       const action = {} as any;
 
-      const result = reducer(initialState, action);
+      const result = reducer(initialBookEntityState, action);
 
-      expect(result).toBe(initialState);
+      expect(result).toBe(initialBookEntityState);
     });
   });
 });

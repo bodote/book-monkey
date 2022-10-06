@@ -8,7 +8,7 @@ import {
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { of } from 'rxjs';
 import { BookRaw } from './book-raw';
-import { Book } from './book';
+import { BookEntity } from '../books/store/book-entity/book-entity.model';
 import { formatDate } from '@angular/common';
 
 enum HttpMethods {
@@ -16,11 +16,11 @@ enum HttpMethods {
   GET = 'GET',
   PUT = 'PUT'
 }
-const theDate = new Date('2020-02-01');
+const theDate = new Date('2020-02-01:01:00:00');
 let bookRaw = {
   title: 'string',
   authors: [],
-  published: formatDate(theDate, 'YYYY-MM-dd', 'en', 'Z'),
+  published: formatDate(theDate, 'YYYY-MM-ddThh:mm:ssZZ', 'en'),
   isbn: '123'
 } as BookRaw;
 let book = {
@@ -28,9 +28,9 @@ let book = {
   authors: [],
   published: theDate,
   isbn: '123'
-} as Book;
+} as BookEntity;
 
-xdescribe('BookStoreService', () => {
+describe('BookStoreService', () => {
   describe(' with Testbed', () => {
     let service: BookStoreService;
     let httpTestingController: HttpTestingController;
@@ -108,7 +108,7 @@ xdescribe('BookStoreService', () => {
         }
       });
       //assert and mock server responses via "flush()"
-      let req = runAlwaysFailingRequests(
+      runAlwaysFailingRequests(
         4,
         'https://api4.angular-buch.com/secure/book/123',
         HttpMethods.GET,
@@ -119,15 +119,15 @@ xdescribe('BookStoreService', () => {
       const n = flush();
       expect(n).toEqual(0);
     }));
-    it('should call getAll() to get a book with isbn with 3 retries , if the first and second try fails', fakeAsync(() => {
+    it('should call getAllEntities() to get a book with isbn with 3 retries , if the first and second try fails', fakeAsync(() => {
       //act
-      service.getAll().subscribe((b) => {
+      service.getAllEntities().subscribe((b) => {
         expect(b[0].title).toEqual(book.title);
         expect(b[0].published).toEqual(book.published);
       });
       //assert and mock server responses via "flush()"
       let req = runAlwaysFailingRequests(
-        3,
+        2,
         'https://api4.angular-buch.com/secure/books',
         HttpMethods.GET
       );
@@ -136,9 +136,9 @@ xdescribe('BookStoreService', () => {
       const n = flush();
       expect(n).toEqual(0);
     }));
-    it('should call getAll() to get a book with isbn with 3 retries , but all retrials fail', fakeAsync(() => {
+    it('should call getAllEntities() to get a book with isbn with 3 retries , but all retrials fail', fakeAsync(() => {
       //act
-      service.getAll().subscribe({
+      service.getAllEntities().subscribe({
         next: (b) => {
           fail('expect error');
         },
@@ -147,18 +147,18 @@ xdescribe('BookStoreService', () => {
         }
       });
       //assert and mock server responses via "flush()"
-      let req = runAlwaysFailingRequests(
-        4,
+      runAlwaysFailingRequests(
+        3,
         'https://api4.angular-buch.com/secure/books',
         HttpMethods.GET,
-        3
+        2
       );
 
       tick(1000);
       const n = flush();
       expect(n).toEqual(0);
     }));
-    xit('should call getAllSearch() to get a book with isbn with 3 retries , if the first and second try fails', fakeAsync(() => {
+    it('should call getAllSearch() to get a book with isbn with 3 retries , if the first and second try fails', fakeAsync(() => {
       //act
       service.getAllSearch('searchstring').subscribe((b) => {
         expect(b[0].title).toEqual(book.title);
@@ -166,7 +166,7 @@ xdescribe('BookStoreService', () => {
       });
       //assert and mock server responses via "flush()"
       let req = runAlwaysFailingRequests(
-        3,
+        2,
         'https://api4.angular-buch.com/secure/books/search/searchstring',
         HttpMethods.GET
       );
@@ -175,7 +175,7 @@ xdescribe('BookStoreService', () => {
       const n = flush();
       expect(n).toEqual(0);
     }));
-    xit('should call getAllSearch() to get a book with isbn with 3 retries , but all 3 retrials fail', fakeAsync(() => {
+    it('should call getAllSearch() to get a book with isbn with 3 retries , but all 3 retrials fail', fakeAsync(() => {
       //act
       service.getAllSearch('searchstring').subscribe({
         next: (b) => {
@@ -186,11 +186,11 @@ xdescribe('BookStoreService', () => {
         }
       });
       //assert and mock server responses via "flush()"
-      let req = runAlwaysFailingRequests(
-        4,
+      runAlwaysFailingRequests(
+        3,
         'https://api4.angular-buch.com/secure/books/search/searchstring',
         HttpMethods.GET,
-        3
+        2
       );
       tick(1000);
       const n = flush();
@@ -224,7 +224,7 @@ xdescribe('BookStoreService', () => {
     let bookStoreService: BookStoreService;
     let httpStub: HttpClient;
     beforeEach(() => {});
-    it('getAll() should call http GET with url and return a Book array converted from BookRaw array', (done) => {
+    it('getAllEntities() should call http GET with url and return a Book array converted from BookRaw array', (done) => {
       //arrange:
       httpStub = jasmine.createSpyObj('httpStub', {
         get: of([bookRaw])
@@ -232,7 +232,7 @@ xdescribe('BookStoreService', () => {
       bookStoreService = new BookStoreService(httpStub);
       //act
 
-      bookStoreService.getAll().subscribe((b: Book[]) => {
+      bookStoreService.getAllEntities().subscribe((b: BookEntity[]) => {
         expect(b.length).toEqual(1);
         expect(b[0].title).toEqual(book.title);
         expect(b[0].published).toEqual(book.published);
@@ -250,7 +250,7 @@ xdescribe('BookStoreService', () => {
           get: of(bookRaw)
         });
         bookStoreService = new BookStoreService(httpStub);
-        bookStoreService.getBook('123').subscribe((b: Book) => {
+        bookStoreService.getBook('123').subscribe((b: BookEntity) => {
           expect(b.title).toEqual(book.title);
           expect(b.published).toEqual(book.published);
           done();
@@ -266,7 +266,7 @@ xdescribe('BookStoreService', () => {
         get: of(bookRaw)
       });
       bookStoreService = new BookStoreService(httpStub);
-      bookStoreService.getBookFast('123').subscribe((b: Book | null) => {
+      bookStoreService.getBookFast('123').subscribe((b: BookEntity | null) => {
         expect(b?.title).toEqual(book.title);
         expect(b?.published).toEqual(book.published);
         done();

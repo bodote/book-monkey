@@ -6,6 +6,8 @@ import {
   deleteBookEntity,
   deleteBookEntitySuccess,
   httpFailure,
+  loadAllAndSetCurrentBook,
+  loadAllAndSetCurrentBookSuccess,
   loadBookEntities,
   loadBookEntitiesSuccess,
   upsertBookEntity,
@@ -14,22 +16,12 @@ import {
 import { distinctUntilChanged, of, switchMap } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { BookStoreService } from '../../../shared/book-store.service';
-import { Router } from '@angular/router';
 import { BookEntity } from './book-entity.model';
-import {
-  loadAllAndSetCurrentBook,
-  loadAllAndSetCurrentBookSuccess
-} from '../book-entity/book-entity.actions';
-import { Book } from '../../../shared/book';
 import isEqual from 'lodash/isEqual';
 
 @Injectable()
 export class BookEntityEffects {
-  constructor(
-    private actions$: Actions,
-    private bs: BookStoreService,
-    private router: Router
-  ) {}
+  constructor(private actions$: Actions, private bs: BookStoreService) {}
   loadBooks$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(loadBookEntities),
@@ -52,8 +44,8 @@ export class BookEntityEffects {
     return this.actions$.pipe(
       ofType(loadAllAndSetCurrentBook),
       switchMap((action) =>
-        this.bs.getAll().pipe(
-          map((books: Book[]) => {
+        this.bs.getAllEntities().pipe(
+          map((books: BookEntity[]) => {
             const currentBook = books.find((book) => book.isbn == action.isbn);
             return loadAllAndSetCurrentBookSuccess({
               books,

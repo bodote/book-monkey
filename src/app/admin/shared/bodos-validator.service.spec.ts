@@ -7,11 +7,12 @@ import {
   ValidationErrors
 } from '@angular/forms';
 import { Observable, of, throwError } from 'rxjs';
-import { Book } from '../../shared/book';
+
 import { TestScheduler } from 'rxjs/testing';
 import { HttpErrorResponse } from '@angular/common/http';
+import { BookEntity } from '../../books/store/book-entity/book-entity.model';
 
-const testBookData: Book = {
+const testBookData: BookEntity = {
   authors: ['author'],
   isbn: '1234567890',
   published: new Date('2022-02-02'),

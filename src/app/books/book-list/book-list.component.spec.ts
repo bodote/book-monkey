@@ -8,14 +8,14 @@ import {
 import { BookListComponent } from './book-list.component';
 import { BookStoreService } from '../../shared/book-store.service';
 import { Observable, of, throwError } from 'rxjs';
-import { Book } from '../../shared/book';
 import { TestScheduler } from 'rxjs/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { delay } from 'rxjs/operators';
 import { By } from '@angular/platform-browser';
 import { HttpErrorResponse } from '@angular/common/http';
+import { BookEntity } from '../store/book-entity/book-entity.model';
 
-const testBookData: Book = {
+const testBookData: BookEntity = {
   authors: ['author'],
   isbn: '1234567890',
   published: new Date('2022-02-02'),
@@ -29,7 +29,7 @@ xdescribe('BookListComponent', () => {
   let component: BookListComponent;
   let fixture: ComponentFixture<BookListComponent>;
   let mockService = jasmine.createSpyObj<BookStoreService>('bookStoreService', [
-    'getAll'
+    'getAllEntities'
   ]);
   let testScheduler: TestScheduler;
   beforeEach(async () => {
@@ -48,8 +48,8 @@ xdescribe('BookListComponent', () => {
   });
 
   xit('should create and get the of(book[]) ', () => {
-    mockService.getAll = jasmine
-      .createSpy<() => Observable<Book[]>>()
+    mockService.getAllEntities = jasmine
+      .createSpy<() => Observable<BookEntity[]>>()
       .and.returnValue(of([testBookData]));
     testScheduler.run((helpers) => {
       const { expectObservable } = helpers;
@@ -66,8 +66,8 @@ xdescribe('BookListComponent', () => {
     });
   });
   xit('should insert no additional delay to that comming from the BookStoreService ', () => {
-    mockService.getAll = jasmine
-      .createSpy<() => Observable<Book[]>>()
+    mockService.getAllEntities = jasmine
+      .createSpy<() => Observable<BookEntity[]>>()
       .and.returnValue(of([testBookData]).pipe(delay(1000)));
     testScheduler.run((helpers) => {
       const { expectObservable } = helpers;
@@ -83,8 +83,8 @@ xdescribe('BookListComponent', () => {
     });
   });
   it('should show "loading" if books are not yet available ', fakeAsync(() => {
-    mockService.getAll = jasmine
-      .createSpy<() => Observable<Book[]>>()
+    mockService.getAllEntities = jasmine
+      .createSpy<() => Observable<BookEntity[]>>()
       .and.returnValue(of([testBookData]).pipe(delay(1000)));
 
     fixture.detectChanges();
@@ -101,8 +101,8 @@ xdescribe('BookListComponent', () => {
     const errorObservable$ = throwError(() => {
       return new HttpErrorResponse({ status: 404 });
     });
-    mockService.getAll = jasmine
-      .createSpy<() => Observable<Book[]>>()
+    mockService.getAllEntities = jasmine
+      .createSpy<() => Observable<BookEntity[]>>()
       .and.returnValue(errorObservable$);
 
     fixture.detectChanges();

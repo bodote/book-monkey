@@ -14,9 +14,10 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms';
-import { Book } from '../../shared/book';
+
 import { BodosValidatorService } from '../shared/bodos-validator.service';
 import { BookFactoryService } from '../../shared/book-factory.service';
+import { BookEntity } from '../../books/store/book-entity/book-entity.model';
 
 @Component({
   selector: 'bm-book-form',
@@ -24,7 +25,7 @@ import { BookFactoryService } from '../../shared/book-factory.service';
   styleUrls: ['./book-form.component.css']
 })
 export class BookFormComponent implements OnInit, OnChanges {
-  @Input() aBook: Book | undefined | null;
+  @Input() aBook: BookEntity | undefined | null;
   @Input() isNew!: boolean;
   @Input() saved: boolean;
   @Input() successMsg!: string;
@@ -103,7 +104,7 @@ export class BookFormComponent implements OnInit, OnChanges {
     this.editForm.setControl('thumbnails', thbArray);
   }
 
-  fillForm(book: Book) {
+  fillForm(book: BookEntity) {
     this.editForm.get('title')?.setValue(book.title);
     this.editForm.get('subtitle')?.setValue(book.subtitle);
     this.editForm.get('isbn')?.setValue(book.isbn + '');

@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { Book } from '../../shared/book';
+
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import {
@@ -7,8 +7,12 @@ import {
   selectError,
   selectShowSavedSuccess
 } from '../../books/store/book-entity/book-entity.selectors';
-import { upsertBookEntity } from '../../books/store/book-entity/book-entity.actions';
+import {
+  resetErrorsAction,
+  upsertBookEntity
+} from '../../books/store/book-entity/book-entity.actions';
 import { Observable, Subscription } from 'rxjs';
+import { BookEntity } from '../../books/store/book-entity/book-entity.model';
 
 @Component({
   selector: 'bm-book-edit',
@@ -31,8 +35,10 @@ export class BookEditComponent implements OnDestroy {
       this.subscriptionSuccess.unsubscribe();
     }
   }
-
-  saveBook(book: Book) {
+  closeError() {
+    this.store.dispatch(resetErrorsAction());
+  }
+  saveBook(book: BookEntity) {
     this.store.dispatch(upsertBookEntity({ bookEntity: book }));
   }
 }

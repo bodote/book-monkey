@@ -1,12 +1,15 @@
 import { Component, OnDestroy } from '@angular/core';
-import { Book } from '../../shared/book';
 import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { addBookEntity } from '../../books/store/book-entity/book-entity.actions';
+import {
+  addBookEntity,
+  resetErrorsAction
+} from '../../books/store/book-entity/book-entity.actions';
 import {
   selectError,
   selectShowSavedSuccess
 } from '../../books/store/book-entity/book-entity.selectors';
+import { BookEntity } from '../../books/store/book-entity/book-entity.model';
 
 @Component({
   selector: 'bm-create-book',
@@ -25,7 +28,7 @@ export class CreateBookComponent implements OnDestroy {
 
   constructor(private store: Store) {}
 
-  createBookSave(book: Book) {
+  createBookSave(book: BookEntity) {
     this.store.dispatch(addBookEntity({ bookEntity: book }));
     this.subscriptionSuccess = this.showSaveSuccess$.subscribe((showSave) => {
       this.saved = showSave;
@@ -36,5 +39,8 @@ export class CreateBookComponent implements OnDestroy {
     if (this.subscriptionSuccess) {
       this.subscriptionSuccess.unsubscribe();
     }
+  }
+  closeError() {
+    this.store.dispatch(resetErrorsAction());
   }
 }

@@ -10,17 +10,17 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { BookDetailsComponent } from '../../books/book-details/book-details.component';
 import { BookStoreService } from '../../shared/book-store.service';
-import { Book } from '../../shared/book';
 import { of, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { By } from '@angular/platform-browser';
+import { BookEntity } from '../../books/store/book-entity/book-entity.model';
 
 xdescribe('BookEditComponent', () => {
   let component: BookEditComponent;
   let fixture: ComponentFixture<BookEditComponent>;
   let bookStoreMock: Partial<BookStoreService>;
-  let book: Book;
+  let book: BookEntity;
   const aTitle = 'The Book Title';
   let route: ActivatedRoute;
   const httpError404 = new HttpErrorResponse({ status: 404 });
@@ -92,7 +92,7 @@ xdescribe('BookEditComponent', () => {
         isbn: ''
       };
       bookStoreMock = {
-        getBook: jasmine.createSpy().and.returnValue(of({} as Book))
+        getBook: jasmine.createSpy().and.returnValue(of({} as BookEntity))
       };
       expect(bookStoreMock.getBook).not.toHaveBeenCalled();
       await TestBed.configureTestingModule({

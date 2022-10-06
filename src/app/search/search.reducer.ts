@@ -1,14 +1,14 @@
 import { createReducer, on } from '@ngrx/store';
-import { Book } from '../shared/book';
 import {
   loadSearchs,
   loadSearchsFailure,
   loadSearchsSuccess
 } from './search.actions';
 import { HttpErrorResponse } from '@angular/common/http';
+import { BookEntity } from '../books/store/book-entity/book-entity.model';
 
 export interface SearchState {
-  books: Book[];
+  books: BookEntity[];
   searchPerformed: boolean;
   httpError: HttpErrorResponse | undefined;
 }

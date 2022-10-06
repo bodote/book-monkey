@@ -3,7 +3,6 @@ import { Update } from '@ngrx/entity';
 
 import { BookEntity } from './book-entity.model';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Book } from '../../../shared/book';
 
 export const loadBookEntities = createAction(
   '[BookEntity/API] Load BookEntities'
@@ -83,7 +82,11 @@ export const clearBookEntitys = createAction(
 
 export const loadAllAndSetCurrentBookSuccess = createAction(
   '[BookEntity/API] Load all and set Current Book Success',
-  props<{ books: Book[]; currentBook: Book | undefined; timeStamp: number }>()
+  props<{
+    books: BookEntity[];
+    currentBook: BookEntity | undefined;
+    timeStamp: number;
+  }>()
 );
 export const loadAllAndSetCurrentBook = createAction(
   '[BookEntity/API] Load all and set Current Book',

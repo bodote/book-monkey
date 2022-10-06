@@ -10,10 +10,11 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BookStoreService } from '../../shared/book-store.service';
 import { Observable, of, throwError } from 'rxjs';
-import { Book } from '../../shared/book';
-import { HttpErrorResponse } from '@angular/common/http';
 
-const testBookData: Book = {
+import { HttpErrorResponse } from '@angular/common/http';
+import { BookEntity } from '../../books/store/book-entity/book-entity.model';
+
+const testBookData: BookEntity = {
   authors: ['author'],
   isbn: '1234567890',
   published: new Date('2022-02-02'),

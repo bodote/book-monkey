@@ -4,7 +4,6 @@ import { Observable, of, throwError, toArray } from 'rxjs';
 
 import { SearchEffects } from './search.effects';
 import { BookStoreService } from '../shared/book-store.service';
-import { Book } from '../shared/book';
 import {
   loadSearchs,
   loadSearchsFailure,
@@ -46,7 +45,7 @@ describe('SearchEffects', () => {
   describe(' success case, ', () => {
     beforeEach(() => {
       mockService.getAllSearch = jasmine
-        .createSpy<() => Observable<Book[]>>()
+        .createSpy<() => Observable<BookEntity[]>>()
         .and.returnValue(of([bookEntity]));
     });
 
@@ -79,7 +78,7 @@ describe('SearchEffects', () => {
     beforeEach(() => {
       httpError = new HttpErrorResponse({ status: 404 });
       mockService.getAllSearch = jasmine
-        .createSpy<() => Observable<Book[]>>()
+        .createSpy<() => Observable<BookEntity[]>>()
         .and.returnValue(throwError(() => httpError));
     });
     it('should return a error action ', (done) => {

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Book } from '../../shared/book';
+import { BookEntity } from '../store/book-entity/book-entity.model';
 
 @Component({
   selector: 'bm-book-list-item',
@@ -7,6 +7,6 @@ import { Book } from '../../shared/book';
   styleUrls: ['./book-list-item.component.css']
 })
 export class BookListItemComponent {
-  @Input() book: Book | undefined;
+  @Input() book: BookEntity | undefined;
   constructor() {}
 }

@@ -7,6 +7,7 @@ import {
   selectShowSavedSuccess
 } from '../store/book-entity/book-entity.selectors';
 import { Observable } from 'rxjs';
+import { resetErrorsAction } from '../store/book-entity/book-entity.actions';
 
 @Component({
   selector: 'bm-book-list',
@@ -29,5 +30,8 @@ export class BookListComponent implements OnInit {
 
   ngOnInit(): void {
     this.listView = true;
+  }
+  closeError() {
+    this.store.dispatch(resetErrorsAction());
   }
 }

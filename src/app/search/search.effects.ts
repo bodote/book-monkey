@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of, switchMap } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { Book } from '../shared/book';
 import { BookStoreService } from '../shared/book-store.service';
 import {
   loadSearchs,
   loadSearchsFailure,
   loadSearchsSuccess
 } from './search.actions';
+import { BookEntity } from '../books/store/book-entity/book-entity.model';
 
 @Injectable()
 export class SearchEffects {
@@ -18,7 +18,7 @@ export class SearchEffects {
       ofType(loadSearchs),
       switchMap((action) => {
         return this.bs.getAllSearch(action.searchString).pipe(
-          map((books: Book[]) => {
+          map((books: BookEntity[]) => {
             return loadSearchsSuccess({ searchResults: books });
           })
         );

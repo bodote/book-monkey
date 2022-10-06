@@ -18,7 +18,6 @@ import {
 import { Store } from '@ngrx/store';
 import { selectCurrentBookAndAll } from '../store/book-entity/book-entity.selectors';
 import { BookStoreService } from '../../shared/book-store.service';
-import { Book } from '../../shared/book';
 import { catchError } from 'rxjs/operators';
 import {
   bookErrorAction,
@@ -87,6 +86,9 @@ export class BookDetailsGuard implements CanActivate {
       distinctUntilChanged((previous, current) => isEqual(previous, current)),
       tap((data) => {
         if (!this.isCurrentBookOrErrorAndUpToDate(data, isbn)) {
+          // console.log(
+          //   'this.dispatchLoadAction(data.allBooks, data.lastUpdateTS, isbn)'
+          // );
           this.dispatchLoadAction(data.allBooks, data.lastUpdateTS, isbn);
         }
       }),
@@ -118,11 +120,12 @@ export class BookDetailsGuard implements CanActivate {
   }
 
   private dispatchLoadAction(
-    allBooks: Book[],
+    allBooks: BookEntity[],
     lastUpdateTS: number,
     isbn: string
   ) {
     if (!allBooks?.length && lastUpdateTS < Date.now() - 1000 * 60) {
+      //console.log('dispatch(loadBookEntities())');
       this.store.dispatch(loadBookEntities());
     } else {
       const currentBook = allBooks?.find((book) => book.isbn == isbn);
@@ -130,7 +133,16 @@ export class BookDetailsGuard implements CanActivate {
         this.store.dispatch(setCurrentBookSuccess({ currentBookId: isbn }));
       } else {
         //2nd reload from API and check again but not too often!
-        if (lastUpdateTS < Date.now() - 1000 * 60) {
+        //console.log('2nd reload from API and check again but not too often!');
+        const nowMinus1Min = Date.now() - 1000 * 60;
+        if (lastUpdateTS < nowMinus1Min) {
+          // console.log(
+          //   'lastUpdateTS=' +
+          //     lastUpdateTS / 1000 +
+          //     'nowMinus1Min ' +
+          //     nowMinus1Min / 1000
+          // );
+          // console.log('dispatch(loadAllAndSetCurrentBook({ isbn }))');
           this.store.dispatch(loadAllAndSetCurrentBook({ isbn }));
         } else {
           this.store.dispatch(

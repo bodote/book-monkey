@@ -1,7 +1,10 @@
 import { BookEntity } from './store/book-entity/book-entity.model';
 import { Dictionary } from '@ngrx/entity';
-import { initialSearchState, SearchState } from '../search/search.reducer';
 import { BookRaw } from '../shared/book-raw';
+import {
+  BookEntityState,
+  initialBookEntityState
+} from './store/book-entity/book-entity.reducer';
 
 export class BookFactory {
   private lastId = 0;
@@ -39,9 +42,10 @@ export class BookFactory {
     booksEntities.forEach((bookEnt) => (entities[bookEnt.isbn] = bookEnt));
     return entities;
   }
-  state(state: Partial<SearchState>): SearchState {
+
+  bookState(state: Partial<BookEntityState>): BookEntityState {
     return {
-      ...initialSearchState,
+      ...initialBookEntityState,
       ...state
     };
   }

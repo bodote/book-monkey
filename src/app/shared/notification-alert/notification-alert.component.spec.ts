@@ -45,6 +45,25 @@ describe('NotificationAlertComponent', () => {
     expect(alertText.nativeElement.textContent).toContain('Status: 404');
     expect(alertText.nativeElement.textContent).toContain('message3');
   });
+  it('should show  error message', () => {
+    component.error = {
+      httpError: null,
+      errorMessage: 'message2'
+    };
+    fixture.detectChanges();
+    const httpErrorMessage = fixture.debugElement.query(
+      By.css('[data-id="httpError"]')
+    );
+    const errorMessage = fixture.debugElement.query(
+      By.css('[data-id="errorMessage"]')
+    );
+    //TODO: needed ?
+    const alertText = fixture.debugElement.query(
+      By.css('[data-id="errorAlert"]')
+    );
+    expect(httpErrorMessage).toBeFalsy();
+    expect(errorMessage.nativeElement.textContent).toContain('message2');
+  });
   it('should close messsage when click() on close svg', () => {
     const closeEvtEmtr = spyOn(component.closeErrorEventEmitter, 'emit');
     const close = spyOn(component, 'close').and.callThrough();
@@ -59,7 +78,6 @@ describe('NotificationAlertComponent', () => {
     svg.dispatchEvent(new Event('click'));
     fixture.detectChanges();
     expect(close).toHaveBeenCalledTimes(1);
-    expect(component.show).toBeFalse();
     expect(closeEvtEmtr).toHaveBeenCalledTimes(1);
   });
 });

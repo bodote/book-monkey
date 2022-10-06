@@ -13,11 +13,12 @@ import {
   SimpleChanges
 } from '@angular/core';
 import { BodosValidatorService } from '../shared/bodos-validator.service';
-import { Book } from '../../shared/book';
+
 import { of } from 'rxjs';
 import { By } from '@angular/platform-browser';
+import { BookEntity } from '../../books/store/book-entity/book-entity.model';
 
-const emptyBookData: Book = {
+const emptyBookData: BookEntity = {
   authors: [''],
   isbn: '',
   published: new Date('2022-08-10'),
@@ -28,7 +29,7 @@ const emptyBookData: Book = {
   thumbnails: [{ title: '', url: '' }]
 };
 
-const testBookDataNoThumbs: Book = {
+const testBookDataNoThumbs: BookEntity = {
   authors: ['author'],
   isbn: '1234567890',
   published: new Date('2022-02-02'),
@@ -37,20 +38,20 @@ const testBookDataNoThumbs: Book = {
   description: 'a description',
   rating: 3
 };
-const testBookData: Book = {
+const testBookData: BookEntity = {
   ...testBookDataNoThumbs,
   thumbnails: [{ title: '', url: '' }]
 };
-const testBookDataWrongISBN: Book = {
+const testBookDataWrongISBN: BookEntity = {
   ...testBookData,
   isbn: '123'
 };
-const testBookDataNoISBNWrongRating: Book = {
+const testBookDataNoISBNWrongRating: BookEntity = {
   ...testBookData,
   isbn: '',
   rating: -1
 };
-const testBookDataWrongISBNRatingTooBig: Book = {
+const testBookDataWrongISBNRatingTooBig: BookEntity = {
   ...testBookData,
   isbn: '',
   rating: 6

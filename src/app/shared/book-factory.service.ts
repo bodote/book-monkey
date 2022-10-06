@@ -22,9 +22,14 @@ export class BookFactoryService {
     };
   }
   static getRawFromBook(book: BookEntity): BookRaw {
+    const date: string = formatDate(
+      book.published,
+      'YYYY-MM-ddThh:mm:ssZZ',
+      'en'
+    );
     return <BookRaw>{
       ...book,
-      published: formatDate(book.published, 'YYYY-MM-dd', 'en', 'Z')
+      published: date
     };
   }
   static getEmptyBook(): BookEntity {
@@ -32,7 +37,7 @@ export class BookFactoryService {
       title: '',
       subtitle: '',
       authors: [],
-      published: new Date('2022-02-02'),
+      published: new Date('1970-01-01'),
       isbn: '',
       thumbnails: [],
       rating: 0,

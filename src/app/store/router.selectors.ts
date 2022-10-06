@@ -8,7 +8,8 @@ const selectRouterState =
   createFeatureSelector<fromRouterStore.RouterReducerState<RouterState>>(
     'router'
   );
-const selectLoaderState = createFeatureSelector<LoaderState>(loaderFeatureKey);
+export const selectLoaderState =
+  createFeatureSelector<LoaderState>(loaderFeatureKey);
 
 export const selectPageLoading = createSelector(
   selectLoaderState,

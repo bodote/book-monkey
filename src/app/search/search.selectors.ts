@@ -1,15 +1,15 @@
-import { Book } from '../shared/book';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import * as fromSearch from './search.reducer';
 import { HttpErrorResponse } from '@angular/common/http';
 import { searchFeatureKey } from '../store';
+import { BookEntity } from '../books/store/book-entity/book-entity.model';
 
 export const selectSearchState =
   createFeatureSelector<fromSearch.SearchState>(searchFeatureKey);
 
 export const selectSearchResults = createSelector(
   selectSearchState,
-  (state): Book[] => state.books
+  (state): BookEntity[] => state.books
 );
 
 export const selectSearchPerformed = createSelector(

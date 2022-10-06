@@ -8,14 +8,13 @@ import {
 } from 'rxjs';
 import { Store } from '@ngrx/store';
 
-//import { selectIsLoading } from '../books/store/book.selectors';
-import { Book } from '../shared/book';
 import {
   selectHttpError,
   selectSearchPerformed,
   selectSearchResults
 } from './search.selectors';
 import { loadSearchs } from './search.actions';
+import { BookEntity } from '../books/store/book-entity/book-entity.model';
 
 @Component({
   selector: 'bm-search',
@@ -24,7 +23,7 @@ import { loadSearchs } from './search.actions';
 })
 export class SearchComponent implements OnInit {
   private searchStringFromKeyBoard$: Subject<string> | undefined;
-  searchBookResults$: Observable<Book[] | undefined> =
+  searchBookResults$: Observable<BookEntity[] | undefined> =
     this.store.select(selectSearchResults);
 
   searchPerformed$ = this.store.select(selectSearchPerformed);
