@@ -1,15 +1,15 @@
 import { reducer } from './router.reducer';
-import { RouterFactory } from './router.factory.spec';
 import {
   routerCancelAction,
   routerErrorAction,
   routerNavigatedAction,
   routerNavigationAction
 } from '@ngrx/router-store';
+import { RouterFactory } from './router.factory.spec';
 
 describe('Router Reducer', () => {
-  let routerFactory = new RouterFactory();
-  describe('an unknown action', () => {
+  const routerFactory = new RouterFactory();
+  describe('and unknown action', () => {
     it('should have loading=false initially', () => {
       const testState = routerFactory.loaderState({});
       expect(testState.loading).toBeFalse();
@@ -27,7 +27,7 @@ describe('Router Reducer', () => {
       expect(result).toBe(testState);
     });
   });
-  describe('an routerCancelAction action', () => {
+  describe('and routerCancelAction action', () => {
     it('should return the previous false state', () => {
       const action = routerCancelAction;
       const testState = routerFactory.loaderState({ loading: false });
@@ -41,7 +41,7 @@ describe('Router Reducer', () => {
       expect(result).toEqual(routerFactory.loaderState({ loading: false }));
     });
   });
-  describe('an routerErrorAction action', () => {
+  describe('and routerErrorAction action', () => {
     it('should  false state', () => {
       const action = routerErrorAction;
       const testState = routerFactory.loaderState({ loading: false });
@@ -55,7 +55,7 @@ describe('Router Reducer', () => {
       expect(result).toEqual(routerFactory.loaderState({ loading: false }));
     });
   });
-  describe('an routerNavigatedAction action', () => {
+  describe('and routerNavigatedAction action', () => {
     it('should  false state', () => {
       const action = routerNavigatedAction;
       const testState = routerFactory.loaderState({ loading: false });
@@ -69,7 +69,7 @@ describe('Router Reducer', () => {
       expect(result).toEqual(routerFactory.loaderState({ loading: false }));
     });
   });
-  describe('an routerNavigationAction action', () => {
+  describe('and routerNavigationAction action', () => {
     const loaderTrue = routerFactory.loaderState({ loading: true });
     const loaderFalse = routerFactory.loaderState({ loading: false });
     const parameters = [
