@@ -325,3 +325,37 @@ Expected $[1].published = '2020-02-01T12:00:00.000Z' to equal '2020-02-01'.
 09:09:04 (25107) INFO HtmlReporter Your report can be found at: file:///Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/reports/mutation/mutation.store.html
 09:09:04 (25107) INFO MutationTestExecutor Done in 29 seconds.
 09:09:04 (25107) INFO Sandbox Resetting your original files from stryker-tmp/backup7259803.
+16:59:10 (23113) WARN ProjectReader Glob pattern "!main.ts" did not exclude any files.
+16:59:10 (23113) INFO ProjectReader Found 4 of 1457 file(s) to be mutated.
+16:59:10 (23113) INFO Instrumenter Instrumented 4 source file(s) with 18 mutant(s)
+16:59:10 (23113) INFO ConcurrencyTokenProvider Creating 1 checker process(es) and 1 test runner process(es).
+16:59:14 (23113) INFO Sandbox In place mode is enabled, Stryker will be overriding YOUR files. Find your backup at: stryker-tmp/backup2866927
+16:59:28 (23113) INFO DryRunExecutor Starting initial test run (karma test runner with "perTest" coverage analysis). This may take a while.
+16:59:31 (23113) INFO DryRunExecutor Initial test run succeeded. Ran 133 tests in 3 seconds (net 2121 ms, overhead 1034 ms).
+16:59:31 (23113) WARN MutantTestPlanner Detected 9 static mutants (50% of total) that are estimated to take 100% of the time running the tests!
+  You might want to enable "ignoreStatic" to ignore these static mutants for your next run. 
+  For more information about static mutants visit: https://stryker-mutator.io/docs/mutation-testing-elements/static-mutants.
+  (disable "warnings.slow" to ignore this warning)
+16:59:51 (23113) INFO HtmlReporter Your report can be found at: file:///Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/reports/mutation/mutation.store.html
+16:59:51 (23113) INFO MutationTestExecutor Done in 41 seconds.
+16:59:51 (23113) INFO Sandbox Resetting your original files from stryker-tmp/backup2866927.
+17:00:03 (23236) WARN ProjectReader Glob pattern "!main.ts" did not exclude any files.
+17:00:04 (23236) INFO ProjectReader Found 1 of 1482 file(s) to be mutated.
+17:00:04 (23236) INFO Instrumenter Instrumented 1 source file(s) with 4 mutant(s)
+17:00:04 (23236) INFO ConcurrencyTokenProvider Creating 1 checker process(es) and 1 test runner process(es).
+17:00:08 (23236) INFO Sandbox In place mode is enabled, Stryker will be overriding YOUR files. Find your backup at: stryker-tmp/backup3670437
+17:00:19 (23236) INFO DryRunExecutor Starting initial test run (karma test runner with "perTest" coverage analysis). This may take a while.
+17:00:22 (23236) INFO DryRunExecutor Initial test run succeeded. Ran 133 tests in 3 seconds (net 2102 ms, overhead 1057 ms).
+17:00:27 (23236) INFO HtmlReporter Your report can be found at: file:///Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/reports/mutation/mutation.error-page.html
+17:00:27 (23236) INFO MutationTestExecutor Done in 24 seconds.
+17:00:28 (23236) INFO Sandbox Resetting your original files from stryker-tmp/backup3670437.
+17:01:17 (23367) WARN ProjectReader Glob pattern "!main.ts" did not exclude any files.
+17:01:17 (23367) INFO ProjectReader Found 1 of 1490 file(s) to be mutated.
+17:01:17 (23367) INFO Instrumenter Instrumented 1 source file(s) with 3 mutant(s)
+17:01:18 (23367) INFO ConcurrencyTokenProvider Creating 1 checker process(es) and 1 test runner process(es).
+17:01:22 (23367) INFO Sandbox In place mode is enabled, Stryker will be overriding YOUR files. Find your backup at: stryker-tmp/backup396610
+17:01:33 (23367) INFO DryRunExecutor Starting initial test run (karma test runner with "perTest" coverage analysis). This may take a while.
+17:01:36 (23367) INFO DryRunExecutor Initial test run succeeded. Ran 133 tests in 3 seconds (net 2113 ms, overhead 1005 ms).
+17:01:40 (23367) INFO HtmlReporter Your report can be found at: file:///Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/reports/mutation/mutation.error-page.html
+17:01:40 (23367) INFO MutationTestExecutor Done in 23 seconds.
+17:01:41 (23367) INFO Sandbox Resetting your original files from stryker-tmp/backup396610.

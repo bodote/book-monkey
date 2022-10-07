@@ -9,6 +9,9 @@ import { TypedAction } from '@ngrx/store/src/models';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { AppState } from '../store';
 import { HttpErrorResponse } from '@angular/common/http';
+import { RouterTestingModule } from '@angular/router/testing';
+import { Router } from '@angular/router';
+import { resetErrorsAction } from '../books/store/book-entity/book-entity.actions';
 
 describe('ErrorPageComponent', () => {
   let actions$: Observable<TypedAction<any>>;
@@ -16,10 +19,12 @@ describe('ErrorPageComponent', () => {
   let fixture: ComponentFixture<ErrorPageComponent>;
   let store: MockStore;
   let dispatchSpy: jasmine.Spy<any>;
+  let router: Router;
+  let navigateSpy: jasmine.Spy<any>;
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ErrorPageComponent],
-      imports: [],
+      imports: [RouterTestingModule],
       schemas: [NO_ERRORS_SCHEMA], // NEU
       providers: [
         provideMockActions(() => actions$),
@@ -32,6 +37,8 @@ describe('ErrorPageComponent', () => {
     component = fixture.componentInstance;
     store = TestBed.inject(MockStore);
     dispatchSpy = spyOn(store, 'dispatch');
+    router = TestBed.inject(Router);
+    navigateSpy = spyOn(router, 'navigate');
   });
 
   it('should get the error object', (done) => {
@@ -48,5 +55,12 @@ describe('ErrorPageComponent', () => {
       expect(error.httpError?.status).toEqual(404);
       done();
     });
+  });
+  it('should call router and store if close() is called', () => {
+    component.closeError();
+    const action = resetErrorsAction();
+    expect(action.type).toEqual('[BookEntity/API] Error reset');
+    expect(dispatchSpy).toHaveBeenCalledWith(action);
+    expect(navigateSpy).toHaveBeenCalledWith(['/home']);
   });
 });
