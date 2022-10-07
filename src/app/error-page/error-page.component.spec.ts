@@ -3,12 +3,15 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ErrorPageComponent } from './error-page.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-
-import { BookEntityState } from '../books/store/book-entity/book-entity.reducer';
-import { mockBookState } from '../books/store/index.spec';
+import { mockStateWithBooksEntities } from '../books/store/index.spec';
+import { Observable } from 'rxjs';
+import { TypedAction } from '@ngrx/store/src/models';
+import { provideMockActions } from '@ngrx/effects/testing';
+import { AppState } from '../store';
 import { HttpErrorResponse } from '@angular/common/http';
 
 describe('ErrorPageComponent', () => {
+  let actions$: Observable<TypedAction<any>>;
   let component: ErrorPageComponent;
   let fixture: ComponentFixture<ErrorPageComponent>;
   let store: MockStore;
@@ -19,25 +22,31 @@ describe('ErrorPageComponent', () => {
       imports: [],
       schemas: [NO_ERRORS_SCHEMA], // NEU
       providers: [
-        provideMockStore<BookEntityState>({
-          initialState: mockBookState()
+        provideMockActions(() => actions$),
+        provideMockStore<AppState>({
+          initialState: mockStateWithBooksEntities()
         })
       ]
     }).compileComponents();
-
     fixture = TestBed.createComponent(ErrorPageComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
     store = TestBed.inject(MockStore);
     dispatchSpy = spyOn(store, 'dispatch');
   });
 
-  it('should create', () => {
+  it('should get the error object', (done) => {
     expect(component).toBeTruthy();
     store.setState(
-      mockBookState({
-        httpError: new HttpErrorResponse({ status: 404 })
+      mockStateWithBooksEntities({
+        httpError: new HttpErrorResponse({ status: 404 }),
+        errorMessage: 'state.errorMessage',
+        lastUpdateTS: 1234
       })
     );
+    fixture.detectChanges();
+    component.error$.subscribe((error) => {
+      expect(error.httpError?.status).toEqual(404);
+      done();
+    });
   });
 });

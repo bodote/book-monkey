@@ -41,7 +41,10 @@ import { BookEntityEffects } from './store/book-entity/book-entity.effects';
     SolidIconsModule,
     SharedModule,
     //StoreModule.forFeature(fromBook.bookFeatureKey, fromBook.reducer),
-    StoreModule.forFeature(fromBook.bookEntitiesFeatureKey, fromBook.reducer),
+    StoreModule.forFeature(
+      fromBook.bookEntitiesFeatureKey,
+      fromBook.bookEntityReducer
+    ),
     EffectsModule.forFeature([BookEntityEffects]),
     ReactiveFormsModule
   ]

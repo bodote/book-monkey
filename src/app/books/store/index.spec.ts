@@ -1,13 +1,28 @@
-import { ROOT_REDUCERS } from '../../store';
 import { INIT } from '@ngrx/store';
-import { BookEntityState } from './book-entity/book-entity.reducer';
+import { AppState, ROOT_REDUCERS } from '../../store';
+import {
+  bookEntitiesFeatureKey,
+  bookEntityReducer,
+  BookEntityState
+} from './book-entity/book-entity.reducer';
 
-export const mockBookState = (
-  override: Partial<BookEntityState> = {}
-): BookEntityState => {
+export const mockStateWithBooksEntities = (
+  overrideBookEntityState: Partial<BookEntityState> = {}
+): AppState => {
   const initialState: any = {};
   Object.entries(ROOT_REDUCERS).forEach(([key, reducer]) => {
     initialState[key] = reducer(undefined, { type: INIT });
   });
-  return { ...initialState, ...override } as BookEntityState;
+  initialState[bookEntitiesFeatureKey] = bookEntityReducer(undefined, {
+    type: INIT
+  }); // we need to add the state of  Feature Modules manually here!
+  return {
+    ...initialState,
+    bookEntities: {
+      ...initialState[bookEntitiesFeatureKey],
+      httpError: overrideBookEntityState.httpError,
+      errorMessage: overrideBookEntityState.errorMessage,
+      lastUpdateTS: overrideBookEntityState.lastUpdateTS
+    }
+  } as AppState;
 };

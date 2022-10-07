@@ -32,7 +32,7 @@ export const initialBookEntityState: BookEntityState = adapter.getInitialState({
   lastUpdateTS: 0
 });
 
-export const reducer = createReducer(
+export const bookEntityReducer = createReducer(
   initialBookEntityState,
   on(BookEntityActions.addBookEntitySuccess, (state, action) => {
     state = adapter.addOne(action.bookEntity, state);
