@@ -359,3 +359,958 @@ Expected $[1].published = '2020-02-01T12:00:00.000Z' to equal '2020-02-01'.
 17:01:40 (23367) INFO HtmlReporter Your report can be found at: file:///Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/reports/mutation/mutation.error-page.html
 17:01:40 (23367) INFO MutationTestExecutor Done in 23 seconds.
 17:01:41 (23367) INFO Sandbox Resetting your original files from stryker-tmp/backup396610.
+08:03:48 (24907) WARN ProjectReader Glob pattern "!main.ts" did not exclude any files.
+08:03:48 (24907) INFO ProjectReader Found 2 of 1524 file(s) to be mutated.
+08:03:48 (24907) INFO Instrumenter Instrumented 2 source file(s) with 4 mutant(s)
+08:03:48 (24907) INFO ConcurrencyTokenProvider Creating 1 checker process(es) and 1 test runner process(es).
+08:03:50 (24907) INFO Sandbox In place mode is enabled, Stryker will be overriding YOUR files. Find your backup at: stryker-tmp/backup6355220
+08:03:58 (24907) INFO DryRunExecutor Starting initial test run (karma test runner with "perTest" coverage analysis). This may take a while.
+08:03:59 (24907) ERROR DryRunExecutor One or more tests failed in the initial test run:
+	FormMessagesComponent should create an array of errormessage that fit to a "title" control 
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BodosValidatorService should return null if FormControlArray has at least one author
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	AppComponent should create the app without loading spinner
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookListItemComponent should create
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	DelayDirective ..delay 100ms   should create an instance of the parent test component with style.visiblity = hidden, after 10ms should change to visible 
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	DelayDirective ..delay undefined (same as 0ms!) ..  should create an instance of the parent test component with style.visiblity = hidden, after 10ms should change to visible 
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	IsbnPipe create an instance
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	ZoomDirective should create an instance
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookEntity Reducer unknown action should return the previous state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	ErrorPageComponent should get the error object
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	HomeComponent should create
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	SearchComponent should create
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	SearchEffects  success case,  effects should be created
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	SearchEffects  error case  should return a error action 
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	Search Reducer an unknown action should return the previous state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	Search Selectors should select the feature state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookFactoryService should get an empty book
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookStoreService  with Testbed should be created
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookStoreService  but without Testbed getAllEntities() should call http GET with url and return a Book array converted from BookRaw array
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	CanNavigateToAdminGuard should return true if window.confirm is true
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	NotificationAlertComponent should create
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	SuccessAlertComponent should create
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	TokenInterceptor should increment the counter for all apis except getUsers
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	Router Reducer and unknown action should have loading=false initially
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	Router Reducer and routerCancelAction action should return the previous false state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	Router Reducer and routerErrorAction action should  false state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	Router Reducer and routerNavigatedAction action should  false state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	Router Reducer and routerNavigationAction action should change the previous  state to true
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	router selectors router state should contain router key in the  store
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	router selectors should router state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+08:03:59 (24907) ERROR Stryker There were failed tests in the initial test run.
+08:04:00 (24907) INFO Sandbox Resetting your original files from stryker-tmp/backup6355220.
+08:05:28 (25436) WARN ProjectReader Glob pattern "!main.ts" did not exclude any files.
+08:05:28 (25436) WARN ProjectReader No files marked to be mutated, Stryker will perform a dry-run without actually mutating anything. You can configure the `mutate` property in your config file (or use `--mutate` via command line).
+08:05:28 (25436) INFO Instrumenter Instrumented 0 source file(s) with 0 mutant(s)
+08:05:28 (25436) INFO ConcurrencyTokenProvider Creating 1 checker process(es) and 1 test runner process(es).
+08:05:31 (25436) INFO Sandbox In place mode is enabled, Stryker will be overriding YOUR files. Find your backup at: stryker-tmp/backup9942488
+08:05:36 (25436) INFO DryRunExecutor Starting initial test run (karma test runner with "perTest" coverage analysis). This may take a while.
+08:05:38 (25436) ERROR DryRunExecutor One or more tests failed in the initial test run:
+	FormMessagesComponent should create an array of errormessage that fit to a "title" control 
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BodosValidatorService should return null if FormControlArray has at least one author
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	AppComponent should create the app without loading spinner
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookListItemComponent should create
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	DelayDirective ..delay 100ms   should create an instance of the parent test component with style.visiblity = hidden, after 10ms should change to visible 
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	DelayDirective ..delay undefined (same as 0ms!) ..  should create an instance of the parent test component with style.visiblity = hidden, after 10ms should change to visible 
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	IsbnPipe create an instance
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	ZoomDirective should create an instance
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookEntity Reducer unknown action should return the previous state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	ErrorPageComponent should get the error object
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	HomeComponent should create
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	SearchComponent should create
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	SearchEffects  success case,  effects should be created
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	SearchEffects  error case  should return a error action 
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	Search Reducer an unknown action should return the previous state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	Search Selectors should select the feature state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookFactoryService should get an empty book
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookStoreService  with Testbed should be created
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookStoreService  but without Testbed getAllEntities() should call http GET with url and return a Book array converted from BookRaw array
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	CanNavigateToAdminGuard should return true if window.confirm is true
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	NotificationAlertComponent should create
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	SuccessAlertComponent should create
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	TokenInterceptor should increment the counter for all apis except getUsers
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	Router Reducer and unknown action should have loading=false initially
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	Router Reducer and routerCancelAction action should return the previous false state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	Router Reducer and routerErrorAction action should  false state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	Router Reducer and routerNavigatedAction action should  false state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	Router Reducer and routerNavigationAction action should change the previous  state to true
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	router selectors router state should contain router key in the  store
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	router selectors should router state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+08:05:38 (25436) ERROR Stryker There were failed tests in the initial test run.
+08:05:38 (25436) INFO Sandbox Resetting your original files from stryker-tmp/backup9942488.
+08:05:43 (25584) WARN ProjectReader Glob pattern "!main.ts" did not exclude any files.
+08:05:43 (25584) INFO ProjectReader Found 1 of 1551 file(s) to be mutated.
+08:05:43 (25584) INFO Instrumenter Instrumented 1 source file(s) with 0 mutant(s)
+08:05:43 (25584) INFO ConcurrencyTokenProvider Creating 1 checker process(es) and 1 test runner process(es).
+08:05:45 (25584) INFO Sandbox In place mode is enabled, Stryker will be overriding YOUR files. Find your backup at: stryker-tmp/backup8943337
+08:05:51 (25584) INFO DryRunExecutor Starting initial test run (karma test runner with "perTest" coverage analysis). This may take a while.
+08:05:52 (25584) ERROR DryRunExecutor One or more tests failed in the initial test run:
+	FormMessagesComponent should create an array of errormessage that fit to a "title" control 
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BodosValidatorService should return null if FormControlArray has at least one author
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	AppComponent should create the app without loading spinner
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookListItemComponent should create
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	DelayDirective ..delay 100ms   should create an instance of the parent test component with style.visiblity = hidden, after 10ms should change to visible 
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	DelayDirective ..delay undefined (same as 0ms!) ..  should create an instance of the parent test component with style.visiblity = hidden, after 10ms should change to visible 
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	IsbnPipe create an instance
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	ZoomDirective should create an instance
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookEntity Reducer unknown action should return the previous state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	ErrorPageComponent should get the error object
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	HomeComponent should create
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	SearchComponent should create
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	SearchEffects  success case,  effects should be created
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	SearchEffects  error case  should return a error action 
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	Search Reducer an unknown action should return the previous state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	Search Selectors should select the feature state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookFactoryService should get an empty book
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookStoreService  with Testbed should be created
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookStoreService  but without Testbed getAllEntities() should call http GET with url and return a Book array converted from BookRaw array
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	CanNavigateToAdminGuard should return true if window.confirm is true
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	NotificationAlertComponent should create
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	SuccessAlertComponent should create
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	TokenInterceptor should increment the counter for all apis except getUsers
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	Router Reducer and unknown action should have loading=false initially
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	Router Reducer and routerCancelAction action should return the previous false state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	Router Reducer and routerErrorAction action should  false state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	Router Reducer and routerNavigatedAction action should  false state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	Router Reducer and routerNavigationAction action should change the previous  state to true
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	router selectors router state should contain router key in the  store
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	router selectors should router state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+08:05:52 (25584) ERROR Stryker There were failed tests in the initial test run.
+08:05:52 (25584) INFO Sandbox Resetting your original files from stryker-tmp/backup8943337.
+08:06:31 (25869) WARN ProjectReader Glob pattern "!main.ts" did not exclude any files.
+08:06:31 (25869) INFO ProjectReader Found 1 of 1551 file(s) to be mutated.
+08:06:31 (25869) INFO Instrumenter Instrumented 1 source file(s) with 0 mutant(s)
+08:06:31 (25869) INFO ConcurrencyTokenProvider Creating 1 checker process(es) and 1 test runner process(es).
+08:06:34 (25869) INFO Sandbox In place mode is enabled, Stryker will be overriding YOUR files. Find your backup at: stryker-tmp/backup8981777
+08:06:39 (25869) INFO DryRunExecutor Starting initial test run (karma test runner with "perTest" coverage analysis). This may take a while.
+08:06:41 (25869) ERROR DryRunExecutor One or more tests failed in the initial test run:
+	FormMessagesComponent should create an array of errormessage that fit to a "title" control 
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BodosValidatorService should return null if FormControlArray has at least one author
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	AppComponent should create the app without loading spinner
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookListItemComponent should create
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	DelayDirective ..delay 100ms   should create an instance of the parent test component with style.visiblity = hidden, after 10ms should change to visible 
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	DelayDirective ..delay undefined (same as 0ms!) ..  should create an instance of the parent test component with style.visiblity = hidden, after 10ms should change to visible 
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	IsbnPipe create an instance
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	ZoomDirective should create an instance
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookEntity Reducer unknown action should return the previous state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	ErrorPageComponent should get the error object
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	HomeComponent should create
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	SearchComponent should create
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	SearchEffects  success case,  effects should be created
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	SearchEffects  error case  should return a error action 
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	Search Reducer an unknown action should return the previous state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	Search Selectors should select the feature state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookFactoryService should get an empty book
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookStoreService  with Testbed should be created
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookStoreService  but without Testbed getAllEntities() should call http GET with url and return a Book array converted from BookRaw array
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	CanNavigateToAdminGuard should return true if window.confirm is true
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	NotificationAlertComponent should create
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	SuccessAlertComponent should create
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	TokenInterceptor should increment the counter for all apis except getUsers
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	Router Reducer and unknown action should have loading=false initially
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	Router Reducer and routerCancelAction action should return the previous false state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	Router Reducer and routerErrorAction action should  false state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	Router Reducer and routerNavigatedAction action should  false state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	Router Reducer and routerNavigationAction action should change the previous  state to true
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	router selectors router state should contain router key in the  store
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	router selectors should router state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+08:06:41 (25869) ERROR Stryker There were failed tests in the initial test run.
+08:06:41 (25869) INFO Sandbox Resetting your original files from stryker-tmp/backup8981777.
+08:08:19 (26557) WARN ProjectReader Glob pattern "!main.ts" did not exclude any files.
+08:08:19 (26557) INFO ProjectReader Found 1 of 1552 file(s) to be mutated.
+08:08:19 (26557) INFO Instrumenter Instrumented 1 source file(s) with 3 mutant(s)
+08:08:20 (26557) INFO ConcurrencyTokenProvider Creating 1 checker process(es) and 1 test runner process(es).
+08:08:22 (26557) INFO Sandbox In place mode is enabled, Stryker will be overriding YOUR files. Find your backup at: stryker-tmp/backup5010551
+08:08:28 (26557) INFO DryRunExecutor Starting initial test run (karma test runner with "perTest" coverage analysis). This may take a while.
+08:08:30 (26557) INFO DryRunExecutor Initial test run succeeded. Ran 134 tests in 2 seconds (net 2056 ms, overhead 634 ms).
+08:08:33 (26557) INFO HtmlReporter Your report can be found at: file:///Users/bodo.teichmann/dev/learning/angular_buch/book-monkey/reports/mutation/mutation.error-page.html
+08:08:33 (26557) INFO MutationTestExecutor Done in 14 seconds.
+08:08:34 (26557) INFO Sandbox Resetting your original files from stryker-tmp/backup5010551.
+08:09:02 (26878) WARN ProjectReader Glob pattern "!main.ts" did not exclude any files.
+08:09:02 (26878) INFO ProjectReader Found 1 of 1552 file(s) to be mutated.
+08:09:02 (26878) INFO Instrumenter Instrumented 1 source file(s) with 0 mutant(s)
+08:09:02 (26878) INFO ConcurrencyTokenProvider Creating 1 checker process(es) and 1 test runner process(es).
+08:09:05 (26878) INFO Sandbox In place mode is enabled, Stryker will be overriding YOUR files. Find your backup at: stryker-tmp/backup4917057
+08:09:10 (26878) INFO DryRunExecutor Starting initial test run (karma test runner with "perTest" coverage analysis). This may take a while.
+08:09:11 (26878) ERROR DryRunExecutor One or more tests failed in the initial test run:
+	FormMessagesComponent should create an array of errormessage that fit to a "title" control 
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BodosValidatorService should return null if FormControlArray has at least one author
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	AppComponent should create the app without loading spinner
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookListItemComponent should create
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	DelayDirective ..delay 100ms   should create an instance of the parent test component with style.visiblity = hidden, after 10ms should change to visible 
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	DelayDirective ..delay undefined (same as 0ms!) ..  should create an instance of the parent test component with style.visiblity = hidden, after 10ms should change to visible 
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	IsbnPipe create an instance
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	ZoomDirective should create an instance
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookEntity Reducer unknown action should return the previous state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	ErrorPageComponent should get the error object
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	HomeComponent should create
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	SearchComponent should create
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	SearchEffects  success case,  effects should be created
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	SearchEffects  error case  should return a error action 
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	Search Reducer an unknown action should return the previous state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	Search Selectors should select the feature state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookFactoryService should get an empty book
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookStoreService  with Testbed should be created
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	BookStoreService  but without Testbed getAllEntities() should call http GET with url and return a Book array converted from BookRaw array
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	CanNavigateToAdminGuard should return true if window.confirm is true
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	NotificationAlertComponent should create
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	SuccessAlertComponent should create
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	TokenInterceptor should increment the counter for all apis except getUsers
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	Router Reducer and unknown action should have loading=false initially
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	Router Reducer and routerCancelAction action should return the previous false state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	Router Reducer and routerErrorAction action should  false state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	Router Reducer and routerNavigatedAction action should  false state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	Router Reducer and routerNavigationAction action should change the previous  state to true
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	router selectors router state should contain router key in the  store
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+	router selectors should router state
+		TypeError: Cannot set properties of undefined (setting 'currentTestId')
+    at Object.specStarted (http://localhost:9877/base/node_modules/@stryker-mutator/karma-runner/dist/src/karma-plugins/test-hooks-middleware-21f23d35-a4c9-4b01-aeff-da9c99c3ffc0.js?undefined:5:44)
+    at <Jasmine>
+    at ZoneQueueRunner.jasmine.QueueRunner.ZoneQueueRunner.execute (node_modules/zone.js/fesm2015/zone-testing.js:692:42)
+    at <Jasmine>
+08:09:11 (26878) ERROR Stryker There were failed tests in the initial test run.
+08:09:11 (26878) INFO Sandbox Resetting your original files from stryker-tmp/backup4917057.
