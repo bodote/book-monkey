@@ -1,5 +1,4 @@
 import { createAction, props } from '@ngrx/store';
-import { Update } from '@ngrx/entity';
 
 import { BookEntity } from './book-entity.model';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -41,26 +40,6 @@ export const upsertBookEntitySuccess = createAction(
   props<{ bookEntity: BookEntity }>()
 );
 
-export const addBookEntitys = createAction(
-  '[BookEntity/API] Add BookEntities',
-  props<{ bookEntitys: BookEntity[] }>()
-);
-
-export const upsertBookEntitys = createAction(
-  '[BookEntity/API] Upsert BookEntities',
-  props<{ bookEntitys: BookEntity[] }>()
-);
-
-export const updateBookEntity = createAction(
-  '[BookEntity/API] Update BookEntity',
-  props<{ bookEntity: Update<BookEntity> }>()
-);
-
-export const updateBookEntities = createAction(
-  '[BookEntity/API] Update BookEntities',
-  props<{ bookEntitys: Update<BookEntity>[] }>()
-);
-
 export const deleteBookEntity = createAction(
   '[BookEntity/API] Delete BookEntity',
   props<{ id: string }>()
@@ -69,15 +48,6 @@ export const deleteBookEntity = createAction(
 export const deleteBookEntitySuccess = createAction(
   '[BookEntity/API] Delete BookEntity Success',
   props<{ id: string }>()
-);
-
-export const deleteBookEntitys = createAction(
-  '[BookEntity/API] Delete BookEntitys',
-  props<{ ids: string[] }>()
-);
-
-export const clearBookEntitys = createAction(
-  '[BookEntity/API] Clear BookEntities'
 );
 
 export const loadAllAndSetCurrentBookSuccess = createAction(

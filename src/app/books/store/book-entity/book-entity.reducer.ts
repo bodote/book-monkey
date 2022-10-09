@@ -50,27 +50,19 @@ export const bookEntityReducer = createReducer(
     state.showSaveSuccess = true;
     return state;
   }),
-  on(BookEntityActions.addBookEntitys, (state, action) =>
-    adapter.addMany(action.bookEntitys, state)
-  ),
-  on(BookEntityActions.upsertBookEntitys, (state, action) =>
-    adapter.upsertMany(action.bookEntitys, state)
-  ),
-  on(BookEntityActions.updateBookEntity, (state, action) =>
-    adapter.updateOne(action.bookEntity, state)
-  ),
-  on(BookEntityActions.updateBookEntities, (state, action) =>
-    adapter.updateMany(action.bookEntitys, state)
-  ),
+  on(BookEntityActions.upsertBookEntity, (state, action) => {
+    return { ...state, showSaveSuccess: false };
+  }),
+  on(BookEntityActions.deleteBookEntity, (state, action) => {
+    return { ...state, showSaveSuccess: false };
+  }),
+
   on(BookEntityActions.deleteBookEntitySuccess, (state, action) => {
     state = adapter.removeOne(action.id, state);
     state.showSaveSuccess = true;
     return state;
   }),
-  on(BookEntityActions.deleteBookEntitys, (state, action) =>
-    adapter.removeMany(action.ids, state)
-  ),
-  on(BookEntityActions.clearBookEntitys, (state) => adapter.removeAll(state)),
+
   on(BookEntityActions.loadBookEntitiesSuccess, (state, action) => {
     state = adapter.setAll(action.bookEntities, state);
     state.lastUpdateTS = action.timeStamp;

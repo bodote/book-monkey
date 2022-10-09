@@ -6,9 +6,13 @@ import {
   addBookEntity,
   addBookEntitySuccess,
   bookErrorAction,
+  deleteBookEntity,
+  deleteBookEntitySuccess,
   httpFailure,
   loadBookEntities,
-  loadBookEntitiesSuccess
+  loadBookEntitiesSuccess,
+  upsertBookEntity,
+  upsertBookEntitySuccess
 } from './book-entity.actions';
 import { BookFactory } from './book.factory.spec';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -108,130 +112,123 @@ describe('BookEntity Reducer', () => {
       expect(result).toEqual(expectedState);
     });
   });
-  describe('addBookEntity action', () => {
-    it('should return the previous state', () => {
-      const bookA = factory.bookEntity();
-      const stateBefore = factory.bookState({
-        showSaveSuccess: true
-      });
-      const result = bookEntityReducer(
-        stateBefore,
-        addBookEntity({ bookEntity: bookA })
+  describe('action ', () => {
+    const bookA = factory.bookEntity();
+    const parameters = [
+      {
+        description: 'addBookEntity ',
+        action: addBookEntity,
+        actionArg: { bookEntity: bookA }
+      },
+      {
+        description: 'upsertBookEntity ',
+        action: upsertBookEntity,
+        actionArg: { bookEntity: bookA }
+      },
+      {
+        description: 'deleteBookEntity',
+        action: deleteBookEntity,
+        actionArg: { id: bookA.isbn }
+      }
+    ];
+    parameters.forEach((param) => {
+      it(
+        param.description + ' should return  state with showSaveSuccess: false',
+        () => {
+          const stateBefore = factory.bookState({
+            showSaveSuccess: true
+          });
+          const result = bookEntityReducer(
+            stateBefore,
+            param.action(param.actionArg as any)
+          );
+          let expectedState = factory.bookState({
+            showSaveSuccess: false
+          });
+          expect(result).toEqual(expectedState);
+        }
       );
-      let expectedState = factory.bookState({
-        showSaveSuccess: false
-      });
-      expect(result).toEqual(expectedState);
-    });
-  });
-  describe('upsertBookEntity action', () => {
-    it('should return the previous state', () => {
-      const result = bookEntityReducer(
-        initialBookEntityState,
-        loadBookEntities
-      );
-      let expectedState = factory.bookState({});
-      expect(result).toEqual(expectedState);
-      fail('not yet ');
     });
   });
   describe('upsertBookEntitySuccess action', () => {
-    it('should return the previous state', () => {
+    it('should return state with changed book and showSaveSuccess flag set', () => {
+      const bookA = factory.bookEntity();
+      const bookB = factory.bookEntity();
+      const bookBChanged = {
+        ...bookB,
+        title: 'totally different'
+      };
+      const booksInit = factory.entities(bookA, bookB);
+      const booksChanged = factory.entities(bookA, bookBChanged);
+      const ts1 = 1;
+      const stateBefore = factory.bookState({
+        ids: [bookA.isbn, bookB.isbn],
+        entities: booksInit,
+        lastUpdateTS: ts1,
+        showSaveSuccess: false
+      });
       const result = bookEntityReducer(
-        initialBookEntityState,
-        loadBookEntities
+        stateBefore,
+        upsertBookEntitySuccess({ bookEntity: bookBChanged })
       );
-      let expectedState = factory.bookState({});
+      let expectedState = factory.bookState({
+        ids: [bookA.isbn, bookBChanged.isbn],
+        entities: booksChanged,
+        lastUpdateTS: ts1,
+        showSaveSuccess: true
+      });
       expect(result).toEqual(expectedState);
-      fail('not yet ');
     });
-  });
-  describe('addBookEntitys action', () => {
-    it('should return the previous state', () => {
+    it('should return state with added book and showSaveSuccess flag set', () => {
+      const bookA = factory.bookEntity();
+      const bookBAdded = factory.bookEntity();
+      const booksInit = factory.entities(bookA);
+      const booksAdded = factory.entities(bookA, bookBAdded);
+      const ts1 = 1;
+      const stateBefore = factory.bookState({
+        ids: [bookA.isbn],
+        entities: booksInit,
+        lastUpdateTS: ts1,
+        showSaveSuccess: false
+      });
       const result = bookEntityReducer(
-        initialBookEntityState,
-        loadBookEntities
+        stateBefore,
+        upsertBookEntitySuccess({ bookEntity: bookBAdded })
       );
-      let expectedState = factory.bookState({});
+      let expectedState = factory.bookState({
+        ids: [bookA.isbn, bookBAdded.isbn],
+        entities: booksAdded,
+        lastUpdateTS: ts1,
+        showSaveSuccess: true
+      });
       expect(result).toEqual(expectedState);
-      fail('not yet ');
-    });
-  });
-  describe('upsertBookEntitys action', () => {
-    it('should return the previous state', () => {
-      const result = bookEntityReducer(
-        initialBookEntityState,
-        loadBookEntities
-      );
-      let expectedState = factory.bookState({});
-      expect(result).toEqual(expectedState);
-      fail('not yet ');
-    });
-  });
-  describe('updateBookEntity action', () => {
-    it('should return the previous state', () => {
-      const result = bookEntityReducer(
-        initialBookEntityState,
-        loadBookEntities
-      );
-      let expectedState = factory.bookState({});
-      expect(result).toEqual(expectedState);
-      fail('not yet ');
-    });
-  });
-  describe('updateBookEntities action', () => {
-    it('should return the previous state', () => {
-      const result = bookEntityReducer(
-        initialBookEntityState,
-        loadBookEntities
-      );
-      let expectedState = factory.bookState({});
-      expect(result).toEqual(expectedState);
-      fail('not yet ');
-    });
-  });
-  describe('deleteBookEntity action', () => {
-    it('should return the previous state', () => {
-      const result = bookEntityReducer(
-        initialBookEntityState,
-        loadBookEntities
-      );
-      let expectedState = factory.bookState({});
-      expect(result).toEqual(expectedState);
-      fail('not yet ');
     });
   });
   describe('deleteBookEntitySuccess action', () => {
-    it('should return the previous state', () => {
+    it('should return  state without the specific book', () => {
+      const bookA = factory.bookEntity();
+      const bookB = factory.bookEntity();
+      const isdnToDelete = bookB.isbn;
+      const booksInit = factory.entities(bookA, bookB);
+      const booksChanged = factory.entities(bookA);
+      const ts1 = 1;
+      const stateBefore = factory.bookState({
+        ids: [bookA.isbn, bookB.isbn],
+        entities: booksInit,
+        lastUpdateTS: ts1,
+        showSaveSuccess: false
+      });
       const result = bookEntityReducer(
-        initialBookEntityState,
-        loadBookEntities
+        stateBefore,
+        deleteBookEntitySuccess({ id: isdnToDelete })
       );
-      let expectedState = factory.bookState({});
+      let expectedState = factory.bookState({
+        ids: [bookA.isbn],
+        entities: booksChanged,
+        lastUpdateTS: ts1,
+        showSaveSuccess: true
+      });
       expect(result).toEqual(expectedState);
-      fail('not yet ');
-    });
-  });
-  describe('deleteBookEntitys action', () => {
-    it('should return the previous state', () => {
-      const result = bookEntityReducer(
-        initialBookEntityState,
-        loadBookEntities
-      );
-      let expectedState = factory.bookState({});
-      expect(result).toEqual(expectedState);
-      fail('not yet ');
-    });
-  });
-  describe('clearBookEntitys action', () => {
-    it('should return the previous state', () => {
-      const result = bookEntityReducer(
-        initialBookEntityState,
-        loadBookEntities
-      );
-      let expectedState = factory.bookState({});
-      expect(result).toEqual(expectedState);
-      fail('not yet ');
     });
   });
   describe('loadAllAndSetCurrentBookSuccess action', () => {
