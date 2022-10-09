@@ -20,9 +20,12 @@ export const mockStateWithBooksEntities = (
     ...initialState,
     bookEntities: {
       ...initialState[bookEntitiesFeatureKey],
-      httpError: overrideBookEntityState.httpError,
-      errorMessage: overrideBookEntityState.errorMessage,
-      lastUpdateTS: overrideBookEntityState.lastUpdateTS
+      ...overrideBookEntityState
+      // ids: overrideBookEntityState.ids,
+      // entities: overrideBookEntityState.entities,
+      // httpError: overrideBookEntityState.httpError,
+      // errorMessage: overrideBookEntityState.errorMessage,
+      // lastUpdateTS: overrideBookEntityState.lastUpdateTS
     }
   } as AppState;
 };

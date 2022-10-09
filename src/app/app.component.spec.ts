@@ -48,4 +48,9 @@ describe('AppComponent', () => {
     );
     expect(svgSpinner).toBeTruthy();
   });
+  it('dummy test', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    expect(app.dummy()).toBe(0);
+  });
 });

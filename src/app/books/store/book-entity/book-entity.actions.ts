@@ -56,7 +56,7 @@ export const updateBookEntity = createAction(
   props<{ bookEntity: Update<BookEntity> }>()
 );
 
-export const updateBookEntitys = createAction(
+export const updateBookEntities = createAction(
   '[BookEntity/API] Update BookEntities',
   props<{ bookEntitys: Update<BookEntity>[] }>()
 );

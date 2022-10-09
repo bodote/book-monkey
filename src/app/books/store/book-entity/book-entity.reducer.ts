@@ -39,7 +39,12 @@ export const bookEntityReducer = createReducer(
     state.showSaveSuccess = true;
     return state;
   }),
-
+  on(BookEntityActions.addBookEntity, (state, action): BookEntityState => {
+    return {
+      ...state,
+      showSaveSuccess: false
+    };
+  }),
   on(BookEntityActions.upsertBookEntitySuccess, (state, action) => {
     state = adapter.upsertOne(action.bookEntity, state);
     state.showSaveSuccess = true;
@@ -54,7 +59,7 @@ export const bookEntityReducer = createReducer(
   on(BookEntityActions.updateBookEntity, (state, action) =>
     adapter.updateOne(action.bookEntity, state)
   ),
-  on(BookEntityActions.updateBookEntitys, (state, action) =>
+  on(BookEntityActions.updateBookEntities, (state, action) =>
     adapter.updateMany(action.bookEntitys, state)
   ),
   on(BookEntityActions.deleteBookEntitySuccess, (state, action) => {
@@ -76,6 +81,12 @@ export const bookEntityReducer = createReducer(
       ...state,
       httpError: action.httpError,
       lastUpdateTS: action.timeStamp
+    };
+  }),
+  on(BookEntityActions.bookErrorAction, (state, action): BookEntityState => {
+    return {
+      ...state,
+      errorMessage: action.message
     };
   }),
   on(

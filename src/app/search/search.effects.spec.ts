@@ -9,7 +9,7 @@ import {
   loadSearchsFailure,
   loadSearchsSuccess
 } from './search.actions';
-import { BookFactory } from '../books/book.factory.spec';
+import { BookFactory } from '../books/store/book-entity/book.factory.spec';
 import { TypedAction } from '@ngrx/store/src/models';
 import { BookEntity } from '../books/store/book-entity/book-entity.model';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';

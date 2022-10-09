@@ -10,7 +10,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { mockState } from '../store/index.spec';
-import { BookFactory } from '../books/book.factory.spec';
+import { BookFactory } from '../books/store/book-entity/book.factory.spec';
 import { AppState } from '../store';
 import { By } from '@angular/platform-browser';
 import { loadSearchs } from './search.actions';

@@ -10,4 +10,8 @@ import { selectPageLoading } from './store/router.selectors';
 export class AppComponent {
   loading$ = this.store$.select(selectPageLoading);
   constructor(private store$: Store) {}
+  dummy(): number {
+    // workaround for stryker bug https://github.com/stryker-mutator/stryker-js/issues/3780
+    return 0;
+  }
 }
