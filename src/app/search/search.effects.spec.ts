@@ -23,7 +23,6 @@ describe('SearchEffects', () => {
   let mockService = jasmine.createSpyObj<BookStoreService>('bookStoreService', [
     'getAllSearch'
   ]);
-
   let factory: BookFactory;
   let bookEntity: BookEntity;
   let store: MockStore;
