@@ -49,4 +49,29 @@ export class BookFactory {
   emptyBookState(): BookEntityState {
     return this.bookState({});
   }
+  stateWith2Books(): BookEntityState {
+    const bookA = this.bookEntity();
+    const bookB = this.bookEntity();
+    const booksInit = this.entities(bookA, bookB);
+    const bookAR: BookEntity | undefined = booksInit[bookA.isbn];
+    const ts1 = 1;
+    const state = this.bookState({
+      ids: [bookA.isbn, bookB.isbn],
+      entities: booksInit,
+      currentBookId: bookA.isbn,
+      lastUpdateTS: ts1,
+      showSaveSuccess: false
+    });
+    return state;
+  }
+  getBooksFromState(state: BookEntityState): BookEntity[] {
+    let booksInit: BookEntity[] = [];
+    let i = 0;
+    Object.keys(state.entities).forEach((key) => {
+      if (state.entities[key]) {
+        booksInit[i++] = <BookEntity>state.entities[key];
+      }
+    });
+    return booksInit;
+  }
 }

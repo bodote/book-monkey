@@ -54,7 +54,7 @@ export const loadAllAndSetCurrentBookSuccess = createAction(
   '[BookEntity/API] Load all and set Current Book Success',
   props<{
     books: BookEntity[];
-    currentBook: BookEntity | undefined;
+    currentBookId: string | undefined;
     timeStamp: number;
   }>()
 );

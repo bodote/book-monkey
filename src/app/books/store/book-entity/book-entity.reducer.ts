@@ -68,6 +68,26 @@ export const bookEntityReducer = createReducer(
     state.lastUpdateTS = action.timeStamp;
     return state;
   }),
+  on(
+    BookEntityActions.setCurrentBookSuccess,
+    (state, action): BookEntityState => {
+      return {
+        ...state,
+        currentBookId: action.currentBookId
+      };
+    }
+  ),
+  on(
+    BookEntityActions.loadAllAndSetCurrentBookSuccess,
+    (state, action): BookEntityState => {
+      state = adapter.setAll(action.books, state);
+      state.lastUpdateTS = action.timeStamp;
+      return {
+        ...state,
+        currentBookId: action.currentBookId
+      };
+    }
+  ),
   on(BookEntityActions.httpFailure, (state, action): BookEntityState => {
     return {
       ...state,
@@ -81,15 +101,7 @@ export const bookEntityReducer = createReducer(
       errorMessage: action.message
     };
   }),
-  on(
-    BookEntityActions.setCurrentBookSuccess,
-    (state, action): BookEntityState => {
-      return {
-        ...state,
-        currentBookId: action.currentBookId
-      };
-    }
-  ),
+
   on(BookActions.isbnNotFound, (state, action): BookEntityState => {
     return {
       ...state,

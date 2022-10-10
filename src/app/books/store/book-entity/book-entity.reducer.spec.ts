@@ -9,8 +9,14 @@ import {
   deleteBookEntity,
   deleteBookEntitySuccess,
   httpFailure,
+  isbnNotFound,
+  loadAllAndSetCurrentBook,
+  loadAllAndSetCurrentBookSuccess,
   loadBookEntities,
   loadBookEntitiesSuccess,
+  resetErrorsAction,
+  resetSavedSuccessFlag,
+  setCurrentBookSuccess,
   upsertBookEntity,
   upsertBookEntitySuccess
 } from './book-entity.actions';
@@ -31,6 +37,17 @@ describe('BookEntity Reducer', () => {
       const result = bookEntityReducer(
         initialBookEntityState,
         loadBookEntities
+      );
+      expect(result).toEqual(initialBookEntityState);
+    });
+  });
+  describe('loadAllAndSetCurrentBook action', () => {
+    it('should return the previous state', () => {
+      const result = bookEntityReducer(
+        initialBookEntityState,
+        loadAllAndSetCurrentBook({
+          isbn: '123'
+        })
       );
       expect(result).toEqual(initialBookEntityState);
     });
@@ -112,7 +129,7 @@ describe('BookEntity Reducer', () => {
       expect(result).toEqual(expectedState);
     });
   });
-  describe('action ', () => {
+  describe('action... ', () => {
     const bookA = factory.bookEntity();
     const parameters = [
       {
@@ -232,69 +249,113 @@ describe('BookEntity Reducer', () => {
     });
   });
   describe('loadAllAndSetCurrentBookSuccess action', () => {
-    it('should return the previous state', () => {
+    it('should return state with updated books and Current Book set', () => {
+      const bookA = factory.bookEntity();
+      const bookB = factory.bookEntity();
+      const booksInit = factory.entities(bookA);
+      const booksResult = factory.entities(bookA, bookB);
+      const ts1 = 1;
+      const ts2 = 2;
+      const stateBefore = factory.bookState({
+        ids: [bookA.isbn],
+        entities: booksInit,
+        lastUpdateTS: ts1
+      });
       const result = bookEntityReducer(
-        initialBookEntityState,
-        loadBookEntities
+        stateBefore,
+        loadAllAndSetCurrentBookSuccess({
+          books: [bookA, bookB],
+          currentBookId: bookB.isbn,
+          timeStamp: ts2
+        })
       );
-      let expectedState = factory.bookState({});
+      let expectedState = factory.bookState({
+        ids: [bookA.isbn, bookB.isbn],
+        entities: booksResult,
+        currentBookId: bookB.isbn,
+        lastUpdateTS: ts2
+      });
       expect(result).toEqual(expectedState);
-      fail('not yet ');
-    });
-  });
-  describe('loadAllAndSetCurrentBook action', () => {
-    it('should return the previous state', () => {
-      const result = bookEntityReducer(
-        initialBookEntityState,
-        loadBookEntities
-      );
-      let expectedState = factory.bookState({});
-      expect(result).toEqual(expectedState);
-      fail('not yet ');
-    });
-  });
-  describe('isbnNotFound action', () => {
-    it('should return the previous state', () => {
-      const result = bookEntityReducer(
-        initialBookEntityState,
-        loadBookEntities
-      );
-      let expectedState = factory.bookState({});
-      expect(result).toEqual(expectedState);
-      fail('not yet ');
     });
   });
   describe('setCurrentBookSuccess action', () => {
     it('should return the previous state', () => {
+      const bookA = factory.bookEntity();
+      const bookB = factory.bookEntity();
+      const booksInit = factory.entities(bookA, bookB);
+      const ts1 = 1;
+      const ts2 = 2;
+      const stateBefore = factory.bookState({
+        ids: [bookA.isbn],
+        entities: booksInit,
+        currentBookId: bookA.isbn,
+        lastUpdateTS: ts1
+      });
       const result = bookEntityReducer(
-        initialBookEntityState,
-        loadBookEntities
+        stateBefore,
+        setCurrentBookSuccess({
+          currentBookId: bookB.isbn
+        })
       );
-      let expectedState = factory.bookState({});
+      let expectedState = factory.bookState({
+        ids: [bookA.isbn],
+        entities: booksInit,
+        currentBookId: bookB.isbn,
+        lastUpdateTS: ts1
+      });
       expect(result).toEqual(expectedState);
-      fail('not yet ');
     });
   });
+  describe('isbnNotFound action', () => {
+    it('should return state with error message', () => {
+      const bookA = factory.bookEntity();
+      const bookB = factory.bookEntity();
+      const booksInit = factory.entities(bookA, bookB);
+      const ts1 = 1;
+      const theMessage = 'isbn not found';
+      const stateBefore = factory.bookState({
+        ids: [bookA.isbn, bookB.isbn],
+        entities: booksInit,
+        lastUpdateTS: ts1
+      });
+      const result = bookEntityReducer(
+        stateBefore,
+        isbnNotFound({ errorMessage: theMessage })
+      );
+      let expectedState = factory.bookState({
+        ids: [bookA.isbn, bookB.isbn],
+        entities: booksInit,
+        lastUpdateTS: ts1,
+        errorMessage: theMessage
+      });
+      expect(result).toEqual(expectedState);
+    });
+  });
+
   describe('resetSavedSuccessFlag action', () => {
     it('should return the previous state', () => {
-      const result = bookEntityReducer(
-        initialBookEntityState,
-        loadBookEntities
-      );
-      let expectedState = factory.bookState({});
+      const stateBefore = factory.bookState({
+        showSaveSuccess: true
+      });
+      const result = bookEntityReducer(stateBefore, resetSavedSuccessFlag());
+      let expectedState = factory.bookState({
+        showSaveSuccess: false
+      });
       expect(result).toEqual(expectedState);
-      fail('not yet ');
     });
   });
   describe('resetErrorsAction action', () => {
     it('should return the previous state', () => {
-      const result = bookEntityReducer(
-        initialBookEntityState,
-        loadBookEntities
-      );
-      let expectedState = factory.bookState({});
+      const stateBefore = factory.bookState({
+        errorMessage: 'some error',
+        httpError: new HttpErrorResponse({ status: 404 })
+      });
+      const result = bookEntityReducer(stateBefore, resetErrorsAction());
+      let expectedState = factory.bookState({
+        errorMessage: null,
+        httpError: null
+      });
       expect(result).toEqual(expectedState);
-      fail('not yet ');
     });
   });
 });

@@ -49,7 +49,7 @@ export class BookEntityEffects {
             const currentBook = books.find((book) => book.isbn == action.isbn);
             return loadAllAndSetCurrentBookSuccess({
               books,
-              currentBook,
+              currentBookId: currentBook?.isbn,
               timeStamp: Date.now()
             });
           }),
