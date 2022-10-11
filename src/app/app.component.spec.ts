@@ -10,6 +10,7 @@ describe('AppComponent', () => {
   let store: MockStore;
   let fixture: ComponentFixture<AppComponent>;
   beforeEach(async () => {
+    JSON.stringify(store);
     await TestBed.configureTestingModule({
       imports: [RouterTestingModule],
       declarations: [AppComponent],
@@ -47,10 +48,5 @@ describe('AppComponent', () => {
       By.css('[data-id="loadingSpinner"]')
     );
     expect(svgSpinner).toBeTruthy();
-  });
-  it('dummy test', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.dummy()).toBe(0);
   });
 });
