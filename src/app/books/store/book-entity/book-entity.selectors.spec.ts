@@ -1,22 +1,23 @@
 import { BookFactory } from './book.factory.spec';
 import {
-  selectAllBooksEntities,
+  selectAllBookEntities,
+  selectBookIds,
   selectCurrentBook,
   selectCurrentBookAndAll,
+  selectError,
   selectErrorState,
   selectShowSavedSuccess,
   selectTotal,
   selectTotalAndErrors,
   selectTotalBooks
 } from './book-entity.selectors';
-import { BookEntity } from './book-entity.model';
 import { HttpErrorResponse } from '@angular/common/http';
 
 describe('BookEntity selectors', () => {
   const factory = new BookFactory();
   it('selectAllBooksEntities should select all books', () => {
     const state = factory.stateWith2Books();
-    const result: BookEntity[] = selectAllBooksEntities.projector(state);
+    const result = selectAllBookEntities.projector(state);
     const booksFromState = factory.getBooksFromState(state);
     expect(result).toEqual(booksFromState);
   });
@@ -101,5 +102,73 @@ describe('BookEntity selectors', () => {
       httpError: state.httpError,
       errorMessage: state.errorMessage
     });
+  });
+  it('selectErrors should select ErrorState', () => {
+    const errorMessage = 'the message';
+    const httpError = new HttpErrorResponse({ status: 404 });
+    const stateW2Books = factory.stateWith2Books();
+    const state = factory.bookState({
+      ...stateW2Books,
+      errorMessage,
+      httpError,
+      lastUpdateTS: 1
+    });
+
+    const result = selectError.projector(state);
+    expect(result).toEqual({
+      httpError: state.httpError,
+      errorMessage: state.errorMessage
+    });
+  });
+  it('selectErrors should select ErrorState', () => {
+    const httpError = new HttpErrorResponse({ status: 404 });
+    const stateW2Books = factory.stateWith2Books();
+    const state = factory.bookState({
+      ...stateW2Books,
+      httpError,
+      lastUpdateTS: 1
+    });
+
+    const result = selectError.projector(state);
+    expect(result).toEqual({
+      httpError: state.httpError,
+      errorMessage: null
+    });
+  });
+  it('selectTotalAndErrors should return only total if no errors', () => {
+    const stateW2Books = factory.stateWith2Books();
+    const state = factory.bookState({
+      ...stateW2Books,
+      lastUpdateTS: 1
+    });
+
+    const result = selectTotalAndErrors.projector(state);
+    expect(result).toEqual({
+      total: selectTotal(state),
+      lastUpdateTS: state.lastUpdateTS,
+      httpError: null,
+      errorMessage: null
+    });
+  });
+  it('selectErrors should select empty ErrorState if there are no errors', () => {
+    const stateW2Books = factory.stateWith2Books();
+    const state = factory.bookState({
+      ...stateW2Books,
+      lastUpdateTS: 1
+    });
+    const result = selectError.projector(state);
+    expect(result).toEqual({});
+  });
+  it('should return the book ids', () => {
+    const bookA = factory.bookEntity();
+    const bookB = factory.bookEntity();
+    const booksInit = factory.entities(bookA, bookB);
+    const state = factory.bookState({
+      ids: [bookA.isbn, bookB.isbn],
+      entities: booksInit
+    });
+    const result = selectBookIds.projector(state);
+    expect(result[0]).toEqual(bookA.isbn);
+    expect(result[1]).toEqual(bookB.isbn);
   });
 });

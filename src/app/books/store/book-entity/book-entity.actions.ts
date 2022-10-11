@@ -27,7 +27,7 @@ export const addBookEntity = createAction(
 );
 
 export const addBookEntitySuccess = createAction(
-  '[BookEntity/API] Add Book Success',
+  '[BookEntity/API] Add BookEntity Success',
   props<{ bookEntity: BookEntity }>()
 );
 export const upsertBookEntity = createAction(

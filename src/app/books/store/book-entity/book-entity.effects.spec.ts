@@ -67,6 +67,8 @@ describe('BookEntityEffects', () => {
           bookEntities: [bookEntity],
           timeStamp: Date.now()
         });
+        expect(loadBookEntities().type).toContain('Load BookEntities');
+        expect(actionExpected.type).toContain('Load BookEntities Success');
         expect(actions.length).toEqual(1);
         expect(actions[0].type).toEqual(actionExpected.type);
         expect((actions[0] as typeof actionExpected).bookEntities).toEqual(
@@ -90,6 +92,12 @@ describe('BookEntityEffects', () => {
             currentBookId: bookEntity?.isbn,
             timeStamp: Date.now()
           });
+          expect(
+            loadAllAndSetCurrentBook({ isbn: bookEntity.isbn }).type
+          ).toContain('Load all and set Current Book');
+          expect(actionExpected.type).toContain(
+            'Load all and set Current Book Success'
+          );
           expect(actions.length).toEqual(1);
           expect(actions[0].type).toEqual(actionExpected.type);
           expect((actions[0] as typeof actionExpected).currentBookId).toEqual(
@@ -119,6 +127,8 @@ describe('BookEntityEffects', () => {
         const actionExpected = addBookEntitySuccess({
           bookEntity
         });
+        expect(actionExpected.type).toContain('Add BookEntity Success');
+        expect(addBookEntity({ bookEntity }).type).toContain('Add BookEntity');
         expect(actions.length).toEqual(1);
         expect(actions[0].type).toEqual(actionExpected.type);
         expect((actions[0] as typeof actionExpected).bookEntity).toEqual(
@@ -142,6 +152,10 @@ describe('BookEntityEffects', () => {
         const actionExpected = deleteBookEntitySuccess({
           id: bookEntity.isbn
         });
+        expect(deleteBookEntity({ id: bookEntity.isbn }).type).toContain(
+          'Delete BookEntity'
+        );
+        expect(actionExpected.type).toContain('Delete BookEntity Success');
         expect(actions.length).toEqual(1);
         expect(actions[0].type).toEqual(actionExpected.type);
         expect((actions[0] as typeof actionExpected).id).toEqual(
@@ -170,6 +184,10 @@ describe('BookEntityEffects', () => {
         const actionExpected = upsertBookEntitySuccess({
           bookEntity
         });
+        expect(upsertBookEntity({ bookEntity }).type).toContain(
+          'Upsert BookEntity'
+        );
+        expect(actionExpected.type).toContain('Upsert BookEntity Success');
         expect(actions.length).toEqual(1);
         expect(actions[0].type).toEqual(actionExpected.type);
         expect((actions[0] as typeof actionExpected).bookEntity).toEqual(

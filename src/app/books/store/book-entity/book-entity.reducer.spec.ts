@@ -84,6 +84,9 @@ describe('BookEntity Reducer', () => {
       let expectedState = factory.bookState({
         errorMessage: errMsgString
       });
+      expect(bookErrorAction({ message: errMsgString }).type).toContain(
+        'Error'
+      );
       expect(result).toEqual(expectedState);
     });
   });
@@ -100,6 +103,9 @@ describe('BookEntity Reducer', () => {
         httpError: herror,
         lastUpdateTS: ts
       });
+      expect(httpFailure({ httpError: herror, timeStamp: ts }).type).toContain(
+        'HTTP Error'
+      );
       expect(result).toEqual(expectedState);
     });
   });
@@ -275,6 +281,13 @@ describe('BookEntity Reducer', () => {
         currentBookId: bookB.isbn,
         lastUpdateTS: ts2
       });
+      expect(
+        loadAllAndSetCurrentBookSuccess({
+          books: [bookA, bookB],
+          currentBookId: bookB.isbn,
+          timeStamp: ts2
+        }).type
+      ).toContain('Set Current Book Success');
       expect(result).toEqual(expectedState);
     });
   });
@@ -284,7 +297,6 @@ describe('BookEntity Reducer', () => {
       const bookB = factory.bookEntity();
       const booksInit = factory.entities(bookA, bookB);
       const ts1 = 1;
-      const ts2 = 2;
       const stateBefore = factory.bookState({
         ids: [bookA.isbn],
         entities: booksInit,
@@ -328,6 +340,9 @@ describe('BookEntity Reducer', () => {
         lastUpdateTS: ts1,
         errorMessage: theMessage
       });
+      expect(isbnNotFound({ errorMessage: theMessage }).type).toContain(
+        'ISBN still not found'
+      );
       expect(result).toEqual(expectedState);
     });
   });
