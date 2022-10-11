@@ -37,5 +37,5 @@
   "fileLogLevel": "debug",
   "tsconfigFile": "tsconfig.stryker.json",
   "tempDirName": "stryker-tmp",
-  "inPlace": true
+  "inPlace": false
 }
