@@ -43,4 +43,5 @@ Thumbs.db
 
 # stryker temp files
 .stryker-tmp
+stryker.log
 reports/mutation/mutation.html
