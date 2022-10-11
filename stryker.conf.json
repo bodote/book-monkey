@@ -10,6 +10,7 @@
     "!main.ts",
     "!cypress/**"
   ],
+  "_comment": "remove following line if you don't have stryker-js locally installed!",
   "plugins": ["/Users/bodo.teichmann/dev/learning/myStryker/stryker-js/packages/karma-runner/dist/src/index.js"
   , "/Users/bodo.teichmann/dev/learning/myStryker/stryker-js/packages/typescript-checker/dist/src/index.js"],
   "testRunner": "karma",
@@ -33,7 +34,7 @@
   "coverageAnalysis": "perTest",
   "timeoutFactor": 40,
   "checkers": ["typescript"],
-  "fileLogLevel": "trace",
+  "fileLogLevel": "debug",
   "tsconfigFile": "tsconfig.stryker.json",
   "tempDirName": "stryker-tmp",
   "inPlace": true

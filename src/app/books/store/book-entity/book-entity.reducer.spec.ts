@@ -39,6 +39,7 @@ describe('BookEntity Reducer', () => {
         loadBookEntities
       );
       expect(result).toEqual(initialBookEntityState);
+      expect(initialBookEntityState.showSaveSuccess).toBeFalse();
     });
   });
   describe('loadAllAndSetCurrentBook action', () => {
@@ -287,7 +288,7 @@ describe('BookEntity Reducer', () => {
           currentBookId: bookB.isbn,
           timeStamp: ts2
         }).type
-      ).toContain('Set Current Book Success');
+      ).toContain('set Current Book Success');
       expect(result).toEqual(expectedState);
     });
   });
@@ -315,6 +316,11 @@ describe('BookEntity Reducer', () => {
         currentBookId: bookB.isbn,
         lastUpdateTS: ts1
       });
+      expect(
+        setCurrentBookSuccess({
+          currentBookId: bookB.isbn
+        }).type
+      ).toContain('Set Current Book Success');
       expect(result).toEqual(expectedState);
     });
   });

@@ -63,7 +63,7 @@ export const loadAllAndSetCurrentBook = createAction(
   props<{ isbn: string }>()
 );
 export const isbnNotFound = createAction(
-  '[BookEntity/API] reloaded books from server, but ISBN still not Found',
+  '[BookEntity/API] reloaded books from server, but ISBN still not found',
   props<{ errorMessage: string }>()
 );
 

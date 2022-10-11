@@ -113,6 +113,38 @@ describe('BookEntityEffects', () => {
           done();
         });
     });
+    it('reloadBooksAndSetCurrentBook$ should dispatch action loadBookEntitiesSuccess even it book not found', (done) => {
+      actions$ = of(loadAllAndSetCurrentBook({ isbn: 'xxx' }));
+      effects.reloadBooksAndSetCurrentBook$
+        .pipe(toArray())
+        .subscribe((actions) => {
+          expect(actions.length).toBe(1);
+          const actionExpected = loadAllAndSetCurrentBookSuccess({
+            books: [bookEntity],
+            currentBookId: bookEntity?.isbn,
+            timeStamp: Date.now()
+          });
+          expect(
+            loadAllAndSetCurrentBook({ isbn: bookEntity.isbn }).type
+          ).toContain('Load all and set Current Book');
+          expect(actionExpected.type).toContain(
+            'Load all and set Current Book Success'
+          );
+          expect(actions.length).toEqual(1);
+          expect(actions[0].type).toEqual(actionExpected.type);
+          expect(
+            (actions[0] as typeof actionExpected).currentBookId
+          ).toBeFalsy();
+          expect((actions[0] as typeof actionExpected).books).toEqual(
+            actionExpected.books
+          );
+          expect(
+            (actions[0] as typeof actionExpected).timeStamp
+          ).toBeLessThanOrEqual(actionExpected.timeStamp);
+          expect(mockService.getAllEntities).toHaveBeenCalledOnceWith();
+          done();
+        });
+    });
   });
   describe(' success case with BookService.postBook ', () => {
     beforeEach(() => {
