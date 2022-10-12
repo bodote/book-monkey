@@ -18,7 +18,7 @@ export class BookListComponent implements OnInit {
   books$ = this.store.select(selectAllBookEntities);
   showSaveSuccess$ = this.store.select(selectShowSavedSuccess);
   listView!: boolean;
-  error2$: Observable<{
+  error$: Observable<{
     httpError?: HttpErrorResponse | null;
     errorMessage?: string | null;
     lastUpdateTS: number;

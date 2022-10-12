@@ -6,7 +6,6 @@ import {
   RouterStateSnapshot
 } from '@angular/router';
 import { distinctUntilChanged, filter, of, switchMap, take, tap } from 'rxjs';
-import { BookStoreService } from '../../shared/book-store.service';
 import { Store } from '@ngrx/store';
 import { selectTotalAndErrors } from '../store/book-entity/book-entity.selectors';
 import {
@@ -21,11 +20,7 @@ import isEqual from 'lodash/isEqual';
   providedIn: 'root'
 })
 export class ListLoadedGuard implements CanActivate {
-  constructor(
-    private bs: BookStoreService,
-    private store: Store,
-    private router: Router
-  ) {}
+  constructor(private store: Store, private router: Router) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     return this.getFromStoreOrAPI().pipe(

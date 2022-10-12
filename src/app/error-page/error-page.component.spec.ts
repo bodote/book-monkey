@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ErrorPageComponent } from './error-page.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { mockStateWithBooksEntities } from '../books/store/index.spec';
+
 import { Observable } from 'rxjs';
 import { TypedAction } from '@ngrx/store/src/models';
 import { provideMockActions } from '@ngrx/effects/testing';
@@ -12,6 +12,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
 import { resetErrorsAction } from '../books/store/book-entity/book-entity.actions';
+import { mockStateWithBooksEntities } from '../books/store/book-entity/book.factory.spec';
 
 describe('ErrorPageComponent', () => {
   let actions$: Observable<TypedAction<any>>;

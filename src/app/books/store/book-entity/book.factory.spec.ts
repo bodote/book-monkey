@@ -1,7 +1,33 @@
 import { BookEntity } from './book-entity.model';
 import { Dictionary } from '@ngrx/entity';
 import { BookRaw } from '../../../shared/book-raw';
-import { BookEntityState, initialBookEntityState } from './book-entity.reducer';
+import {
+  bookEntitiesFeatureKey,
+  bookEntityReducer,
+  BookEntityState,
+  initialBookEntityState
+} from './book-entity.reducer';
+import { AppState, ROOT_REDUCERS } from '../../../store';
+import { INIT } from '@ngrx/store';
+
+export const mockStateWithBooksEntities = (
+  overrideBookEntityState: Partial<BookEntityState> = {}
+): AppState => {
+  const initialState: any = {};
+  Object.entries(ROOT_REDUCERS).forEach(([key, reducer]) => {
+    initialState[key] = reducer(undefined, { type: INIT });
+  });
+  initialState[bookEntitiesFeatureKey] = bookEntityReducer(undefined, {
+    type: INIT
+  }); // we need to add the state of  Feature Modules manually here!
+  return {
+    ...initialState,
+    bookEntities: {
+      ...initialState[bookEntitiesFeatureKey],
+      ...overrideBookEntityState
+    }
+  } as AppState;
+};
 
 export class BookFactory {
   private lastId = 0;
@@ -53,16 +79,14 @@ export class BookFactory {
     const bookA = this.bookEntity();
     const bookB = this.bookEntity();
     const booksInit = this.entities(bookA, bookB);
-    const bookAR: BookEntity | undefined = booksInit[bookA.isbn];
     const ts1 = 1;
-    const state = this.bookState({
+    return this.bookState({
       ids: [bookA.isbn, bookB.isbn],
       entities: booksInit,
       currentBookId: bookA.isbn,
       lastUpdateTS: ts1,
       showSaveSuccess: false
     });
-    return state;
   }
   getBooksFromState(state: BookEntityState): BookEntity[] {
     let booksInit: BookEntity[] = [];

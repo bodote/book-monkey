@@ -1,41 +1,29 @@
-import {
-  ComponentFixture,
-  fakeAsync,
-  TestBed,
-  tick
-} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BookListComponent } from './book-list.component';
-import { throwError } from 'rxjs';
 import { TestScheduler } from 'rxjs/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { HttpErrorResponse } from '@angular/common/http';
-import { BookEntity } from '../store/book-entity/book-entity.model';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { AppState } from '../../store';
-import { mockStateWithBooksEntities } from '../store/index.spec';
-import { BookFactory } from '../store/book-entity/book.factory.spec';
 
-const testBookData: BookEntity = {
-  authors: ['author'],
-  isbn: '1234567890',
-  published: new Date('2022-02-02'),
-  title: 'a title',
-  subtitle: '',
-  description: '',
-  rating: 3,
-  thumbnails: [{ title: '', url: '' }]
-};
-xdescribe('BookListComponent', () => {
+import {
+  BookFactory,
+  mockStateWithBooksEntities
+} from '../store/book-entity/book.factory.spec';
+import { resetErrorsAction } from '../store/book-entity/book-entity.actions';
+
+describe('BookListComponent', () => {
   let component: BookListComponent;
   let fixture: ComponentFixture<BookListComponent>;
   let store: MockStore;
   let dispatchSpy: jasmine.Spy<any>;
   let testScheduler: TestScheduler;
   const factory = new BookFactory();
-  const firstB = factory.bookEntity();
-  const secondB = factory.bookEntity();
+  const bookEntityState = factory.stateWith2Books();
+  const firstB = factory.getBooksFromState(bookEntityState)[0];
+  const secondB = factory.getBooksFromState(bookEntityState)[1];
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [BookListComponent],
@@ -57,58 +45,81 @@ xdescribe('BookListComponent', () => {
     dispatchSpy = spyOn(store, 'dispatch');
   });
 
-  it('should create and get the of(book[]) ', () => {
-    store.setState(mockStateWithBooksEntities(factory.stateWith2Books()));
+  it('should have an observable containing the books and show 2 book-items', (done) => {
+    store.setState(mockStateWithBooksEntities(bookEntityState));
     fixture.detectChanges();
-    testScheduler.run((helpers) => {
-      const { expectObservable } = helpers;
-      fixture.detectChanges();
-      expect(component).toBeTruthy();
-      expect(component.books$).toBeDefined();
-      if (component.books$) {
-        const valuesOut = { a: firstB, b: secondB };
-        expectObservable(component.books$).toBe('(ab|)', valuesOut);
-      } else {
-        fail();
-      }
-      expect(component.listView).toBeTrue();
+    expect(component.books$).toBeTruthy();
+    component.books$.subscribe((books) => {
+      expect(books.length).toBe(2);
+      expect(books[0]).toEqual(firstB);
+      expect(books[1]).toEqual(secondB);
+      done();
     });
+    expect(component.listView).toBeTrue();
+    const bookFound0 = fixture.debugElement.query(
+      By.css('[data-id="book-item-0"]')
+    );
+    const bookFound1 = fixture.debugElement.query(
+      By.css('[data-id="book-item-1"]')
+    );
+    expect(bookFound0).toBeTruthy();
+    expect(bookFound1).toBeTruthy();
   });
-  xit('should insert no additional delay to that comming from the BookStoreService ', () => {
-    testScheduler.run((helpers) => {
-      const { expectObservable } = helpers;
-      fixture.detectChanges();
-
-      expect(component.books$).toBeDefined();
-      const valuesOut = { x: [testBookData] };
-      if (component.books$) {
-        expectObservable(component.books$).toBe(' 1000ms (x|)', valuesOut);
-      } else {
-        fail();
-      }
+  it('should show  http errors if any ', (done) => {
+    const httpError = new HttpErrorResponse({ status: 404 });
+    store.setState(
+      mockStateWithBooksEntities({
+        httpError,
+        lastUpdateTS: 1
+      })
+    );
+    fixture.detectChanges();
+    component.error$.subscribe((error) => {
+      expect(error.httpError).toBe(httpError);
+      expect(error.lastUpdateTS).toBe(1);
+      expect(error.errorMessage).toBe(null);
+      done();
     });
+    const errorElement = fixture.debugElement.query(
+      By.css('[data-id="error-element"]')
+    );
+    expect(errorElement).toBeTruthy();
   });
-  xit('should show "loading" if books are not yet available ', fakeAsync(() => {
+  it('should show   errorMessage if any ', (done) => {
+    const errorMessage = 'some error';
+    store.setState(
+      mockStateWithBooksEntities({
+        errorMessage,
+        lastUpdateTS: 1
+      })
+    );
     fixture.detectChanges();
-    let loading = fixture.debugElement.query(By.css('div.relative > div'));
-    expect(loading).toBeDefined();
-    expect(loading.nativeElement.textContent).toContain('Loading');
-    expect(component.books$).toBeDefined();
-    tick(1001);
-    fixture.detectChanges();
-    loading = fixture.debugElement.query(By.css('div.relative > div'));
-    expect(loading).toBeNull();
-  }));
-  xit('should show error if BookStoreService runs into an error ', () => {
-    const errorObservable$ = throwError(() => {
-      return new HttpErrorResponse({ status: 404 });
+    component.error$.subscribe((error) => {
+      expect(error.errorMessage).toEqual(errorMessage);
+      expect(error.lastUpdateTS).toBe(1);
+      expect(error.httpError).toBe(null);
+      done();
     });
+    const errorElement = fixture.debugElement.query(
+      By.css('[data-id="error-element"]')
+    );
+    expect(errorElement).toBeTruthy();
+  });
 
+  it('should dispatch(resetErrorsAction()) if there is an error and the closeErrorEventEmitter emits an event', () => {
+    const errorMessage = 'some error';
+    store.setState(
+      mockStateWithBooksEntities({
+        errorMessage,
+        lastUpdateTS: 1
+      })
+    );
     fixture.detectChanges();
-    let error = fixture.debugElement.query(By.css('div.container > div.alert'));
-    let loading = fixture.debugElement.query(By.css('div.relative > div'));
-    expect(loading).toBeNull();
-    expect(error).toBeDefined();
-    expect(error.nativeElement.textContent).toContain('"status": 404');
+    const errorElement = fixture.debugElement.query(
+      By.css('[data-id="error-element"]')
+    );
+    expect(errorElement).toBeTruthy();
+    component.closeError();
+    expect(dispatchSpy).toHaveBeenCalledOnceWith(resetErrorsAction());
   });
 });
