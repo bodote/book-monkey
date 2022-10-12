@@ -18,8 +18,6 @@ export class BookListComponent implements OnInit {
   books$ = this.store.select(selectAllBookEntities);
   showSaveSuccess$ = this.store.select(selectShowSavedSuccess);
   listView!: boolean;
-  error: HttpErrorResponse | undefined;
-  //loading$ = this.store.select(selectIsLoading);
   error2$: Observable<{
     httpError?: HttpErrorResponse | null;
     errorMessage?: string | null;

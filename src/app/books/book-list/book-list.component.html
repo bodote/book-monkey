@@ -11,16 +11,6 @@
       [successMsg]="'Book has been saved successfully'"
     ></bm-success-alert>
   </ng-container>
-  <ng-container *ngIf="!error">
-    <ng-container *ngIf="books$ | async as books">
-      <bm-book-list-item
-        *ngFor="let b of books; index as id"
-        [book]="b"
-        class="item"
-        [routerLink]="['/books/detail', b.isbn]"
-      ></bm-book-list-item>
-    </ng-container>
-  </ng-container>
   <ng-container *ngIf="false">
     <!--  loading$ | async">-->
     <div class="relative rounded-xl overflow-auto p-8">

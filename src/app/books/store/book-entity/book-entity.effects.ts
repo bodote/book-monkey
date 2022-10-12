@@ -67,7 +67,7 @@ export class BookEntityEffects {
       switchMap((action) => {
         let book = action.bookEntity;
         return this.bs.postBook(book).pipe(
-          map((response: string) => addBookEntitySuccess({ bookEntity: book })),
+          map((response: any) => addBookEntitySuccess({ bookEntity: book })),
           catchError((error) =>
             of(httpFailure({ httpError: error, timeStamp: Date.now() }))
           )

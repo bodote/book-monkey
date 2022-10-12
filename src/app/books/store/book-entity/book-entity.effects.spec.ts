@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
-import { Observable, of, toArray } from 'rxjs';
+import { Observable, of, throwError, toArray } from 'rxjs';
 
 import { BookEntityEffects } from './book-entity.effects';
 import { TypedAction } from '@ngrx/store/src/models';
@@ -15,6 +15,7 @@ import {
   addBookEntitySuccess,
   deleteBookEntity,
   deleteBookEntitySuccess,
+  httpFailure,
   loadAllAndSetCurrentBook,
   loadAllAndSetCurrentBookSuccess,
   loadBookEntities,
@@ -22,6 +23,7 @@ import {
   upsertBookEntity,
   upsertBookEntitySuccess
 } from './book-entity.actions';
+import { HttpErrorResponse } from '@angular/common/http';
 
 describe('BookEntityEffects', () => {
   let actions$: Observable<TypedAction<any>>;
@@ -146,6 +148,57 @@ describe('BookEntityEffects', () => {
         });
     });
   });
+  describe(' error case with BookService.getAllEntities ', () => {
+    const httpError: HttpErrorResponse = new HttpErrorResponse({ status: 404 });
+    beforeEach(() => {
+      mockService.getAllEntities = jasmine
+        .createSpy<() => Observable<BookEntity[]>>()
+        .and.returnValue(throwError(() => httpError));
+    });
+    it('loadBooks$ should catch the error and return  action httpError', (done) => {
+      actions$ = of(loadBookEntities());
+      effects.loadBooks$.pipe(toArray()).subscribe((actions) => {
+        expect(actions.length).toBe(1);
+        const actionExpected = httpFailure({
+          httpError,
+          timeStamp: Date.now()
+        });
+        expect(actionExpected.type).toContain('HTTP Error Response');
+        expect(actions.length).toEqual(1);
+        expect(actions[0].type).toEqual(actionExpected.type);
+        expect((actions[0] as typeof actionExpected).httpError).toEqual(
+          actionExpected.httpError
+        );
+        expect(
+          (actions[0] as typeof actionExpected).timeStamp
+        ).toBeLessThanOrEqual(actionExpected.timeStamp);
+        expect(mockService.getAllEntities).toHaveBeenCalledOnceWith();
+        done();
+      });
+    });
+    it('reloadBooksAndSetCurrentBook$ should dispatch httpFailure ', (done) => {
+      actions$ = of(loadAllAndSetCurrentBook({ isbn: bookEntity.isbn }));
+      effects.reloadBooksAndSetCurrentBook$
+        .pipe(toArray())
+        .subscribe((actions) => {
+          expect(actions.length).toBe(1);
+          const actionExpected = httpFailure({
+            httpError,
+            timeStamp: Date.now()
+          });
+          expect(actions.length).toEqual(1);
+          expect(actions[0].type).toEqual(actionExpected.type);
+          expect((actions[0] as typeof actionExpected).httpError).toEqual(
+            actionExpected.httpError
+          );
+          expect(
+            (actions[0] as typeof actionExpected).timeStamp
+          ).toBeLessThanOrEqual(actionExpected.timeStamp);
+          expect(mockService.getAllEntities).toHaveBeenCalledOnceWith();
+          done();
+        });
+    });
+  });
   describe(' success case with BookService.postBook ', () => {
     beforeEach(() => {
       mockService.postBook = jasmine
@@ -165,6 +218,31 @@ describe('BookEntityEffects', () => {
         expect(actions[0].type).toEqual(actionExpected.type);
         expect((actions[0] as typeof actionExpected).bookEntity).toEqual(
           actionExpected.bookEntity
+        );
+        expect(mockService.postBook).toHaveBeenCalledOnceWith(bookEntity);
+        done();
+      });
+    });
+  });
+  describe(' error case with BookService.postBook ', () => {
+    const httpError: HttpErrorResponse = new HttpErrorResponse({ status: 404 });
+    beforeEach(() => {
+      mockService.postBook = jasmine
+        .createSpy<() => Observable<string>>()
+        .and.returnValue(throwError(() => httpError));
+    });
+    it('addBook$ should dispatch httpFailure action ', (done) => {
+      actions$ = of(addBookEntity({ bookEntity }));
+      effects.addBook$.pipe(toArray()).subscribe((actions) => {
+        expect(actions.length).toBe(1);
+        const actionExpected = httpFailure({
+          httpError,
+          timeStamp: Date.now()
+        });
+        expect(actions.length).toEqual(1);
+        expect(actions[0].type).toEqual(actionExpected.type);
+        expect((actions[0] as typeof actionExpected).httpError).toEqual(
+          actionExpected.httpError
         );
         expect(mockService.postBook).toHaveBeenCalledOnceWith(bookEntity);
         done();
@@ -200,6 +278,34 @@ describe('BookEntityEffects', () => {
       });
     });
   });
+  describe(' error case with BookService.deleteBook ', () => {
+    const httpError: HttpErrorResponse = new HttpErrorResponse({ status: 404 });
+    beforeEach(() => {
+      mockService.deleteBook = jasmine
+        .createSpy<() => Observable<string>>()
+        .and.returnValue(throwError(() => httpError));
+    });
+    it('deleteBook$ should dispatch httpFailure action ', (done) => {
+      actions$ = of(deleteBookEntity({ id: bookEntity.isbn }));
+      effects.deleteBook$.pipe(toArray()).subscribe((actions) => {
+        expect(actions.length).toBe(1);
+        const actionExpected = httpFailure({
+          httpError,
+          timeStamp: Date.now()
+        });
+
+        expect(actions.length).toEqual(1);
+        expect(actions[0].type).toEqual(actionExpected.type);
+        expect((actions[0] as typeof actionExpected).httpError).toEqual(
+          actionExpected.httpError
+        );
+        expect(mockService.deleteBook).toHaveBeenCalledOnceWith(
+          bookEntity.isbn
+        );
+        done();
+      });
+    });
+  });
   describe(' success case with BookService.putBook ', () => {
     beforeEach(() => {
       mockService.putBook = jasmine
@@ -224,6 +330,35 @@ describe('BookEntityEffects', () => {
         expect(actions[0].type).toEqual(actionExpected.type);
         expect((actions[0] as typeof actionExpected).bookEntity).toEqual(
           actionExpected.bookEntity
+        );
+        expect(mockService.putBook).toHaveBeenCalledOnceWith(bookEntity);
+        done();
+      });
+    });
+  });
+  describe(' error case with BookService.putBook ', () => {
+    const httpError: HttpErrorResponse = new HttpErrorResponse({ status: 404 });
+    beforeEach(() => {
+      mockService.putBook = jasmine
+        .createSpy<() => Observable<string>>()
+        .and.returnValue(throwError(() => httpError));
+    });
+    it('saveCurrentBook$ should dispatch httpFailure action ', (done) => {
+      actions$ = of(
+        upsertBookEntity({ bookEntity }),
+        upsertBookEntity({ bookEntity })
+      );
+      effects.saveCurrentBook$.pipe(toArray()).subscribe((actions) => {
+        expect(actions.length).toBe(1); //! because the 2nd action is exactly the same and should be ignored
+        const actionExpected = httpFailure({
+          httpError,
+          timeStamp: Date.now()
+        });
+
+        expect(actions.length).toEqual(1);
+        expect(actions[0].type).toEqual(actionExpected.type);
+        expect((actions[0] as typeof actionExpected).httpError).toEqual(
+          actionExpected.httpError
         );
         expect(mockService.putBook).toHaveBeenCalledOnceWith(bookEntity);
         done();

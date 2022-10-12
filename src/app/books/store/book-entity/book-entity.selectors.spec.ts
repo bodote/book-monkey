@@ -40,7 +40,16 @@ describe('BookEntity selectors', () => {
     const result = selectCurrentBook.projector(state);
     const currentBook = state.currentBookId
       ? state.entities[state.currentBookId]
-      : undefined;
+      : null;
+    expect(result).toEqual(currentBook);
+  });
+  it('selectCurrentBook should select  CurrentBook or return null if not defined', () => {
+    const state = factory.stateWith2Books();
+    state.currentBookId = undefined;
+    const result = selectCurrentBook.projector(state);
+    const currentBook = state.currentBookId
+      ? state.entities[state.currentBookId]
+      : null;
     expect(result).toEqual(currentBook);
   });
   it('selectCurrentBookAndAll should select CurrentBookAndAll', () => {

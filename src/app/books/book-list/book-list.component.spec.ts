@@ -6,14 +6,16 @@ import {
 } from '@angular/core/testing';
 
 import { BookListComponent } from './book-list.component';
-import { BookStoreService } from '../../shared/book-store.service';
-import { Observable, of, throwError } from 'rxjs';
+import { throwError } from 'rxjs';
 import { TestScheduler } from 'rxjs/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { delay } from 'rxjs/operators';
 import { By } from '@angular/platform-browser';
 import { HttpErrorResponse } from '@angular/common/http';
 import { BookEntity } from '../store/book-entity/book-entity.model';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { AppState } from '../../store';
+import { mockStateWithBooksEntities } from '../store/index.spec';
+import { BookFactory } from '../store/book-entity/book.factory.spec';
 
 const testBookData: BookEntity = {
   authors: ['author'],
@@ -28,15 +30,21 @@ const testBookData: BookEntity = {
 xdescribe('BookListComponent', () => {
   let component: BookListComponent;
   let fixture: ComponentFixture<BookListComponent>;
-  let mockService = jasmine.createSpyObj<BookStoreService>('bookStoreService', [
-    'getAllEntities'
-  ]);
+  let store: MockStore;
+  let dispatchSpy: jasmine.Spy<any>;
   let testScheduler: TestScheduler;
+  const factory = new BookFactory();
+  const firstB = factory.bookEntity();
+  const secondB = factory.bookEntity();
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [BookListComponent],
       schemas: [NO_ERRORS_SCHEMA],
-      providers: [{ provide: BookStoreService, useValue: mockService }]
+      providers: [
+        provideMockStore<AppState>({
+          initialState: mockStateWithBooksEntities()
+        })
+      ]
     }).compileComponents();
 
     testScheduler = new TestScheduler((actual, expected) => {
@@ -45,20 +53,21 @@ xdescribe('BookListComponent', () => {
     });
     fixture = TestBed.createComponent(BookListComponent);
     component = fixture.componentInstance;
+    store = TestBed.inject(MockStore);
+    dispatchSpy = spyOn(store, 'dispatch');
   });
 
-  xit('should create and get the of(book[]) ', () => {
-    mockService.getAllEntities = jasmine
-      .createSpy<() => Observable<BookEntity[]>>()
-      .and.returnValue(of([testBookData]));
+  it('should create and get the of(book[]) ', () => {
+    store.setState(mockStateWithBooksEntities(factory.stateWith2Books()));
+    fixture.detectChanges();
     testScheduler.run((helpers) => {
       const { expectObservable } = helpers;
       fixture.detectChanges();
       expect(component).toBeTruthy();
       expect(component.books$).toBeDefined();
       if (component.books$) {
-        const valuesOut = { x: [testBookData] };
-        expectObservable(component.books$).toBe('(x|)', valuesOut);
+        const valuesOut = { a: firstB, b: secondB };
+        expectObservable(component.books$).toBe('(ab|)', valuesOut);
       } else {
         fail();
       }
@@ -66,9 +75,6 @@ xdescribe('BookListComponent', () => {
     });
   });
   xit('should insert no additional delay to that comming from the BookStoreService ', () => {
-    mockService.getAllEntities = jasmine
-      .createSpy<() => Observable<BookEntity[]>>()
-      .and.returnValue(of([testBookData]).pipe(delay(1000)));
     testScheduler.run((helpers) => {
       const { expectObservable } = helpers;
       fixture.detectChanges();
@@ -82,11 +88,7 @@ xdescribe('BookListComponent', () => {
       }
     });
   });
-  it('should show "loading" if books are not yet available ', fakeAsync(() => {
-    mockService.getAllEntities = jasmine
-      .createSpy<() => Observable<BookEntity[]>>()
-      .and.returnValue(of([testBookData]).pipe(delay(1000)));
-
+  xit('should show "loading" if books are not yet available ', fakeAsync(() => {
     fixture.detectChanges();
     let loading = fixture.debugElement.query(By.css('div.relative > div'));
     expect(loading).toBeDefined();
@@ -101,9 +103,6 @@ xdescribe('BookListComponent', () => {
     const errorObservable$ = throwError(() => {
       return new HttpErrorResponse({ status: 404 });
     });
-    mockService.getAllEntities = jasmine
-      .createSpy<() => Observable<BookEntity[]>>()
-      .and.returnValue(errorObservable$);
 
     fixture.detectChanges();
     let error = fixture.debugElement.query(By.css('div.container > div.alert'));
