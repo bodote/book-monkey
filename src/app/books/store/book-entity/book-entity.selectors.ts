@@ -60,6 +60,13 @@ export const selectAllBookEntities = createSelector(
 );
 
 export const selectTotalAndErrors = createSelector(selectBookState, (state) => {
+  if (!state)
+    return {
+      total: 0,
+      lastUpdateTS: 0,
+      httpError: null,
+      errorMessage: null
+    };
   return {
     total: selectTotal(state),
     lastUpdateTS: state.lastUpdateTS,

@@ -25,7 +25,7 @@ export class ListLoadedGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     return this.getFromStoreOrAPI().pipe(
       switchMap((data) => {
-        if (data.total > 0 && !data.httpError) {
+        if (data.total > 0 && !data.httpError && !data.errorMessage) {
           return of(true);
         }
         return of(this.router.parseUrl('/error'));
@@ -33,6 +33,7 @@ export class ListLoadedGuard implements CanActivate {
       // otherwise, something went wrong
       catchError((error) => {
         let errorMsg;
+        console.error('error:', error);
         error instanceof HttpErrorResponse
           ? (errorMsg = JSON.stringify(error))
           : (errorMsg = error.toString());
@@ -53,14 +54,27 @@ export class ListLoadedGuard implements CanActivate {
         return isEqual(previous, current);
       }),
       tap((data) => {
-        if (
-          (!data.total && !data.httpError && !data.errorMessage) ||
-          data.lastUpdateTS < Date.now() - 1000 * 60
-        ) {
+        if (data.lastUpdateTS < Date.now() - 1000 * 60) {
+          // old timestamp
           this.store.dispatch(loadBookEntities());
+        } else {
+          // new timestamp
+          if (!data.total && !data.httpError && !data.errorMessage) {
+            this.store.dispatch(
+              bookErrorAction({
+                message: 'no books found from backend recently'
+              })
+            );
+          }
         }
       }),
-      filter((data) => !!data.total || !!data.httpError || !!data.errorMessage),
+      filter(
+        (data) =>
+          !!data.total ||
+          !!data.httpError ||
+          !!data.errorMessage ||
+          data.lastUpdateTS >= Date.now() - 1000 * 60
+      ),
       take(1)
     );
   }
