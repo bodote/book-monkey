@@ -12,7 +12,6 @@ import {
   bookErrorAction,
   loadBookEntities
 } from '../store/book-entity/book-entity.actions';
-import { catchError } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 import isEqual from 'lodash/isEqual';
 
@@ -26,23 +25,9 @@ export class ListLoadedGuard implements CanActivate {
     return this.getFromStoreOrAPI().pipe(
       switchMap((data) => {
         if (data.total > 0 && !data.httpError && !data.errorMessage) {
+          // only if we have data AND no errors whatsoever
           return of(true);
         }
-        return of(this.router.parseUrl('/error'));
-      }),
-      // otherwise, something went wrong
-      catchError((error) => {
-        let errorMsg;
-        console.error('error:', error);
-        error instanceof HttpErrorResponse
-          ? (errorMsg = JSON.stringify(error))
-          : (errorMsg = error.toString());
-        console.error('errorMsg=' + errorMsg);
-        this.store.dispatch(
-          bookErrorAction({
-            message: errorMsg
-          })
-        );
         return of(this.router.parseUrl('/error'));
       })
     );
@@ -54,28 +39,52 @@ export class ListLoadedGuard implements CanActivate {
         return isEqual(previous, current);
       }),
       tap((data) => {
-        if (data.lastUpdateTS < Date.now() - 1000 * 60) {
-          // old timestamp
-          this.store.dispatch(loadBookEntities());
-        } else {
-          // new timestamp
-          if (!data.total && !data.httpError && !data.errorMessage) {
-            this.store.dispatch(
-              bookErrorAction({
-                message: 'no books found from backend recently'
-              })
-            );
-          }
-        }
+        this.dispatchActions(data);
       }),
-      filter(
-        (data) =>
-          !!data.total ||
-          !!data.httpError ||
-          !!data.errorMessage ||
-          data.lastUpdateTS >= Date.now() - 1000 * 60
-      ),
+      filter((data) => {
+        return this.canWeProceed(data);
+      }),
       take(1)
     );
+  }
+
+  private canWeProceed(data: {
+    total: number;
+    lastUpdateTS: number;
+    httpError: HttpErrorResponse | null;
+    errorMessage: string | null;
+  }) {
+    if (data.lastUpdateTS >= Date.now() - 1000 * 60) {
+      // yes: new timestamp
+      return true;
+    } else if (!!data.total || !!data.httpError || !!data.errorMessage) {
+      // yes: old timestamp , but we have data or an error message
+      return true;
+    }
+    // no: wait for next data, because it's an old timestamp,
+    // and we have no data nor errors -> wait for store update, do nothing
+    return false;
+  }
+
+  private dispatchActions(data: {
+    total: number;
+    lastUpdateTS: number;
+    httpError: HttpErrorResponse | null;
+    errorMessage: string | null;
+  }) {
+    if (data.lastUpdateTS < Date.now() - 1000 * 60) {
+      // old timestamp
+      this.store.dispatch(loadBookEntities());
+      console.error('have dispatched loadBookEntities');
+    } else {
+      // new timestamp
+      if (!data.total && !data.httpError && !data.errorMessage) {
+        this.store.dispatch(
+          bookErrorAction({
+            message: 'no books found from backend recently'
+          })
+        );
+      }
+    }
   }
 }
