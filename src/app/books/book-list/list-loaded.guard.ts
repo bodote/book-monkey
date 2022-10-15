@@ -75,7 +75,6 @@ export class ListLoadedGuard implements CanActivate {
     if (data.lastUpdateTS < Date.now() - 1000 * 60) {
       // old timestamp
       this.store.dispatch(loadBookEntities());
-      console.error('have dispatched loadBookEntities');
     } else {
       // new timestamp
       if (!data.total && !data.httpError && !data.errorMessage) {
