@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BookListComponent } from './book-list.component';
-import { TestScheduler } from 'rxjs/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -19,7 +18,6 @@ describe('BookListComponent', () => {
   let fixture: ComponentFixture<BookListComponent>;
   let store: MockStore;
   let dispatchSpy: jasmine.Spy<any>;
-  let testScheduler: TestScheduler;
   const factory = new BookFactory();
   const bookEntityState = factory.stateWith2Books();
   const firstB = factory.getBooksFromState(bookEntityState)[0];
@@ -34,11 +32,6 @@ describe('BookListComponent', () => {
         })
       ]
     }).compileComponents();
-
-    testScheduler = new TestScheduler((actual, expected) => {
-      // asserting the two objects are equal - required
-      expect(actual).toEqual(expected);
-    });
     fixture = TestBed.createComponent(BookListComponent);
     component = fixture.componentInstance;
     store = TestBed.inject(MockStore);
