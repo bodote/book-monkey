@@ -10,7 +10,32 @@ import { provideMockStore } from '@ngrx/store/testing';
 import { AppState } from '../store';
 import { mockState } from '../store/index.spec';
 
-describe('HomeComponent', () => {
+interface NOTIFIC {
+  kind: string;
+  value: string;
+  error: any;
+}
+interface FRAME {
+  frame: number;
+  notification: NOTIFIC;
+}
+function logFrames(label: string, frames: FRAME[]) {
+  console.log(label + ':');
+  frames.forEach((frame: FRAME) => {
+    console.log(
+      'Frame:',
+      frame.frame,
+      'Kind',
+      frame.notification.kind,
+      'Value:',
+      frame.notification.value,
+      frame.notification.error ? 'Error:' + frame.notification.error : ''
+    );
+  });
+  console.log('----------');
+}
+
+describe('NOT about HomeComponent, but get familiar with marble testing', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
   let testScheduler: TestScheduler;
@@ -27,6 +52,8 @@ describe('HomeComponent', () => {
     fixture.detectChanges();
 
     testScheduler = new TestScheduler((actual, expected) => {
+      logFrames('actual', actual);
+      logFrames('expected', expected);
       // asserting the two objects are equal - required
       expect(actual).toEqual(expected);
     });
