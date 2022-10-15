@@ -4,7 +4,6 @@ import {
   selectBookIds,
   selectCurrentBook,
   selectCurrentBookAndAll,
-  selectError,
   selectErrorState,
   selectShowSavedSuccess,
   selectTotal,
@@ -123,10 +122,11 @@ describe('BookEntity selectors', () => {
       lastUpdateTS: 1
     });
 
-    const result = selectError.projector(state);
+    const result = selectErrorState.projector(state);
     expect(result).toEqual({
       httpError: state.httpError,
-      errorMessage: state.errorMessage
+      errorMessage: state.errorMessage,
+      lastUpdateTS: state.lastUpdateTS
     });
   });
   it('selectErrors should select ErrorState', () => {
@@ -138,10 +138,11 @@ describe('BookEntity selectors', () => {
       lastUpdateTS: 1
     });
 
-    const result = selectError.projector(state);
+    const result = selectErrorState.projector(state);
     expect(result).toEqual({
       httpError: state.httpError,
-      errorMessage: null
+      errorMessage: null,
+      lastUpdateTS: state.lastUpdateTS
     });
   });
   it('selectTotalAndErrors should return only total if no errors', () => {
@@ -165,7 +166,7 @@ describe('BookEntity selectors', () => {
       ...stateW2Books,
       lastUpdateTS: 1
     });
-    const result = selectError.projector(state);
+    const result = selectErrorState.projector(state);
     expect(result).toEqual({});
   });
   it('should return the book ids', () => {

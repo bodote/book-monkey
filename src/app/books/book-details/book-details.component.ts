@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { Store } from '@ngrx/store';
 import {
   selectCurrentBook,
-  selectError
+  selectErrorState
 } from '../store/book-entity/book-entity.selectors';
 import {
   deleteBookEntity,
@@ -21,7 +21,7 @@ export class BookDetailsComponent {
   book!: BookEntity;
   book$ = this.store.select(selectCurrentBook);
   id: number = 0;
-  error$ = this.store.select(selectError);
+  error$ = this.store.select(selectErrorState);
 
   constructor(
     private router: Router,

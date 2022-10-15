@@ -35,7 +35,7 @@ export class BookFactory {
   bookEntity(book?: Partial<BookEntity>): BookEntity {
     const id = this.lastId++;
     return {
-      isbn: `123-${id}`,
+      isbn: `123456789${id}`,
       title: `Title ${id}`,
       description: `Description ${id}`,
       rating: 1,
@@ -49,7 +49,7 @@ export class BookFactory {
     const id = this.lastId++;
     return {
       authors: ['author'],
-      isbn: `123-${id}`,
+      isbn: `123456789${id}`,
       published: '2022-02-02',
       title: 'a title',
       subtitle: '',

@@ -16,11 +16,13 @@ export const selectBookIds = createSelector(selectBookState, (state) =>
 );
 
 export const selectErrorState = createSelector(selectBookState, (state) => {
-  return {
-    httpError: state.httpError,
-    errorMessage: state.errorMessage,
-    lastUpdateTS: state.lastUpdateTS
-  };
+  if (!!state.httpError || !!state.errorMessage)
+    return {
+      httpError: state.httpError,
+      errorMessage: state.errorMessage,
+      lastUpdateTS: state.lastUpdateTS
+    };
+  else return {};
 });
 
 export const selectCurrentBook = createSelector(selectBookState, (state) => {
@@ -73,13 +75,4 @@ export const selectTotalAndErrors = createSelector(selectBookState, (state) => {
     httpError: state.httpError,
     errorMessage: state.errorMessage
   };
-});
-
-export const selectError = createSelector(selectBookState, (state) => {
-  if (!!state.httpError || !!state.errorMessage)
-    return {
-      httpError: state.httpError,
-      errorMessage: state.errorMessage
-    };
-  else return {};
 });

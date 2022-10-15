@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import {
   selectCurrentBook,
-  selectError,
+  selectErrorState,
   selectShowSavedSuccess
 } from '../../books/store/book-entity/book-entity.selectors';
 import {
@@ -21,7 +21,7 @@ import { BookEntity } from '../../books/store/book-entity/book-entity.model';
 })
 export class BookEditComponent implements OnDestroy {
   book$ = this.store.select(selectCurrentBook);
-  error$ = this.store.select(selectError);
+  error$ = this.store.select(selectErrorState);
   showSaveSuccess$: Observable<boolean> = this.store.select(
     selectShowSavedSuccess
   );

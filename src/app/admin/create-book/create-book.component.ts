@@ -6,7 +6,7 @@ import {
   resetErrorsAction
 } from '../../books/store/book-entity/book-entity.actions';
 import {
-  selectError,
+  selectErrorState,
   selectShowSavedSuccess
 } from '../../books/store/book-entity/book-entity.selectors';
 import { BookEntity } from '../../books/store/book-entity/book-entity.model';
@@ -20,7 +20,7 @@ export class CreateBookComponent implements OnDestroy {
   //TODO: clean up HTTP-Error massages
   //loading$ = this.store.select(selectIsLoading);
   showSaveSuccess$ = this.store.select(selectShowSavedSuccess);
-  error$ = this.store.select(selectError);
+  error$ = this.store.select(selectErrorState);
 
   saved = false;
   successMsg = '';

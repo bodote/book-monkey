@@ -1,6 +1,7 @@
 <div class="px-8 py-8">
   <ng-container *ngIf="error$ | async as error">
     <bm-notification-alert
+      data-id="error-element"
       [error]="error"
       (closeErrorEventEmitter)="closeError()"
     ></bm-notification-alert>
@@ -9,7 +10,9 @@
   <ng-container *ngIf="book$ | async as book">
     <div class="container">
       <div class="mb-14">
-        <div class="text-2xl font-bold pb-8">{{ book.title }}</div>
+        <div class="text-2xl font-bold pb-8" data-id="title">
+          {{ book.title }}
+        </div>
         <div class="text-lg font-bold">{{ book.subtitle }}</div>
         <div class="divider"></div>
         <div class="flex flex-row flex-wrap pb-8">
@@ -19,7 +22,7 @@
               {{ author }}<br />
             </ng-container>
           </div>
-          <div class="basis-1/4 pr-2 pb-2" id="isbn">
+          <div class="basis-1/4 pr-2 pb-2" id="isbn" data-id="isbn">
             <div class="text-lg font-bold">ISBN:</div>
             {{ book.isbn | isbn }}
           </div>
