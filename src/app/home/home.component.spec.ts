@@ -9,31 +9,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { provideMockStore } from '@ngrx/store/testing';
 import { AppState } from '../store';
 import { mockState } from '../store/index.spec';
-
-interface NOTIFIC {
-  kind: string;
-  value: string;
-  error: any;
-}
-interface FRAME {
-  frame: number;
-  notification: NOTIFIC;
-}
-function logFrames(label: string, frames: FRAME[]) {
-  console.log(label + ':');
-  frames.forEach((frame: FRAME) => {
-    console.log(
-      'Frame:',
-      frame.frame,
-      'Kind',
-      frame.notification.kind,
-      'Value:',
-      frame.notification.value,
-      frame.notification.error ? 'Error:' + frame.notification.error : ''
-    );
-  });
-  console.log('----------');
-}
+import { logFrames } from '../shared/helper.spec';
 
 describe('NOT about HomeComponent, but get familiar with marble testing', () => {
   let component: HomeComponent;

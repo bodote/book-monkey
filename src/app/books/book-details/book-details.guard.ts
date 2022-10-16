@@ -17,7 +17,6 @@ import {
 } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { selectCurrentBookAndAll } from '../store/book-entity/book-entity.selectors';
-import { BookStoreService } from '../../shared/book-store.service';
 import { catchError } from 'rxjs/operators';
 import {
   bookErrorAction,
@@ -34,16 +33,12 @@ import isEqual from 'lodash/isEqual';
   providedIn: 'root'
 })
 export class BookDetailsGuard implements CanActivate {
-  constructor(
-    private store: Store,
-    private bs: BookStoreService,
-    private router: Router
-  ) {}
+  constructor(private store: Store, private router: Router) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Observable<boolean | UrlTree> | boolean {
+  ): Observable<boolean | UrlTree> {
     let isbn = route.paramMap.get('isbn');
     if (!isbn) {
       this.store.dispatch(
