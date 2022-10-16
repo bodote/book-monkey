@@ -5,7 +5,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { BookListComponent } from '../book-list/book-list.component';
 import { Observable, of } from 'rxjs';
 import { TestScheduler } from 'rxjs/testing';
-import { ActivatedRoute, ParamMap, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { IsbnPipe } from '../shared/isbn.pipe';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
@@ -24,6 +24,11 @@ import {
 } from '../store/book-entity/book-entity.selectors';
 import { BookEditComponent } from '../../admin/book-edit/book-edit.component';
 import { Location } from '@angular/common';
+import {
+  deleteBookEntity,
+  resetErrorsAction
+} from '../store/book-entity/book-entity.actions';
+import { NotificationAlertComponent } from '../../shared/notification-alert/notification-alert.component';
 
 describe('BookDetailsComponent and IsbnPipe', () => {
   let component: BookDetailsComponent;
@@ -34,16 +39,20 @@ describe('BookDetailsComponent and IsbnPipe', () => {
   let actions$: Observable<TypedAction<any>>;
   let store: MockStore;
   let selectSpy: jasmine.Spy<any>;
+  let dispatchSpy: jasmine.Spy<any>;
   const factory = new BookFactory();
-  const theError = new HttpErrorResponse({ status: 404 });
+  const httpError = new HttpErrorResponse({ status: 404 });
   const bookEntityState = factory.stateWith2Books();
   const firstB = factory.getBooksFromState(bookEntityState)[0];
-  const secondB = factory.getBooksFromState(bookEntityState)[1];
   let location: Location;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [BookDetailsComponent, IsbnPipe],
+      declarations: [
+        BookDetailsComponent,
+        NotificationAlertComponent,
+        IsbnPipe
+      ],
       imports: [
         RouterTestingModule.withRoutes([
           { path: 'detail/:isbn', component: BookDetailsComponent },
@@ -68,6 +77,7 @@ describe('BookDetailsComponent and IsbnPipe', () => {
     router = TestBed.inject(Router);
     store = TestBed.inject(MockStore);
     selectSpy = spyOn(store, 'select');
+    dispatchSpy = spyOn(store, 'dispatch');
     selectSpy.and.callThrough();
     fixture = TestBed.createComponent(BookDetailsComponent);
     location = TestBed.inject(Location);
@@ -83,20 +93,34 @@ describe('BookDetailsComponent and IsbnPipe', () => {
     expect(selectSpy).toHaveBeenCalledWith(selectCurrentBook);
     expect(selectSpy).toHaveBeenCalledWith(selectErrorState);
   });
-  it('should show  http errors if any ', () => {
-    const httpError = new HttpErrorResponse({ status: 404 });
-    store.setState(
-      mockStateWithBooksEntities({
-        httpError,
-        lastUpdateTS: 1
-      })
-    );
-    fixture.detectChanges();
-    const errorElement = fixture.debugElement.query(
-      By.css('[data-id="error-element"]')
-    );
-    expect(errorElement).toBeTruthy();
-  });
+  it(
+    'should show  http errors if any  and if clicked on close,' +
+      ' the error message should disapear',
+    (done) => {
+      store.setState(
+        mockStateWithBooksEntities({
+          httpError,
+          lastUpdateTS: 1
+        })
+      );
+      fixture.detectChanges();
+      let errorElement = fixture.debugElement.query(
+        By.css('[data-id="error-element"]')
+      );
+      expect(errorElement).toBeTruthy();
+      let closeBtn = fixture.debugElement.query(By.css('[data-id="closeBtn"]'));
+      expect(closeBtn).toBeTruthy();
+      closeBtn.triggerEventHandler('click');
+      expect(dispatchSpy).toHaveBeenCalledOnceWith(resetErrorsAction());
+      store.setState(mockStateWithBooksEntities({}));
+      fixture.detectChanges();
+      fixture.whenStable().then(() => {
+        closeBtn = fixture.debugElement.query(By.css('[data-id="closeBtn"]'));
+        expect(closeBtn).toBeFalsy();
+        done();
+      });
+    }
+  );
 
   it('should show a book title an isbn number', () => {
     store.setState(mockStateWithBooksEntities(bookEntityState));
@@ -109,6 +133,35 @@ describe('BookDetailsComponent and IsbnPipe', () => {
     expect(isbnElement.nativeElement.textContent).toContain(
       firstB.isbn.slice(0, 3) + '-' + firstB.isbn.slice(3)
     );
+    let debugElements = fixture.debugElement.queryAll(By.directive(RouterLink));
+    let index = debugElements.findIndex((de) => {
+      return (
+        de.attributes['ng-reflect-router-link'] === '/admin/edit,1234567890'
+      );
+    });
+    expect(index).toBeGreaterThan(-1);
+    index = debugElements.findIndex((de) => {
+      return de.attributes['ng-reflect-router-link'] === '/books/list';
+    });
+    expect(index).toBeGreaterThan(-1);
+    debugElements = fixture.debugElement.queryAll(By.css('div>div>button'));
+    index = debugElements.findIndex((de) => {
+      return de.nativeElement.textContent.indexOf('Delete') != -1;
+    });
+    expect(index).toBeGreaterThan(-1);
+    index = debugElements.findIndex((de) => {
+      return de.nativeElement.textContent.indexOf('Next') != -1;
+    });
+    expect(index).toBeGreaterThan(-1);
+    let debugElement = fixture.debugElement.query(By.css('div#isbn'));
+    expect(
+      debugElement.nativeElement.textContent.indexOf('123-4567890')
+    ).toBeGreaterThan(-1); //check ISBN-Pipe
+    debugElement = fixture.debugElement.query(By.css('#published'));
+    //debugElement.query(By.css('div[name="my-name"]'));
+    expect(
+      debugElement.nativeElement.textContent.indexOf('published')
+    ).toBeGreaterThan(-1); //check ISBN-Pipe
   });
 
   it(
@@ -120,7 +173,7 @@ describe('BookDetailsComponent and IsbnPipe', () => {
         By.css('[data-cy="editBtn"]')
       );
       expect(editButton).toBeTruthy();
-      editButton.nativeElement.click();
+      editButton.triggerEventHandler('click');
       fixture.whenStable().then(() => {
         expect(location.path()).toEqual('/admin/edit/' + firstB.isbn);
         done();
@@ -129,19 +182,52 @@ describe('BookDetailsComponent and IsbnPipe', () => {
   );
 
   it(
-    'should subscribe a to a confirmation window, and call this.book .deleteBook(isbn)' +
+    ' when click on delete, it should subscribe a to a confirmation window,' +
+      ' and call this.book .deleteBook(isbn)' +
       ' if the confirmation is true, and navigate to "/books/list" when the book .deleteBook() is called and it succeeds',
-    () => {
+    (done) => {
       //arrange
-      spyOn(window, 'confirm').and.returnValue(true);
-      // mockService.deleteBook = jasmine
-      //   .createSpy<() => Observable<string>>()
-      //   .and.returnValue(of('OK'));
+      const windowsSpy = spyOn(window, 'confirm').and.returnValue(true);
       spyOn(router, 'navigate');
+      store.setState(mockStateWithBooksEntities(bookEntityState));
+      fixture.detectChanges();
+      const deleteButton = fixture.debugElement.query(
+        By.css('[data-cy="deleteBtn"]')
+      );
       //act
-      component.delete('1234567890');
-      // expect(mockService.deleteBook).toHaveBeenCalledOnceWith('1234567890');
-      expect(router.navigate).toHaveBeenCalledOnceWith(['/books/list']);
+      deleteButton.nativeElement.click();
+      fixture.whenStable().then(() => {
+        expect(windowsSpy).toHaveBeenCalledOnceWith('Really delete book?');
+        expect(dispatchSpy).toHaveBeenCalledOnceWith(
+          deleteBookEntity({ id: firstB.isbn })
+        );
+        expect(router.navigate).toHaveBeenCalledOnceWith(['/books/list']);
+        done();
+      });
+    }
+  );
+
+  it(
+    ' when click on delete, it should subscribe a to a confirmation window,' +
+      ' and NOT call this.book .deleteBook(isbn)' +
+      ' if the confirmation is false, and NOT navigate to "/books/list" ',
+    (done) => {
+      //arrange
+      const windowsSpy = spyOn(window, 'confirm').and.returnValue(false);
+      spyOn(router, 'navigate');
+      store.setState(mockStateWithBooksEntities(bookEntityState));
+      fixture.detectChanges();
+      const deleteButton = fixture.debugElement.query(
+        By.css('[data-cy="deleteBtn"]')
+      );
+      //act
+      deleteButton.nativeElement.click();
+      fixture.whenStable().then(() => {
+        expect(windowsSpy).toHaveBeenCalledOnceWith('Really delete book?');
+        expect(dispatchSpy).not.toHaveBeenCalled();
+        expect(router.navigate).not.toHaveBeenCalled();
+        done();
+      });
     }
   );
 
@@ -160,129 +246,4 @@ describe('BookDetailsComponent and IsbnPipe', () => {
       });
     }
   );
-  describe('when initializes properly', () => {
-    const params = {
-      get: () => {
-        return '1234567890';
-      }
-    } as unknown as ParamMap;
-    beforeEach(async () => {
-      store.setState(mockStateWithBooksEntities(bookEntityState));
-      fixture.detectChanges();
-    });
-    xit(
-      'should subscribe to route.paramMap onInit() and get the isbn param ' +
-        'and get the book with that isbn from bookstore' +
-        'and show all the book details on screen including some buttons and show ISBN with a dash',
-      () => {
-        let propertySpy = spyOnProperty(
-          route,
-          'paramMap',
-          'get'
-        ).and.returnValue(of(params));
-        fixture.detectChanges(); // should call ngOnInit()
-        expect(propertySpy).toHaveBeenCalledTimes(1);
-
-        expect(component.book).toEqual(factory.bookEntity());
-
-        let debugElements = fixture.debugElement.queryAll(
-          By.directive(RouterLink)
-        );
-        let index = debugElements.findIndex((de) => {
-          return (
-            de.attributes['ng-reflect-router-link'] === '/admin/edit,1234567890'
-          );
-        });
-        expect(index).toBeGreaterThan(-1);
-        index = debugElements.findIndex((de) => {
-          return de.attributes['ng-reflect-router-link'] === '/books/list';
-        });
-        expect(index).toBeGreaterThan(-1);
-        debugElements = fixture.debugElement.queryAll(By.css('div>div>button'));
-        index = debugElements.findIndex((de) => {
-          return de.nativeElement.textContent.indexOf('Delete') != -1;
-        });
-        expect(index).toBeGreaterThan(-1);
-        index = debugElements.findIndex((de) => {
-          return de.nativeElement.textContent.indexOf('Next') != -1;
-        });
-        expect(index).toBeGreaterThan(-1);
-        let debugElement = fixture.debugElement.query(By.css('div#isbn'));
-        expect(
-          debugElement.nativeElement.textContent.indexOf('123-4567890')
-        ).toBeGreaterThan(-1); //check ISBN-Pipe
-        debugElement = fixture.debugElement.query(By.css('#published'));
-        //debugElement.query(By.css('div[name="my-name"]'));
-        expect(
-          debugElement.nativeElement.textContent.indexOf('published')
-        ).toBeGreaterThan(-1); //check ISBN-Pipe
-      }
-    );
-    it(
-      'should contain delete-button, and when clicked  ' +
-        'should call component.delete(isbn)',
-      () => {
-        spyOnProperty(route, 'paramMap', 'get').and.returnValue(of(params));
-        spyOn(component, 'delete');
-        fixture.detectChanges(); // should call ngOnInit()
-        let debugElements = fixture.debugElement.queryAll(
-          By.css('div>div>button')
-        );
-        let index = debugElements.findIndex((de) => {
-          return de.nativeElement.textContent.indexOf('Delete') != -1;
-        });
-        expect(index).toBeGreaterThan(-1);
-        debugElements[index].nativeElement.click();
-        expect(component.delete).toHaveBeenCalledOnceWith('1234567890');
-      }
-    );
-    xit(
-      'should subscribe a to a confirmation window, and call this.book .deleteBook(isbn)' +
-        ' if the confirmation is true, and show an error when the book.deleteBook() is called and it does not succeede',
-      () => {
-        spyOnProperty(route, 'paramMap', 'get').and.returnValue(of(params));
-        fixture.detectChanges(); // should call ngOnInit()
-        //arrange
-        spyOn(window, 'confirm').and.returnValue(true);
-        // mockService.deleteBook = jasmine
-        //   .createSpy<() => Observable<string>>()
-        //   .and.returnValue(throwError(() => theError));
-
-        expect(component.book).toBeDefined();
-        //act
-        component.delete('1234567890');
-        // expect(mockService.deleteBook).toHaveBeenCalledOnceWith('1234567890');
-        //expect(component.error).toBeDefined();
-        expect(window.confirm).toHaveBeenCalledOnceWith('Really delete book?');
-        expect(component.book).toBeDefined();
-        fixture.detectChanges();
-        const debugElement = fixture.debugElement.query(
-          By.css('div.container div.alert')
-        );
-        expect(debugElement.nativeElement.textContent).toContain(
-          '"status": 404'
-        );
-      }
-    );
-    it(
-      'should subscribe a to a confirmation window, and NOT call this.book deleteBook(isbn)' +
-        ' if the confirmation is false, ',
-      () => {
-        spyOnProperty(route, 'paramMap', 'get').and.returnValue(of(params));
-        spyOn(component, 'reallyDelete');
-        fixture.detectChanges(); // should call ngOnInit()
-        //arrange
-        spyOn(window, 'confirm').and.returnValue(false);
-        // mockService.deleteBook = jasmine
-        //   .createSpy<() => Observable<string>>()
-        //   .and.returnValue(throwError(() => theError));
-
-        expect(component.book).toBeDefined();
-        //act
-        component.delete('1234567890');
-        // expect(mockService.deleteBook).toHaveBeenCalledTimes(0);
-        expect(component.reallyDelete).toHaveBeenCalledTimes(0);
-      }
-    );
-  });
 });
