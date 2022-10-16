@@ -2,6 +2,7 @@ import { BookDetailsGuard2 } from './book-details2.guard';
 import { Store } from '@ngrx/store';
 import {
   ActivatedRouteSnapshot,
+  ParamMap,
   Router,
   RouterStateSnapshot
 } from '@angular/router';
@@ -41,8 +42,10 @@ describe('BookDetailsGuard2', () => {
       const { cold, expectObservable } = helpers;
       const select$ = cold('a', { a: { lastUpdateTS: twoMinutes } });
       mockStore.select.and.returnValue(select$);
+      const mockParamMap = jasmine.createSpyObj<ParamMap>('paramMap', ['get']);
+      mockParamMap.get.and.returnValue('123');
       let actual$ = bookDetailsGuard.canActivate(
-        {} as ActivatedRouteSnapshot,
+        { paramMap: mockParamMap } as any as ActivatedRouteSnapshot,
         {} as RouterStateSnapshot
       );
       let expectedValues = { r: true };
@@ -50,8 +53,8 @@ describe('BookDetailsGuard2', () => {
     });
   });
   it(
-    'canActivate should return nothing but emit a dispatch(loadBookEntities)' +
-      'if timestamp is old',
+    'canActivate return-Observalble should not yet return anything but emit a dispatch(loadBookEntities)' +
+      'if timestamp is old and there is no currentBook with the requested isbn-nr yet',
     function () {
       testScheduler = new TestScheduler((actual, expected) => {
         logFrames('actual', actual);
@@ -65,12 +68,18 @@ describe('BookDetailsGuard2', () => {
       });
       testScheduler.run((helpers) => {
         const { cold, expectObservable } = helpers;
-        const selectReturn$ = cold('a', { a: { lastUpdateTS: 1 } });
+        const selectReturn$ = cold('a', {
+          a: { currentBook: undefined, lastUpdateTS: 1 }
+        });
         (mockStore.select as jasmine.Spy<(s: any) => Observable<any>>)
           .withArgs(selectCurrentBookAndTimeStamp)
           .and.returnValue(selectReturn$);
+        const mockParamMap = jasmine.createSpyObj<ParamMap>('paramMap', [
+          'get'
+        ]);
+        mockParamMap.get.and.returnValue('123');
         let actual$ = bookDetailsGuard.canActivate(
-          {} as ActivatedRouteSnapshot,
+          { paramMap: mockParamMap } as any as ActivatedRouteSnapshot,
           {} as RouterStateSnapshot
         );
         expect(

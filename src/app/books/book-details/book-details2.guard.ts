@@ -27,6 +27,8 @@ export class BookDetailsGuard2 implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> {
+    let paramMap = route.paramMap;
+    let isbn = paramMap.get('');
     return this.store.select(selectCurrentBookAndTimeStamp).pipe(
       tap((data: curBookTS) => {
         if (data.lastUpdateTS < Date.now()) {
