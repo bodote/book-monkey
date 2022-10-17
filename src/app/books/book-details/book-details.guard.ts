@@ -34,7 +34,6 @@ import isEqual from 'lodash/isEqual';
 })
 export class BookDetailsGuard implements CanActivate {
   constructor(private store: Store, private router: Router) {}
-
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -53,7 +52,6 @@ export class BookDetailsGuard implements CanActivate {
         if (data.currentBookId === isbn) return of(true);
         else return of(this.router.parseUrl('/error'));
       }),
-      // otherwise, something went wrong
       catchError((error: Error) => {
         let errorMsg: string;
         error instanceof HttpErrorResponse
@@ -69,7 +67,6 @@ export class BookDetailsGuard implements CanActivate {
       })
     );
   }
-
   private getFromStoreOrAPI(isbn: string): Observable<{
     currentBookId: string | undefined;
     httpError: HttpErrorResponse | null;
@@ -81,20 +78,13 @@ export class BookDetailsGuard implements CanActivate {
       distinctUntilChanged((previous, current) => isEqual(previous, current)),
       tap((data) => {
         if (!this.isCurrentBookOrErrorAndUpToDate(data, isbn)) {
-          // console.log(
-          //   'this.dispatchLoadAction(data.allBooks, data.lastUpdateTS, isbn)'
-          // );
           this.dispatchLoadAction(data.allBooks, data.lastUpdateTS, isbn);
         }
       }),
-      filter((data) =>
-        //current book or (httperror, and timestamp not older then 1 min).
-        this.isCurrentBookOrErrorAndUpToDate(data, isbn)
-      ),
+      filter((data) => this.isCurrentBookOrErrorAndUpToDate(data, isbn)),
       take(1)
     );
   }
-
   private isCurrentBookOrErrorAndUpToDate<B>(
     data: {
       currentBookId: string | undefined;
@@ -113,31 +103,20 @@ export class BookDetailsGuard implements CanActivate {
         data.lastUpdateTS >= Date.now() - 1000 * 60)
     );
   }
-
   private dispatchLoadAction(
     allBooks: BookEntity[],
     lastUpdateTS: number,
     isbn: string
   ) {
     if (!allBooks?.length && lastUpdateTS < Date.now() - 1000 * 60) {
-      //console.log('dispatch(loadBookEntities())');
       this.store.dispatch(loadBookEntities());
     } else {
       const currentBook = allBooks?.find((book) => book.isbn == isbn);
       if (!!currentBook) {
         this.store.dispatch(setCurrentBookSuccess({ currentBookId: isbn }));
       } else {
-        //2nd reload from API and check again but not too often!
-        //console.log('2nd reload from API and check again but not too often!');
         const nowMinus1Min = Date.now() - 1000 * 60;
         if (lastUpdateTS < nowMinus1Min) {
-          // console.log(
-          //   'lastUpdateTS=' +
-          //     lastUpdateTS / 1000 +
-          //     'nowMinus1Min ' +
-          //     nowMinus1Min / 1000
-          // );
-          // console.log('dispatch(loadAllAndSetCurrentBook({ isbn }))');
           this.store.dispatch(loadAllAndSetCurrentBook({ isbn }));
         } else {
           this.store.dispatch(

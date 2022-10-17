@@ -2,6 +2,8 @@ import { adapter } from './book-entity.reducer';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import * as fromBook from '../book-entity/book-entity.reducer';
+import { HttpErrorResponse } from '@angular/common/http';
+import { BookEntity } from './book-entity.model';
 
 //these are just EntitySelectors NOT MemoizedSelectors !
 export const { selectIds, selectEntities, selectAll, selectTotal } =
@@ -43,9 +45,17 @@ export const selectCurrentBookAndTimeStamp = createSelector(
   }
 );
 
+export interface curBookTS {
+  currentBookId: string | undefined;
+  lastUpdateTS: number;
+  httpError: HttpErrorResponse | null;
+  errorMessage: string | null;
+  allBooks: BookEntity[];
+}
+
 export const selectCurrentBookAndAll = createSelector(
   selectBookState,
-  (state) => {
+  (state): curBookTS => {
     return {
       currentBookId: state.currentBookId,
       httpError: state.httpError,
