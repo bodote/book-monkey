@@ -62,7 +62,6 @@ export class BookDetailsGuard2 implements CanActivate {
     }
     if (
       this.isNewTimeStamp(data) &&
-      data.currentBookId != isbn &&
       !data.allBooks.find((book) => book.isbn === isbn)
     ) {
       this.store.dispatch(

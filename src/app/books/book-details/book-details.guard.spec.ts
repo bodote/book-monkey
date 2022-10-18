@@ -39,6 +39,7 @@ describe('BookDetailsGuard2 canActivate', () => {
   let mockRouter: jasmine.SpyObj<Router>;
   let testScheduler: TestScheduler;
   const twoMinutes = 1000 * 120;
+  const oldTimestamp = twoMinutes - 1000 * 60 - +1;
   const factory = new BookFactory();
   const stateWith2Books = factory.stateWith2Books();
   let bookA: BookEntity = factory.getBooksFromState(stateWith2Books)[0];
@@ -58,7 +59,7 @@ describe('BookDetailsGuard2 canActivate', () => {
       currentBookId: bookA.isbn,
       errorMessage: null,
       httpError: null,
-      lastUpdateTS: twoMinutes
+      lastUpdateTS: twoMinutes - 1000 * 60
     };
     mockSelect = mockStore.select as jasmine.Spy<(s: any) => Observable<any>>;
     bookDetailsGuard = new BookDetailsGuard2(mockStore, mockRouter);
@@ -85,6 +86,7 @@ describe('BookDetailsGuard2 canActivate', () => {
         {} as RouterStateSnapshot
       );
       let expectedValues = { r: urlTree };
+      expect(mockParamMap.get).toHaveBeenCalledOnceWith('isbn');
       expectObservable(actual$).toBe('(r|)', expectedValues);
     });
   });
@@ -198,7 +200,7 @@ describe('BookDetailsGuard2 canActivate', () => {
         });
         testScheduler.run((helpers) => {
           const { cold, expectObservable } = helpers;
-          selectReturn.lastUpdateTS = 1;
+          selectReturn.lastUpdateTS = oldTimestamp;
           selectReturn.currentBookId = undefined;
           const selectReturn$ = cold('a', {
             a: selectReturn
@@ -231,7 +233,7 @@ describe('BookDetailsGuard2 canActivate', () => {
         });
         testScheduler.run((helpers) => {
           const { cold, expectObservable } = helpers;
-          selectReturn.lastUpdateTS = 1;
+          selectReturn.lastUpdateTS = oldTimestamp;
           selectReturn.currentBookId = bookA.isbn;
           const selectReturn$ = cold('a', {
             a: selectReturn
