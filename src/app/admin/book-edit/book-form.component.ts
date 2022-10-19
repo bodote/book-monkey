@@ -27,7 +27,7 @@ import { BookEntity } from '../../books/store/book-entity/book-entity.model';
 export class BookFormComponent implements OnInit, OnChanges {
   @Input() aBook: BookEntity | undefined | null;
   @Input() isNew!: boolean;
-  @Input() saved!: boolean;
+  @Input() saved!: boolean | null;
   successMsg = 'Book has been saved successfully';
   editForm!: FormGroup;
   @Output() saveBookEventEmitter = new EventEmitter();

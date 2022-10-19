@@ -8,9 +8,9 @@ import { resetSavedSuccessFlag } from '../../books/store/book-entity/book-entity
   styleUrls: ['./success-alert.component.css']
 })
 export class SuccessAlertComponent {
-  _saved!: boolean;
+  _saved!: boolean | null;
   @Input() successMsg!: string;
-  @Input() set saved(value: boolean) {
+  @Input() set saved(value: boolean | null) {
     this._saved = value;
     if (this._saved) {
       setTimeout(() => {
@@ -18,7 +18,7 @@ export class SuccessAlertComponent {
       }, 5000);
     }
   }
-  get saved(): boolean {
+  get saved(): boolean | null {
     return this._saved;
   }
   constructor(private store: Store) {}
