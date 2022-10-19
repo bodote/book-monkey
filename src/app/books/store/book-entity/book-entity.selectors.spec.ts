@@ -11,6 +11,7 @@ import {
   selectTotalBooks
 } from './book-entity.selectors';
 import { HttpErrorResponse } from '@angular/common/http';
+import { BookEntityState } from './book-entity.reducer';
 
 describe('BookEntity selectors', () => {
   const factory = new BookFactory();
@@ -96,19 +97,28 @@ describe('BookEntity selectors', () => {
     const errorMessage = 'the message';
     const httpError = new HttpErrorResponse({ status: 404 });
     const stateW2Books = factory.stateWith2Books();
-    const state = factory.bookState({
+
+    let state: BookEntityState | null = factory.bookState({
       ...stateW2Books,
       errorMessage,
       httpError,
       lastUpdateTS: 1
     });
 
-    const result = selectTotalAndErrors.projector(state);
+    let result = selectTotalAndErrors.projector(state);
     expect(result).toEqual({
       total: selectTotal(state),
       lastUpdateTS: state.lastUpdateTS,
       httpError: state.httpError,
       errorMessage: state.errorMessage
+    });
+    state = null;
+    result = selectTotalAndErrors.projector(state);
+    expect(result).toEqual({
+      total: 0,
+      lastUpdateTS: 0,
+      httpError: null,
+      errorMessage: null
     });
   });
   it('selectErrors should select ErrorState', () => {

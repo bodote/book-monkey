@@ -33,18 +33,6 @@ export const selectCurrentBook = createSelector(selectBookState, (state) => {
   } else return null;
 });
 
-export const selectCurrentBookAndTimeStamp = createSelector(
-  selectBookState,
-  (state) => {
-    return {
-      currentBook: state.currentBookId
-        ? state.entities[state.currentBookId]
-        : undefined,
-      lastUpdateTS: state.lastUpdateTS
-    };
-  }
-);
-
 export interface curBookTS {
   currentBookId: string | undefined;
   lastUpdateTS: number;

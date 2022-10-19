@@ -18,7 +18,7 @@ import { ErrorPageComponent } from './error-page/error-page.component';
 import { RouterEffects } from './store/router.effects';
 import { SharedModule } from './shared/shared.module';
 import { SearchEffects } from './search/search.effects';
-//{serializer: CustomRouterStateSerializer}
+
 const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
 ];

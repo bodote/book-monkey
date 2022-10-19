@@ -24,12 +24,14 @@ describe('SuccessAlertComponent', () => {
 
     fixture = TestBed.createComponent(SuccessAlertComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    component.successMsg = 'book saved';
 
     store = TestBed.inject(MockStore);
   });
 
   it('should create', () => {
+    //component.saved = false;
+    fixture.detectChanges();
     expect(component).toBeTruthy();
   });
   it('should fire a resetSavedSuccessFlag action after 5 sec', fakeAsync(() => {
@@ -37,6 +39,25 @@ describe('SuccessAlertComponent', () => {
     component.saved = true;
     fixture.detectChanges();
     const message = fixture.debugElement.query(By.css('[data-id="message"]'));
+    expect(message.nativeElement.textContent).toContain('Book saved!');
+    tick(4000);
+    expect(dispatchSpy).toHaveBeenCalledTimes(0);
+    tick(1000);
+    expect(dispatchSpy).toHaveBeenCalledTimes(1);
+    const action = resetSavedSuccessFlag();
+    expect(dispatchSpy).toHaveBeenCalledWith(action);
+    expect(action.type).toEqual('[BookEntity/API] Reset Saved Success Flag');
+  }));
+  it('should fire a resetSavedSuccessFlag action after 5 sec', fakeAsync(() => {
+    const dispatchSpy = spyOn(store, 'dispatch');
+    component.saved = false;
+    fixture.detectChanges();
+    let message = fixture.debugElement.query(By.css('[data-id="message"]'));
+    expect(message).toBeFalsy();
+    tick(1000);
+    component.saved = true;
+    fixture.detectChanges();
+    message = fixture.debugElement.query(By.css('[data-id="message"]'));
     expect(message.nativeElement.textContent).toContain('Book saved!');
     tick(4000);
     expect(dispatchSpy).toHaveBeenCalledTimes(0);
