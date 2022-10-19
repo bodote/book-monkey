@@ -27,17 +27,14 @@ import { BookEntity } from '../../books/store/book-entity/book-entity.model';
 export class BookFormComponent implements OnInit, OnChanges {
   @Input() aBook: BookEntity | undefined | null;
   @Input() isNew!: boolean;
-  @Input() saved: boolean;
-  @Input() successMsg!: string;
+  @Input() saved!: boolean;
+  successMsg = 'Book has been saved successfully';
   editForm!: FormGroup;
   @Output() saveBookEventEmitter = new EventEmitter();
-  clickCounter = 0;
   constructor(
     private fb: FormBuilder,
     private bodosValidatorService: BodosValidatorService
-  ) {
-    this.saved = false;
-  }
+  ) {}
 
   ngOnInit(): void {
     this.checkEditForm();
@@ -63,20 +60,18 @@ export class BookFormComponent implements OnInit, OnChanges {
   }
 
   private checkEditForm() {
-    if (!this.editForm) {
-      let isbnControl = this.createIsbnControl();
-      this.editForm = this.fb.group({
-        title: ['', Validators.required],
-        subtitle: '',
-        isbn: isbnControl,
-        published: [
-          new Date().toISOString().substring(0, 10),
-          Validators.required
-        ],
-        description: '',
-        rating: [null, [Validators.min(0), Validators.max(5)]]
-      });
-    }
+    let isbnControl = this.createIsbnControl();
+    this.editForm = this.fb.group({
+      title: ['', Validators.required],
+      subtitle: '',
+      isbn: isbnControl,
+      published: [
+        new Date().toISOString().substring(0, 10),
+        Validators.required
+      ],
+      description: '',
+      rating: [null, [Validators.min(0), Validators.max(5)]]
+    });
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -110,7 +105,7 @@ export class BookFormComponent implements OnInit, OnChanges {
     this.editForm.get('isbn')?.setValue(book.isbn + '');
     this.editForm.get('description')?.setValue(book.description);
     const published: string = book.published.toISOString().substring(0, 10);
-    console.log('published in set editForm', published);
+
     this.editForm.get('published')?.setValue(published);
     this.editForm.get('rating')?.setValue(book.rating);
 
@@ -144,7 +139,6 @@ export class BookFormComponent implements OnInit, OnChanges {
   }
 
   bookFormSaveBook() {
-    this.clickCounter++;
     if (this.editForm.valid) {
       this.saveBookEventEmitter.emit(
         BookFactoryService.getFromRaw(this.editForm.value)
@@ -164,11 +158,6 @@ export class BookFormComponent implements OnInit, OnChanges {
   }
 
   addThumb() {
-    //console.log('add thumb called in book-form');
-    // const thumbG = this.fb.group({
-    //   url: '',
-    //   title: ''
-    // });
     const thumbG = this.fb.group({});
     this.thumbnails.push(thumbG);
   }

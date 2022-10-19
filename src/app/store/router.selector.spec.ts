@@ -3,11 +3,9 @@ import { mockState } from './index.spec';
 import { selectLoaderState, selectPageLoading } from './router.selectors';
 import { LoaderState } from './router.reducer';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { AppState, ROOT_REDUCERS } from './index';
-import { Store, StoreModule } from '@ngrx/store';
-import { PreloadAllModules, RouterModule } from '@angular/router';
+import { AppState } from './index';
 import { AppComponent } from '../app.component';
 
 describe('router selectors', () => {
@@ -28,45 +26,6 @@ describe('router selectors', () => {
       const mystate = (store as any).initialState;
       const stateKeys = Object.keys(mystate);
       expect(stateKeys).toContain('router');
-    });
-  });
-  xdescribe('router state real router', () => {
-    let store: Store;
-    let component: AppComponent;
-    let fixture: ComponentFixture<AppComponent>;
-    beforeEach(async () => {
-      await TestBed.configureTestingModule({
-        declarations: [AppComponent],
-        imports: [
-          RouterModule.forRoot(
-            [
-              {
-                path: '',
-                redirectTo: '/home',
-                pathMatch: 'full'
-              }
-            ],
-            {
-              preloadingStrategy: PreloadAllModules,
-              enableTracing: false,
-              scrollPositionRestoration: 'disabled'
-            }
-          ),
-          StoreModule.forRoot(ROOT_REDUCERS, {})
-        ],
-        schemas: [NO_ERRORS_SCHEMA], // NEU
-        providers: []
-      }).compileComponents();
-      store = TestBed.inject(Store);
-      fixture = TestBed.createComponent(AppComponent);
-      component = fixture.componentInstance;
-      fixture.detectChanges();
-    });
-    xit('should contain router key in the  store', (done) => {
-      // store.select(selectRouterState).subscribe((value) => {
-      //   //expect(value).toBeDefined()  // Doesn't work yet
-      //   done();
-      // });
     });
   });
 

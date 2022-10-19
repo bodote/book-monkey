@@ -17,6 +17,7 @@ import { BodosValidatorService } from '../shared/bodos-validator.service';
 import { of } from 'rxjs';
 import { By } from '@angular/platform-browser';
 import { BookEntity } from '../../books/store/book-entity/book-entity.model';
+import { BookFactory } from '../../books/store/book-entity/book.factory.spec';
 
 const emptyBookData: BookEntity = {
   authors: [''],
@@ -57,9 +58,10 @@ const testBookDataWrongISBNRatingTooBig: BookEntity = {
   rating: 6
 };
 
-xdescribe('BookFormsComponent', () => {
+describe('BookFormsComponent', () => {
   let component: BookFormComponent;
   let fixture: ComponentFixture<BookFormComponent>;
+  let factory: BookFactory;
   let validatorService = jasmine.createSpyObj<BodosValidatorService>(
     'validatorSpy',
     ['asyncIsbnExistsValidator', 'checkIsbn', 'checkAuthors']
@@ -86,7 +88,7 @@ xdescribe('BookFormsComponent', () => {
         { provide: BodosValidatorService, useValue: validatorService }
       ]
     }).compileComponents();
-
+    factory = new BookFactory();
     fixture = TestBed.createComponent(BookFormComponent);
     component = fixture.componentInstance;
   }
@@ -99,6 +101,9 @@ xdescribe('BookFormsComponent', () => {
         await prepareTests();
         component.isNew = false;
         expect(component).toBeTruthy();
+        expect(component.successMsg).toContain(
+          'Book has been saved successfully'
+        );
         spyOn(component.saveBookEventEmitter, 'emit');
         fixture.detectChanges(); // only if component.isNew || component.book , there is a button!
         //directly call ngOnChanges
@@ -110,6 +115,9 @@ xdescribe('BookFormsComponent', () => {
         });
         // to force reevaluate the html - template after component.book = testBookData:
         fixture.detectChanges();
+        expect(component.editForm.get('published')?.value).toEqual(
+          new Date('2022-02-02').toISOString().substring(0, 10)
+        );
         const buttonEl = fixture.debugElement.query(
           By.css('button[type="submit"]')
         );
@@ -259,7 +267,7 @@ xdescribe('BookFormsComponent', () => {
       expect(component.editForm.get('authors')?.valid).toBeFalse();
     });
   });
-  xdescribe('with new book and AsyncValidatorFn or the checkAuthors validator  returns an error ', () => {
+  describe('with new book and AsyncValidatorFn or the checkAuthors validator  returns an error ', () => {
     beforeEach(async () => {
       await prepareTests(
         {
@@ -275,7 +283,12 @@ xdescribe('BookFormsComponent', () => {
       expect(component).toBeTruthy();
     });
     it('should create the edit form, which should not be valid', () => {
-      expect(component.editForm.value).toEqual(emptyBookData);
+      const testBook = {
+        ...emptyBookData,
+        published: new Date().toISOString().substring(0, 10)
+      };
+      expect(component.editForm.value['published']).toEqual(testBook.published);
+      expect(component.editForm.value).toEqual(testBook);
       expect(component.editForm.valid).toBeFalse();
       expect(component.editForm.get('isbn')?.valid).toBeFalse();
     });
@@ -322,7 +335,7 @@ xdescribe('BookFormsComponent', () => {
       expect(component.saveBookEventEmitter.emit).toHaveBeenCalledTimes(0);
     });
   });
-  xdescribe('with new book and isbnLength validator  returns an error ', () => {
+  describe('with new book and isbnLength validator  returns an error ', () => {
     beforeEach(async () => {
       await prepareTests(null, { isbnLength: { valid: false } }, null);
       component.isNew = true;
@@ -330,7 +343,11 @@ xdescribe('BookFormsComponent', () => {
     });
 
     it('should create the edit form, which should not be valid', () => {
-      expect(component.editForm.value).toEqual(emptyBookData);
+      const testBook = {
+        ...emptyBookData,
+        published: new Date().toISOString().substring(0, 10)
+      };
+      expect(component.editForm.value).toEqual(testBook);
       expect(component.editForm.valid).toBeFalse();
       expect(component.editForm.get('isbn')?.valid).toBeFalse();
     });

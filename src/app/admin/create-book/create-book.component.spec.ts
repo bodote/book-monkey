@@ -1,106 +1,111 @@
-import {
-  ComponentFixture,
-  fakeAsync,
-  TestBed,
-  tick
-} from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed } from '@angular/core/testing';
 
 import { CreateBookComponent } from './create-book.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { BookStoreService } from '../../shared/book-store.service';
-import { Observable, of, throwError } from 'rxjs';
-
-import { HttpErrorResponse } from '@angular/common/http';
-import { BookEntity } from '../../books/store/book-entity/book-entity.model';
-
-const testBookData: BookEntity = {
-  authors: ['author'],
-  isbn: '1234567890',
-  published: new Date('2022-02-02'),
-  title: 'a title',
-  subtitle: '',
-  description: '',
-  rating: 3,
-  thumbnails: [{ title: '', url: '' }]
-};
+import { Observable, toArray } from 'rxjs';
+import { provideMockActions } from '@ngrx/effects/testing';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { AppState } from '../../store';
+import {
+  BookFactory,
+  mockStateWithBooksEntities
+} from '../../books/store/book-entity/book.factory.spec';
+import { TypedAction } from '@ngrx/store/src/models';
+import {
+  selectErrorState,
+  selectShowSavedSuccess
+} from '../../books/store/book-entity/book-entity.selectors';
+import {
+  addBookEntity,
+  resetErrorsAction
+} from '../../books/store/book-entity/book-entity.actions';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { By } from '@angular/platform-browser';
 
 describe('CreateBookComponent', () => {
   let component: CreateBookComponent;
   let fixture: ComponentFixture<CreateBookComponent>;
-  let mockService = jasmine.createSpyObj<BookStoreService>('bookStoreService', [
-    'postBook'
-  ]);
+  let actions$: Observable<TypedAction<any>>;
+  let store: MockStore;
+  let factory: BookFactory;
 
   beforeEach(async () => {
+    factory = new BookFactory();
     await TestBed.configureTestingModule({
       declarations: [CreateBookComponent],
       imports: [HttpClientTestingModule],
-      providers: [{ provide: BookStoreService, useValue: mockService }],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      providers: [
+        provideMockActions(() => actions$),
+        provideMockStore<AppState>({
+          initialState: mockStateWithBooksEntities()
+        })
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
-
+    store = TestBed.inject(MockStore);
+    store.setState(mockStateWithBooksEntities({ showSaveSuccess: true }));
     fixture = TestBed.createComponent(CreateBookComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
-
-  xit('should create, set "save" to true for 5 sec and set successmessage to the result', fakeAsync(() => {
-    //arrange
-    mockService.postBook = jasmine
-      .createSpy<() => Observable<string>>()
-      .and.returnValue(of('OK'));
-    expect(component).toBeTruthy();
-    expect(component.saved).toBeFalse();
-    //act
-    component.createBookSave(testBookData);
-    //assert
-    expect(mockService.postBook).toHaveBeenCalledOnceWith(testBookData);
-    expect(component.saved).toBeTrue();
-    expect(component.successMsg).toEqual('OK');
-    tick(5001);
-    expect(component.saved).toBeFalse();
-  }));
-  xit('should create, set errorMsg ', () => {
-    //arrange
-    spyOn(console, 'error');
-    const errorObservable$ = throwError(() => {
-      return new HttpErrorResponse({ status: 404 });
+  afterEach(() => {
+    store.resetSelectors();
+  });
+  describe('.createBookSave', () => {
+    const paramList = [
+      { selectShow: true, result: true },
+      { selectShow: false, result: false }
+    ];
+    paramList.forEach((params) => {
+      it(`should create, set "component.saved" to ${params.result} in order to show/not show successmessage `, () => {
+        //arrange
+        store.overrideSelector(selectShowSavedSuccess, params.selectShow);
+        let newBook = factory.bookEntity();
+        //act
+        component.createBookSave(newBook);
+        fixture.detectChanges();
+        //assert
+        store.scannedActions$.pipe(toArray()).subscribe((actions) => {
+          expect(actions.length).toBe(1);
+          expect(actions[0]).toEqual(addBookEntity({ bookEntity: newBook }));
+        });
+        const form = fixture.debugElement.query(By.css('bm-book-form'));
+        expect(form).toBeTruthy();
+        expect(form.properties['saved']).toBe(params.result);
+      });
     });
-    mockService.postBook = jasmine
-      .createSpy<() => Observable<string>>()
-      .and.returnValue(errorObservable$);
-    //act
-    component.createBookSave(testBookData);
-    //assert
-    expect(mockService.postBook).toHaveBeenCalledOnceWith(testBookData);
-    // expect(component.errorMessage).toContain('404');
-    expect((console.error as jasmine.Spy).calls.mostRecent().args[0]).toContain(
-      'ERROR in createBookSave:'
-    );
-    expect(component.successMsg?.length).toEqual(0);
-    expect(component.saved).toBeFalse();
-    expect(console.error).toHaveBeenCalledTimes(1);
   });
-  xit('should unsubscribe when component is disposed ', () => {
+
+  it(`should  show  errors `, () => {
     //arrange
-    spyOn(component, 'ngOnDestroy').and.callThrough();
-
-    mockService.postBook = jasmine
-      .createSpy<() => Observable<string>>()
-      .and.returnValue(of('OK'));
-
+    const errorInfo = {
+      httpError: null,
+      errorMessage: 'error',
+      lastUpdateTS: 1
+    };
+    store.overrideSelector(selectErrorState, errorInfo);
     //act
-    component.createBookSave(testBookData);
-    // if (component.subscription)
-    //   spyOn(component.subscription, 'unsubscribe').and.callThrough();
-    // //assert
-    // expect(mockService.postBook).toHaveBeenCalledOnceWith(testBookData);
-    // //act
-    // component.ngOnDestroy();
-    // //assert
-    // expect(component.ngOnDestroy).toHaveBeenCalledTimes(1);
-    // expect(component.subscription?.closed).toBeTrue();
-    // expect(component.subscription?.unsubscribe).toHaveBeenCalled();
+    fixture.detectChanges();
+    //assert
+    const form = fixture.debugElement.query(By.css('bm-notification-alert'));
+    expect(form.properties['error']).toEqual(errorInfo);
   });
+
+  it('should dispatch resetErrorsAction on closeError-event ', fakeAsync(() => {
+    //arrange
+    const errorInfo = {
+      httpError: null,
+      errorMessage: 'error',
+      lastUpdateTS: 1
+    };
+    store.overrideSelector(selectErrorState, errorInfo);
+    fixture.detectChanges();
+    const noteAlert = fixture.debugElement.query(
+      By.css('bm-notification-alert')
+    );
+    noteAlert.triggerEventHandler('closeErrorEventEmitter');
+    store.scannedActions$.pipe(toArray()).subscribe((actions) => {
+      expect(actions.length).toBe(1);
+      expect(actions[0]).toEqual(resetErrorsAction());
+    });
+  }));
 });
