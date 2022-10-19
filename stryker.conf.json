@@ -3,12 +3,11 @@
   "_comment": "This config was generated using 'stryker init'. Please see the guide for more information: https://stryker-mutator.io/docs/stryker-js/guides/angular",
   "mutate": [
     "src/**/*.ts",
-    "!src/**/main.ts",
     "!src/**/*.spec.ts",
     "!src/test.ts",
     "!src/environments/*.ts",
     "!src/**/*.module.ts",
-    "!main.ts",
+    "!src/main.ts",
     "!cypress/**"
   ],
   "_comment": "remove following line if you don't have stryker-js locally installed!",
