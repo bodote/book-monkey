@@ -18,6 +18,8 @@ import { ErrorPageComponent } from './error-page/error-page.component';
 import { RouterEffects } from './store/router.effects';
 import { SharedModule } from './shared/shared.module';
 import { SearchEffects } from './search/search.effects';
+import { CalculatorComponent } from './calc/calculator.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
@@ -27,7 +29,8 @@ const httpInterceptorProviders = [
     AppComponent,
     HomeComponent,
     SearchComponent,
-    ErrorPageComponent
+    ErrorPageComponent,
+    CalculatorComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +47,8 @@ const httpInterceptorProviders = [
     StoreRouterConnectingModule.forRoot({
       serializer: CustomRouterStateSerializer
     }),
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ],
   providers: [
     httpInterceptorProviders

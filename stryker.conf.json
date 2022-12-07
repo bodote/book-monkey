@@ -2,7 +2,7 @@
   "$schema": "./node_modules/@stryker-mutator/core/schema/stryker-schema.json",
   "_comment": "This config was generated using 'stryker init'. Please see the guide for more information: https://stryker-mutator.io/docs/stryker-js/guides/angular",
   "mutate": [
-    "src/**/*.ts",
+    "src/**/calculator.*.ts",
     "!src/**/*.spec.ts",
     "!src/test.ts",
     "!src/environments/*.ts",
@@ -10,8 +10,8 @@
     "!src/main.ts",
     "!cypress/**"
   ],
-  "_comment": "remove following line if you don't have stryker-js locally installed!",
-  "plugins": ["/Users/bodo.teichmann/dev/learning/myStryker/stryker-js/packages/karma-runner/dist/src/index.js"
+  "_comment": "remove following line 'plugins' if you don't have stryker-js locally installed!",
+  "_comment": ["/Users/bodo.teichmann/dev/learning/myStryker/stryker-js/packages/karma-runner/dist/src/index.js"
   , "/Users/bodo.teichmann/dev/learning/myStryker/stryker-js/packages/typescript-checker/dist/src/index.js"],
   "testRunner": "karma",
   "karma": {
@@ -28,7 +28,7 @@
     "clear-text",
     "html"
   ],
-  "htmlReporter": { "fileName": "reports/mutation/mutation.all.html" },
+  "htmlReporter": { "fileName": "reports/mutation/mutation.calc.html" },
   "concurrency": 4,
   "concurrency_comment": "Recommended to use about half of your available cores when running stryker with angular",
   "coverageAnalysis": "perTest",

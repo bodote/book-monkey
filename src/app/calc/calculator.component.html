@@ -1,0 +1,64 @@
+<p>Bodos Calculator Form:</p>
+<div *ngIf="myForm" class="container">
+  <form [formGroup]="myForm" (ngSubmit)="submitForm()">
+    <div class="mb-14">
+      <div class="pb-4">
+        <label class="input-group">
+          <span class="bg-primary/30">Zahl1:</span>
+          <input
+            id="zahl1"
+            type="text"
+            formControlName="zahl1"
+            placeholder="42"
+            class="input input-bordered w-5/12 z-0"
+          />
+        </label>
+      </div>
+      <div class="pb-4">
+        <label class="input-group">
+          <span class="bg-primary/30">Zahl2:</span>
+          <input
+            id="zahl2"
+            type="text"
+            formControlName="zahl2"
+            placeholder="69"
+            class="input input-bordered w-5/12 z-0"
+          />
+        </label>
+      </div>
+      <button
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold px-4 border border-blue-700 rounded"
+      >
+        Calc
+      </button>
+      <div class="mb-1">
+        <div class="flex flex-row">
+          <div
+            data-id="summe-label"
+            class="text-gray-700 text-center bg-gray-100 px-4 py-2 m-2"
+          >
+            Summe:
+          </div>
+          <div
+            data-id="summe"
+            class="text-gray-700 text-center bg-gray-100 px-4 py-2 m-2"
+          >
+            {{ summe }}
+          </div>
+          <div
+            data-id="product-label"
+            class="text-gray-700 text-center bg-gray-100 px-4 py-2 m-2"
+          >
+            Produkt:
+          </div>
+          <div
+            data-id="product"
+            class="text-gray-700 text-center bg-gray-100 px-4 py-2 m-2"
+          >
+            {{ produkt }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
